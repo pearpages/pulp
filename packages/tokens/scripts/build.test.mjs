@@ -84,6 +84,7 @@ const PAIRS = [
   ['--color-text-on-action', ['--color-action-primary', '--color-action-primary-hover', '--color-action-primary-active']],
   ['--color-action-text', ['--color-surface-base', '--color-surface-raised', '--color-surface-sunken', '--color-action-primary-quiet']],
   ['--color-text-default', ['--color-action-secondary', '--color-action-secondary-hover']],
+  ['--color-status-error-text', ['--color-surface-base', '--color-surface-raised', '--color-surface-sunken']],
 ];
 
 test('text pairs meet WCAG AA (4.5:1) in every brand and scheme', async () => {

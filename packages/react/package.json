@@ -22,11 +22,16 @@
       "types": "./dist/index.d.ts",
       "import": "./dist/index.js"
     },
+    "./text-field": {
+      "types": "./dist/text-field.d.ts",
+      "import": "./dist/text-field.js"
+    },
     "./button": {
       "types": "./dist/button.d.ts",
       "import": "./dist/button.js"
     },
     "./styles.css": "./dist/index.css",
+    "./text-field.css": "./dist/text-field.css",
     "./button.css": "./dist/button.css",
     "./component-manifest.json": "./dist/component-manifest.json",
     "./package.json": "./package.json"
@@ -40,7 +45,7 @@
     "test:dist": "vitest run --config vitest.dist.config.ts",
     "manifest": "node scripts/manifest.mjs",
     "scaffold": "node scripts/scaffold-component.mjs",
-    "check:package": "publint && attw --pack . --profile esm-only --exclude-entrypoints styles.css button.css component-manifest.json",
+    "check:package": "publint && attw --pack . --profile esm-only --exclude-entrypoints styles.css button.css text-field.css component-manifest.json",
     "prepublishOnly": "pnpm run build && pnpm run test:run && pnpm run check:package"
   },
   "peerDependencies": {

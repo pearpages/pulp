@@ -38,6 +38,7 @@
     --color-green-500: #1a8f5c;
     --color-red-300: #ff6b70;
     --color-red-500: #d0393e;
+    --color-red-700: #a52c30;
     --color-surface-base: light-dark(var(--color-neutral-50), var(--color-neutral-975));
     --color-surface-raised: light-dark(var(--color-neutral-0), var(--color-neutral-900));
     --color-surface-sunken: light-dark(var(--color-neutral-200), var(--color-neutral-1000));
@@ -59,6 +60,7 @@
     --color-status-warning: light-dark(var(--color-saffron-500), var(--color-saffron-500));
     --color-status-error: light-dark(var(--color-red-500), var(--color-red-300));
     --color-status-info: light-dark(var(--color-ultramarine-500), var(--color-ultramarine-300));
+    --color-status-error-text: light-dark(var(--color-red-700), var(--color-red-300));
     --radius-sm: 3px;
     --radius-lg: 10px;
     --radius-pill: 9999px;
@@ -131,6 +133,34 @@
     --button-focus-ring-width: var(--focus-ring-width);
     --button-focus-ring-offset: var(--focus-ring-offset);
     --button-motion-duration: var(--motion-duration-fast);
+    --text-field-radius: var(--radius-control);
+    --text-field-gap: var(--space-1);
+    --text-field-padding-inline: var(--space-3);
+    --text-field-font-family: var(--font-family-body);
+    --text-field-font-size-sm: var(--font-size-sm);
+    --text-field-font-size-md: var(--font-size-md);
+    --text-field-font-size-lg: var(--font-size-lg);
+    --text-field-height-sm: var(--size-control-sm);
+    --text-field-height-md: var(--size-control-md);
+    --text-field-height-lg: var(--size-control-lg);
+    --text-field-bg: var(--color-surface-raised);
+    --text-field-fg: var(--color-text-default);
+    --text-field-placeholder: var(--color-text-faint);
+    --text-field-border-default: var(--color-border-default);
+    --text-field-border-hover: var(--color-border-strong);
+    --text-field-border-focus: var(--color-border-focus);
+    --text-field-border-invalid: var(--color-status-error);
+    --text-field-label-fg: var(--color-text-default);
+    --text-field-label-font-weight: var(--font-weight-medium);
+    --text-field-label-font-size: var(--font-size-sm);
+    --text-field-description-fg: var(--color-text-muted);
+    --text-field-description-font-size: var(--font-size-xs);
+    --text-field-error-fg: var(--color-status-error-text);
+    --text-field-error-font-size: var(--font-size-xs);
+    --text-field-focus-ring: var(--color-border-focus);
+    --text-field-focus-ring-width: var(--focus-ring-width);
+    --text-field-focus-ring-offset: var(--focus-ring-offset);
+    --text-field-motion-duration: var(--motion-duration-fast);
   }
 
   /* Brand: bitepals */
@@ -178,6 +208,7 @@
     --color-gold-500: #d98e04;
     --color-red-300: #ff6b6b;
     --color-red-500: #d64545;
+    --color-red-700: #a83333;
     --color-blue-300: #5aa9ff;
     --color-blue-500: #2f80ed;
     --color-surface-base: light-dark(var(--color-cream-300), var(--color-ink-900));
@@ -201,6 +232,7 @@
     --color-status-warning: light-dark(var(--color-gold-500), var(--color-gold-300));
     --color-status-error: light-dark(var(--color-red-500), var(--color-red-300));
     --color-status-info: light-dark(var(--color-blue-500), var(--color-blue-300));
+    --color-status-error-text: light-dark(var(--color-red-700), var(--color-red-300));
     --radius-sm: 10px;
     --radius-lg: 18px;
     --radius-pill: 9999px;

@@ -12,6 +12,7 @@ import { defineConfig } from 'tsup';
 export default defineConfig({
   entry: {
     index: 'src/index.ts',
+    'text-field': 'src/text-field/index.ts',
     button: 'src/button/index.ts',
   },
   format: ['esm'],

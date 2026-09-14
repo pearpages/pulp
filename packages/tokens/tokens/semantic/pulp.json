@@ -181,6 +181,15 @@
             "dark": "{color.ultramarine.300}"
           }
         }
+      },
+      "error-text": {
+        "$value": "{color.red.700}",
+        "$extensions": {
+          "com.pearpages.pulp": {
+            "dark": "{color.red.300}"
+          }
+        },
+        "$description": "Error colour for text (messages, required markers). status.error is a fill/border colour and is below AA as text on light surfaces."
       }
     }
   },

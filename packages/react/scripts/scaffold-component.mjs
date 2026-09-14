@@ -21,8 +21,9 @@ if (!name || !/^[A-Z][A-Za-z0-9]+$/.test(name)) {
   console.error('Usage: scaffold-component <PascalCaseName>');
   process.exit(1);
 }
-const dir = name.charAt(0).toLowerCase() + name.slice(1);
 const kebab = name.replace(/([a-z0-9])([A-Z])/g, '$1-$2').toLowerCase();
+// Directory, entry point and CSS file share the kebab-case name; the export is PascalCase.
+const dir = kebab;
 const target = resolve(ROOT, 'src', dir);
 if (existsSync(target)) {
   console.error(`${target} already exists.`);
@@ -41,7 +42,7 @@ export interface ${name}Props extends HTMLAttributes<HTMLDivElement> {
 
 export function ${name}({ className, ref, children, ...rest }: ${name}Props) {
   return (
-    <div {...rest} ref={ref} className={classes(styles.${dir}, className)}>
+    <div {...rest} ref={ref} className={classes(styles.root, className)}>
       {children}
     </div>
   );
@@ -51,8 +52,10 @@ ${name}.displayName = '${name}';
 `,
   [`${name}.module.css`]: `/* Every value is a token: --${kebab}-* in packages/tokens/tokens/component/${kebab}.json */
 
-.${dir} {
-  color: var(--color-text-default);
+@layer components {
+  .root {
+    color: var(--color-text-default);
+  }
 }
 `,
   [`${name}.test.tsx`]: `import { render, screen } from '@testing-library/react';

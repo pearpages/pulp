@@ -56,8 +56,10 @@ pnpm --filter @pearpages/pulp-react scaffold Name   # new component skeleton
 - **CSS modules, native CSS** (nesting, logical properties, cascade layers). No Sass, no
   CSS-in-JS, no utility classes.
 - **Every component ships** `Name.tsx`, `Name.module.css`, `Name.test.tsx` (with an `axe`
-  check), `Name.stories.tsx` (with a `play` for anything interactive), `index.ts`, and a
-  `tokens/component/<name>.json`. The scaffold script creates all of them.
+  check), `Name.stories.tsx` (with a `play` for anything interactive and the four brand × scheme
+  matrix stories), `index.ts`, and a `tokens/component/<kebab-name>.json`. Directory, entry point
+  and CSS file are kebab-case (`text-field`); the export is PascalCase. The scaffold script
+  creates all of them, and the dist smoke test covers every component listed in the manifest.
 - **Adding a semantic token means adding it to every brand file.** The token tests diff the
   brands and fail otherwise.
 - **`ref` is a normal prop** (React 19). The compiler lint rule (`react-hooks/refs`) rejects
@@ -153,8 +155,9 @@ Ordered within each group. Groups 1 and 2 are the gate to everything else being 
 - [ ] Link the CV repo from pulp's README as the reference consumer.
 
 **3. Components, one per kind, in this order**
-- [ ] TextField: label, description, error message wired via `aria-describedby`, `required`,
-      controlled + uncontrolled, sizes; tokens `--text-field-*`.
+- [x] TextField (2026-09-14): label, description, error via `aria-describedby`, `aria-invalid` +
+      `data-invalid`, sizes, controlled + uncontrolled. Decision: `color.status.error-text` added
+      because `status.error` is a fill/border colour and fails AA as text on light surfaces.
 - [ ] Card: `Card`, `Card.Header`, `Card.Body`, `Card.Footer`; elevation via `--shadow-raised`;
       `asChild` for link cards.
 - [ ] Tabs: `Tabs`, `Tabs.List`, `Tabs.Tab`, `Tabs.Panel`; roving tabindex, arrow keys, Home/End,

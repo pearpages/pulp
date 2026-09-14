@@ -1,0 +1,85 @@
+/*
+ * Every value is a token (--text-field-*). State lives on the wrapper as
+ * data attributes and on the input as native pseudo-classes.
+ */
+
+@layer components {
+  .field {
+    display: flex;
+    flex-direction: column;
+    gap: var(--text-field-gap);
+    font-family: var(--text-field-font-family);
+  }
+
+  .label {
+    font-size: var(--text-field-label-font-size);
+    font-weight: var(--text-field-label-font-weight);
+    color: var(--text-field-label-fg);
+  }
+
+  .required {
+    margin-inline-start: var(--space-1);
+    color: var(--text-field-error-fg);
+  }
+
+  .input {
+    min-block-size: var(--text-field-height-md);
+    padding-block: 0;
+    padding-inline: var(--text-field-padding-inline);
+    border: 1px solid var(--text-field-border-default);
+    border-radius: var(--text-field-radius);
+    background-color: var(--text-field-bg);
+    color: var(--text-field-fg);
+    font-size: var(--text-field-font-size-md);
+    transition:
+      border-color var(--text-field-motion-duration) var(--motion-easing-standard),
+      background-color var(--text-field-motion-duration) var(--motion-easing-standard);
+
+    &::placeholder {
+      color: var(--text-field-placeholder);
+    }
+
+    &:focus-visible {
+      border-color: var(--text-field-border-focus);
+      outline: var(--text-field-focus-ring-width) solid var(--text-field-focus-ring);
+      outline-offset: var(--text-field-focus-ring-offset);
+    }
+
+    &:disabled {
+      cursor: not-allowed;
+      opacity: 0.55;
+    }
+
+    &:read-only:not(:disabled) {
+      background-color: var(--color-surface-sunken);
+    }
+
+    &:hover:not(:disabled, :focus-visible) {
+      border-color: var(--text-field-border-hover);
+    }
+  }
+
+  .field[data-size="sm"] .input {
+    min-block-size: var(--text-field-height-sm);
+    font-size: var(--text-field-font-size-sm);
+  }
+
+  .field[data-size="lg"] .input {
+    min-block-size: var(--text-field-height-lg);
+    font-size: var(--text-field-font-size-lg);
+  }
+
+  .field[data-invalid] .input {
+    border-color: var(--text-field-border-invalid);
+  }
+
+  .description {
+    font-size: var(--text-field-description-font-size);
+    color: var(--text-field-description-fg);
+  }
+
+  .error {
+    font-size: var(--text-field-error-font-size);
+    color: var(--text-field-error-fg);
+  }
+}
