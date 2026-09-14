@@ -1,0 +1,79 @@
+/*
+ * Every value is a token (--switch-*). The input is the track; its ::before
+ * is the thumb. Size and invalid state resolve into private custom
+ * properties on the root.
+ */
+
+@layer components {
+  .switch {
+    --_size: var(--switch-size-md);
+    --_track: var(--switch-track-bg);
+
+    font-family: var(--font-family-body);
+
+    &[data-size="sm"] { --_size: var(--switch-size-sm); }
+    &[data-size="lg"] { --_size: var(--switch-size-lg); }
+    &[data-invalid] { --_track: var(--switch-track-invalid); }
+  }
+
+  .row {
+    display: flex;
+    align-items: center;
+    gap: var(--switch-gap);
+  }
+
+  .input {
+    --_inset: calc(2 * var(--switch-thumb-inset));
+
+    position: relative;
+    flex: none;
+    inline-size: calc(2 * var(--_size));
+    block-size: var(--_size);
+    margin: 0;
+    border: none;
+    border-radius: var(--switch-radius);
+    background-color: var(--_track);
+    appearance: none;
+    cursor: pointer;
+    transition: background-color var(--switch-motion-duration) var(--motion-easing-standard);
+
+    &::before {
+      content: "";
+      position: absolute;
+      inset-block-start: var(--_inset);
+      inset-inline-start: var(--_inset);
+      inline-size: calc(var(--_size) - 2 * var(--_inset));
+      block-size: calc(var(--_size) - 2 * var(--_inset));
+      border-radius: var(--switch-radius);
+      background-color: var(--switch-thumb);
+      transition: translate var(--switch-motion-duration) var(--motion-easing-standard);
+    }
+
+    &:checked {
+      background-color: var(--switch-track-bg-checked);
+
+      &::before {
+        translate: var(--_size) 0;
+        background-color: var(--switch-thumb-checked);
+      }
+    }
+
+    &:focus-visible {
+      outline: var(--switch-focus-ring-width) solid var(--switch-focus-ring);
+      outline-offset: var(--switch-focus-ring-offset);
+    }
+
+    &:disabled {
+      cursor: not-allowed;
+      opacity: 0.55;
+    }
+
+    &:hover:not(:disabled, :checked) {
+      background-color: var(--switch-track-bg-hover);
+    }
+
+    &:hover:not(:disabled):checked {
+      background-color: var(--switch-track-bg-checked-hover);
+    }
+  }
+}

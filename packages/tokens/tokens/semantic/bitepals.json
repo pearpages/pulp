@@ -503,6 +503,27 @@
         "unit": "px"
       },
       "$description": "The thinnest visible line: borders, dividers, the visually-hidden box."
+    },
+    "toggle": {
+      "sm": {
+        "$value": {
+          "value": 1,
+          "unit": "rem"
+        }
+      },
+      "md": {
+        "$value": {
+          "value": 1.25,
+          "unit": "rem"
+        }
+      },
+      "lg": {
+        "$value": {
+          "value": 1.5,
+          "unit": "rem"
+        }
+      },
+      "$description": "Box size of checkboxes, radios and switch thumbs."
     }
   },
   "focus": {

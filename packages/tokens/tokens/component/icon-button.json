@@ -1,0 +1,17 @@
+{
+  "$description": "IconButton component tokens: a square Button.",
+  "icon-button": {
+    "size": {
+      "$type": "dimension",
+      "sm": {
+        "$value": "{size.control.sm}"
+      },
+      "md": {
+        "$value": "{size.control.md}"
+      },
+      "lg": {
+        "$value": "{size.control.lg}"
+      }
+    }
+  }
+}

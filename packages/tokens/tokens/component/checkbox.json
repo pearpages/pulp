@@ -1,0 +1,77 @@
+{
+  "$description": "Checkbox component tokens. Semantic references only.",
+  "checkbox": {
+    "size": {
+      "$type": "dimension",
+      "sm": {
+        "$value": "{size.toggle.sm}"
+      },
+      "md": {
+        "$value": "{size.toggle.md}"
+      },
+      "lg": {
+        "$value": "{size.toggle.lg}"
+      }
+    },
+    "gap": {
+      "$type": "dimension",
+      "$value": "{space.2}"
+    },
+    "radius": {
+      "$type": "dimension",
+      "$value": "{radius.control}"
+    },
+    "bg": {
+      "$type": "color",
+      "$value": "{color.surface.raised}"
+    },
+    "bg-checked": {
+      "$type": "color",
+      "$value": "{color.action.primary}"
+    },
+    "bg-checked-hover": {
+      "$type": "color",
+      "$value": "{color.action.primary-hover}"
+    },
+    "border": {
+      "$type": "color",
+      "$value": "{color.border.strong}"
+    },
+    "border-hover": {
+      "$type": "color",
+      "$value": "{color.action.primary}"
+    },
+    "border-invalid": {
+      "$type": "color",
+      "$value": "{color.status.error}"
+    },
+    "check": {
+      "$type": "color",
+      "$value": "{color.text.on-action}"
+    },
+    "check-width": {
+      "$type": "dimension",
+      "$value": "{focus.ring.width}"
+    },
+    "focus": {
+      "ring": {
+        "$type": "color",
+        "$value": "{color.border.focus}"
+      },
+      "ring-width": {
+        "$type": "dimension",
+        "$value": "{focus.ring.width}"
+      },
+      "ring-offset": {
+        "$type": "dimension",
+        "$value": "{focus.ring.offset}"
+      }
+    },
+    "motion": {
+      "duration": {
+        "$type": "duration",
+        "$value": "{motion.duration.fast}"
+      }
+    }
+  }
+}

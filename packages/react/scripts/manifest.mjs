@@ -27,7 +27,7 @@ const parser = withCustomConfig(resolve(ROOT, 'tsconfig.json'), {
 });
 
 const componentFiles = readdirSync(SRC, { withFileTypes: true })
-  .filter((entry) => entry.isDirectory() && !['internal', 'test'].includes(entry.name))
+  .filter((entry) => entry.isDirectory() && !['internal', 'test', 'stories'].includes(entry.name))
   .map((entry) => {
     const name = entry.name.split('-').map((part) => part.charAt(0).toUpperCase() + part.slice(1)).join('');
     return { dir: entry.name, file: resolve(SRC, entry.name, `${name}.tsx`) };

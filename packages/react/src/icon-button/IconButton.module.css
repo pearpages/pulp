@@ -1,0 +1,12 @@
+/* Squares a Button. Selectors carry the data attribute so they outrank Button's own size rules. */
+
+@layer components {
+  .iconButton[data-icon-only] {
+    gap: 0;
+    inline-size: var(--icon-button-size-md);
+    padding-inline: 0;
+
+    &[data-size="sm"] { inline-size: var(--icon-button-size-sm); }
+    &[data-size="lg"] { inline-size: var(--icon-button-size-lg); }
+  }
+}

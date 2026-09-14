@@ -1,0 +1,77 @@
+{
+  "$description": "Switch component tokens. The track is twice the toggle size; the thumb is inset by a hairline pair.",
+  "switch": {
+    "size": {
+      "$type": "dimension",
+      "sm": {
+        "$value": "{size.toggle.sm}"
+      },
+      "md": {
+        "$value": "{size.toggle.md}"
+      },
+      "lg": {
+        "$value": "{size.toggle.lg}"
+      }
+    },
+    "gap": {
+      "$type": "dimension",
+      "$value": "{space.2}"
+    },
+    "radius": {
+      "$type": "dimension",
+      "$value": "{radius.full}"
+    },
+    "thumb-inset": {
+      "$type": "dimension",
+      "$value": "{size.hairline}"
+    },
+    "track-bg": {
+      "$type": "color",
+      "$value": "{color.border.strong}"
+    },
+    "track-bg-hover": {
+      "$type": "color",
+      "$value": "{color.text.faint}"
+    },
+    "track-bg-checked": {
+      "$type": "color",
+      "$value": "{color.action.primary}"
+    },
+    "track-bg-checked-hover": {
+      "$type": "color",
+      "$value": "{color.action.primary-hover}"
+    },
+    "track-invalid": {
+      "$type": "color",
+      "$value": "{color.status.error}"
+    },
+    "thumb": {
+      "$type": "color",
+      "$value": "{color.surface.raised}"
+    },
+    "thumb-checked": {
+      "$type": "color",
+      "$value": "{color.text.on-action}"
+    },
+    "focus": {
+      "ring": {
+        "$type": "color",
+        "$value": "{color.border.focus}"
+      },
+      "ring-width": {
+        "$type": "dimension",
+        "$value": "{focus.ring.width}"
+      },
+      "ring-offset": {
+        "$type": "dimension",
+        "$value": "{focus.ring.offset}"
+      }
+    },
+    "motion": {
+      "duration": {
+        "$type": "duration",
+        "$value": "{motion.duration.fast}"
+      }
+    }
+  }
+}

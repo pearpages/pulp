@@ -1,0 +1,88 @@
+/* Every value is a token (--radio-*). The input draws itself; the dot is its ::after. */
+
+@layer components {
+  .group {
+    --_size: var(--radio-size-md);
+    --_border: var(--radio-border);
+
+    font-family: var(--font-family-body);
+
+    &[data-size="sm"] { --_size: var(--radio-size-sm); }
+    &[data-size="lg"] { --_size: var(--radio-size-lg); }
+    &[data-invalid] { --_border: var(--radio-border-invalid); }
+  }
+
+  .items {
+    display: flex;
+    flex-direction: column;
+    gap: var(--radio-group-gap);
+
+    &[data-orientation="horizontal"] {
+      flex-flow: row wrap;
+      gap: var(--radio-group-gap) var(--space-4);
+    }
+  }
+
+  .radio {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--radio-gap);
+    cursor: pointer;
+
+    &[data-disabled] {
+      cursor: not-allowed;
+    }
+  }
+
+  .label {
+    font-size: var(--field-label-font-size);
+    color: var(--field-label-fg);
+  }
+
+  .input {
+    display: grid;
+    flex: none;
+    place-content: center;
+    inline-size: var(--_size);
+    block-size: var(--_size);
+    margin: 0;
+    border: var(--size-hairline) solid var(--_border);
+    border-radius: var(--radio-radius);
+    background-color: var(--radio-bg);
+    appearance: none;
+    cursor: inherit;
+    transition: border-color var(--radio-motion-duration) var(--motion-easing-standard);
+
+    /* Sized from the box, not in percent: a grid item's percentage resolves against an auto area and collapses. */
+    &::after {
+      content: "";
+      inline-size: calc(var(--_size) / 2);
+      block-size: calc(var(--_size) / 2);
+      border-radius: var(--radio-radius);
+      background-color: var(--radio-dot);
+      scale: 0;
+      transition: scale var(--radio-motion-duration) var(--motion-easing-standard);
+    }
+
+    &:checked {
+      border-color: var(--radio-border-checked);
+
+      &::after {
+        scale: 1;
+      }
+    }
+
+    &:focus-visible {
+      outline: var(--radio-focus-ring-width) solid var(--radio-focus-ring);
+      outline-offset: var(--radio-focus-ring-offset);
+    }
+
+    &:disabled {
+      opacity: 0.55;
+    }
+
+    &:hover:not(:disabled, :checked) {
+      border-color: var(--radio-border-hover);
+    }
+  }
+}

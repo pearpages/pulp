@@ -183,16 +183,17 @@ copy, not to re-derive.
   manifest `requires` lists icons and the vendor dialog stylesheet.
 
 *Tier 2, form controls (all reuse Field and the TextField tokens)*
-- [ ] IconButton: Button with a required accessible name (TS: `aria-label` required) and square
-      sizes; removes the dev-only warning path from Button.
-- [ ] Checkbox: native input, `indeterminate`, label via Field; `data-state` checked/unchecked/mixed.
-- [ ] Switch: `role="switch"`, `aria-checked`; same tokens as Checkbox with a track/thumb.
-- [ ] Radio and RadioGroup: roving focus via `useRovingFocus`, arrow keys select; group carries
-      Field wiring.
-- [ ] Textarea: TextField tokens, `rows`, optional auto-grow via `field-sizing: content`.
-- [ ] Select (native): styled `<select>` with a chevron; accessible for free. Custom listbox waits
-      for tier 5.
-- [ ] Form-level story: one form using every control, submitted with `play`, as the integration test.
+- [x] IconButton (2026-09-14): `label` required; squares Button through `--icon-button-size-*` on a
+      `data-icon-only` attribute. Button keeps its dev warning for the un-sanctioned path.
+- [x] Checkbox (2026-09-14): native input, `appearance: none`, tick drawn in CSS, `indeterminate` as
+      property + `aria-checked="mixed"` + `data-indeterminate`. State is the native `:checked`.
+- [x] Switch (2026-09-14): native checkbox with `role="switch"`; track/thumb from `--switch-*`.
+- [x] RadioGroup + Radio (2026-09-14): native radios (the browser's arrow keys, no hook needed);
+      group labelled by reference via `Field.Label as="span"` + `useField().labelId`.
+- [x] Textarea (2026-09-14): `rows`, `resize`, `autoGrow` (`field-sizing: content`, progressive).
+- [x] Select (2026-09-14): native `<select>`, chevron as the wrapper's `::after` in the same grid cell.
+- [x] Form pattern story (2026-09-14): `src/stories/Form.stories.tsx`, submits and asserts FormData.
+      Checkbox and Switch share `src/internal/ToggleField.tsx`.
 
 *Tier 3, feedback*
 - [ ] Spinner: extracted from Button's loading state; `size`, `label` for assistive technology.

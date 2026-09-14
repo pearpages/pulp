@@ -12,6 +12,12 @@ import { defineConfig } from 'tsup';
 export default defineConfig({
   entry: {
     index: 'src/index.ts',
+    'select': 'src/select/index.ts',
+    'textarea': 'src/textarea/index.ts',
+    'radio': 'src/radio/index.ts',
+    'switch': 'src/switch/index.ts',
+    'checkbox': 'src/checkbox/index.ts',
+    'icon-button': 'src/icon-button/index.ts',
     field: 'src/field/index.ts',
     inline: 'src/inline/index.ts',
     stack: 'src/stack/index.ts',

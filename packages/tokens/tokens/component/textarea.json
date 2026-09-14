@@ -1,0 +1,90 @@
+{
+  "$description": "Textarea component tokens: the same surface as TextField, its own file so it can diverge.",
+  "textarea": {
+    "radius": {
+      "$type": "dimension",
+      "$value": "{radius.control}"
+    },
+    "padding-inline": {
+      "$type": "dimension",
+      "$value": "{space.3}"
+    },
+    "padding-block": {
+      "$type": "dimension",
+      "$value": "{space.2}"
+    },
+    "min-height": {
+      "$type": "dimension",
+      "$value": "{size.control.lg}"
+    },
+    "font": {
+      "family": {
+        "$type": "fontFamily",
+        "$value": "{font.family.body}"
+      },
+      "size": {
+        "$type": "dimension",
+        "sm": {
+          "$value": "{font.size.sm}"
+        },
+        "md": {
+          "$value": "{font.size.md}"
+        },
+        "lg": {
+          "$value": "{font.size.lg}"
+        }
+      }
+    },
+    "line-height": {
+      "$type": "number",
+      "$value": "{font.line-height.normal}"
+    },
+    "bg": {
+      "$type": "color",
+      "$value": "{color.surface.raised}"
+    },
+    "fg": {
+      "$type": "color",
+      "$value": "{color.text.default}"
+    },
+    "placeholder": {
+      "$type": "color",
+      "$value": "{color.text.faint}"
+    },
+    "border": {
+      "$type": "color",
+      "default": {
+        "$value": "{color.border.default}"
+      },
+      "hover": {
+        "$value": "{color.border.strong}"
+      },
+      "focus": {
+        "$value": "{color.border.focus}"
+      },
+      "invalid": {
+        "$value": "{color.status.error}"
+      }
+    },
+    "focus": {
+      "ring": {
+        "$type": "color",
+        "$value": "{color.border.focus}"
+      },
+      "ring-width": {
+        "$type": "dimension",
+        "$value": "{focus.ring.width}"
+      },
+      "ring-offset": {
+        "$type": "dimension",
+        "$value": "{focus.ring.offset}"
+      }
+    },
+    "motion": {
+      "duration": {
+        "$type": "duration",
+        "$value": "{motion.duration.fast}"
+      }
+    }
+  }
+}

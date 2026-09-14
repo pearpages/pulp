@@ -19,6 +19,8 @@ type Part = 'description' | 'error';
 export interface FieldContextValue {
   /** The control's id; the label points at it. */
   id: string;
+  /** The label's id, for controls that are labelled by reference (`aria-labelledby`), such as a radio group. */
+  labelId: string;
   invalid: boolean;
   disabled: boolean;
   required: boolean;
@@ -87,7 +89,7 @@ export function Field({ id, invalid = false, disabled = false, required = false,
     undefined;
 
   return (
-    <FieldContext.Provider value={{ id: controlId, invalid, disabled, required, describedBy, register }}>
+    <FieldContext.Provider value={{ id: controlId, labelId: `${controlId}-label`, invalid, disabled, required, describedBy, register }}>
       <div
         {...rest}
         ref={ref}
@@ -103,20 +105,36 @@ export function Field({ id, invalid = false, disabled = false, required = false,
 }
 
 interface FieldLabelProps extends LabelHTMLAttributes<HTMLLabelElement> {
+  /**
+   * `label` points at the control with `for`. `span` is for controls that are
+   * not labelable (a radio group, a fieldset): it carries `labelId` and the
+   * control references it with `aria-labelledby`.
+   * @default 'label'
+   */
+  as?: 'label' | 'span';
   ref?: Ref<HTMLLabelElement>;
   children: ReactNode;
 }
 
-function FieldLabel({ className, ref, children, ...rest }: FieldLabelProps) {
+function FieldLabel({ as = 'label', className, ref, children, ...rest }: FieldLabelProps) {
   const field = useField();
+  const marker = field.required && (
+    <span className={styles.required} aria-hidden="true">
+      *
+    </span>
+  );
+  if (as === 'span') {
+    return (
+      <span {...rest} id={field.labelId} className={classes(styles.label, className)}>
+        {children}
+        {marker}
+      </span>
+    );
+  }
   return (
     <label {...rest} ref={ref} htmlFor={field.id} className={classes(styles.label, className)}>
       {children}
-      {field.required && (
-        <span className={styles.required} aria-hidden="true">
-          *
-        </span>
-      )}
+      {marker}
     </label>
   );
 }

@@ -1,0 +1,91 @@
+/*
+ * Every value is a token (--checkbox-*). Size and invalid state are resolved
+ * into private custom properties on the root, so the input has one rule per
+ * property and no selector ordering to maintain.
+ */
+
+@layer components {
+  .checkbox {
+    --_size: var(--checkbox-size-md);
+    --_border: var(--checkbox-border);
+
+    font-family: var(--font-family-body);
+
+    &[data-size="sm"] { --_size: var(--checkbox-size-sm); }
+    &[data-size="lg"] { --_size: var(--checkbox-size-lg); }
+    &[data-invalid] { --_border: var(--checkbox-border-invalid); }
+  }
+
+  .row {
+    display: flex;
+    align-items: center;
+    gap: var(--checkbox-gap);
+  }
+
+  .input {
+    display: grid;
+    flex: none;
+    place-content: center;
+    inline-size: var(--_size);
+    block-size: var(--_size);
+    margin: 0;
+    border: var(--size-hairline) solid var(--_border);
+    border-radius: var(--checkbox-radius);
+    background-color: var(--checkbox-bg);
+    appearance: none;
+    cursor: pointer;
+    transition:
+      background-color var(--checkbox-motion-duration) var(--motion-easing-standard),
+      border-color var(--checkbox-motion-duration) var(--motion-easing-standard);
+
+    /* Sized from the box, not in percent: a grid item's percentage resolves against an auto area and collapses. */
+    &::after {
+      content: "";
+      inline-size: calc(var(--_size) * 0.3);
+      block-size: calc(var(--_size) * 0.55);
+      border-style: solid;
+      border-color: var(--checkbox-check);
+      border-width: 0 var(--checkbox-check-width) var(--checkbox-check-width) 0;
+      rotate: 45deg;
+      translate: 0 -10%;
+      opacity: 0;
+    }
+
+    &:checked,
+    &:indeterminate {
+      border-color: var(--checkbox-bg-checked);
+      background-color: var(--checkbox-bg-checked);
+
+      &::after {
+        opacity: 1;
+      }
+    }
+
+    &:indeterminate::after {
+      inline-size: calc(var(--_size) * 0.55);
+      block-size: 0;
+      border-width: 0 0 var(--checkbox-check-width);
+      rotate: 0deg;
+      translate: 0 0;
+    }
+
+    &:focus-visible {
+      outline: var(--checkbox-focus-ring-width) solid var(--checkbox-focus-ring);
+      outline-offset: var(--checkbox-focus-ring-offset);
+    }
+
+    &:disabled {
+      cursor: not-allowed;
+      opacity: 0.55;
+    }
+
+    &:hover:not(:disabled, :checked, :indeterminate) {
+      border-color: var(--checkbox-border-hover);
+    }
+
+    &:hover:not(:disabled):is(:checked, :indeterminate) {
+      border-color: var(--checkbox-bg-checked-hover);
+      background-color: var(--checkbox-bg-checked-hover);
+    }
+  }
+}

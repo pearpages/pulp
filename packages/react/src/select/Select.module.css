@@ -1,0 +1,84 @@
+/*
+ * Every value is a token (--select-*). The chevron is the wrapper's ::after,
+ * sharing the select's grid cell. Size and invalid state resolve into private
+ * custom properties on the root.
+ */
+
+@layer components {
+  .field {
+    --_height: var(--select-height-md);
+    --_font-size: var(--select-font-size-md);
+    --_border: var(--select-border-default);
+
+    font-family: var(--select-font-family);
+
+    &[data-size="sm"] {
+      --_height: var(--select-height-sm);
+      --_font-size: var(--select-font-size-sm);
+    }
+
+    &[data-size="lg"] {
+      --_height: var(--select-height-lg);
+      --_font-size: var(--select-font-size-lg);
+    }
+
+    &[data-invalid] { --_border: var(--select-border-invalid); }
+  }
+
+  .control {
+    display: grid;
+    align-items: center;
+
+    & > * {
+      grid-area: 1 / 1;
+    }
+
+    &::after {
+      content: "";
+      inline-size: var(--space-2);
+      block-size: var(--space-2);
+      margin-inline-end: var(--select-chevron-inset);
+      border-inline-end: var(--select-chevron-width) solid var(--select-chevron);
+      border-block-end: var(--select-chevron-width) solid var(--select-chevron);
+      justify-self: end;
+      rotate: 45deg;
+      translate: 0 -25%;
+      pointer-events: none;
+      grid-area: 1 / 1;
+    }
+  }
+
+  .select {
+    inline-size: 100%;
+    min-block-size: var(--_height);
+    padding-block: 0;
+    padding-inline: var(--select-padding-inline) var(--select-chevron-gap);
+    border: var(--size-hairline) solid var(--_border);
+    border-radius: var(--select-radius);
+    background-color: var(--select-bg);
+    color: var(--select-fg);
+    font-size: var(--_font-size);
+    appearance: none;
+    cursor: pointer;
+    transition: border-color var(--select-motion-duration) var(--motion-easing-standard);
+
+    &:focus-visible {
+      border-color: var(--select-border-focus);
+      outline: var(--select-focus-ring-width) solid var(--select-focus-ring);
+      outline-offset: var(--select-focus-ring-offset);
+    }
+
+    &:disabled {
+      cursor: not-allowed;
+      opacity: 0.55;
+    }
+
+    &:hover:not(:disabled, :focus-visible) {
+      border-color: var(--select-border-hover);
+    }
+
+    &:has(option[value=""]:checked) {
+      color: var(--select-placeholder);
+    }
+  }
+}

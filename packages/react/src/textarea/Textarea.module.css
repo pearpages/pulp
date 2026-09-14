@@ -1,0 +1,53 @@
+/* Every value is a token (--textarea-*). Label, description and error come from Field. */
+
+@layer components {
+  .field {
+    font-family: var(--textarea-font-family);
+  }
+
+  .textarea {
+    min-block-size: var(--textarea-min-height);
+    padding-block: var(--textarea-padding-block);
+    padding-inline: var(--textarea-padding-inline);
+    border: var(--size-hairline) solid var(--textarea-border-default);
+    border-radius: var(--textarea-radius);
+    background-color: var(--textarea-bg);
+    color: var(--textarea-fg);
+    font-size: var(--textarea-font-size-md);
+    line-height: var(--textarea-line-height);
+    resize: vertical;
+    transition:
+      border-color var(--textarea-motion-duration) var(--motion-easing-standard),
+      background-color var(--textarea-motion-duration) var(--motion-easing-standard);
+
+    &::placeholder {
+      color: var(--textarea-placeholder);
+    }
+
+    &:focus-visible {
+      border-color: var(--textarea-border-focus);
+      outline: var(--textarea-focus-ring-width) solid var(--textarea-focus-ring);
+      outline-offset: var(--textarea-focus-ring-offset);
+    }
+
+    &:disabled {
+      cursor: not-allowed;
+      opacity: 0.55;
+    }
+
+    &:read-only:not(:disabled) {
+      background-color: var(--color-surface-sunken);
+    }
+
+    &:hover:not(:disabled, :focus-visible) {
+      border-color: var(--textarea-border-hover);
+    }
+  }
+
+  .field[data-size="sm"] .textarea { font-size: var(--textarea-font-size-sm); }
+  .field[data-size="lg"] .textarea { font-size: var(--textarea-font-size-lg); }
+  .field[data-resize="none"] .textarea { resize: none; }
+  .field[data-resize="both"] .textarea { resize: both; }
+  .field[data-auto-grow] .textarea { field-sizing: content; }
+  .field[data-invalid] .textarea { border-color: var(--textarea-border-invalid); }
+}

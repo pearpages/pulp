@@ -1,0 +1,73 @@
+{
+  "$description": "Radio and RadioGroup component tokens. Semantic references only.",
+  "radio": {
+    "size": {
+      "$type": "dimension",
+      "sm": {
+        "$value": "{size.toggle.sm}"
+      },
+      "md": {
+        "$value": "{size.toggle.md}"
+      },
+      "lg": {
+        "$value": "{size.toggle.lg}"
+      }
+    },
+    "gap": {
+      "$type": "dimension",
+      "$value": "{space.2}"
+    },
+    "group-gap": {
+      "$type": "dimension",
+      "$value": "{space.2}"
+    },
+    "radius": {
+      "$type": "dimension",
+      "$value": "{radius.full}"
+    },
+    "bg": {
+      "$type": "color",
+      "$value": "{color.surface.raised}"
+    },
+    "border": {
+      "$type": "color",
+      "$value": "{color.border.strong}"
+    },
+    "border-hover": {
+      "$type": "color",
+      "$value": "{color.action.primary}"
+    },
+    "border-checked": {
+      "$type": "color",
+      "$value": "{color.action.primary}"
+    },
+    "border-invalid": {
+      "$type": "color",
+      "$value": "{color.status.error}"
+    },
+    "dot": {
+      "$type": "color",
+      "$value": "{color.action.primary}"
+    },
+    "focus": {
+      "ring": {
+        "$type": "color",
+        "$value": "{color.border.focus}"
+      },
+      "ring-width": {
+        "$type": "dimension",
+        "$value": "{focus.ring.width}"
+      },
+      "ring-offset": {
+        "$type": "dimension",
+        "$value": "{focus.ring.offset}"
+      }
+    },
+    "motion": {
+      "duration": {
+        "$type": "duration",
+        "$value": "{motion.duration.fast}"
+      }
+    }
+  }
+}
