@@ -22,6 +22,22 @@
       "types": "./dist/index.d.ts",
       "import": "./dist/index.js"
     },
+    "./menu": {
+      "types": "./dist/menu.d.ts",
+      "import": "./dist/menu.js"
+    },
+    "./accordion": {
+      "types": "./dist/accordion.d.ts",
+      "import": "./dist/accordion.js"
+    },
+    "./popover": {
+      "types": "./dist/popover.d.ts",
+      "import": "./dist/popover.js"
+    },
+    "./tooltip": {
+      "types": "./dist/tooltip.d.ts",
+      "import": "./dist/tooltip.js"
+    },
     "./skeleton": {
       "types": "./dist/skeleton.d.ts",
       "import": "./dist/skeleton.js"
@@ -119,6 +135,10 @@
       "import": "./dist/button.js"
     },
     "./styles.css": "./dist/index.css",
+    "./menu.css": "./dist/menu.css",
+    "./accordion.css": "./dist/accordion.css",
+    "./popover.css": "./dist/popover.css",
+    "./tooltip.css": "./dist/tooltip.css",
     "./skeleton.css": "./dist/skeleton.css",
     "./progress.css": "./dist/progress.css",
     "./toast.css": "./dist/toast.css",
@@ -155,7 +175,7 @@
     "test:dist": "vitest run --config vitest.dist.config.ts",
     "manifest": "node scripts/manifest.mjs",
     "scaffold": "node scripts/scaffold-component.mjs",
-    "check:package": "publint && attw --pack . --profile esm-only --exclude-entrypoints styles.css button.css text-field.css card.css tabs.css dialog.css text.css heading.css icon.css visually-hidden.css stack.css inline.css field.css icon-button.css checkbox.css switch.css radio.css textarea.css select.css spinner.css badge.css alert.css toast.css progress.css skeleton.css component-manifest.json",
+    "check:package": "publint && attw --pack . --profile esm-only --exclude-entrypoints styles.css button.css text-field.css card.css tabs.css dialog.css text.css heading.css icon.css visually-hidden.css stack.css inline.css field.css icon-button.css checkbox.css switch.css radio.css textarea.css select.css spinner.css badge.css alert.css toast.css progress.css skeleton.css tooltip.css popover.css accordion.css menu.css component-manifest.json",
     "prepublishOnly": "pnpm run build && pnpm run test:run && pnpm run check:package"
   },
   "peerDependencies": {
@@ -191,6 +211,7 @@
     }
   },
   "dependencies": {
+    "@floating-ui/react-dom": "^2.1.9",
     "@pearpages/modals": "^0.2.0",
     "@pearpages/pulp-icons": "workspace:^"
   }

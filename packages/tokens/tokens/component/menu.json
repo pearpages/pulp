@@ -1,0 +1,101 @@
+{
+  "$description": "Menu component tokens.",
+  "menu": {
+    "bg": {
+      "$type": "color",
+      "$value": "{color.surface.raised}"
+    },
+    "fg": {
+      "$type": "color",
+      "$value": "{color.text.default}"
+    },
+    "border": {
+      "$type": "color",
+      "$value": "{color.border.default}"
+    },
+    "radius": {
+      "$type": "dimension",
+      "$value": "{radius.surface}"
+    },
+    "padding": {
+      "$type": "dimension",
+      "$value": "{space.1}"
+    },
+    "gap": {
+      "$type": "dimension",
+      "$value": "{space.2}"
+    },
+    "min-width": {
+      "$type": "dimension",
+      "$value": "{size.menu-width}"
+    },
+    "shadow": {
+      "$type": "shadow",
+      "$value": "{shadow.overlay}"
+    },
+    "layer": {
+      "$type": "number",
+      "$value": "{layer.popover}"
+    },
+    "duration": {
+      "$type": "duration",
+      "$value": "{motion.duration.fast}"
+    },
+    "item": {
+      "padding-block": {
+        "$type": "dimension",
+        "$value": "{space.2}"
+      },
+      "padding-inline": {
+        "$type": "dimension",
+        "$value": "{space.3}"
+      },
+      "radius": {
+        "$type": "dimension",
+        "$value": "{radius.control}"
+      },
+      "font-size": {
+        "$type": "dimension",
+        "$value": "{font.size.sm}"
+      },
+      "fg": {
+        "$type": "color",
+        "$value": "{color.text.default}"
+      },
+      "fg-muted": {
+        "$type": "color",
+        "$value": "{color.text.muted}"
+      },
+      "bg-active": {
+        "$type": "color",
+        "$value": "{color.action.primary-quiet}"
+      },
+      "fg-active": {
+        "$type": "color",
+        "$value": "{color.text.default}"
+      },
+      "fg-danger": {
+        "$type": "color",
+        "$value": "{color.status.error-text}"
+      }
+    },
+    "separator": {
+      "$type": "color",
+      "$value": "{color.border.default}"
+    },
+    "focus": {
+      "ring": {
+        "$type": "color",
+        "$value": "{color.border.focus}"
+      },
+      "ring-width": {
+        "$type": "dimension",
+        "$value": "{focus.ring.width}"
+      },
+      "ring-offset": {
+        "$type": "dimension",
+        "$value": "{focus.ring.offset}"
+      }
+    }
+  }
+}

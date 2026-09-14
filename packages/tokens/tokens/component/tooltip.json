@@ -1,0 +1,49 @@
+{
+  "$description": "Tooltip component tokens.",
+  "tooltip": {
+    "bg": {
+      "$type": "color",
+      "$value": "{color.surface.inverse}"
+    },
+    "fg": {
+      "$type": "color",
+      "$value": "{color.text.on-inverse}"
+    },
+    "radius": {
+      "$type": "dimension",
+      "$value": "{radius.control}"
+    },
+    "padding-block": {
+      "$type": "dimension",
+      "$value": "{space.1}"
+    },
+    "padding-inline": {
+      "$type": "dimension",
+      "$value": "{space.2}"
+    },
+    "font-size": {
+      "$type": "dimension",
+      "$value": "{font.size.xs}"
+    },
+    "max-width": {
+      "$type": "dimension",
+      "$value": "{size.menu-width}"
+    },
+    "gap": {
+      "$type": "dimension",
+      "$value": "{space.2}"
+    },
+    "shadow": {
+      "$type": "shadow",
+      "$value": "{shadow.raised}"
+    },
+    "layer": {
+      "$type": "number",
+      "$value": "{layer.tooltip}"
+    },
+    "duration": {
+      "$type": "duration",
+      "$value": "{motion.duration.fast}"
+    }
+  }
+}

@@ -26,6 +26,15 @@
             "dark": "{color.ink.700}"
           }
         }
+      },
+      "inverse": {
+        "$value": "{color.neutral.900}",
+        "$extensions": {
+          "com.pearpages.pulp": {
+            "dark": "{color.neutral.50}"
+          }
+        },
+        "$description": "The opposite of the page: tooltips, and anything that must stand out from every surface."
       }
     },
     "text": {
@@ -62,6 +71,14 @@
           }
         },
         "$description": "Ink, not white: white on the brand orange is 2.8:1 and fails AA in both schemes."
+      },
+      "on-inverse": {
+        "$value": "{color.neutral.0}",
+        "$extensions": {
+          "com.pearpages.pulp": {
+            "dark": "{color.neutral.900}"
+          }
+        }
       }
     },
     "action": {
@@ -654,6 +671,18 @@
         "value": 22,
         "unit": "rem"
       }
+    },
+    "popover-width": {
+      "$value": {
+        "value": 20,
+        "unit": "rem"
+      }
+    },
+    "menu-width": {
+      "$value": {
+        "value": 14,
+        "unit": "rem"
+      }
     }
   },
   "focus": {
@@ -678,6 +707,14 @@
     "toast": {
       "$value": 1100,
       "$description": "Stacking order for toasts: above the dialog layer (the vendor dialog uses 1000)."
+    },
+    "popover": {
+      "$value": 1200,
+      "$description": "Popovers and menus: above dialogs (they open inside them) and toasts."
+    },
+    "tooltip": {
+      "$value": 1300,
+      "$description": "Tooltips: above everything."
     }
   }
 }

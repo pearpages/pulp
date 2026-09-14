@@ -213,14 +213,28 @@ copy, not to re-derive.
 - [x] Skeleton (2026-09-14): decorative; container carries `aria-busy`; shimmer off under reduced motion.
 
 *Tier 4, overlays and disclosure (reuse Dialog's portal pattern and Tabs' roving focus)*
-- [ ] Tooltip: hover/focus, `aria-describedby`, delay, never as the only label; Escape closes.
-      Positioning via CSS anchor positioning where supported, with a small fallback.
-- [ ] Popover: `role="dialog"` non-modal, focus management, click-outside; shares Tooltip's positioning.
-- [ ] Accordion: `single|multiple`, `<button aria-expanded>` in a heading, `region` panels; roving
-      focus between headers.
-- [ ] Sheet: Dialog variant docked to an edge; add a `placement` to the vendor mapping or a pulp
-      wrapper class on the portal element.
-- [ ] Menu and MenuItem: `role="menu"`, roving focus, typeahead, submenus later; trigger via Popover.
+- [x] Tooltip (2026-09-14): hover with delay, focus immediately, `aria-describedby` while open,
+      Escape hides. Positioning: `@floating-ui/react-dom` (runtime dependency, external) through
+      `src/internal/floating.ts`. CSS anchor positioning is above the browser floor today; the hook
+      is the one place to swap it in later. The gap is read from a `--_gap` token, and the position
+      is delivered as `--_x`/`--_y` custom properties (the per-instance inline value, disable comment).
+- [x] Popover (2026-09-14): non-modal `role="dialog"`, focus in on open and back to the trigger on
+      close, Escape/outside/`Popover.Close` dismiss via `src/internal/useDismiss.ts`.
+- [x] Accordion (2026-09-14): buttons inside real headings (`headingLevel`), `region` panels,
+      roving focus, `single|multiple`, `collapsible`.
+- [x] Menu (2026-09-14): WAI-ARIA menu button: arrows open to first/last, wraparound, typeahead,
+      Enter/Space/click select and close, Escape/Tab close and return focus, `tone="danger"` items.
+- [ ] Sheet: **blocked on `@pearpages/modals` ≥ 0.3.0 `placement`**. Docking the vendor dialog to
+      an edge cannot be done from pulp's layered stylesheet (the vendor's layout rules are
+      unlayered). Decision (2026-09-14): the vendor learns to dock, pulp maps colours. Then `Sheet`
+      = `Dialog` with `placement` forwarded and `--sheet-*` tokens mapped onto
+      `--modal-width-sheet` / `--modal-height-sheet`.
+- Decisions after tier 4 (2026-09-14): positioning stays on `@floating-ui/react-dom` behind
+  `src/internal/floating.ts`; revisit when Safari 26 is an acceptable floor (CSS anchor positioning)
+  or when modals moves to the top layer (native Popover API; until then, top-layer overlays would
+  stack above dialogs opened from them). Menu's hand-rolled interaction model is reviewed against
+  React Aria in tier 5. Longer term, modals shipping its CSS in a named layer would make every pulp
+  override win by design (a major for modals).
 
 *Tier 5, complex widgets: build on React Aria, never hand-roll the keyboard model*
 - [ ] Decision record first: React Aria Components as the headless layer for this tier (why: the

@@ -1,0 +1,50 @@
+/* Every value is a token (--popover-*). Position comes in as --_x/--_y from the floating hook. */
+
+@layer components {
+  .content {
+    --_gap: var(--popover-gap);
+
+    position: fixed;
+    z-index: var(--popover-layer);
+    inset-block-start: var(--_y);
+    inset-inline-start: var(--_x);
+    display: flex;
+    flex-direction: column;
+    gap: var(--popover-gap);
+    inline-size: var(--popover-width);
+    max-inline-size: calc(100vw - 2 * var(--space-4));
+    padding: var(--popover-padding);
+    border: var(--size-hairline) solid var(--popover-border);
+    border-radius: var(--popover-radius);
+    background-color: var(--popover-bg);
+    color: var(--popover-fg);
+    font-family: var(--font-family-body);
+    box-shadow: var(--popover-shadow);
+    animation: fade var(--popover-duration) var(--motion-easing-standard);
+
+    &:focus-visible {
+      outline: var(--popover-focus-ring-width) solid var(--popover-focus-ring);
+      outline-offset: var(--popover-focus-ring-offset);
+    }
+  }
+
+  .title {
+    margin: 0;
+    font-family: var(--font-family-display);
+    font-size: var(--font-size-md);
+    font-weight: var(--font-weight-semibold);
+    line-height: var(--font-line-height-tight);
+  }
+
+  @keyframes fade {
+    from {
+      opacity: 0;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .content {
+      animation: none;
+    }
+  }
+}

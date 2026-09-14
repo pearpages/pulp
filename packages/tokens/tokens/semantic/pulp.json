@@ -26,6 +26,15 @@
             "dark": "{color.neutral.1000}"
           }
         }
+      },
+      "inverse": {
+        "$value": "{color.neutral.950}",
+        "$extensions": {
+          "com.pearpages.pulp": {
+            "dark": "{color.neutral.100}"
+          }
+        },
+        "$description": "The opposite of the page: tooltips, and anything that must stand out from every surface."
       }
     },
     "text": {
@@ -62,6 +71,14 @@
           }
         },
         "$description": "Text on an action fill. Dark scheme fills are light, so the text flips to ink."
+      },
+      "on-inverse": {
+        "$value": "{color.neutral.50}",
+        "$extensions": {
+          "com.pearpages.pulp": {
+            "dark": "{color.neutral.950}"
+          }
+        }
       }
     },
     "action": {
@@ -655,6 +672,18 @@
         "value": 22,
         "unit": "rem"
       }
+    },
+    "popover-width": {
+      "$value": {
+        "value": 20,
+        "unit": "rem"
+      }
+    },
+    "menu-width": {
+      "$value": {
+        "value": 14,
+        "unit": "rem"
+      }
     }
   },
   "focus": {
@@ -679,6 +708,14 @@
     "toast": {
       "$value": 1100,
       "$description": "Stacking order for toasts: above the dialog layer (the vendor dialog uses 1000)."
+    },
+    "popover": {
+      "$value": 1200,
+      "$description": "Popovers and menus: above dialogs (they open inside them) and toasts."
+    },
+    "tooltip": {
+      "$value": 1300,
+      "$description": "Tooltips: above everything."
     }
   }
 }

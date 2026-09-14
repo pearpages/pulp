@@ -1,0 +1,85 @@
+/* Every value is a token (--menu-*). Position comes in as --_x/--_y from the floating hook. */
+
+@layer components {
+  .content {
+    --_gap: var(--menu-gap);
+
+    position: fixed;
+    z-index: var(--menu-layer);
+    inset-block-start: var(--_y);
+    inset-inline-start: var(--_x);
+    display: flex;
+    flex-direction: column;
+    min-inline-size: var(--menu-min-width);
+    max-inline-size: calc(100vw - 2 * var(--space-4));
+    padding: var(--menu-padding);
+    border: var(--size-hairline) solid var(--menu-border);
+    border-radius: var(--menu-radius);
+    background-color: var(--menu-bg);
+    color: var(--menu-fg);
+    font-family: var(--font-family-body);
+    box-shadow: var(--menu-shadow);
+    animation: fade var(--menu-duration) var(--motion-easing-standard);
+
+    &:focus-visible {
+      outline: var(--menu-focus-ring-width) solid var(--menu-focus-ring);
+      outline-offset: var(--menu-focus-ring-offset);
+    }
+  }
+
+  .item {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    inline-size: 100%;
+    padding-block: var(--menu-item-padding-block);
+    padding-inline: var(--menu-item-padding-inline);
+    border: none;
+    border-radius: var(--menu-item-radius);
+    background-color: transparent;
+    color: var(--menu-item-fg);
+    font-size: var(--menu-item-font-size);
+    text-align: start;
+    cursor: pointer;
+
+    &[data-tone="danger"] {
+      color: var(--menu-item-fg-danger);
+    }
+
+    &[data-disabled] {
+      color: var(--menu-item-fg-muted);
+      cursor: not-allowed;
+    }
+
+    &:focus-visible {
+      outline: none;
+      background-color: var(--menu-item-bg-active);
+    }
+
+    &:hover:not([data-disabled]) {
+      background-color: var(--menu-item-bg-active);
+    }
+  }
+
+  .label {
+    flex: 1;
+  }
+
+  .separator {
+    block-size: var(--size-hairline);
+    margin-block: var(--menu-padding);
+    background-color: var(--menu-separator);
+  }
+
+  @keyframes fade {
+    from {
+      opacity: 0;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .content {
+      animation: none;
+    }
+  }
+}

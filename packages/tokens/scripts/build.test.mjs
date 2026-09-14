@@ -85,6 +85,7 @@ const PAIRS = [
   ['--color-action-text', ['--color-surface-base', '--color-surface-raised', '--color-surface-sunken', '--color-action-primary-quiet']],
   ['--color-text-default', ['--color-action-secondary', '--color-action-secondary-hover']],
   ['--color-status-error-text', ['--color-surface-base', '--color-surface-raised', '--color-surface-sunken']],
+  ['--color-text-on-inverse', ['--color-surface-inverse']],
   ...['success', 'warning', 'error', 'info', 'neutral'].flatMap((tone) => [
     [`--color-status-${tone}-text`, ['--color-surface-base', '--color-surface-raised', '--color-surface-sunken', `--color-status-${tone}-subtle`]],
     [`--color-status-on-${tone}`, [`--color-status-${tone}`]],

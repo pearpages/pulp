@@ -12,6 +12,10 @@ import { defineConfig } from 'tsup';
 export default defineConfig({
   entry: {
     index: 'src/index.ts',
+    'menu': 'src/menu/index.ts',
+    'accordion': 'src/accordion/index.ts',
+    'popover': 'src/popover/index.ts',
+    'tooltip': 'src/tooltip/index.ts',
     'skeleton': 'src/skeleton/index.ts',
     'progress': 'src/progress/index.ts',
     'toast': 'src/toast/index.ts',
@@ -44,6 +48,6 @@ export default defineConfig({
   splitting: true,
   treeshake: true,
   target: 'es2022',
-  external: ['react', 'react-dom', 'react/jsx-runtime', '@pearpages/modals', '@pearpages/pulp-icons'],
+  external: ['react', 'react-dom', 'react/jsx-runtime', '@pearpages/modals', '@pearpages/pulp-icons', '@floating-ui/react-dom'],
   loader: { '.css': 'local-css' },
 });

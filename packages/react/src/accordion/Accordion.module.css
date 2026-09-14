@@ -1,0 +1,76 @@
+/* Every value is a token (--accordion-*). Open state is a data attribute; the chevron rotates on it. */
+
+@layer components {
+  .accordion {
+    display: flex;
+    flex-direction: column;
+    border: var(--size-hairline) solid var(--accordion-border);
+    border-radius: var(--accordion-radius);
+    font-family: var(--font-family-body);
+  }
+
+  .item {
+    border-block-end: var(--size-hairline) solid var(--accordion-border);
+
+    &:last-child {
+      border-block-end: none;
+    }
+  }
+
+  .heading {
+    margin: 0;
+    font-size: inherit;
+    font-weight: inherit;
+  }
+
+  .trigger {
+    display: flex;
+    gap: var(--accordion-trigger-gap);
+    align-items: center;
+    inline-size: 100%;
+    padding-block: var(--accordion-trigger-padding-block);
+    padding-inline: var(--accordion-trigger-padding-inline);
+    border: none;
+    background-color: transparent;
+    color: var(--accordion-trigger-fg);
+    font-size: var(--accordion-trigger-font-size);
+    font-weight: var(--accordion-trigger-font-weight);
+    text-align: start;
+    cursor: pointer;
+    transition: background-color var(--accordion-duration) var(--motion-easing-standard);
+
+    &:focus-visible {
+      outline: var(--accordion-focus-ring-width) solid var(--accordion-focus-ring);
+      outline-offset: calc(-1 * var(--accordion-focus-ring-offset));
+    }
+
+    &:disabled {
+      cursor: not-allowed;
+      opacity: 0.55;
+    }
+
+    &:hover:not(:disabled) {
+      background-color: var(--accordion-trigger-bg-hover);
+    }
+  }
+
+  .label {
+    flex: 1;
+  }
+
+  .chevron {
+    color: var(--accordion-trigger-chevron);
+    transition: rotate var(--accordion-duration) var(--motion-easing-standard);
+  }
+
+  .trigger[data-state="open"] .chevron {
+    rotate: 180deg;
+  }
+
+  .panel {
+    padding-block: var(--accordion-panel-padding-block);
+    padding-inline: var(--accordion-panel-padding-inline);
+    color: var(--accordion-panel-fg);
+    font-size: var(--accordion-panel-font-size);
+  }
+}
