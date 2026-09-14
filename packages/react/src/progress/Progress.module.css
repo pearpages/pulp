@@ -1,0 +1,71 @@
+/* Every value is a token (--progress-*). The fill width is the per-instance --_value custom property. */
+
+@layer components {
+  .progress {
+    --_height: var(--progress-height-md);
+    --_indicator: var(--progress-indicator-primary);
+
+    display: flex;
+    flex-direction: column;
+    gap: var(--progress-gap);
+    font-family: var(--font-family-body);
+
+    &[data-size="sm"] { --_height: var(--progress-height-sm); }
+    &[data-tone="success"] { --_indicator: var(--progress-indicator-success); }
+    &[data-tone="warning"] { --_indicator: var(--progress-indicator-warning); }
+    &[data-tone="error"] { --_indicator: var(--progress-indicator-error); }
+  }
+
+  .header {
+    display: flex;
+    justify-content: space-between;
+    gap: var(--space-3);
+    font-size: var(--progress-label-font-size);
+  }
+
+  .label {
+    color: var(--progress-label-fg);
+  }
+
+  .value {
+    color: var(--progress-value-fg);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .track {
+    overflow: hidden;
+    block-size: var(--_height);
+    border-radius: var(--progress-radius);
+    background-color: var(--progress-track);
+  }
+
+  .indicator {
+    block-size: 100%;
+    inline-size: var(--_value, 0%);
+    border-radius: var(--progress-radius);
+    background-color: var(--_indicator);
+    transition: inline-size var(--progress-duration) var(--motion-easing-standard);
+  }
+
+  .progress[data-indeterminate] .indicator {
+    inline-size: 40%;
+    animation: slide calc(4 * var(--progress-duration)) var(--motion-easing-standard) infinite;
+  }
+
+  @keyframes slide {
+    from {
+      translate: -100% 0;
+    }
+
+    to {
+      translate: 250% 0;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .progress[data-indeterminate] .indicator {
+      inline-size: 50%;
+      animation: none;
+    }
+  }
+}

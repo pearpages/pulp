@@ -1,0 +1,93 @@
+{
+  "$description": "Alert component tokens.",
+  "alert": {
+    "radius": {
+      "$type": "dimension",
+      "$value": "{radius.surface}"
+    },
+    "padding": {
+      "$type": "dimension",
+      "$value": "{space.4}"
+    },
+    "gap": {
+      "$type": "dimension",
+      "$value": "{space.3}"
+    },
+    "border-width": {
+      "$type": "dimension",
+      "$value": "{size.hairline}"
+    },
+    "accent-width": {
+      "$type": "dimension",
+      "$value": "{space.1}"
+    },
+    "fg": {
+      "$type": "color",
+      "$value": "{color.text.default}"
+    },
+    "font-size": {
+      "$type": "dimension",
+      "$value": "{font.size.sm}"
+    },
+    "title-font-weight": {
+      "$type": "fontWeight",
+      "$value": "{font.weight.semibold}"
+    },
+    "info": {
+      "bg": {
+        "$type": "color",
+        "$value": "{color.status.info-subtle}"
+      },
+      "accent": {
+        "$type": "color",
+        "$value": "{color.status.info}"
+      },
+      "title": {
+        "$type": "color",
+        "$value": "{color.status.info-text}"
+      }
+    },
+    "success": {
+      "bg": {
+        "$type": "color",
+        "$value": "{color.status.success-subtle}"
+      },
+      "accent": {
+        "$type": "color",
+        "$value": "{color.status.success}"
+      },
+      "title": {
+        "$type": "color",
+        "$value": "{color.status.success-text}"
+      }
+    },
+    "warning": {
+      "bg": {
+        "$type": "color",
+        "$value": "{color.status.warning-subtle}"
+      },
+      "accent": {
+        "$type": "color",
+        "$value": "{color.status.warning}"
+      },
+      "title": {
+        "$type": "color",
+        "$value": "{color.status.warning-text}"
+      }
+    },
+    "error": {
+      "bg": {
+        "$type": "color",
+        "$value": "{color.status.error-subtle}"
+      },
+      "accent": {
+        "$type": "color",
+        "$value": "{color.status.error}"
+      },
+      "title": {
+        "$type": "color",
+        "$value": "{color.status.error-text}"
+      }
+    }
+  }
+}

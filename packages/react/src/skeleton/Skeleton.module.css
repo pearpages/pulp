@@ -1,0 +1,60 @@
+/* Every value is a token (--skeleton-*). Shimmer is a moving background-image; off under reduced motion. */
+
+@layer components {
+  .skeleton {
+    --_size: var(--skeleton-circle-md);
+
+    display: block;
+    inline-size: 100%;
+    border-radius: var(--skeleton-radius);
+    background-color: var(--skeleton-base);
+    background-image: linear-gradient(90deg, var(--skeleton-base), var(--skeleton-highlight), var(--skeleton-base));
+    background-size: 200% 100%;
+    animation: shimmer calc(6 * var(--skeleton-duration)) linear infinite;
+
+    &[data-shape="text"] {
+      block-size: var(--skeleton-text-height);
+    }
+
+    &[data-shape="rect"] {
+      block-size: var(--skeleton-circle-lg);
+    }
+
+    &[data-shape="circle"] {
+      inline-size: var(--_size);
+      block-size: var(--_size);
+      border-radius: var(--radius-full);
+    }
+
+    &[data-size="sm"] { --_size: var(--skeleton-circle-sm); }
+    &[data-size="lg"] { --_size: var(--skeleton-circle-lg); }
+
+    &[data-last] {
+      inline-size: 60%;
+    }
+  }
+
+  .lines {
+    display: flex;
+    flex-direction: column;
+    gap: var(--skeleton-gap);
+    inline-size: 100%;
+  }
+
+  @keyframes shimmer {
+    from {
+      background-position: 200% 0;
+    }
+
+    to {
+      background-position: -200% 0;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .skeleton {
+      animation: none;
+      background-image: none;
+    }
+  }
+}

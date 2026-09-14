@@ -1,0 +1,35 @@
+{
+  "$description": "Toast component tokens: the region and its stack; each toast is an Alert.",
+  "toast": {
+    "width": {
+      "$type": "dimension",
+      "$value": "{size.toast-width}"
+    },
+    "offset": {
+      "$type": "dimension",
+      "$value": "{space.5}"
+    },
+    "gap": {
+      "$type": "dimension",
+      "$value": "{space.3}"
+    },
+    "layer": {
+      "$type": "number",
+      "$value": "{layer.toast}"
+    },
+    "shadow": {
+      "$type": "shadow",
+      "$value": "{shadow.overlay}"
+    },
+    "radius": {
+      "$type": "dimension",
+      "$value": "{radius.surface}"
+    },
+    "motion": {
+      "duration": {
+        "$type": "duration",
+        "$value": "{motion.duration.base}"
+      }
+    }
+  }
+}

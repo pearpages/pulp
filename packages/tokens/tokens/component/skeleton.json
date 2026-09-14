@@ -1,0 +1,41 @@
+{
+  "$description": "Skeleton component tokens.",
+  "skeleton": {
+    "base": {
+      "$type": "color",
+      "$value": "{color.surface.sunken}"
+    },
+    "highlight": {
+      "$type": "color",
+      "$value": "{color.surface.raised}"
+    },
+    "radius": {
+      "$type": "dimension",
+      "$value": "{radius.control}"
+    },
+    "text-height": {
+      "$type": "dimension",
+      "$value": "{font.size.md}"
+    },
+    "gap": {
+      "$type": "dimension",
+      "$value": "{space.2}"
+    },
+    "circle": {
+      "$type": "dimension",
+      "sm": {
+        "$value": "{size.control.sm}"
+      },
+      "md": {
+        "$value": "{size.control.md}"
+      },
+      "lg": {
+        "$value": "{size.control.lg}"
+      }
+    },
+    "duration": {
+      "$type": "duration",
+      "$value": "{motion.duration.base}"
+    }
+  }
+}

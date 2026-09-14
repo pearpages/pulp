@@ -1,0 +1,80 @@
+/* Every value is a token (--alert-*). Tone resolves into private custom properties. */
+
+@layer components {
+  .alert {
+    --_bg: var(--alert-info-bg);
+    --_accent: var(--alert-info-accent);
+    --_title: var(--alert-info-title);
+
+    display: flex;
+    align-items: flex-start;
+    gap: var(--alert-gap);
+    padding: var(--alert-padding);
+    border: var(--alert-border-width) solid var(--_accent);
+    border-inline-start-width: var(--alert-accent-width);
+    border-radius: var(--alert-radius);
+    background-color: var(--_bg);
+    color: var(--alert-fg);
+    font-size: var(--alert-font-size);
+
+    &[data-tone="info"] {
+      --_bg: var(--alert-info-bg);
+      --_accent: var(--alert-info-accent);
+      --_title: var(--alert-info-title);
+    }
+
+    &[data-tone="success"] {
+      --_bg: var(--alert-success-bg);
+      --_accent: var(--alert-success-accent);
+      --_title: var(--alert-success-title);
+    }
+
+    &[data-tone="warning"] {
+      --_bg: var(--alert-warning-bg);
+      --_accent: var(--alert-warning-accent);
+      --_title: var(--alert-warning-title);
+    }
+
+    &[data-tone="error"] {
+      --_bg: var(--alert-error-bg);
+      --_accent: var(--alert-error-accent);
+      --_title: var(--alert-error-title);
+    }
+  }
+
+  .icon {
+    flex: none;
+    color: var(--_accent);
+  }
+
+  .body {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    gap: var(--space-1);
+    min-inline-size: 0;
+  }
+
+  .title {
+    margin: 0;
+    color: var(--_title);
+    font-weight: var(--alert-title-font-weight);
+  }
+
+  .content {
+    overflow-wrap: anywhere;
+  }
+
+  .action {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+    margin-block-start: var(--space-1);
+  }
+
+  .dismiss {
+    flex: none;
+    margin-block: calc(-1 * var(--space-1));
+    margin-inline-end: calc(-1 * var(--space-2));
+  }
+}

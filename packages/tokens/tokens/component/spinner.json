@@ -1,0 +1,33 @@
+{
+  "$description": "Spinner component tokens.",
+  "spinner": {
+    "size": {
+      "$type": "dimension",
+      "sm": {
+        "$value": "{size.toggle.sm}"
+      },
+      "md": {
+        "$value": "{size.toggle.md}"
+      },
+      "lg": {
+        "$value": "{size.toggle.lg}"
+      }
+    },
+    "width": {
+      "$type": "dimension",
+      "$value": "{focus.ring.width}"
+    },
+    "track": {
+      "$type": "color",
+      "$value": "{color.border.default}"
+    },
+    "indicator": {
+      "$type": "color",
+      "$value": "{color.action.primary}"
+    },
+    "duration": {
+      "$type": "duration",
+      "$value": "{motion.duration.base}"
+    }
+  }
+}

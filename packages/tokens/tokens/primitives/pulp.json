@@ -80,22 +80,40 @@
       "$description": "Sixteen steps rather than the usual eleven: 450, 850, 975 and 1000 exist because the dark scheme needs three surfaces below 900 (raised, base, sunken). Derived from perepages.com. 450 is the faint text step that still meets AA on the dark raised surface."
     },
     "saffron": {
+      "100": {
+        "$value": "#fff3d6"
+      },
       "500": {
         "$value": "#ffb020"
       },
+      "700": {
+        "$value": "#8a5a00"
+      },
       "900": {
-        "$value": "#2a1c00"
+        "$value": "#3a2800"
       }
     },
     "green": {
+      "100": {
+        "$value": "#e3f6ec"
+      },
       "300": {
         "$value": "#3ecf8e"
       },
       "500": {
         "$value": "#1a8f5c"
+      },
+      "700": {
+        "$value": "#146e47"
+      },
+      "900": {
+        "$value": "#0e2e20"
       }
     },
     "red": {
+      "100": {
+        "$value": "#fbe5e6"
+      },
       "300": {
         "$value": "#ff6b70"
       },
@@ -104,6 +122,9 @@
       },
       "700": {
         "$value": "#a52c30"
+      },
+      "900": {
+        "$value": "#3d1113"
       }
     }
   },

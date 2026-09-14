@@ -168,20 +168,22 @@
         }
       },
       "error": {
-        "$value": "{color.red.500}",
+        "$value": "{color.red.600}",
         "$extensions": {
           "com.pearpages.pulp": {
             "dark": "{color.red.300}"
           }
-        }
+        },
+        "$description": "One step darker than the brand red so white text on it meets AA."
       },
       "info": {
-        "$value": "{color.blue.500}",
+        "$value": "{color.blue.600}",
         "$extensions": {
           "com.pearpages.pulp": {
             "dark": "{color.blue.300}"
           }
-        }
+        },
+        "$description": "One step darker than the brand blue so white text on it meets AA."
       },
       "error-text": {
         "$value": "{color.red.700}",
@@ -191,6 +193,128 @@
           }
         },
         "$description": "Error colour for text (messages, required markers). status.error is a fill/border colour and is below AA as text on light surfaces."
+      },
+      "success-text": {
+        "$value": "{color.green.700}",
+        "$extensions": {
+          "com.pearpages.pulp": {
+            "dark": "{color.green.300}"
+          }
+        }
+      },
+      "warning-text": {
+        "$value": "{color.gold.700}",
+        "$extensions": {
+          "com.pearpages.pulp": {
+            "dark": "{color.gold.300}"
+          }
+        }
+      },
+      "info-text": {
+        "$value": "{color.blue.700}",
+        "$extensions": {
+          "com.pearpages.pulp": {
+            "dark": "{color.blue.300}"
+          }
+        }
+      },
+      "success-subtle": {
+        "$value": "{color.green.100}",
+        "$extensions": {
+          "com.pearpages.pulp": {
+            "dark": "{color.green.900}"
+          }
+        },
+        "$description": "Tinted background for the tone; pair with <tone>-text."
+      },
+      "warning-subtle": {
+        "$value": "{color.gold.100}",
+        "$extensions": {
+          "com.pearpages.pulp": {
+            "dark": "{color.gold.900}"
+          }
+        }
+      },
+      "error-subtle": {
+        "$value": "{color.red.100}",
+        "$extensions": {
+          "com.pearpages.pulp": {
+            "dark": "{color.red.900}"
+          }
+        }
+      },
+      "info-subtle": {
+        "$value": "{color.blue.100}",
+        "$extensions": {
+          "com.pearpages.pulp": {
+            "dark": "{color.blue.900}"
+          }
+        }
+      },
+      "on-success": {
+        "$value": "{color.neutral.900}",
+        "$extensions": {
+          "com.pearpages.pulp": {
+            "dark": "{color.neutral.900}"
+          }
+        }
+      },
+      "on-warning": {
+        "$value": "{color.neutral.900}",
+        "$extensions": {
+          "com.pearpages.pulp": {
+            "dark": "{color.neutral.900}"
+          }
+        }
+      },
+      "on-error": {
+        "$value": "{color.neutral.0}",
+        "$extensions": {
+          "com.pearpages.pulp": {
+            "dark": "{color.neutral.900}"
+          }
+        }
+      },
+      "on-info": {
+        "$value": "{color.neutral.0}",
+        "$extensions": {
+          "com.pearpages.pulp": {
+            "dark": "{color.neutral.900}"
+          }
+        }
+      },
+      "neutral": {
+        "$value": "{color.neutral.600}",
+        "$extensions": {
+          "com.pearpages.pulp": {
+            "dark": "{color.neutral.400}"
+          }
+        },
+        "$description": "A tone with no meaning: default Badge, counts, tags."
+      },
+      "neutral-subtle": {
+        "$value": "{color.cream.400}",
+        "$extensions": {
+          "com.pearpages.pulp": {
+            "dark": "{color.ink.500}"
+          }
+        }
+      },
+      "neutral-text": {
+        "$value": "{color.neutral.700}",
+        "$extensions": {
+          "com.pearpages.pulp": {
+            "dark": "{color.neutral.300}"
+          }
+        }
+      },
+      "on-neutral": {
+        "$value": "{color.neutral.0}",
+        "$extensions": {
+          "com.pearpages.pulp": {
+            "dark": "{color.neutral.900}"
+          }
+        }
       }
     },
     "overlay": {
@@ -524,6 +648,12 @@
         }
       },
       "$description": "Box size of checkboxes, radios and switch thumbs."
+    },
+    "toast-width": {
+      "$value": {
+        "value": 22,
+        "unit": "rem"
+      }
     }
   },
   "focus": {
@@ -541,6 +671,13 @@
           "unit": "px"
         }
       }
+    }
+  },
+  "layer": {
+    "$type": "number",
+    "toast": {
+      "$value": 1100,
+      "$description": "Stacking order for toasts: above the dialog layer (the vendor dialog uses 1000)."
     }
   }
 }

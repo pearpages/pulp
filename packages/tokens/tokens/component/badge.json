@@ -1,0 +1,153 @@
+{
+  "$description": "Badge component tokens: tone \u00d7 variant onto the status layer.",
+  "badge": {
+    "radius": {
+      "$type": "dimension",
+      "$value": "{radius.full}"
+    },
+    "gap": {
+      "$type": "dimension",
+      "$value": "{space.1}"
+    },
+    "padding-block": {
+      "$type": "dimension",
+      "$value": "{space.1}"
+    },
+    "padding-inline": {
+      "$type": "dimension",
+      "sm": {
+        "$value": "{space.2}"
+      },
+      "md": {
+        "$value": "{space.3}"
+      }
+    },
+    "font-size": {
+      "$type": "dimension",
+      "sm": {
+        "$value": "{font.size.xs}"
+      },
+      "md": {
+        "$value": "{font.size.sm}"
+      }
+    },
+    "font-weight": {
+      "$type": "fontWeight",
+      "$value": "{font.weight.medium}"
+    },
+    "line-height": {
+      "$type": "number",
+      "$value": "{font.line-height.tight}"
+    },
+    "neutral": {
+      "solid": {
+        "bg": {
+          "$type": "color",
+          "$value": "{color.status.neutral}"
+        },
+        "fg": {
+          "$type": "color",
+          "$value": "{color.status.on-neutral}"
+        }
+      },
+      "subtle": {
+        "bg": {
+          "$type": "color",
+          "$value": "{color.status.neutral-subtle}"
+        },
+        "fg": {
+          "$type": "color",
+          "$value": "{color.status.neutral-text}"
+        }
+      }
+    },
+    "info": {
+      "solid": {
+        "bg": {
+          "$type": "color",
+          "$value": "{color.status.info}"
+        },
+        "fg": {
+          "$type": "color",
+          "$value": "{color.status.on-info}"
+        }
+      },
+      "subtle": {
+        "bg": {
+          "$type": "color",
+          "$value": "{color.status.info-subtle}"
+        },
+        "fg": {
+          "$type": "color",
+          "$value": "{color.status.info-text}"
+        }
+      }
+    },
+    "success": {
+      "solid": {
+        "bg": {
+          "$type": "color",
+          "$value": "{color.status.success}"
+        },
+        "fg": {
+          "$type": "color",
+          "$value": "{color.status.on-success}"
+        }
+      },
+      "subtle": {
+        "bg": {
+          "$type": "color",
+          "$value": "{color.status.success-subtle}"
+        },
+        "fg": {
+          "$type": "color",
+          "$value": "{color.status.success-text}"
+        }
+      }
+    },
+    "warning": {
+      "solid": {
+        "bg": {
+          "$type": "color",
+          "$value": "{color.status.warning}"
+        },
+        "fg": {
+          "$type": "color",
+          "$value": "{color.status.on-warning}"
+        }
+      },
+      "subtle": {
+        "bg": {
+          "$type": "color",
+          "$value": "{color.status.warning-subtle}"
+        },
+        "fg": {
+          "$type": "color",
+          "$value": "{color.status.warning-text}"
+        }
+      }
+    },
+    "error": {
+      "solid": {
+        "bg": {
+          "$type": "color",
+          "$value": "{color.status.error}"
+        },
+        "fg": {
+          "$type": "color",
+          "$value": "{color.status.on-error}"
+        }
+      },
+      "subtle": {
+        "bg": {
+          "$type": "color",
+          "$value": "{color.status.error-subtle}"
+        },
+        "fg": {
+          "$type": "color",
+          "$value": "{color.status.error-text}"
+        }
+      }
+    }
+  }
+}

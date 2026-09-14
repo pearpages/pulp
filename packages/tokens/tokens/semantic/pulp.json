@@ -190,6 +190,130 @@
           }
         },
         "$description": "Error colour for text (messages, required markers). status.error is a fill/border colour and is below AA as text on light surfaces."
+      },
+      "success-text": {
+        "$value": "{color.green.700}",
+        "$extensions": {
+          "com.pearpages.pulp": {
+            "dark": "{color.green.300}"
+          }
+        }
+      },
+      "warning-text": {
+        "$value": "{color.saffron.700}",
+        "$extensions": {
+          "com.pearpages.pulp": {
+            "dark": "{color.saffron.500}"
+          }
+        }
+      },
+      "info-text": {
+        "$value": "{color.ultramarine.500}",
+        "$extensions": {
+          "com.pearpages.pulp": {
+            "dark": "{color.ultramarine.300}"
+          }
+        }
+      },
+      "success-subtle": {
+        "$value": "{color.green.100}",
+        "$extensions": {
+          "com.pearpages.pulp": {
+            "dark": "{color.green.900}"
+          }
+        },
+        "$description": "Tinted background for the tone; pair with <tone>-text."
+      },
+      "warning-subtle": {
+        "$value": "{color.saffron.100}",
+        "$extensions": {
+          "com.pearpages.pulp": {
+            "dark": "{color.saffron.900}"
+          }
+        }
+      },
+      "error-subtle": {
+        "$value": "{color.red.100}",
+        "$extensions": {
+          "com.pearpages.pulp": {
+            "dark": "{color.red.900}"
+          }
+        }
+      },
+      "info-subtle": {
+        "$value": "{color.ultramarine.100}",
+        "$extensions": {
+          "com.pearpages.pulp": {
+            "dark": "{color.ultramarine.900}"
+          }
+        }
+      },
+      "on-success": {
+        "$value": "{color.neutral.950}",
+        "$extensions": {
+          "com.pearpages.pulp": {
+            "dark": "{color.neutral.950}"
+          }
+        },
+        "$description": "Text on the solid success fill. Ink: bone on this green is 3.5:1."
+      },
+      "on-warning": {
+        "$value": "{color.neutral.950}",
+        "$extensions": {
+          "com.pearpages.pulp": {
+            "dark": "{color.neutral.950}"
+          }
+        }
+      },
+      "on-error": {
+        "$value": "{color.neutral.0}",
+        "$extensions": {
+          "com.pearpages.pulp": {
+            "dark": "{color.neutral.950}"
+          }
+        },
+        "$description": "White on the light red fill, ink on the light-scheme-dark fill."
+      },
+      "on-info": {
+        "$value": "{color.neutral.100}",
+        "$extensions": {
+          "com.pearpages.pulp": {
+            "dark": "{color.neutral.950}"
+          }
+        }
+      },
+      "neutral": {
+        "$value": "{color.neutral.700}",
+        "$extensions": {
+          "com.pearpages.pulp": {
+            "dark": "{color.neutral.400}"
+          }
+        },
+        "$description": "A tone with no meaning: default Badge, counts, tags."
+      },
+      "neutral-subtle": {
+        "$value": "{color.neutral.100}",
+        "$extensions": {
+          "com.pearpages.pulp": {
+            "dark": "{color.neutral.850}"
+          }
+        }
+      },
+      "neutral-text": {
+        "$value": "{color.neutral.700}",
+        "$extensions": {
+          "com.pearpages.pulp": {
+            "dark": "{color.neutral.400}"
+          }
+        }
+      },
+      "on-neutral": {
+        "$value": "{color.neutral.0}",
+        "$extensions": {
+          "com.pearpages.pulp": {
+            "dark": "{color.neutral.950}"
+          }
+        }
       }
     },
     "overlay": {
@@ -525,6 +649,12 @@
         }
       },
       "$description": "Box size of checkboxes, radios and switch thumbs."
+    },
+    "toast-width": {
+      "$value": {
+        "value": 22,
+        "unit": "rem"
+      }
     }
   },
   "focus": {
@@ -542,6 +672,13 @@
           "unit": "px"
         }
       }
+    }
+  },
+  "layer": {
+    "$type": "number",
+    "toast": {
+      "$value": 1100,
+      "$description": "Stacking order for toasts: above the dialog layer (the vendor dialog uses 1000)."
     }
   }
 }

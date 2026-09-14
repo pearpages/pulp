@@ -196,14 +196,21 @@ copy, not to re-derive.
       Checkbox and Switch share `src/internal/ToggleField.tsx`.
 
 *Tier 3, feedback*
-- [ ] Spinner: extracted from Button's loading state; `size`, `label` for assistive technology.
-- [ ] Badge: `tone` from `color.status.*`, `variant: solid|subtle`; contrast pairs added to the
-      token test (status colours as text on subtle fills).
-- [ ] Alert: `tone`, optional title, dismissible; `role="status"` or `"alert"` by tone.
-- [ ] Toast: `ToastProvider` with a live region, queue, timeouts, pause on hover/focus; imperative
-      `toast()` API. Reuses Dialog's owned-portal-element pattern.
-- [ ] Progress: determinate/indeterminate, `aria-valuenow`; tokens from `color.action.*`.
-- [ ] Skeleton: `prefers-reduced-motion` aware shimmer; uses `--color-surface-sunken`.
+- [x] Spinner (2026-09-14): `size` incl. `inherit`, `tone` incl. `inherit`, `label`/`decorative`.
+      Button renders it decoratively (its own spinner CSS is gone).
+- [x] Badge (2026-09-14): tone × variant on the status layer. Tokens added for every tone:
+      `<tone>-text`, `<tone>-subtle`, `on-<tone>`, plus a `neutral` tone; the contrast test covers
+      text-on-subtle and on-fill pairs. bitepals `status.error`/`status.info` fills darkened one step
+      so white text on them meets AA.
+- [x] Alert (2026-09-14): tone, title, action, dismiss; `role="alert"` for error else `status`,
+      `live="off"` to opt out. Default glyphs from `@pearpages/pulp-icons`, which is now a
+      **runtime dependency** of the React package (kept external; tree-shaken per glyph).
+- [x] Toast (2026-09-14): `ToastProvider` owns a portal element with a polite region;
+      `useToast()`; timers pause on hover/focus; Escape dismisses; cap; errors sticky by default.
+- [x] Progress (2026-09-14): `role="progressbar"`, required label, `valueText`; the fill width is
+      the library's one per-instance inline value (a `--_value` custom property, disable comment
+      with the reason). Indeterminate stops under reduced motion.
+- [x] Skeleton (2026-09-14): decorative; container carries `aria-busy`; shimmer off under reduced motion.
 
 *Tier 4, overlays and disclosure (reuse Dialog's portal pattern and Tabs' roving focus)*
 - [ ] Tooltip: hover/focus, `aria-describedby`, delay, never as the only label; Escape closes.

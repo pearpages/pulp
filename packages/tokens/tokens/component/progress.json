@@ -1,0 +1,60 @@
+{
+  "$description": "Progress component tokens.",
+  "progress": {
+    "height": {
+      "$type": "dimension",
+      "sm": {
+        "$value": "{space.1}"
+      },
+      "md": {
+        "$value": "{space.2}"
+      }
+    },
+    "radius": {
+      "$type": "dimension",
+      "$value": "{radius.full}"
+    },
+    "gap": {
+      "$type": "dimension",
+      "$value": "{space.1}"
+    },
+    "track": {
+      "$type": "color",
+      "$value": "{color.surface.sunken}"
+    },
+    "label-font-size": {
+      "$type": "dimension",
+      "$value": "{font.size.sm}"
+    },
+    "label-fg": {
+      "$type": "color",
+      "$value": "{color.text.default}"
+    },
+    "value-fg": {
+      "$type": "color",
+      "$value": "{color.text.muted}"
+    },
+    "indicator": {
+      "primary": {
+        "$type": "color",
+        "$value": "{color.action.primary}"
+      },
+      "success": {
+        "$type": "color",
+        "$value": "{color.status.success}"
+      },
+      "warning": {
+        "$type": "color",
+        "$value": "{color.status.warning}"
+      },
+      "error": {
+        "$type": "color",
+        "$value": "{color.status.error}"
+      }
+    },
+    "duration": {
+      "$type": "duration",
+      "$value": "{motion.duration.base}"
+    }
+  }
+}

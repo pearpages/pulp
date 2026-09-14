@@ -22,6 +22,30 @@
       "types": "./dist/index.d.ts",
       "import": "./dist/index.js"
     },
+    "./skeleton": {
+      "types": "./dist/skeleton.d.ts",
+      "import": "./dist/skeleton.js"
+    },
+    "./progress": {
+      "types": "./dist/progress.d.ts",
+      "import": "./dist/progress.js"
+    },
+    "./toast": {
+      "types": "./dist/toast.d.ts",
+      "import": "./dist/toast.js"
+    },
+    "./alert": {
+      "types": "./dist/alert.d.ts",
+      "import": "./dist/alert.js"
+    },
+    "./badge": {
+      "types": "./dist/badge.d.ts",
+      "import": "./dist/badge.js"
+    },
+    "./spinner": {
+      "types": "./dist/spinner.d.ts",
+      "import": "./dist/spinner.js"
+    },
     "./select": {
       "types": "./dist/select.d.ts",
       "import": "./dist/select.js"
@@ -95,6 +119,12 @@
       "import": "./dist/button.js"
     },
     "./styles.css": "./dist/index.css",
+    "./skeleton.css": "./dist/skeleton.css",
+    "./progress.css": "./dist/progress.css",
+    "./toast.css": "./dist/toast.css",
+    "./alert.css": "./dist/alert.css",
+    "./badge.css": "./dist/badge.css",
+    "./spinner.css": "./dist/spinner.css",
     "./select.css": "./dist/select.css",
     "./textarea.css": "./dist/textarea.css",
     "./radio.css": "./dist/radio.css",
@@ -125,7 +155,7 @@
     "test:dist": "vitest run --config vitest.dist.config.ts",
     "manifest": "node scripts/manifest.mjs",
     "scaffold": "node scripts/scaffold-component.mjs",
-    "check:package": "publint && attw --pack . --profile esm-only --exclude-entrypoints styles.css button.css text-field.css card.css tabs.css dialog.css text.css heading.css icon.css visually-hidden.css stack.css inline.css field.css icon-button.css checkbox.css switch.css radio.css textarea.css select.css component-manifest.json",
+    "check:package": "publint && attw --pack . --profile esm-only --exclude-entrypoints styles.css button.css text-field.css card.css tabs.css dialog.css text.css heading.css icon.css visually-hidden.css stack.css inline.css field.css icon-button.css checkbox.css switch.css radio.css textarea.css select.css spinner.css badge.css alert.css toast.css progress.css skeleton.css component-manifest.json",
     "prepublishOnly": "pnpm run build && pnpm run test:run && pnpm run check:package"
   },
   "peerDependencies": {
@@ -135,7 +165,6 @@
   },
   "devDependencies": {
     "@arethetypeswrong/cli": "^0.18.5",
-    "@pearpages/pulp-icons": "workspace:*",
     "@pearpages/pulp-tokens": "workspace:*",
     "@storybook/react-vite": "^10.6.0",
     "@testing-library/dom": "^10.4.0",
@@ -162,6 +191,7 @@
     }
   },
   "dependencies": {
-    "@pearpages/modals": "^0.2.0"
+    "@pearpages/modals": "^0.2.0",
+    "@pearpages/pulp-icons": "workspace:^"
   }
 }

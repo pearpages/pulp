@@ -1,6 +1,7 @@
 import { Children, isValidElement, type ButtonHTMLAttributes, type MouseEvent, type ReactNode, type Ref } from 'react';
 import { Icon } from '../icon';
 import { renderAsChild } from '../internal/asChild';
+import { Spinner } from '../spinner';
 import { classes } from '../internal/classes';
 import styles from './Button.module.css';
 
@@ -108,7 +109,7 @@ export function Button<E extends HTMLElement = HTMLButtonElement>({
 
   const decorate = (label: ReactNode) => (
     <>
-      {loading && <span className={styles.spinner} aria-hidden="true" />}
+      {loading && <Spinner decorative size="inherit" tone="inherit" />}
       {iconStart && <Icon size="inherit">{iconStart}</Icon>}
       <span className={styles.label}>{label}</span>
       {iconEnd && <Icon size="inherit">{iconEnd}</Icon>}

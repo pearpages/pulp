@@ -1,0 +1,45 @@
+/* Every value is a token (--spinner-*). The ring is a border with one coloured side. */
+
+@layer components {
+  .spinner {
+    --_size: var(--spinner-size-md);
+    --_track: var(--spinner-track);
+    --_indicator: var(--spinner-indicator);
+
+    display: inline-flex;
+    flex: none;
+    inline-size: var(--_size);
+    block-size: var(--_size);
+    vertical-align: middle;
+
+    &[data-size="sm"] { --_size: var(--spinner-size-sm); }
+    &[data-size="lg"] { --_size: var(--spinner-size-lg); }
+    &[data-size="inherit"] { --_size: 1em; }
+
+    &[data-tone="inherit"] {
+      --_track: transparent;
+      --_indicator: currentcolor;
+    }
+  }
+
+  .ring {
+    inline-size: 100%;
+    block-size: 100%;
+    border: var(--spinner-width) solid var(--_track);
+    border-block-start-color: var(--_indicator);
+    border-radius: var(--radius-full);
+    animation: spin var(--spinner-duration) linear infinite;
+  }
+
+  @keyframes spin {
+    to {
+      rotate: 1turn;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .ring {
+      animation: none;
+    }
+  }
+}
