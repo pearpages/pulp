@@ -40,7 +40,8 @@ export default {
         '/^(padding|margin|gap|row-gap|column-gap|inset)/',
       ],
       {
-        ignoreValues: ['currentcolor', 'transparent', 'inherit', 'none', 'initial', 'unset', '0', 'auto'],
+        // A percentage is a ratio of the container (centring a thumb at 50%), never a brand value; lengths must be tokens.
+        ignoreValues: ['currentcolor', 'transparent', 'inherit', 'none', 'initial', 'unset', '0', 'auto', '/^\\d+(\\.\\d+)?%$/'],
         disableFix: true,
         message: 'Use a token: ${property} must be var(--…), got "${value}".',
       },

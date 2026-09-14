@@ -16,6 +16,7 @@ to humans and coding agents alike.
 | `apps/storybook` | docs + stories-as-tests; deploys to pulp.pearpages.com |
 | `.claude/skills/add-component` | the scaffold procedure for a new component |
 | `PRINCIPLES.md` | the ten design principles; rendered as the Storybook introduction |
+| `docs/decisions` | decision records (headless layer, positioning, Sheet, Menu); rendered as the Storybook "Decisions" page |
 
 ## Commands (run from the repo root)
 
@@ -41,7 +42,8 @@ pnpm --filter @pearpages/pulp-react scaffold Name   # new component skeleton
   per preview kind, each saying why).
 - **No literal colours, radii, fonts, shadows or spacing in CSS.** Stylelint requires `var(--…)`
   for those properties (including `padding`, `margin`, `gap`, `inset`) everywhere except
-  `packages/tokens`. No hex, no `rgb()`, no `color-mix()`.
+  `packages/tokens`. No hex, no `rgb()`, no `color-mix()`. A bare percentage (`inset-block-start:
+  50%` to centre a thumb) is allowed: it is a ratio of the container, never a brand value.
 - **Components read semantic and component tokens only.** A primitive (`--color-ultramarine-500`,
   `--typeface-*`, `--radius-sm|lg|pill`, `--space-unit`, `--duration-*`, `--easing-*`) in a
   component fails Stylelint. Component *tokens* must reference the semantic layer too; the token
@@ -66,6 +68,14 @@ pnpm --filter @pearpages/pulp-react scaffold Name   # new component skeleton
 - **`ref` is a normal prop** (React 19). The compiler lint rule (`react-hooks/refs`) rejects
   passing a ref, or an object holding one, into any function. An `asChild` helper has to,
   so that one call carries a `eslint-disable-next-line react-hooks/refs -- forwarded, not read`.
+- **Complex widgets build on `react-aria-components`** (decision record 001), never on a
+  hand-rolled keyboard model. The vendor's props never reach the public API (`disabled`, not
+  `isDisabled`; `value`/`onChange`, not `selectedKey`/`onSelectionChange`); class names are plain
+  CSS-module strings, styled through the vendor's `data-*` state; dates cross the API as
+  `YYYY-MM-DD` strings (`src/internal/dates.ts`); label, description and error come from
+  `src/internal/AriaField.tsx` (the vendor's parts on `--field-*` tokens). A file next to a
+  component that is not named after the directory (`listbox/ListboxOptions.tsx`,
+  `calendar/CalendarGrid.tsx`, `pagination/range.ts`) is internal to it and stays out of the manifest.
 
 ## Theming model
 
@@ -96,6 +106,15 @@ names. `$extensions["com.pearpages.pulp"].dark` holds a dark counterpart;
 - `vitest-axe` augments the legacy `Vi` namespace; `src/test/setup.ts` declares the `vitest` one.
 - Stories live next to components, so `storybook` and `@storybook/react-vite` are devDependencies
   of `packages/react` (pnpm's strict isolation), and the Storybook app only typechecks its own files.
+- An unregistered custom property computes to its specified text: `getComputedStyle().getPropertyValue('--_gap')`
+  returned `calc(0.25rem * 2)`, which parsed to 0, so anchored overlays had no gap until tier 5.
+  `src/internal/floating.css` registers `--_gap` with `@property`; the Menu story asserts the gap in Chromium.
+- React Aria opens option lists with the list itself focused after a pointer press and with the first
+  option focused after a keyboard open; it hides everything outside an open popover with `aria-hidden`
+  (query the trigger before opening); its calendar names the grid through a visually hidden `h2` and
+  keeps the visible month name `aria-hidden`; and a pointer press on a calendar day makes it listen
+  for window focus events, which crash on the Storybook iframe's own focus event, so calendar
+  stories drive the grid with the keyboard.
 
 ## Releasing
 
@@ -237,14 +256,35 @@ copy, not to re-derive.
   override win by design (a major for modals).
 
 *Tier 5, complex widgets: build on React Aria, never hand-roll the keyboard model*
-- [ ] Decision record first: React Aria Components as the headless layer for this tier (why: the
-      most complete keyboard and screen-reader model; pulp keeps the styling and tokens).
-- [ ] Combobox: filtering, `aria-activedescendant`, async options.
-- [ ] Listbox and custom Select: replaces the native Select where multi-select or rich options are needed.
-- [ ] DatePicker and Calendar: locale-aware, keyboard grid.
-- [ ] Slider: single and range, `aria-valuetext`.
-- [ ] Table: sortable headers, selection, sticky header; row density from `space.unit`.
-- [ ] Pagination: `nav` with `aria-current`.
+- [x] Decision records (2026-09-14): `docs/decisions/001` React Aria Components as the headless
+      layer (and how the boundary is kept), `002` floating positioning and `003` Sheet backfilled from
+      tier 4, `004` the Menu review: kept, with the gaps listed and the migration triggers (selectable
+      items, sections, submenus, multi-character typeahead).
+- [x] Listbox (2026-09-14): single or multiple, ids in and out as an array, `'all'` resolved to ids.
+      Its option renderer (`ListboxOptions.tsx`, `--listbox-item-*`) is shared by Combobox and Picker.
+- [x] Combobox (2026-09-14): `contains`/`startsWith` filtering or `filter="none"` for async lists,
+      `loading` keeps the list open with a message, `allowsCustomValue`, `aria-activedescendant` by the vendor.
+- [x] Picker (2026-09-14): the rich single select on the vendor's Select with a hidden native select for
+      forms. The native `Select` stays the default for plain word lists; Listbox covers multiple choice.
+- [x] Calendar (2026-09-14): ISO strings, `min`/`max`, `isDateUnavailable`, `locale` (wraps the
+      vendor's `I18nProvider`), the visible month follows an outside `value` change (the vendor alone
+      would not). No `headingLevel`: the vendor's hidden `h2` names the grid.
+- [x] DatePicker (2026-09-14): segmented input in locale order, calendar popover reusing
+      `CalendarGrid`, ISO value in forms.
+- [x] Slider (2026-09-14): number or `[start, end]`, `formatOptions` for the output and
+      `aria-valuetext`, `thumbLabels`, vertical, `hideLabel`. Disabled dims the track, not the label.
+- [x] Table (2026-09-14): compound parts, sort as caller state (`sort`/`onSortChange`, uncontrolled
+      default held locally because the vendor has none), selection as id arrays with the selection column
+      inserted by the parts, `density` from the spacing scale, `stickyHeader`. `onRowAction` documents the
+      vendor's rule: with a selection in place, Enter and click toggle selection instead.
+- [x] Pagination (2026-09-14): `nav` landmark, `aria-current="page"`, ellipses from `paginationRange`,
+      Buttons by default and links with `getHref`. No headless layer needed.
+- Tier 5 notes: `react-aria-components` and `@internationalized/date` are runtime dependencies, external
+  and asserted unbundled by the dist smoke test (`data-rac` must not appear in dist). New semantic token
+  `size.listbox-height`; new icons `Calendar`, `ChevronLeft`. The vendor sets its popovers' `z-index`
+  inline, so no `--*-popover-layer` token exists for them; the gap to the trigger is padding on the popover.
+  axe in Chromium caught two contrast regressions from `opacity` on disabled roots (Calendar heading,
+  Slider label) and an empty selection header (`empty-table-header`); all three fixed at the source.
 
 *Cross-cutting, alongside the tiers*
 - [ ] Per-component docs page (usage, do/don't, accessibility notes) generated from the manifest,
@@ -290,6 +330,13 @@ copy, not to re-derive.
 - [ ] Dependabot or Renovate config with grouped updates.
 - [ ] LICENSE file (MIT is declared in every package.json but no file exists yet).
 - [ ] CODEOWNERS and a PR template that repeats the contributing checklist.
+
+**8. Known vendor limits (react-aria-components 1.21, react-aria 3.52)**
+- A pointer press on a calendar day registers window focus listeners that throw on a focus event whose
+  target is the Window (seen in the Storybook iframe; a first click into an unfocused page may hit it
+  too). Console error only, no state corruption. Track upstream; the calendar stories use the keyboard.
+- `Select`/`ComboBox` support `selectionMode="multiple"` in this version; pulp exposes single only for
+  Picker and Combobox and points multiple choice at Listbox. Revisit if a multi-select field is needed.
 
 ### Later (not scheduled)
 Deprecation codemods, Tailwind preset emitted from tokens, Figma sync (Tokens Studio reads the

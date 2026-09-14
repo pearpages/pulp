@@ -1,0 +1,22 @@
+{
+  "$description": "Pagination component tokens. The page controls are Buttons; these cover the layout and the ellipsis.",
+  "pagination": {
+    "gap": { "$type": "dimension", "$value": "{space.1}" },
+    "font": {
+      "family": { "$type": "fontFamily", "$value": "{font.family.body}" },
+      "size": {
+        "$type": "dimension",
+        "sm": { "$value": "{font.size.sm}" },
+        "md": { "$value": "{font.size.md}" }
+      }
+    },
+    "ellipsis": {
+      "fg": { "$type": "color", "$value": "{color.text.muted}" },
+      "size": {
+        "$type": "dimension",
+        "sm": { "$value": "{size.control.sm}" },
+        "md": { "$value": "{size.control.md}" }
+      }
+    }
+  }
+}

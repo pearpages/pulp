@@ -1,0 +1,216 @@
+/*
+ * Every value is a token (--table-*). Density resolves the row padding into a
+ * private custom property on the table. React Aria writes the state:
+ * data-hovered, data-selected, data-disabled, data-focus-visible on rows and
+ * cells; data-allows-sorting and data-sort-direction on columns;
+ * data-selected and data-indeterminate on the selection checkbox.
+ * Rules are ordered from general to specific so no later selector has a lower
+ * specificity than an earlier one for the same element.
+ */
+
+@layer components {
+  .container {
+    overflow: auto;
+    border: var(--size-hairline) solid var(--table-border);
+    border-radius: var(--table-radius);
+    background-color: var(--table-bg);
+    color: var(--table-fg);
+    font-family: var(--table-font-family);
+    font-size: var(--table-font-size);
+  }
+
+  .table {
+    --_padding-block: var(--table-cell-padding-block-default);
+
+    inline-size: 100%;
+    border-collapse: collapse;
+    border-spacing: 0;
+    outline: none;
+
+    &[data-density="compact"] {
+      --_padding-block: var(--table-cell-padding-block-compact);
+    }
+
+    &[data-focus-visible] {
+      outline: var(--table-focus-ring-width) solid var(--table-focus-ring);
+      outline-offset: calc(-1 * var(--table-focus-ring-width));
+    }
+  }
+
+  .header {
+    background-color: var(--table-header-bg);
+  }
+
+  .container[data-sticky-header] .header {
+    position: sticky;
+    inset-block-start: 0;
+  }
+
+  .column {
+    padding-block: var(--_padding-block);
+    padding-inline: var(--table-cell-padding-inline);
+    border-block-end: var(--size-hairline) solid var(--table-border);
+    color: var(--table-header-fg);
+    font-size: var(--table-header-font-size);
+    font-weight: var(--table-header-font-weight);
+    text-align: start;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    outline: none;
+
+    &[data-align="end"] {
+      text-align: end;
+    }
+
+    &[data-allows-sorting] {
+      cursor: pointer;
+    }
+
+    &[data-allows-sorting]::after {
+      content: "";
+      display: inline-block;
+      inline-size: var(--table-header-sort-indicator-size);
+      block-size: var(--table-header-sort-indicator-size);
+      margin-inline-start: var(--table-header-sort-indicator-size);
+      border-inline-end: var(--table-header-sort-indicator-width) solid currentcolor;
+      border-block-end: var(--table-header-sort-indicator-width) solid currentcolor;
+      rotate: -135deg;
+      translate: 0 25%;
+      opacity: 0;
+      transition: opacity var(--table-motion-duration) var(--motion-easing-standard);
+    }
+
+    &[data-hovered]::after {
+      opacity: 0.5;
+    }
+
+    &[data-sort-direction] {
+      color: var(--table-header-fg-active);
+    }
+
+    &[data-sort-direction]::after {
+      color: var(--table-header-sort-indicator);
+      opacity: 1;
+    }
+
+    &[data-sort-direction="descending"]::after {
+      rotate: 45deg;
+      translate: 0 -25%;
+    }
+
+    &[data-focus-visible] {
+      outline: var(--table-focus-ring-width) solid var(--table-focus-ring);
+      outline-offset: calc(-1 * var(--table-focus-ring-width));
+    }
+  }
+
+  .row {
+    outline: none;
+    transition: background-color var(--table-motion-duration) var(--motion-easing-standard);
+
+    &[data-hovered] {
+      background-color: var(--table-row-bg-hover);
+    }
+
+    &[data-selected] {
+      background-color: var(--table-row-bg-selected);
+    }
+
+    &[data-disabled] {
+      color: var(--table-row-fg-disabled);
+    }
+
+    &[data-focus-visible] {
+      outline: var(--table-focus-ring-width) solid var(--table-focus-ring);
+      outline-offset: calc(-1 * var(--table-focus-ring-width));
+    }
+  }
+
+  .cell {
+    padding-block: var(--_padding-block);
+    padding-inline: var(--table-cell-padding-inline);
+    outline: none;
+
+    &[data-align="end"] {
+      text-align: end;
+      font-variant-numeric: tabular-nums;
+    }
+
+    &[data-focus-visible] {
+      outline: var(--table-focus-ring-width) solid var(--table-focus-ring);
+      outline-offset: calc(-1 * var(--table-focus-ring-width));
+    }
+  }
+
+  .body .row:not(:last-child) .cell {
+    border-block-end: var(--size-hairline) solid var(--table-border);
+  }
+
+  .selectColumn,
+  .selectCell {
+    inline-size: var(--table-select-size);
+    padding-inline-end: 0;
+  }
+
+  .selectBox {
+    display: grid;
+    place-content: center;
+    inline-size: var(--table-select-size);
+    block-size: var(--table-select-size);
+    border: var(--size-hairline) solid var(--table-select-border);
+    border-radius: var(--table-select-radius);
+    background-color: var(--table-select-bg);
+    transition:
+      background-color var(--table-motion-duration) var(--motion-easing-standard),
+      border-color var(--table-motion-duration) var(--motion-easing-standard);
+
+    &::after {
+      content: "";
+      inline-size: calc(var(--table-select-size) * 0.3);
+      block-size: calc(var(--table-select-size) * 0.55);
+      border-style: solid;
+      border-color: var(--table-select-check);
+      border-width: 0 var(--table-select-check-width) var(--table-select-check-width) 0;
+      rotate: 45deg;
+      translate: 0 -10%;
+      opacity: 0;
+    }
+  }
+
+  .select {
+    display: inline-grid;
+    place-items: center;
+    inline-size: var(--table-select-size);
+    block-size: var(--table-select-size);
+    cursor: pointer;
+
+    &[data-focus-visible] .selectBox {
+      outline: var(--table-focus-ring-width) solid var(--table-focus-ring);
+      outline-offset: var(--table-focus-ring-offset);
+    }
+
+    &[data-selected] .selectBox,
+    &[data-indeterminate] .selectBox {
+      border-color: var(--table-select-bg-checked);
+      background-color: var(--table-select-bg-checked);
+
+      &::after {
+        opacity: 1;
+      }
+    }
+
+    &[data-indeterminate] .selectBox::after {
+      inline-size: calc(var(--table-select-size) * 0.55);
+      block-size: 0;
+      border-width: 0 0 var(--table-select-check-width);
+      rotate: 0deg;
+      translate: 0 0;
+    }
+  }
+
+  .empty {
+    padding: var(--table-empty-padding);
+    color: var(--table-empty-fg);
+    text-align: center;
+  }
+}

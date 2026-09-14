@@ -1,0 +1,26 @@
+import { Markdown, Meta } from '@storybook/addon-docs/blocks';
+import index from '../../../docs/decisions/README.md?raw';
+import d001 from '../../../docs/decisions/001-headless-layer.md?raw';
+import d002 from '../../../docs/decisions/002-floating-positioning.md?raw';
+import d003 from '../../../docs/decisions/003-sheet-waits-for-modals.md?raw';
+import d004 from '../../../docs/decisions/004-menu-stays-hand-rolled.md?raw';
+
+<Meta title="Decisions" />
+
+<Markdown>{index.replace(/\[(\d{3})\]\([^)]*\)/g, '$1')}</Markdown>
+
+---
+
+<Markdown>{d001}</Markdown>
+
+---
+
+<Markdown>{d002}</Markdown>
+
+---
+
+<Markdown>{d003}</Markdown>
+
+---
+
+<Markdown>{d004}</Markdown>

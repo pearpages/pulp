@@ -1,0 +1,125 @@
+/*
+ * Every value is a token (--calendar-*). React Aria writes the cell state:
+ * data-selected, data-focused, data-focus-visible, data-hovered,
+ * data-disabled, data-unavailable, data-today, data-outside-month.
+ */
+
+@layer components {
+  .root {
+    display: inline-flex;
+    flex-direction: column;
+    gap: var(--calendar-gap);
+    padding: var(--calendar-padding);
+    background-color: var(--calendar-bg);
+    color: var(--calendar-fg);
+    font-family: var(--calendar-font-family);
+    font-size: var(--calendar-font-size);
+  }
+
+  .header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--calendar-gap);
+  }
+
+  .heading {
+    margin: 0;
+    font-size: var(--calendar-heading-font-size);
+    font-weight: var(--calendar-heading-font-weight);
+  }
+
+  .nav {
+    display: grid;
+    place-items: center;
+    inline-size: var(--calendar-nav-size);
+    block-size: var(--calendar-nav-size);
+    padding: 0;
+    border: none;
+    border-radius: var(--calendar-nav-radius);
+    background-color: transparent;
+    color: var(--calendar-nav-fg);
+    cursor: pointer;
+    transition: background-color var(--calendar-motion-duration) var(--motion-easing-standard);
+
+    &[data-hovered] {
+      background-color: var(--calendar-nav-bg-hover);
+      color: var(--calendar-nav-fg-hover);
+    }
+
+    &[data-focus-visible] {
+      outline: var(--calendar-focus-ring-width) solid var(--calendar-focus-ring);
+      outline-offset: var(--calendar-focus-ring-offset);
+    }
+
+    &[data-disabled] {
+      cursor: not-allowed;
+      opacity: 0.55;
+    }
+  }
+
+  .grid {
+    border-collapse: collapse;
+    border-spacing: 0;
+  }
+
+  .weekday {
+    inline-size: var(--calendar-cell-size);
+    padding: 0;
+    color: var(--calendar-weekday-fg);
+    font-size: var(--calendar-weekday-font-size);
+    font-weight: var(--calendar-weekday-font-weight);
+    text-align: center;
+  }
+
+  .cell {
+    display: grid;
+    place-items: center;
+    inline-size: var(--calendar-cell-size);
+    block-size: var(--calendar-cell-size);
+    border-radius: var(--calendar-cell-radius);
+    color: var(--calendar-cell-fg);
+    cursor: pointer;
+    outline: none;
+    transition: background-color var(--calendar-motion-duration) var(--motion-easing-standard);
+
+    &[data-outside-month] {
+      display: none;
+    }
+
+    &[data-today] {
+      color: var(--calendar-cell-fg-today);
+      font-weight: var(--calendar-heading-font-weight);
+    }
+
+    &[data-hovered] {
+      background-color: var(--calendar-cell-bg-hover);
+    }
+
+    &[data-selected] {
+      background-color: var(--calendar-cell-bg-selected);
+      color: var(--calendar-cell-fg-selected);
+
+      &[data-hovered] {
+        background-color: var(--calendar-cell-bg-selected-hover);
+      }
+    }
+
+    &[data-focus-visible] {
+      outline: var(--calendar-focus-ring-width) solid var(--calendar-focus-ring);
+      outline-offset: var(--calendar-focus-ring-offset);
+    }
+
+    &[data-unavailable] {
+      color: var(--calendar-cell-fg-unavailable);
+      text-decoration: line-through;
+      cursor: not-allowed;
+    }
+
+    /* Disabled dims the days, not the month name, so the visible text keeps its contrast. */
+    &[data-disabled] {
+      color: var(--calendar-cell-fg-unavailable);
+      cursor: not-allowed;
+    }
+  }
+}

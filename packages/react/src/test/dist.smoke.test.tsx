@@ -73,7 +73,7 @@ describe('dist', () => {
     expect(document.body.querySelector('[data-pulp-dialogs]')?.className).toMatch(/root/);
   });
 
-  it('imports the vendor dialog package and the icons package instead of bundling them', () => {
+  it('imports the vendor packages (dialogs, icons, positioning, React Aria) instead of bundling them', () => {
     const js = readdirSync(DIST)
       .filter((file) => file.endsWith('.js'))
       .map((file) => readFileSync(resolve(DIST, file), 'utf8'))
@@ -84,6 +84,10 @@ describe('dist', () => {
     expect(js).not.toMatch(/M5 12h14/);
     expect(js).toMatch(/from ['"]@floating-ui\/react-dom['"]/);
     expect(js).not.toMatch(/computePosition/);
+    // React Aria Components (decision record 001) stamps data-rac on its elements; that string only exists in its own code.
+    expect(js).toMatch(/from ['"]react-aria-components['"]/);
+    expect(js).not.toMatch(/data-rac/);
+    expect(js).toMatch(/from ['"]@internationalized\/date['"]/);
   });
 
   it('the combined stylesheet contains every component', () => {

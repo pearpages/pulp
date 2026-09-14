@@ -56,7 +56,7 @@ const preview: Preview = {
     },
     controls: { expanded: true },
     options: {
-      storySort: { order: ['Introduction', 'Tokens', 'Contributing', 'Components'] },
+      storySort: { order: ['Introduction', 'Tokens', 'Decisions', 'Contributing', 'Components'] },
     },
   },
 };

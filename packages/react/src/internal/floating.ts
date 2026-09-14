@@ -1,5 +1,6 @@
 import { autoUpdate, flip, offset, shift, useFloating, type Placement } from '@floating-ui/react-dom';
 import type { CSSProperties } from 'react';
+import './floating.css';
 
 export type FloatingPlacement = Extract<
   Placement,
@@ -10,7 +11,8 @@ export type FloatingPlacement = Extract<
  * Positions a floating element next to a reference: flips when there is no
  * room, shifts to stay in the viewport, updates on scroll and resize. The
  * gap is read from the floating element's `--_gap` custom property, so it is
- * a token, not a number in code. Returns the position as two custom
+ * a token, not a number in code; `floating.css` registers the property so
+ * the computed value is a pixel length and not the token's `calc()` text. Returns the position as two custom
  * properties (`--_x`, `--_y`): the one per-instance inline value overlays
  * need, consumed by `inset-*` in the stylesheet.
  *

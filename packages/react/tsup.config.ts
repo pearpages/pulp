@@ -12,6 +12,14 @@ import { defineConfig } from 'tsup';
 export default defineConfig({
   entry: {
     index: 'src/index.ts',
+    'pagination': 'src/pagination/index.ts',
+    'table': 'src/table/index.ts',
+    'slider': 'src/slider/index.ts',
+    'date-picker': 'src/date-picker/index.ts',
+    'calendar': 'src/calendar/index.ts',
+    'picker': 'src/picker/index.ts',
+    'listbox': 'src/listbox/index.ts',
+    'combobox': 'src/combobox/index.ts',
     'menu': 'src/menu/index.ts',
     'accordion': 'src/accordion/index.ts',
     'popover': 'src/popover/index.ts',
@@ -48,6 +56,6 @@ export default defineConfig({
   splitting: true,
   treeshake: true,
   target: 'es2022',
-  external: ['react', 'react-dom', 'react/jsx-runtime', '@pearpages/modals', '@pearpages/pulp-icons', '@floating-ui/react-dom'],
+  external: ['react', 'react-dom', 'react/jsx-runtime', '@pearpages/modals', '@pearpages/pulp-icons', '@floating-ui/react-dom', 'react-aria-components', '@internationalized/date'],
   loader: { '.css': 'local-css' },
 });

@@ -684,6 +684,13 @@
         "value": 14,
         "unit": "rem"
       }
+    },
+    "listbox-height": {
+      "$value": {
+        "value": 18,
+        "unit": "rem"
+      },
+      "$description": "Maximum height of an option list before it scrolls (Combobox, Picker, Listbox)."
     }
   },
   "focus": {

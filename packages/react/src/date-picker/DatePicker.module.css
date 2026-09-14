@@ -1,0 +1,135 @@
+/*
+ * Every value is a token (--date-picker-*); the calendar reads --calendar-*.
+ * The control is a group drawn like a text field around the date segments.
+ * React Aria writes the state: data-focus-within, data-hovered,
+ * data-disabled, data-invalid on the group; data-placeholder, data-focused
+ * on each segment.
+ */
+
+@layer components {
+  .root {
+    --_height: var(--date-picker-height-md);
+    --_font-size: var(--date-picker-font-size-md);
+    --_border: var(--date-picker-border-default);
+
+    font-family: var(--date-picker-font-family);
+
+    &[data-size="sm"] {
+      --_height: var(--date-picker-height-sm);
+      --_font-size: var(--date-picker-font-size-sm);
+    }
+
+    &[data-size="lg"] {
+      --_height: var(--date-picker-height-lg);
+      --_font-size: var(--date-picker-font-size-lg);
+    }
+
+    &[data-invalid] { --_border: var(--date-picker-border-invalid); }
+  }
+
+  .control {
+    display: flex;
+    align-items: center;
+    min-block-size: var(--_height);
+    padding-inline-start: var(--date-picker-padding-inline);
+    border: var(--size-hairline) solid var(--_border);
+    border-radius: var(--date-picker-radius);
+    background-color: var(--date-picker-bg);
+    color: var(--date-picker-fg);
+    font-size: var(--_font-size);
+    transition: border-color var(--date-picker-motion-duration) var(--motion-easing-standard);
+
+    &[data-focus-within] {
+      border-color: var(--date-picker-border-focus);
+      outline: var(--date-picker-focus-ring-width) solid var(--date-picker-focus-ring);
+      outline-offset: var(--date-picker-focus-ring-offset);
+    }
+
+    &[data-disabled] {
+      cursor: not-allowed;
+      opacity: 0.55;
+    }
+
+    &[data-hovered]:not([data-focus-within], [data-disabled]) {
+      border-color: var(--date-picker-border-hover);
+    }
+  }
+
+  .input {
+    display: flex;
+    flex: 1;
+    align-items: center;
+  }
+
+  .segment {
+    padding-inline: var(--date-picker-segment-padding-inline);
+    border-radius: var(--date-picker-segment-radius);
+    font-variant-numeric: tabular-nums;
+    outline: none;
+    caret-color: transparent;
+
+    &[data-type="literal"] {
+      padding-inline: 0;
+    }
+
+    &[data-placeholder] {
+      color: var(--date-picker-segment-fg-placeholder);
+    }
+
+    &[data-focused] {
+      background-color: var(--date-picker-segment-bg-focus);
+      color: var(--date-picker-fg);
+    }
+  }
+
+  .button {
+    display: grid;
+    place-items: center;
+    inline-size: var(--date-picker-icon-size);
+    block-size: calc(var(--_height) - 2 * var(--size-hairline));
+    padding: 0;
+    border: none;
+    border-radius: var(--date-picker-radius);
+    background-color: transparent;
+    color: var(--date-picker-icon);
+    cursor: pointer;
+
+    &[data-focus-visible] {
+      outline: var(--date-picker-focus-ring-width) solid var(--date-picker-focus-ring);
+      outline-offset: calc(-1 * var(--date-picker-focus-ring-width));
+    }
+
+    &[data-disabled] {
+      cursor: not-allowed;
+    }
+  }
+
+  .popover {
+    padding-block-start: var(--date-picker-gap);
+    animation: fade var(--date-picker-popover-duration) var(--motion-easing-standard);
+
+    &[data-placement="top"] {
+      padding-block: 0 var(--date-picker-gap);
+    }
+  }
+
+  .dialog {
+    border: var(--size-hairline) solid var(--date-picker-dialog-border);
+    border-radius: var(--date-picker-dialog-radius);
+    background-color: var(--date-picker-dialog-bg);
+    box-shadow: var(--date-picker-popover-shadow);
+    outline: none;
+  }
+
+  @keyframes fade {
+    from {
+      opacity: 0;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .popover {
+      animation: none;
+    }
+  }
+}

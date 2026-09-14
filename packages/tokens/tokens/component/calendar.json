@@ -1,0 +1,48 @@
+{
+  "$description": "Calendar component tokens: the month grid, its heading and navigation. DatePicker renders it inside its popover.",
+  "calendar": {
+    "bg": { "$type": "color", "$value": "{color.surface.raised}" },
+    "fg": { "$type": "color", "$value": "{color.text.default}" },
+    "padding": { "$type": "dimension", "$value": "{space.3}" },
+    "gap": { "$type": "dimension", "$value": "{space.2}" },
+    "font": {
+      "family": { "$type": "fontFamily", "$value": "{font.family.body}" },
+      "size": { "$type": "dimension", "$value": "{font.size.sm}" }
+    },
+    "heading": {
+      "font-size": { "$type": "dimension", "$value": "{font.size.md}" },
+      "font-weight": { "$type": "fontWeight", "$value": "{font.weight.medium}" }
+    },
+    "nav": {
+      "size": { "$type": "dimension", "$value": "{size.control.sm}" },
+      "radius": { "$type": "dimension", "$value": "{radius.control}" },
+      "fg": { "$type": "color", "$value": "{color.text.muted}" },
+      "fg-hover": { "$type": "color", "$value": "{color.text.default}" },
+      "bg-hover": { "$type": "color", "$value": "{color.action.secondary}" }
+    },
+    "weekday": {
+      "fg": { "$type": "color", "$value": "{color.text.muted}" },
+      "font-size": { "$type": "dimension", "$value": "{font.size.xs}" },
+      "font-weight": { "$type": "fontWeight", "$value": "{font.weight.medium}" }
+    },
+    "cell": {
+      "size": { "$type": "dimension", "$value": "{size.control.sm}" },
+      "radius": { "$type": "dimension", "$value": "{radius.control}" },
+      "fg": { "$type": "color", "$value": "{color.text.default}" },
+      "fg-unavailable": { "$type": "color", "$value": "{color.text.faint}" },
+      "fg-today": { "$type": "color", "$value": "{color.action.text}" },
+      "bg-hover": { "$type": "color", "$value": "{color.action.secondary}" },
+      "bg-selected": { "$type": "color", "$value": "{color.action.primary}" },
+      "fg-selected": { "$type": "color", "$value": "{color.text.on-action}" },
+      "bg-selected-hover": { "$type": "color", "$value": "{color.action.primary-hover}" }
+    },
+    "focus": {
+      "ring": { "$type": "color", "$value": "{color.border.focus}" },
+      "ring-width": { "$type": "dimension", "$value": "{focus.ring.width}" },
+      "ring-offset": { "$type": "dimension", "$value": "{focus.ring.offset}" }
+    },
+    "motion": {
+      "duration": { "$type": "duration", "$value": "{motion.duration.fast}" }
+    }
+  }
+}

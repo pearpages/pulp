@@ -29,3 +29,8 @@
 .sb-wide {
   inline-size: 24rem;
 }
+
+/* A bounded scroll container for the sticky-header Table story. */
+.sb-table-sticky {
+  max-block-size: 16rem;
+}

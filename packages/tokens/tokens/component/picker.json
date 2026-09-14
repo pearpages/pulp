@@ -1,0 +1,113 @@
+{
+  "$description": "Picker component tokens: the trigger button and its popover. Options are styled by --listbox-*.",
+  "picker": {
+    "radius": {
+      "$type": "dimension",
+      "$value": "{radius.control}"
+    },
+    "padding-inline": {
+      "$type": "dimension",
+      "$value": "{space.3}"
+    },
+    "gap": {
+      "$type": "dimension",
+      "$value": "{space.2}",
+      "$description": "Between the control and its popover; carried as padding on the popover so no offset lives in code."
+    },
+    "height": {
+      "$type": "dimension",
+      "sm": {
+        "$value": "{size.control.sm}"
+      },
+      "md": {
+        "$value": "{size.control.md}"
+      },
+      "lg": {
+        "$value": "{size.control.lg}"
+      }
+    },
+    "font": {
+      "family": {
+        "$type": "fontFamily",
+        "$value": "{font.family.body}"
+      },
+      "size": {
+        "$type": "dimension",
+        "sm": {
+          "$value": "{font.size.sm}"
+        },
+        "md": {
+          "$value": "{font.size.md}"
+        },
+        "lg": {
+          "$value": "{font.size.lg}"
+        }
+      }
+    },
+    "bg": {
+      "$type": "color",
+      "$value": "{color.surface.raised}"
+    },
+    "fg": {
+      "$type": "color",
+      "$value": "{color.text.default}"
+    },
+    "placeholder": {
+      "$type": "color",
+      "$value": "{color.text.faint}"
+    },
+    "icon": {
+      "$type": "color",
+      "$value": "{color.text.muted}"
+    },
+    "icon-size": {
+      "$type": "dimension",
+      "$value": "{space.6}"
+    },
+    "border": {
+      "$type": "color",
+      "default": {
+        "$value": "{color.border.default}"
+      },
+      "hover": {
+        "$value": "{color.border.strong}"
+      },
+      "focus": {
+        "$value": "{color.border.focus}"
+      },
+      "invalid": {
+        "$value": "{color.status.error}"
+      }
+    },
+    "popover": {
+      "shadow": {
+        "$type": "shadow",
+        "$value": "{shadow.overlay}"
+      },
+      "duration": {
+        "$type": "duration",
+        "$value": "{motion.duration.fast}"
+      }
+    },
+    "focus": {
+      "ring": {
+        "$type": "color",
+        "$value": "{color.border.focus}"
+      },
+      "ring-width": {
+        "$type": "dimension",
+        "$value": "{focus.ring.width}"
+      },
+      "ring-offset": {
+        "$type": "dimension",
+        "$value": "{focus.ring.offset}"
+      }
+    },
+    "motion": {
+      "duration": {
+        "$type": "duration",
+        "$value": "{motion.duration.fast}"
+      }
+    }
+  }
+}

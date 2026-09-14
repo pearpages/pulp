@@ -1,0 +1,122 @@
+/*
+ * Every value is a token (--slider-*); the label and description read
+ * --field-*. React Aria positions the thumbs and the fill (its inline
+ * values); the rail is the visible track inside a larger pointer target.
+ * State: data-orientation and data-disabled on the root; data-dragging,
+ * data-hovered, data-focus-visible on a thumb.
+ */
+
+@layer components {
+  .root {
+    --_thumb: var(--slider-thumb-size);
+
+    display: flex;
+    flex-direction: column;
+    gap: var(--slider-gap);
+    inline-size: 100%;
+    font-family: var(--slider-font-family);
+
+    &[data-orientation="vertical"] {
+      inline-size: auto;
+      block-size: var(--slider-track-length);
+    }
+
+  }
+
+  .header {
+    display: flex;
+    justify-content: space-between;
+    gap: var(--slider-gap);
+  }
+
+  .hidden {
+    position: absolute;
+    inline-size: var(--size-hairline);
+    block-size: var(--size-hairline);
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+
+  .output {
+    color: var(--slider-output-fg);
+    font-family: var(--slider-output-font-family);
+    font-size: var(--slider-output-font-size);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .track {
+    position: relative;
+    block-size: var(--slider-track-hit-size);
+
+    .root[data-orientation="vertical"] & {
+      inline-size: var(--slider-track-hit-size);
+      block-size: 100%;
+    }
+  }
+
+  /* Disabled dims the track, not the label and output, so the text keeps its contrast. */
+  .root[data-disabled] .track {
+    opacity: 0.55;
+  }
+
+  .rail {
+    position: absolute;
+    inset-block-start: 50%;
+    inline-size: 100%;
+    block-size: var(--slider-track-size);
+    overflow: hidden;
+    border-radius: var(--slider-track-radius);
+    background-color: var(--slider-track-bg);
+    translate: 0 -50%;
+
+    .root[data-orientation="vertical"] & {
+      inset-block-start: 0;
+      inset-inline-start: 50%;
+      inline-size: var(--slider-track-size);
+      block-size: 100%;
+      translate: -50% 0;
+    }
+  }
+
+  .fill {
+    position: absolute;
+    block-size: 100%;
+    background-color: var(--slider-fill);
+
+    .root[data-orientation="vertical"] & {
+      inline-size: 100%;
+    }
+  }
+
+  .thumb {
+    inset-block-start: 50%;
+    inline-size: var(--_thumb);
+    block-size: var(--_thumb);
+    border: var(--slider-thumb-border-width) solid var(--slider-thumb-border);
+    border-radius: var(--slider-thumb-radius);
+    background-color: var(--slider-thumb-bg);
+    box-shadow: var(--slider-thumb-shadow);
+    cursor: grab;
+    transition: border-color var(--slider-motion-duration) var(--motion-easing-standard);
+
+    .root[data-orientation="vertical"] & {
+      inset-block-start: auto;
+      inset-inline-start: 50%;
+    }
+
+    &[data-hovered],
+    &[data-dragging] {
+      border-color: var(--slider-thumb-border-hover);
+    }
+
+    &[data-dragging] {
+      cursor: grabbing;
+    }
+
+    &[data-focus-visible] {
+      outline: var(--slider-focus-ring-width) solid var(--slider-focus-ring);
+      outline-offset: var(--slider-focus-ring-offset);
+    }
+  }
+}

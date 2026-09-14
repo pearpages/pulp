@@ -1,0 +1,39 @@
+{
+  "$description": "Slider component tokens: track, fill and thumb. Label, description and error read --field-*.",
+  "slider": {
+    "gap": { "$type": "dimension", "$value": "{space.2}" },
+    "font": {
+      "family": { "$type": "fontFamily", "$value": "{font.family.body}" }
+    },
+    "output": {
+      "fg": { "$type": "color", "$value": "{color.text.muted}" },
+      "font-size": { "$type": "dimension", "$value": "{font.size.sm}" },
+      "font-family": { "$type": "fontFamily", "$value": "{font.family.mono}" }
+    },
+    "track": {
+      "size": { "$type": "dimension", "$value": "{space.1}" },
+      "length": { "$type": "dimension", "$value": "{size.listbox-height}", "$description": "The run of a vertical slider; horizontal ones fill their container." },
+      "bg": { "$type": "color", "$value": "{color.surface.sunken}" },
+      "radius": { "$type": "dimension", "$value": "{radius.full}" },
+      "hit-size": { "$type": "dimension", "$value": "{size.toggle.lg}", "$description": "The pointer target around the thin track." }
+    },
+    "fill": { "$type": "color", "$value": "{color.action.primary}" },
+    "thumb": {
+      "size": { "$type": "dimension", "$value": "{size.toggle.md}" },
+      "bg": { "$type": "color", "$value": "{color.surface.raised}" },
+      "border": { "$type": "color", "$value": "{color.action.primary}" },
+      "border-hover": { "$type": "color", "$value": "{color.action.primary-hover}" },
+      "border-width": { "$type": "dimension", "$value": "{focus.ring.width}" },
+      "radius": { "$type": "dimension", "$value": "{radius.full}" },
+      "shadow": { "$type": "shadow", "$value": "{shadow.raised}" }
+    },
+    "focus": {
+      "ring": { "$type": "color", "$value": "{color.border.focus}" },
+      "ring-width": { "$type": "dimension", "$value": "{focus.ring.width}" },
+      "ring-offset": { "$type": "dimension", "$value": "{focus.ring.offset}" }
+    },
+    "motion": {
+      "duration": { "$type": "duration", "$value": "{motion.duration.fast}" }
+    }
+  }
+}

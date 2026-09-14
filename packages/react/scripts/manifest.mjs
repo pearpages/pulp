@@ -48,8 +48,8 @@ const props = (doc) =>
 // reached through the parent, not imported on their own.
 const components = componentFiles.flatMap(({ dir, file }) => {
   const docs = parser.parse(file);
-  // Hooks (useField) and sub-components (Card.Header) are not root components.
-  const roots = docs.filter((doc) => !doc.displayName.includes('.') && !/^use[A-Z]/.test(doc.displayName));
+  // Hooks (useField), helpers (lower-case names) and sub-components (Card.Header) are not root components.
+  const roots = docs.filter((doc) => /^[A-Z]/.test(doc.displayName) && !doc.displayName.includes('.') && !/^use[A-Z]/.test(doc.displayName));
   return roots.map((doc) => ({
     name: doc.displayName,
     description: doc.description,
@@ -74,6 +74,7 @@ writeFileSync(
         base: '@pearpages/pulp-css (optional: layer order, reset, body defaults, vendor layer)',
         icons: '@pearpages/pulp-icons (optional: stroke glyphs; wrap them in Icon or pass them to Button slots)',
         dialogs: '@pearpages/modals/styles.css (only when using Dialog; import it into the vendor layer)',
+        headless: 'react-aria-components (installed automatically; Combobox, Listbox, Picker, Calendar, DatePicker, Slider and Table build on it, see docs/decisions/001)',
         fonts: 'consumers load the brand typefaces themselves (pulp: Archivo, Instrument Sans, Geist Mono; bitepals: Nunito, Inter)',
       },
       components,

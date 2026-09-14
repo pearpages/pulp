@@ -1,0 +1,119 @@
+/*
+ * Every value is a token (--combobox-*); the options read --listbox-*. Size
+ * and invalid state resolve into private custom properties on the root. The
+ * popover is positioned by React Aria; the gap to the control is its own
+ * padding, so no offset number lives in code, and --trigger-width (set by
+ * the vendor) makes it as wide as the control.
+ */
+
+@layer components {
+  .root {
+    --_height: var(--combobox-height-md);
+    --_font-size: var(--combobox-font-size-md);
+    --_border: var(--combobox-border-default);
+
+    font-family: var(--combobox-font-family);
+
+    &[data-size="sm"] {
+      --_height: var(--combobox-height-sm);
+      --_font-size: var(--combobox-font-size-sm);
+    }
+
+    &[data-size="lg"] {
+      --_height: var(--combobox-height-lg);
+      --_font-size: var(--combobox-font-size-lg);
+    }
+
+    &[data-invalid] { --_border: var(--combobox-border-invalid); }
+  }
+
+  .control {
+    display: grid;
+    align-items: center;
+
+    & > * {
+      grid-area: 1 / 1;
+    }
+  }
+
+  .input {
+    inline-size: 100%;
+    min-block-size: var(--_height);
+    padding-block: 0;
+    padding-inline: var(--combobox-padding-inline) var(--combobox-icon-size);
+    border: var(--size-hairline) solid var(--_border);
+    border-radius: var(--combobox-radius);
+    background-color: var(--combobox-bg);
+    color: var(--combobox-fg);
+    font-size: var(--_font-size);
+    transition: border-color var(--combobox-motion-duration) var(--motion-easing-standard);
+
+    &::placeholder {
+      color: var(--combobox-placeholder);
+    }
+
+    &[data-focused] {
+      border-color: var(--combobox-border-focus);
+      outline: var(--combobox-focus-ring-width) solid var(--combobox-focus-ring);
+      outline-offset: var(--combobox-focus-ring-offset);
+    }
+
+    &[data-disabled] {
+      cursor: not-allowed;
+      opacity: 0.55;
+    }
+
+    &[data-hovered]:not([data-focused], [data-disabled]) {
+      border-color: var(--combobox-border-hover);
+    }
+  }
+
+  .button {
+    display: grid;
+    place-items: center;
+    inline-size: var(--combobox-icon-size);
+    block-size: var(--_height);
+    padding: 0;
+    border: none;
+    border-radius: var(--combobox-radius);
+    background-color: transparent;
+    color: var(--combobox-icon);
+    justify-self: end;
+    cursor: pointer;
+
+    &[data-focus-visible] {
+      outline: var(--combobox-focus-ring-width) solid var(--combobox-focus-ring);
+      outline-offset: calc(-1 * var(--combobox-focus-ring-width));
+    }
+
+    &[data-disabled] {
+      cursor: not-allowed;
+    }
+  }
+
+  .popover {
+    inline-size: var(--trigger-width);
+    padding-block-start: var(--combobox-gap);
+    animation: fade var(--combobox-popover-duration) var(--motion-easing-standard);
+
+    &[data-placement="top"] {
+      padding-block: 0 var(--combobox-gap);
+    }
+  }
+
+  .list {
+    box-shadow: var(--combobox-popover-shadow);
+  }
+
+  @keyframes fade {
+    from {
+      opacity: 0;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .popover {
+      animation: none;
+    }
+  }
+}

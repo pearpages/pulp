@@ -10,8 +10,10 @@ describe('icons', () => {
     expect(components.map(([name]) => name)).toEqual([
       'ArrowLeft',
       'ArrowRight',
+      'Calendar',
       'Check',
       'ChevronDown',
+      'ChevronLeft',
       'ChevronRight',
       'Close',
       'Info',

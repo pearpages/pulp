@@ -1,0 +1,40 @@
+/* Every value is a token (--pagination-*). The controls are Buttons; this file lays them out. */
+
+@layer components {
+  .root {
+    --_size: var(--pagination-ellipsis-size-md);
+    --_font-size: var(--pagination-font-size-md);
+
+    font-family: var(--pagination-font-family);
+
+    &[data-size="sm"] {
+      --_size: var(--pagination-ellipsis-size-sm);
+      --_font-size: var(--pagination-font-size-sm);
+    }
+  }
+
+  .list {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--pagination-gap);
+    padding: 0;
+    margin: 0;
+    list-style: none;
+  }
+
+  .page {
+    min-inline-size: var(--_size);
+    padding-inline: 0;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .ellipsis {
+    display: grid;
+    place-items: center;
+    min-inline-size: var(--_size);
+    block-size: var(--_size);
+    color: var(--pagination-ellipsis-fg);
+    font-size: var(--_font-size);
+  }
+}

@@ -18,7 +18,7 @@ Docs: https://pulp.pearpages.com
 | --- | --- |
 | `@pearpages/pulp-tokens` | `tokens.css`, `tokens.json` |
 | `@pearpages/pulp-css` | `index.css` (layers + tokens + reset + base) |
-| `@pearpages/pulp-react` | `Text`, `Heading`, `Icon`, `VisuallyHidden`, `Stack`, `Inline`, `Field`, `Button`, `IconButton`, `TextField`, `Textarea`, `Select`, `Checkbox`, `Switch`, `RadioGroup`, `Card`, `Tabs`, `Dialog`, `Spinner`, `Badge`, `Alert`, `Toast`, `Progress`, `Skeleton`, `Tooltip`, `Popover`, `Menu`, `Accordion` |
+| `@pearpages/pulp-react` | `Text`, `Heading`, `Icon`, `VisuallyHidden`, `Stack`, `Inline`, `Field`, `Button`, `IconButton`, `TextField`, `Textarea`, `Select`, `Checkbox`, `Switch`, `RadioGroup`, `Card`, `Tabs`, `Dialog`, `Spinner`, `Badge`, `Alert`, `Toast`, `Progress`, `Skeleton`, `Tooltip`, `Popover`, `Menu`, `Accordion`, `Combobox`, `Listbox`, `Picker`, `Calendar`, `DatePicker`, `Slider`, `Table`, `Pagination` |
 | `@pearpages/pulp-icons` | stroke icons as React components, tree-shakeable |
 
 ## Use
@@ -32,6 +32,10 @@ Load the brand typefaces yourself (pulp: Archivo, Instrument Sans, Geist Mono; b
 Nunito, Inter), for example from `@fontsource-variable/*`. The tokens name the families
 with system fallbacks but ship no font files. Shipped CSS uses native nesting and
 `light-dark()`: Chrome/Edge 123, Firefox 120, Safari 17.5 or later.
+
+The complex widgets (Combobox, Listbox, Picker, Calendar, DatePicker, Slider, Table) build
+on React Aria Components, installed with the package and tree-shaken per entry. Their
+props are pulp's; dates cross the API as `YYYY-MM-DD` strings.
 
 ```tsx
 import { Button } from '@pearpages/pulp-react/button';
@@ -51,8 +55,9 @@ pnpm test:storybook     # stories as browser tests (once: pnpm --filter storyboo
 pnpm build && pnpm test:dist && pnpm check:package
 ```
 
-See `PRINCIPLES.md` for why the system is shaped this way, and `CLAUDE.md` for the rules CI
-enforces and the current status.
+See `PRINCIPLES.md` for why the system is shaped this way, `docs/decisions/` for the
+decisions that applied them (the headless layer, positioning, the vendor dialog), and
+`CLAUDE.md` for the rules CI enforces and the current status.
 
 ## License
 

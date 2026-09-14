@@ -1,0 +1,86 @@
+/*
+ * Every value is a token (--listbox-*). React Aria writes the state:
+ * data-focused (real or virtual focus), data-selected, data-disabled,
+ * data-hovered, data-focus-visible, data-empty. The tick is in the DOM for
+ * every option and revealed by data-selected.
+ */
+
+@layer components {
+  .list {
+    display: flex;
+    flex-direction: column;
+    max-block-size: var(--listbox-max-height);
+    padding: var(--listbox-padding);
+    overflow: auto;
+    border: var(--size-hairline) solid var(--listbox-border);
+    border-radius: var(--listbox-radius);
+    background-color: var(--listbox-bg);
+    color: var(--listbox-fg);
+    font-family: var(--listbox-font-family);
+    font-size: var(--listbox-font-size);
+    outline: none;
+
+    &[data-focus-visible] {
+      outline: var(--listbox-focus-ring-width) solid var(--listbox-focus-ring);
+      outline-offset: var(--listbox-focus-ring-offset);
+    }
+  }
+
+  .check {
+    flex: none;
+    visibility: hidden;
+    color: var(--listbox-item-check);
+  }
+
+  .item {
+    display: flex;
+    align-items: center;
+    gap: var(--listbox-item-gap);
+    padding-block: var(--listbox-item-padding-block);
+    padding-inline: var(--listbox-item-padding-inline);
+    border-radius: var(--listbox-item-radius);
+    color: var(--listbox-item-fg);
+    cursor: default;
+    outline: none;
+
+    &[data-hovered],
+    &[data-focused] {
+      background-color: var(--listbox-item-bg-focus);
+    }
+
+    &[data-selected] {
+      background-color: var(--listbox-item-bg-selected);
+
+      .check {
+        visibility: visible;
+      }
+    }
+
+    &[data-disabled] {
+      color: var(--listbox-item-fg-disabled);
+      cursor: not-allowed;
+    }
+  }
+
+  .itemBody {
+    display: flex;
+    flex-direction: column;
+    min-inline-size: 0;
+  }
+
+  .itemLabel {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .itemDescription {
+    color: var(--listbox-item-fg-muted);
+    font-size: var(--listbox-item-description-font-size);
+  }
+
+  .empty {
+    padding: var(--listbox-empty-padding);
+    color: var(--listbox-empty-fg);
+  }
+}

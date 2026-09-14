@@ -22,6 +22,38 @@
       "types": "./dist/index.d.ts",
       "import": "./dist/index.js"
     },
+    "./pagination": {
+      "types": "./dist/pagination.d.ts",
+      "import": "./dist/pagination.js"
+    },
+    "./table": {
+      "types": "./dist/table.d.ts",
+      "import": "./dist/table.js"
+    },
+    "./slider": {
+      "types": "./dist/slider.d.ts",
+      "import": "./dist/slider.js"
+    },
+    "./date-picker": {
+      "types": "./dist/date-picker.d.ts",
+      "import": "./dist/date-picker.js"
+    },
+    "./calendar": {
+      "types": "./dist/calendar.d.ts",
+      "import": "./dist/calendar.js"
+    },
+    "./picker": {
+      "types": "./dist/picker.d.ts",
+      "import": "./dist/picker.js"
+    },
+    "./listbox": {
+      "types": "./dist/listbox.d.ts",
+      "import": "./dist/listbox.js"
+    },
+    "./combobox": {
+      "types": "./dist/combobox.d.ts",
+      "import": "./dist/combobox.js"
+    },
     "./menu": {
       "types": "./dist/menu.d.ts",
       "import": "./dist/menu.js"
@@ -135,6 +167,14 @@
       "import": "./dist/button.js"
     },
     "./styles.css": "./dist/index.css",
+    "./pagination.css": "./dist/pagination.css",
+    "./table.css": "./dist/table.css",
+    "./slider.css": "./dist/slider.css",
+    "./date-picker.css": "./dist/date-picker.css",
+    "./calendar.css": "./dist/calendar.css",
+    "./picker.css": "./dist/picker.css",
+    "./listbox.css": "./dist/listbox.css",
+    "./combobox.css": "./dist/combobox.css",
     "./menu.css": "./dist/menu.css",
     "./accordion.css": "./dist/accordion.css",
     "./popover.css": "./dist/popover.css",
@@ -175,7 +215,7 @@
     "test:dist": "vitest run --config vitest.dist.config.ts",
     "manifest": "node scripts/manifest.mjs",
     "scaffold": "node scripts/scaffold-component.mjs",
-    "check:package": "publint && attw --pack . --profile esm-only --exclude-entrypoints styles.css button.css text-field.css card.css tabs.css dialog.css text.css heading.css icon.css visually-hidden.css stack.css inline.css field.css icon-button.css checkbox.css switch.css radio.css textarea.css select.css spinner.css badge.css alert.css toast.css progress.css skeleton.css tooltip.css popover.css accordion.css menu.css component-manifest.json",
+    "check:package": "publint && attw --pack . --profile esm-only --exclude-entrypoints styles.css button.css text-field.css card.css tabs.css dialog.css text.css heading.css icon.css visually-hidden.css stack.css inline.css field.css icon-button.css checkbox.css switch.css radio.css textarea.css select.css spinner.css badge.css alert.css toast.css progress.css skeleton.css tooltip.css popover.css accordion.css menu.css combobox.css listbox.css picker.css calendar.css date-picker.css slider.css table.css pagination.css component-manifest.json",
     "prepublishOnly": "pnpm run build && pnpm run test:run && pnpm run check:package"
   },
   "peerDependencies": {
@@ -212,7 +252,9 @@
   },
   "dependencies": {
     "@floating-ui/react-dom": "^2.1.9",
+    "@internationalized/date": "^3.12.4",
     "@pearpages/modals": "^0.2.0",
-    "@pearpages/pulp-icons": "workspace:^"
+    "@pearpages/pulp-icons": "workspace:^",
+    "react-aria-components": "^1.21.1"
   }
 }

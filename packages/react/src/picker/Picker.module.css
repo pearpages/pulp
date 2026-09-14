@@ -1,0 +1,103 @@
+/*
+ * Every value is a token (--picker-*); the options read --listbox-*. The
+ * trigger is a button drawn like a text field. The popover is positioned by
+ * React Aria; the gap is its own padding and --trigger-width (vendor) sizes it.
+ */
+
+@layer components {
+  .root {
+    --_height: var(--picker-height-md);
+    --_font-size: var(--picker-font-size-md);
+    --_border: var(--picker-border-default);
+
+    font-family: var(--picker-font-family);
+
+    &[data-size="sm"] {
+      --_height: var(--picker-height-sm);
+      --_font-size: var(--picker-font-size-sm);
+    }
+
+    &[data-size="lg"] {
+      --_height: var(--picker-height-lg);
+      --_font-size: var(--picker-font-size-lg);
+    }
+
+    &[data-invalid] { --_border: var(--picker-border-invalid); }
+  }
+
+  .trigger {
+    display: flex;
+    align-items: center;
+    gap: var(--picker-gap);
+    inline-size: 100%;
+    min-block-size: var(--_height);
+    padding-block: 0;
+    padding-inline: var(--picker-padding-inline);
+    border: var(--size-hairline) solid var(--_border);
+    border-radius: var(--picker-radius);
+    background-color: var(--picker-bg);
+    color: var(--picker-fg);
+    font-family: inherit;
+    font-size: var(--_font-size);
+    text-align: start;
+    cursor: pointer;
+    transition: border-color var(--picker-motion-duration) var(--motion-easing-standard);
+
+    &[data-focus-visible] {
+      border-color: var(--picker-border-focus);
+      outline: var(--picker-focus-ring-width) solid var(--picker-focus-ring);
+      outline-offset: var(--picker-focus-ring-offset);
+    }
+
+    &[data-disabled] {
+      cursor: not-allowed;
+      opacity: 0.55;
+    }
+
+    &[data-hovered]:not([data-focus-visible], [data-disabled]) {
+      border-color: var(--picker-border-hover);
+    }
+  }
+
+  .value {
+    flex: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+
+    &[data-placeholder] {
+      color: var(--picker-placeholder);
+    }
+  }
+
+  .chevron {
+    flex: none;
+    color: var(--picker-icon);
+  }
+
+  .popover {
+    inline-size: var(--trigger-width);
+    padding-block-start: var(--picker-gap);
+    animation: fade var(--picker-popover-duration) var(--motion-easing-standard);
+
+    &[data-placement="top"] {
+      padding-block: 0 var(--picker-gap);
+    }
+  }
+
+  .list {
+    box-shadow: var(--picker-popover-shadow);
+  }
+
+  @keyframes fade {
+    from {
+      opacity: 0;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .popover {
+      animation: none;
+    }
+  }
+}

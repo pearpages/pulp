@@ -1,0 +1,14 @@
+/*
+ * Registers the gap the floating hook reads. An unregistered custom property
+ * computes to its specified text ("calc(0.25rem * 2)"), which no number
+ * parser can use; a registered <length> computes to pixels ("8px"). Browsers
+ * without @property (Firefox before 128) fall back to a gap of 0.
+ * Outside the components layer on purpose: registration is not cascaded.
+ */
+
+@property --_gap {
+  syntax: "<length>";
+  inherits: false;
+  /* stylelint-disable-next-line length-zero-no-unit -- a registered <length> needs a unit in its initial value */
+  initial-value: 0px;
+}

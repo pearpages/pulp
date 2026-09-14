@@ -2,8 +2,10 @@
 export type { IconProps } from './types';
 export { ArrowLeft } from './icons/ArrowLeft';
 export { ArrowRight } from './icons/ArrowRight';
+export { Calendar } from './icons/Calendar';
 export { Check } from './icons/Check';
 export { ChevronDown } from './icons/ChevronDown';
+export { ChevronLeft } from './icons/ChevronLeft';
 export { ChevronRight } from './icons/ChevronRight';
 export { Close } from './icons/Close';
 export { Info } from './icons/Info';

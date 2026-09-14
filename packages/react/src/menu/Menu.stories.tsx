@@ -50,6 +50,10 @@ export const Default: Story = {
   play: async ({ canvasElement }) => {
     await open(canvasElement);
     await waitFor(() => expect(within(document.body).getByRole('menuitem', { name: 'New workspace' })).toHaveFocus());
+    // The gap token reaches the position: the menu sits below the trigger, not flush against it.
+    const menu = within(document.body).getByRole('menu');
+    const trigger = within(canvasElement).getByRole('button', { name: 'Actions' });
+    await waitFor(() => expect(menu.getBoundingClientRect().top).toBeGreaterThan(trigger.getBoundingClientRect().bottom + 4));
     await userEvent.keyboard('{ArrowDown}');
     await expect(within(document.body).getByRole('menuitem', { name: 'Move to…' })).toHaveFocus();
     await userEvent.keyboard('{Escape}');
