@@ -1,0 +1,21 @@
+/* Every value is a token (--icon-*). The child SVG fills the box; colour is currentColor. */
+
+@layer components {
+  .icon {
+    display: inline-flex;
+    flex: none;
+    inline-size: 1em;
+    block-size: 1em;
+    font-size: var(--icon-size-md);
+    vertical-align: middle;
+
+    &[data-size="sm"] { font-size: var(--icon-size-sm); }
+    &[data-size="lg"] { font-size: var(--icon-size-lg); }
+    &[data-size="inherit"] { font-size: inherit; }
+
+    & > * {
+      inline-size: 100%;
+      block-size: 100%;
+    }
+  }
+}

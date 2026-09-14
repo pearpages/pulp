@@ -1,12 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { expect, fn, userEvent, within } from 'storybook/test';
+import { ArrowRight } from '@pearpages/pulp-icons';
 import { Button } from './Button';
-
-const ArrowIcon = () => (
-  <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M3 8h10M9 4l4 4-4 4" />
-  </svg>
-);
 
 const meta = {
   title: 'Components/Button',
@@ -64,7 +59,7 @@ export const Sizes: Story = {
 };
 
 export const WithIcons: Story = {
-  args: { iconStart: <ArrowIcon />, iconEnd: <ArrowIcon />, children: 'Continue' },
+  args: { iconStart: <ArrowRight />, iconEnd: <ArrowRight />, children: 'Continue' },
 };
 
 export const Loading: Story = {
@@ -81,7 +76,7 @@ export const Disabled: Story = { args: { disabled: true } };
 
 export const AsLink: Story = {
   name: 'As a link (asChild)',
-  args: { asChild: true, variant: 'secondary', iconEnd: <ArrowIcon /> },
+  args: { asChild: true, variant: 'secondary', iconEnd: <ArrowRight /> },
   render: (args) => (
     <Button {...args}>
       <a href="#docs">Read the docs</a>
@@ -98,7 +93,7 @@ const matrix = (
     {(['primary', 'secondary', 'ghost'] as const).map((variant) => (
       <div className="sb-row" key={variant}>
         <Button variant={variant}>{variant}</Button>
-        <Button variant={variant} iconStart={<ArrowIcon />}>
+        <Button variant={variant} iconStart={<ArrowRight />}>
           icon
         </Button>
         <Button variant={variant} loading>

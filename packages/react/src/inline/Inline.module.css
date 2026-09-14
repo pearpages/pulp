@@ -1,0 +1,30 @@
+/* Every value is a token (--inline-gap-*). Gap, alignment and justification are data attributes. */
+
+@layer components {
+  .inline {
+    display: flex;
+    flex-flow: row nowrap;
+    gap: var(--inline-gap-3);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+
+    &[data-gap="1"] { gap: var(--inline-gap-1); }
+    &[data-gap="2"] { gap: var(--inline-gap-2); }
+    &[data-gap="3"] { gap: var(--inline-gap-3); }
+    &[data-gap="4"] { gap: var(--inline-gap-4); }
+    &[data-gap="5"] { gap: var(--inline-gap-5); }
+    &[data-gap="6"] { gap: var(--inline-gap-6); }
+    &[data-gap="7"] { gap: var(--inline-gap-7); }
+    &[data-gap="8"] { gap: var(--inline-gap-8); }
+    &[data-align="start"] { align-items: flex-start; }
+    &[data-align="center"] { align-items: center; }
+    &[data-align="end"] { align-items: flex-end; }
+    &[data-align="stretch"] { align-items: stretch; }
+    &[data-justify="start"] { justify-content: flex-start; }
+    &[data-justify="center"] { justify-content: center; }
+    &[data-justify="end"] { justify-content: flex-end; }
+    &[data-justify="between"] { justify-content: space-between; }
+    &[data-wrap] { flex-wrap: wrap; }
+  }
+}

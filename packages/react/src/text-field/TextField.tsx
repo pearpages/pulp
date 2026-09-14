@@ -1,4 +1,5 @@
-import { useId, type InputHTMLAttributes, type ReactNode, type Ref } from 'react';
+import type { InputHTMLAttributes, ReactNode, Ref } from 'react';
+import { Field } from '../field';
 import { classes } from '../internal/classes';
 import styles from './TextField.module.css';
 
@@ -23,11 +24,12 @@ export interface TextFieldProps extends Omit<InputHTMLAttributes<HTMLInputElemen
 }
 
 /**
- * A single-line text input with its label, description and error wired for
- * assistive technology. Controlled and uncontrolled behave exactly like the
- * native input (`value`/`onChange` or `defaultValue`). Every value comes from
- * `--text-field-*` tokens; state is exposed as `data-size`, `data-invalid`,
- * `data-disabled` and `data-readonly` on the wrapper.
+ * A single-line text input on top of `Field`: label, description and error
+ * wired for assistive technology. Controlled and uncontrolled behave exactly
+ * like the native input (`value`/`onChange` or `defaultValue`). Every value
+ * comes from `--text-field-*` and `--field-*` tokens; state is exposed as
+ * `data-size`, `data-invalid`, `data-disabled` and `data-readonly` on the
+ * wrapper.
  */
 export function TextField({
   label,
@@ -43,51 +45,25 @@ export function TextField({
   'aria-describedby': describedBy,
   ...rest
 }: TextFieldProps) {
-  const autoId = useId();
-  const inputId = id ?? autoId;
   const invalid = error !== undefined && error !== null && error !== false && error !== '';
-  const descriptionId = description ? `${inputId}-description` : undefined;
-  const errorId = invalid ? `${inputId}-error` : undefined;
-  const describedIds = [describedBy, descriptionId, errorId].filter(Boolean).join(' ') || undefined;
 
   return (
-    <div
+    <Field
+      id={id}
+      invalid={invalid}
+      disabled={Boolean(disabled)}
+      required={Boolean(required)}
       className={classes(styles.field, className)}
       data-size={size}
-      data-invalid={invalid ? '' : undefined}
-      data-disabled={disabled ? '' : undefined}
       data-readonly={readOnly ? '' : undefined}
     >
-      <label className={styles.label} htmlFor={inputId}>
-        {label}
-        {required && (
-          <span className={styles.required} aria-hidden="true">
-            *
-          </span>
-        )}
-      </label>
-      <input
-        {...rest}
-        ref={ref}
-        id={inputId}
-        className={styles.input}
-        required={required}
-        disabled={disabled}
-        readOnly={readOnly}
-        aria-invalid={invalid || undefined}
-        aria-describedby={describedIds}
-      />
-      {description && (
-        <p id={descriptionId} className={styles.description}>
-          {description}
-        </p>
-      )}
-      {invalid && (
-        <p id={errorId} className={styles.error} role="alert">
-          {error}
-        </p>
-      )}
-    </div>
+      <Field.Label>{label}</Field.Label>
+      <Field.Control aria-describedby={describedBy}>
+        <input {...rest} ref={ref} className={styles.input} readOnly={readOnly} />
+      </Field.Control>
+      {description && <Field.Description>{description}</Field.Description>}
+      {invalid && <Field.Error>{error}</Field.Error>}
+    </Field>
   );
 }
 

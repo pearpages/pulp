@@ -255,6 +255,12 @@
           "value": 1.75,
           "unit": "rem"
         }
+      },
+      "3xl": {
+        "$value": {
+          "value": 2.25,
+          "unit": "rem"
+        }
       }
     },
     "weight": {
@@ -490,6 +496,13 @@
         }
       },
       "$description": "Block size of interactive controls: buttons, inputs, selects."
+    },
+    "hairline": {
+      "$value": {
+        "value": 1,
+        "unit": "px"
+      },
+      "$description": "The thinnest visible line: borders, dividers, the visually-hidden box."
     }
   },
   "focus": {

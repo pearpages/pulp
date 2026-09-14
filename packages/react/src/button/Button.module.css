@@ -92,18 +92,6 @@
     display: inline-block;
   }
 
-  .icon {
-    display: inline-flex;
-    inline-size: 1em;
-    block-size: 1em;
-    flex: none;
-
-    & > * {
-      inline-size: 100%;
-      block-size: 100%;
-    }
-  }
-
   .spinner {
     inline-size: 1em;
     block-size: 1em;

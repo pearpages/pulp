@@ -28,7 +28,10 @@ const config: StorybookConfig = {
         // Stories and docs import the package by name and get the source, so
         // docgen sees TypeScript. Packaging is proven separately by the dist
         // smoke test and the package checks, not by this site.
-        alias: { '@pearpages/pulp-react': resolve(reactSrc, 'index.ts') },
+        alias: {
+          '@pearpages/pulp-react': resolve(reactSrc, 'index.ts'),
+          '@pearpages/pulp-icons': resolve(here, '../../../packages/icons/src/index.ts'),
+        },
         dedupe: ['react', 'react-dom'],
       },
     }),

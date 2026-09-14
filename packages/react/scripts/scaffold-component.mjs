@@ -110,7 +110,7 @@ function edit(file, transform) {
 }
 
 edit('src/index.ts', (src) => `${src.trimEnd()}\nexport * from './${dir}';\n`);
-edit('tsup.config.ts', (src) => src.replace(/(\n\s+)(index: 'src\/index\.ts',)/, `$1$2$1${dir}: 'src/${dir}/index.ts',`));
+edit('tsup.config.ts', (src) => src.replace(/(\n\s+)(index: 'src\/index\.ts',)/, `$1$2$1'${dir}': 'src/${dir}/index.ts',`));
 edit('package.json', (src) => {
   const pkg = JSON.parse(src);
   const exports = {};

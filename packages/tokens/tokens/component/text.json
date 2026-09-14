@@ -1,0 +1,31 @@
+{
+  "$description": "Text component tokens: the type scale and tones as a component. Semantic references only.",
+  "text": {
+    "font-family": {
+      "$type": "fontFamily",
+      "body": { "$value": "{font.family.body}" },
+      "mono": { "$value": "{font.family.mono}" }
+    },
+    "size": {
+      "$type": "dimension",
+      "xs": { "$value": "{font.size.xs}" },
+      "sm": { "$value": "{font.size.sm}" },
+      "md": { "$value": "{font.size.md}" },
+      "lg": { "$value": "{font.size.lg}" },
+      "xl": { "$value": "{font.size.xl}" }
+    },
+    "weight": {
+      "$type": "fontWeight",
+      "regular": { "$value": "{font.weight.regular}" },
+      "medium": { "$value": "{font.weight.medium}" },
+      "semibold": { "$value": "{font.weight.semibold}" }
+    },
+    "line-height": { "$type": "number", "$value": "{font.line-height.normal}" },
+    "tone": {
+      "$type": "color",
+      "default": { "$value": "{color.text.default}" },
+      "muted": { "$value": "{color.text.muted}" },
+      "faint": { "$value": "{color.text.faint}" }
+    }
+  }
+}

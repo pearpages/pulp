@@ -1,0 +1,44 @@
+{
+  "$description": "Heading component tokens. Display family, tight leading, sizes from the type scale.",
+  "heading": {
+    "font-family": {
+      "$type": "fontFamily",
+      "$value": "{font.family.display}"
+    },
+    "font-weight": {
+      "$type": "fontWeight",
+      "$value": "{font.weight.semibold}"
+    },
+    "line-height": {
+      "$type": "number",
+      "$value": "{font.line-height.tight}"
+    },
+    "size": {
+      "$type": "dimension",
+      "sm": {
+        "$value": "{font.size.md}"
+      },
+      "md": {
+        "$value": "{font.size.lg}"
+      },
+      "lg": {
+        "$value": "{font.size.xl}"
+      },
+      "xl": {
+        "$value": "{font.size.2xl}"
+      },
+      "2xl": {
+        "$value": "{font.size.3xl}"
+      }
+    },
+    "tone": {
+      "$type": "color",
+      "default": {
+        "$value": "{color.text.default}"
+      },
+      "muted": {
+        "$value": "{color.text.muted}"
+      }
+    }
+  }
+}

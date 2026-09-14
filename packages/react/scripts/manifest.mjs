@@ -48,7 +48,8 @@ const props = (doc) =>
 // reached through the parent, not imported on their own.
 const components = componentFiles.flatMap(({ dir, file }) => {
   const docs = parser.parse(file);
-  const roots = docs.filter((doc) => !doc.displayName.includes('.'));
+  // Hooks (useField) and sub-components (Card.Header) are not root components.
+  const roots = docs.filter((doc) => !doc.displayName.includes('.') && !/^use[A-Z]/.test(doc.displayName));
   return roots.map((doc) => ({
     name: doc.displayName,
     description: doc.description,
@@ -69,8 +70,10 @@ writeFileSync(
     {
       package: '@pearpages/pulp-react',
       requires: {
-        tokens: '@pearpages/pulp-tokens/tokens.css (every --button-* value resolves through it; without it components render unstyled)',
-        base: '@pearpages/pulp-css (optional: layer order, reset, body defaults)',
+        tokens: '@pearpages/pulp-tokens/tokens.css (every --<component>-* value resolves through it; without it components render unstyled)',
+        base: '@pearpages/pulp-css (optional: layer order, reset, body defaults, vendor layer)',
+        icons: '@pearpages/pulp-icons (optional: stroke glyphs; wrap them in Icon or pass them to Button slots)',
+        dialogs: '@pearpages/modals/styles.css (only when using Dialog; import it into the vendor layer)',
         fonts: 'consumers load the brand typefaces themselves (pulp: Archivo, Instrument Sans, Geist Mono; bitepals: Nunito, Inter)',
       },
       components,

@@ -18,8 +18,8 @@ jobs:
       - run: pnpm install --frozen-lockfile
 
       # Generated tokens must match their JSON source.
-      - name: Tokens drift
-        run: pnpm check:tokens
+      - name: Generated output drift (tokens, icons)
+        run: pnpm check:generated
 
       - name: Lint (ESLint + Stylelint + guardrail probe)
         run: pnpm lint

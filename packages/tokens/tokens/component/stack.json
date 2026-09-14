@@ -1,0 +1,32 @@
+{
+  "$description": "Stack layout tokens: the spacing scale as gap steps.",
+  "stack": {
+    "gap": {
+      "$type": "dimension",
+      "1": {
+        "$value": "{space.1}"
+      },
+      "2": {
+        "$value": "{space.2}"
+      },
+      "3": {
+        "$value": "{space.3}"
+      },
+      "4": {
+        "$value": "{space.4}"
+      },
+      "5": {
+        "$value": "{space.5}"
+      },
+      "6": {
+        "$value": "{space.6}"
+      },
+      "7": {
+        "$value": "{space.7}"
+      },
+      "8": {
+        "$value": "{space.8}"
+      }
+    }
+  }
+}

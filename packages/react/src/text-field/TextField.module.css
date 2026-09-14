@@ -1,25 +1,12 @@
 /*
- * Every value is a token (--text-field-*). State lives on the wrapper as
- * data attributes and on the input as native pseudo-classes.
+ * The input's own styles (--text-field-*). Label, description and error come
+ * from Field. State lives on the wrapper as data attributes and on the input
+ * as native pseudo-classes.
  */
 
 @layer components {
   .field {
-    display: flex;
-    flex-direction: column;
-    gap: var(--text-field-gap);
     font-family: var(--text-field-font-family);
-  }
-
-  .label {
-    font-size: var(--text-field-label-font-size);
-    font-weight: var(--text-field-label-font-weight);
-    color: var(--text-field-label-fg);
-  }
-
-  .required {
-    margin-inline-start: var(--space-1);
-    color: var(--text-field-error-fg);
   }
 
   .input {
@@ -71,15 +58,5 @@
 
   .field[data-invalid] .input {
     border-color: var(--text-field-border-invalid);
-  }
-
-  .description {
-    font-size: var(--text-field-description-font-size);
-    color: var(--text-field-description-fg);
-  }
-
-  .error {
-    font-size: var(--text-field-error-font-size);
-    color: var(--text-field-error-fg);
   }
 }

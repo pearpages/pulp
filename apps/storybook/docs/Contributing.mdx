@@ -38,6 +38,12 @@ pnpm check:tokens && pnpm lint && pnpm typecheck && pnpm test && pnpm build && p
 - Brands never break: adding a semantic token means adding it to every brand
   file, and the token tests fail otherwise.
 
+## Known limitations
+
+- `Field` registers its description and error in a layout effect, so server-rendered HTML has
+  no `aria-describedby` until hydration. A test in `Field.test.tsx` pins the gap; when it
+  starts failing, the limitation is gone.
+
 ## Releasing
 
 Tag `vX.Y.Z` on `main` after `pnpm version-packages` has landed. The publish

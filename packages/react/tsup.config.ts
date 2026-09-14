@@ -12,6 +12,13 @@ import { defineConfig } from 'tsup';
 export default defineConfig({
   entry: {
     index: 'src/index.ts',
+    field: 'src/field/index.ts',
+    inline: 'src/inline/index.ts',
+    stack: 'src/stack/index.ts',
+    'visually-hidden': 'src/visually-hidden/index.ts',
+    icon: 'src/icon/index.ts',
+    heading: 'src/heading/index.ts',
+    text: 'src/text/index.ts',
     dialog: 'src/dialog/index.ts',
     tabs: 'src/tabs/index.ts',
     card: 'src/card/index.ts',

@@ -14,7 +14,18 @@
   gap: var(--space-4);
 }
 
-.sb-h3 {
-  margin: 0;
-  font-size: var(--font-size-md);
+.sb-tile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2);
+  min-inline-size: var(--space-8);
+}
+
+.sb-narrow {
+  max-inline-size: 16rem;
+}
+
+.sb-wide {
+  inline-size: 24rem;
 }

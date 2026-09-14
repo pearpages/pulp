@@ -24,7 +24,8 @@
     "changeset": "changeset",
     "version-packages": "changeset version && pnpm install --lockfile-only",
     "release": "pnpm build && changeset publish",
-    "check:guardrails": "node scripts/check-guardrails.mjs"
+    "check:guardrails": "node scripts/check-guardrails.mjs",
+    "check:generated": "pnpm check:tokens && pnpm --filter @pearpages/pulp-icons check"
   },
   "devDependencies": {
     "@changesets/cli": "^3.0.2",

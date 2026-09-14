@@ -1,0 +1,23 @@
+{
+  "$description": "Field component tokens: label, description and error wiring shared by every form control.",
+  "field": {
+    "gap": { "$type": "dimension", "$value": "{space.1}" },
+    "label": {
+      "fg": { "$type": "color", "$value": "{color.text.default}" },
+      "font-size": { "$type": "dimension", "$value": "{font.size.sm}" },
+      "font-weight": { "$type": "fontWeight", "$value": "{font.weight.medium}" }
+    },
+    "required": {
+      "fg": { "$type": "color", "$value": "{color.status.error-text}" },
+      "gap": { "$type": "dimension", "$value": "{space.1}" }
+    },
+    "description": {
+      "fg": { "$type": "color", "$value": "{color.text.muted}" },
+      "font-size": { "$type": "dimension", "$value": "{font.size.xs}" }
+    },
+    "error": {
+      "fg": { "$type": "color", "$value": "{color.status.error-text}" },
+      "font-size": { "$type": "dimension", "$value": "{font.size.xs}" }
+    }
+  }
+}

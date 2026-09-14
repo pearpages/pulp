@@ -1,0 +1,19 @@
+/* Every value is a token (--heading-*). Size is a data attribute, independent of the level. */
+
+@layer components {
+  .heading {
+    margin: 0;
+    font-family: var(--heading-font-family);
+    font-weight: var(--heading-font-weight);
+    line-height: var(--heading-line-height);
+    color: var(--heading-tone-default);
+    text-wrap: balance;
+
+    &[data-size="sm"] { font-size: var(--heading-size-sm); }
+    &[data-size="md"] { font-size: var(--heading-size-md); }
+    &[data-size="lg"] { font-size: var(--heading-size-lg); }
+    &[data-size="xl"] { font-size: var(--heading-size-xl); }
+    &[data-size="2xl"] { font-size: var(--heading-size-2xl); }
+    &[data-tone="muted"] { color: var(--heading-tone-muted); }
+  }
+}

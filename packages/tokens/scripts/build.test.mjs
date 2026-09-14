@@ -104,3 +104,21 @@ test('text pairs meet WCAG AA (4.5:1) in every brand and scheme', async () => {
   }
   assert.deepEqual(failures, []);
 });
+
+test('every size scale has distinct values (no two steps resolve to the same size)', async () => {
+  const { json } = await render();
+  const manifest = JSON.parse(json);
+  const duplicates = [];
+  for (const [brand, tokens] of Object.entries(manifest)) {
+    const groups = new Map();
+    for (const token of tokens) {
+      if (token.type !== 'dimension' || !token.path.includes('size')) continue;
+      const group = token.path.slice(0, -1).join('.');
+      if (!groups.has(group)) groups.set(group, new Map());
+      const seen = groups.get(group);
+      if (seen.has(token.value)) duplicates.push(`${brand}: ${token.name} = ${seen.get(token.value)} = ${token.value}`);
+      else seen.set(token.value, token.name);
+    }
+  }
+  assert.deepEqual(duplicates, []);
+});

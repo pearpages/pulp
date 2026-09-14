@@ -1,0 +1,9 @@
+{
+  "$description": "VisuallyHidden component tokens.",
+  "visually-hidden": {
+    "size": {
+      "$type": "dimension",
+      "$value": "{size.hairline}"
+    }
+  }
+}

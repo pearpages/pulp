@@ -12,6 +12,7 @@ to humans and coding agents alike.
 | `packages/tokens` | W3C DTCG JSON in `tokens/{primitives,semantic,component}`; `scripts/build.mjs` → `dist/tokens.css` + `dist/tokens.json` (**committed**, CI checks drift) |
 | `packages/css` | `layers.css`, `reset.css`, `base.css`, `index.css`. No build. Framework-agnostic |
 | `packages/react` | components in `src/<name>/` (five files each), tsup build, one entry per component |
+| `packages/icons` | `svg/` sources → generated `src/icons/*.tsx` (committed; `check` on drift); one barrel, tree-shakeable |
 | `apps/storybook` | docs + stories-as-tests; deploys to pulp.pearpages.com |
 | `.claude/skills/add-component` | the scaffold procedure for a new component |
 | `PRINCIPLES.md` | the ten design principles; rendered as the Storybook introduction |
@@ -20,7 +21,7 @@ to humans and coding agents alike.
 
 ```
 pnpm build:tokens      # regenerate tokens; commit the result
-pnpm check:tokens      # what CI runs: fails if dist is stale
+pnpm check:generated   # what CI runs: tokens dist and generated icons must match their sources
 pnpm lint              # eslint + stylelint
 pnpm typecheck
 pnpm test              # unit tests, one shot (never bare `vitest`: watch mode)
@@ -153,16 +154,84 @@ Ordered within each group. Groups 1 and 2 are the gate to everything else being 
 - [ ] Build, run the PDF script, check both schemes and the print page; commit and deploy.
 - [ ] Link the CV repo from pulp's README as the reference consumer.
 
-**3. Components, one per kind, in this order**
-- [x] TextField (2026-09-14): label, description, error via `aria-describedby`, `aria-invalid` +
-      `data-invalid`, sizes, controlled + uncontrolled. Decision: `color.status.error-text` added
-      because `status.error` is a fill/border colour and fails AA as text on light surfaces.
-- [x] Card (2026-09-14): `raised|outlined|sunken`, `padding` knob on slots, `interactive`, `asChild` link cards.
-- [x] Tabs (2026-09-14): APG pattern via `src/internal/useRovingFocus.ts` (reusable for Menu, RadioGroup).
-- [x] Dialog (2026-09-14): composes `@pearpages/modals`. Named **Dialog**, not Modal: the vendor owns
-      the `--modal-*` variable namespace, so pulp tokens are `--dialog-*` and `Dialog.module.css` maps
-      them onto the vendor names on the portal element that `DialogSystem` owns. New semantic tokens
-      `color.overlay.backdrop`, `shadow.overlay`; `vendor` cascade layer in `packages/css`.
+**3. Components: the library, by tier**
+
+Done, one per kind: Button, TextField, Card, Tabs, Dialog. Every new component follows the same
+recipe (`pnpm --filter @pearpages/pulp-react scaffold Name`, tokens → component → tests with axe →
+stories with `play` + four brand × scheme matrices → changeset → README table → tick here). Tiers
+are dependency order: a tier reuses what the previous one proved. "Reuses" names the pattern to
+copy, not to re-derive.
+
+*Tier 1, foundations other components need first*
+- [x] Text (2026-09-14): `as`, size, weight, tone, family, align, truncate.
+- [x] Heading (2026-09-14): `level` sets the element, `size` defaults from it and can be overridden.
+- [x] Icon (2026-09-14): sizes any SVG; decorative unless `label`.
+- [x] Icons package `@pearpages/pulp-icons` (2026-09-14): `svg/*.svg` → `scripts/generate.mjs` →
+      committed `src/icons/*.tsx`; `pnpm check:generated` fails on drift (same pattern as tokens).
+      One barrel entry; `sideEffects: false` lets bundlers tree-shake per icon.
+      Storybook, react's tsconfig and vitest alias it to source so nothing depends on build order.
+- [x] VisuallyHidden (2026-09-14).
+- [x] Stack and Inline (2026-09-14): `gap` 1–8 from the spacing scale, `align`, `justify`, `as`.
+- [x] Field (2026-09-14): `Field`, `Field.Label`, `Field.Control` (asChild), `Field.Description`,
+      `Field.Error`, `useField`. Parts register on mount so `aria-describedby` never dangles.
+      TextField composes it with its API and tests unchanged.
+- Tier 1 review (same day), fixed before commit: `font.size.3xl` so h1 and h2 differ (a token test
+  now rejects size scales with duplicate values); Button renders `Icon size="inherit"` instead of
+  its own icon spans; Stack/Inline keep `role="list"` as `ul`/`ol` (Safari); Field counts parts
+  and warns on duplicates, and its SSR gap (no `aria-describedby` until hydration) is documented
+  and pinned by a test; `Text` no longer offers `as="label"`; icons ship one barrel (tree-shaken);
+  manifest `requires` lists icons and the vendor dialog stylesheet.
+
+*Tier 2, form controls (all reuse Field and the TextField tokens)*
+- [ ] IconButton: Button with a required accessible name (TS: `aria-label` required) and square
+      sizes; removes the dev-only warning path from Button.
+- [ ] Checkbox: native input, `indeterminate`, label via Field; `data-state` checked/unchecked/mixed.
+- [ ] Switch: `role="switch"`, `aria-checked`; same tokens as Checkbox with a track/thumb.
+- [ ] Radio and RadioGroup: roving focus via `useRovingFocus`, arrow keys select; group carries
+      Field wiring.
+- [ ] Textarea: TextField tokens, `rows`, optional auto-grow via `field-sizing: content`.
+- [ ] Select (native): styled `<select>` with a chevron; accessible for free. Custom listbox waits
+      for tier 5.
+- [ ] Form-level story: one form using every control, submitted with `play`, as the integration test.
+
+*Tier 3, feedback*
+- [ ] Spinner: extracted from Button's loading state; `size`, `label` for assistive technology.
+- [ ] Badge: `tone` from `color.status.*`, `variant: solid|subtle`; contrast pairs added to the
+      token test (status colours as text on subtle fills).
+- [ ] Alert: `tone`, optional title, dismissible; `role="status"` or `"alert"` by tone.
+- [ ] Toast: `ToastProvider` with a live region, queue, timeouts, pause on hover/focus; imperative
+      `toast()` API. Reuses Dialog's owned-portal-element pattern.
+- [ ] Progress: determinate/indeterminate, `aria-valuenow`; tokens from `color.action.*`.
+- [ ] Skeleton: `prefers-reduced-motion` aware shimmer; uses `--color-surface-sunken`.
+
+*Tier 4, overlays and disclosure (reuse Dialog's portal pattern and Tabs' roving focus)*
+- [ ] Tooltip: hover/focus, `aria-describedby`, delay, never as the only label; Escape closes.
+      Positioning via CSS anchor positioning where supported, with a small fallback.
+- [ ] Popover: `role="dialog"` non-modal, focus management, click-outside; shares Tooltip's positioning.
+- [ ] Accordion: `single|multiple`, `<button aria-expanded>` in a heading, `region` panels; roving
+      focus between headers.
+- [ ] Sheet: Dialog variant docked to an edge; add a `placement` to the vendor mapping or a pulp
+      wrapper class on the portal element.
+- [ ] Menu and MenuItem: `role="menu"`, roving focus, typeahead, submenus later; trigger via Popover.
+
+*Tier 5, complex widgets: build on React Aria, never hand-roll the keyboard model*
+- [ ] Decision record first: React Aria Components as the headless layer for this tier (why: the
+      most complete keyboard and screen-reader model; pulp keeps the styling and tokens).
+- [ ] Combobox: filtering, `aria-activedescendant`, async options.
+- [ ] Listbox and custom Select: replaces the native Select where multi-select or rich options are needed.
+- [ ] DatePicker and Calendar: locale-aware, keyboard grid.
+- [ ] Slider: single and range, `aria-valuetext`.
+- [ ] Table: sortable headers, selection, sticky header; row density from `space.unit`.
+- [ ] Pagination: `nav` with `aria-current`.
+
+*Cross-cutting, alongside the tiers*
+- [ ] Per-component docs page (usage, do/don't, accessibility notes) generated from the manifest,
+      starting with Button; every new component ships one.
+- [ ] Component status page in Storybook (`experimental | stable | deprecated`) read from a
+      `status` field the manifest generator takes from a JSDoc tag.
+- [ ] Vendor-variable guardrail: a test that every `--modal-*` name in `Dialog.module.css` exists
+      in the installed `@pearpages/modals` stylesheet, so a vendor rename cannot silently unstyle Dialog.
+- [ ] Bundle-size budget per entry (size-limit) once tier 2 lands.
 
 **4. Guardrails still missing**
 - [ ] Token schema validation: every token has `$type` (the dark-counterpart and component→semantic
@@ -201,7 +270,6 @@ Ordered within each group. Groups 1 and 2 are the gate to everything else being 
 - [ ] CODEOWNERS and a PR template that repeats the contributing checklist.
 
 ### Later (not scheduled)
-IconButton, Checkbox, Switch, Select, Tooltip, Badge, Text, Alert, Toast, Accordion, icons package,
-React Aria for Select/Combobox/Menu, deprecation codemods, Tailwind preset emitted from tokens,
-Figma sync (Tokens Studio reads the DTCG files as-is), a second consumer (bitepals web) to prove the
-bitepals brand in production.
+Deprecation codemods, Tailwind preset emitted from tokens, Figma sync (Tokens Studio reads the
+DTCG files; dark values live in pulp's extension), a second consumer (bitepals web) to prove the
+bitepals brand in production, a third brand to prove "one JSON file, zero component changes".

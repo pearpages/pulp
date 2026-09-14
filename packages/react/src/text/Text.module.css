@@ -1,0 +1,31 @@
+/* Every value is a token (--text-*). Variants are data attributes. */
+
+@layer components {
+  .text {
+    margin: 0;
+    font-family: var(--text-font-family-body);
+    font-size: var(--text-size-md);
+    font-weight: var(--text-weight-regular);
+    line-height: var(--text-line-height);
+    color: var(--text-tone-default);
+
+    &[data-size="xs"] { font-size: var(--text-size-xs); }
+    &[data-size="sm"] { font-size: var(--text-size-sm); }
+    &[data-size="lg"] { font-size: var(--text-size-lg); }
+    &[data-size="xl"] { font-size: var(--text-size-xl); }
+    &[data-weight="medium"] { font-weight: var(--text-weight-medium); }
+    &[data-weight="semibold"] { font-weight: var(--text-weight-semibold); }
+    &[data-tone="muted"] { color: var(--text-tone-muted); }
+    &[data-tone="faint"] { color: var(--text-tone-faint); }
+    &[data-family="mono"] { font-family: var(--text-font-family-mono); }
+    &[data-align="start"] { text-align: start; }
+    &[data-align="center"] { text-align: center; }
+    &[data-align="end"] { text-align: end; }
+
+    &[data-truncate] {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+  }
+}

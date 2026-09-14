@@ -92,6 +92,7 @@
     --font-size-lg: 1.125rem;
     --font-size-xl: 1.375rem;
     --font-size-2xl: 1.75rem;
+    --font-size-3xl: 2.25rem;
     --font-weight-regular: 400;
     --font-weight-medium: 500;
     --font-weight-semibold: 600;
@@ -107,6 +108,7 @@
     --size-control-sm: 2rem;
     --size-control-md: 2.5rem;
     --size-control-lg: 3rem;
+    --size-hairline: 1px;
     --focus-ring-width: 2px;
     --focus-ring-offset: 2px;
     --button-radius: var(--radius-control);
@@ -175,6 +177,45 @@
     --dialog-close-fg-hover: var(--color-text-default);
     --dialog-motion-duration: var(--motion-duration-base);
     --dialog-motion-easing: var(--motion-easing-standard);
+    --field-gap: var(--space-1);
+    --field-label-fg: var(--color-text-default);
+    --field-label-font-size: var(--font-size-sm);
+    --field-label-font-weight: var(--font-weight-medium);
+    --field-required-fg: var(--color-status-error-text);
+    --field-required-gap: var(--space-1);
+    --field-description-fg: var(--color-text-muted);
+    --field-description-font-size: var(--font-size-xs);
+    --field-error-fg: var(--color-status-error-text);
+    --field-error-font-size: var(--font-size-xs);
+    --heading-font-family: var(--font-family-display);
+    --heading-font-weight: var(--font-weight-semibold);
+    --heading-line-height: var(--font-line-height-tight);
+    --heading-size-sm: var(--font-size-md);
+    --heading-size-md: var(--font-size-lg);
+    --heading-size-lg: var(--font-size-xl);
+    --heading-size-xl: var(--font-size-2xl);
+    --heading-size-2xl: var(--font-size-3xl);
+    --heading-tone-default: var(--color-text-default);
+    --heading-tone-muted: var(--color-text-muted);
+    --icon-size-sm: var(--font-size-sm);
+    --icon-size-md: var(--font-size-lg);
+    --icon-size-lg: var(--font-size-xl);
+    --inline-gap-1: var(--space-1);
+    --inline-gap-2: var(--space-2);
+    --inline-gap-3: var(--space-3);
+    --inline-gap-4: var(--space-4);
+    --inline-gap-5: var(--space-5);
+    --inline-gap-6: var(--space-6);
+    --inline-gap-7: var(--space-7);
+    --inline-gap-8: var(--space-8);
+    --stack-gap-1: var(--space-1);
+    --stack-gap-2: var(--space-2);
+    --stack-gap-3: var(--space-3);
+    --stack-gap-4: var(--space-4);
+    --stack-gap-5: var(--space-5);
+    --stack-gap-6: var(--space-6);
+    --stack-gap-7: var(--space-7);
+    --stack-gap-8: var(--space-8);
     --tabs-list-border: var(--color-border-default);
     --tabs-tab-fg: var(--color-text-muted);
     --tabs-tab-fg-hover: var(--color-text-default);
@@ -194,7 +235,6 @@
     --tabs-focus-ring-offset: var(--focus-ring-offset);
     --tabs-motion-duration: var(--motion-duration-fast);
     --text-field-radius: var(--radius-control);
-    --text-field-gap: var(--space-1);
     --text-field-padding-inline: var(--space-3);
     --text-field-font-family: var(--font-family-body);
     --text-field-font-size-sm: var(--font-size-sm);
@@ -210,17 +250,25 @@
     --text-field-border-hover: var(--color-border-strong);
     --text-field-border-focus: var(--color-border-focus);
     --text-field-border-invalid: var(--color-status-error);
-    --text-field-label-fg: var(--color-text-default);
-    --text-field-label-font-weight: var(--font-weight-medium);
-    --text-field-label-font-size: var(--font-size-sm);
-    --text-field-description-fg: var(--color-text-muted);
-    --text-field-description-font-size: var(--font-size-xs);
-    --text-field-error-fg: var(--color-status-error-text);
-    --text-field-error-font-size: var(--font-size-xs);
     --text-field-focus-ring: var(--color-border-focus);
     --text-field-focus-ring-width: var(--focus-ring-width);
     --text-field-focus-ring-offset: var(--focus-ring-offset);
     --text-field-motion-duration: var(--motion-duration-fast);
+    --text-font-family-body: var(--font-family-body);
+    --text-font-family-mono: var(--font-family-mono);
+    --text-size-xs: var(--font-size-xs);
+    --text-size-sm: var(--font-size-sm);
+    --text-size-md: var(--font-size-md);
+    --text-size-lg: var(--font-size-lg);
+    --text-size-xl: var(--font-size-xl);
+    --text-weight-regular: var(--font-weight-regular);
+    --text-weight-medium: var(--font-weight-medium);
+    --text-weight-semibold: var(--font-weight-semibold);
+    --text-line-height: var(--font-line-height-normal);
+    --text-tone-default: var(--color-text-default);
+    --text-tone-muted: var(--color-text-muted);
+    --text-tone-faint: var(--color-text-faint);
+    --visually-hidden-size: var(--size-hairline);
   }
 
   /* Brand: bitepals */
@@ -324,6 +372,7 @@
     --font-size-lg: 1.125rem;
     --font-size-xl: 1.375rem;
     --font-size-2xl: 1.75rem;
+    --font-size-3xl: 2.25rem;
     --font-weight-regular: 400;
     --font-weight-medium: 600;
     --font-weight-semibold: 700;
@@ -339,6 +388,7 @@
     --size-control-sm: 2rem;
     --size-control-md: 2.5rem;
     --size-control-lg: 3rem;
+    --size-hairline: 1px;
     --focus-ring-width: 2px;
     --focus-ring-offset: 2px;
   }

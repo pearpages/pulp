@@ -5,10 +5,6 @@
       "$type": "dimension",
       "$value": "{radius.control}"
     },
-    "gap": {
-      "$type": "dimension",
-      "$value": "{space.1}"
-    },
     "padding-inline": {
       "$type": "dimension",
       "$value": "{space.3}"
@@ -68,40 +64,6 @@
       },
       "invalid": {
         "$value": "{color.status.error}"
-      }
-    },
-    "label": {
-      "fg": {
-        "$type": "color",
-        "$value": "{color.text.default}"
-      },
-      "font-weight": {
-        "$type": "fontWeight",
-        "$value": "{font.weight.medium}"
-      },
-      "font-size": {
-        "$type": "dimension",
-        "$value": "{font.size.sm}"
-      }
-    },
-    "description": {
-      "fg": {
-        "$type": "color",
-        "$value": "{color.text.muted}"
-      },
-      "font-size": {
-        "$type": "dimension",
-        "$value": "{font.size.xs}"
-      }
-    },
-    "error": {
-      "fg": {
-        "$type": "color",
-        "$value": "{color.status.error-text}"
-      },
-      "font-size": {
-        "$type": "dimension",
-        "$value": "{font.size.xs}"
       }
     },
     "focus": {

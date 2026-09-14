@@ -22,6 +22,34 @@
       "types": "./dist/index.d.ts",
       "import": "./dist/index.js"
     },
+    "./field": {
+      "types": "./dist/field.d.ts",
+      "import": "./dist/field.js"
+    },
+    "./inline": {
+      "types": "./dist/inline.d.ts",
+      "import": "./dist/inline.js"
+    },
+    "./stack": {
+      "types": "./dist/stack.d.ts",
+      "import": "./dist/stack.js"
+    },
+    "./visually-hidden": {
+      "types": "./dist/visually-hidden.d.ts",
+      "import": "./dist/visually-hidden.js"
+    },
+    "./icon": {
+      "types": "./dist/icon.d.ts",
+      "import": "./dist/icon.js"
+    },
+    "./heading": {
+      "types": "./dist/heading.d.ts",
+      "import": "./dist/heading.js"
+    },
+    "./text": {
+      "types": "./dist/text.d.ts",
+      "import": "./dist/text.js"
+    },
     "./dialog": {
       "types": "./dist/dialog.d.ts",
       "import": "./dist/dialog.js"
@@ -43,6 +71,13 @@
       "import": "./dist/button.js"
     },
     "./styles.css": "./dist/index.css",
+    "./field.css": "./dist/field.css",
+    "./inline.css": "./dist/inline.css",
+    "./stack.css": "./dist/stack.css",
+    "./visually-hidden.css": "./dist/visually-hidden.css",
+    "./icon.css": "./dist/icon.css",
+    "./heading.css": "./dist/heading.css",
+    "./text.css": "./dist/text.css",
     "./dialog.css": "./dist/dialog.css",
     "./tabs.css": "./dist/tabs.css",
     "./card.css": "./dist/card.css",
@@ -60,7 +95,7 @@
     "test:dist": "vitest run --config vitest.dist.config.ts",
     "manifest": "node scripts/manifest.mjs",
     "scaffold": "node scripts/scaffold-component.mjs",
-    "check:package": "publint && attw --pack . --profile esm-only --exclude-entrypoints styles.css button.css text-field.css card.css tabs.css dialog.css component-manifest.json",
+    "check:package": "publint && attw --pack . --profile esm-only --exclude-entrypoints styles.css button.css text-field.css card.css tabs.css dialog.css text.css heading.css icon.css visually-hidden.css stack.css inline.css field.css component-manifest.json",
     "prepublishOnly": "pnpm run build && pnpm run test:run && pnpm run check:package"
   },
   "peerDependencies": {
@@ -70,6 +105,7 @@
   },
   "devDependencies": {
     "@arethetypeswrong/cli": "^0.18.5",
+    "@pearpages/pulp-icons": "workspace:*",
     "@pearpages/pulp-tokens": "workspace:*",
     "@storybook/react-vite": "^10.6.0",
     "@testing-library/dom": "^10.4.0",

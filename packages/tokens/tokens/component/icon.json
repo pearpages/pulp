@@ -1,0 +1,18 @@
+{
+  "$description": "Icon component tokens: three sizes bound to the type scale so icons sit on text.",
+  "icon": {
+    "size": {
+      "$type": "dimension",
+      "sm": {
+        "$value": "{font.size.sm}"
+      },
+      "md": {
+        "$value": "{font.size.lg}"
+      },
+      "lg": {
+        "$value": "{font.size.xl}"
+      },
+      "$description": "One step above the text size an icon sits beside (md \u2192 font.size.lg next to md text): stroke glyphs read smaller than letters in the same box. Inside text-sized controls use Icon size=\"inherit\"."
+    }
+  }
+}

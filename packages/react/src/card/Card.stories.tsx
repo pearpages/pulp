@@ -1,6 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { expect, within } from 'storybook/test';
 import { Button } from '../button';
+import { Heading } from '../heading';
+import { Text } from '../text';
 import { Card } from './Card';
 
 const meta = {
@@ -29,9 +31,13 @@ const meta = {
   render: (args) => (
     <Card {...args} aria-label="Plan">
       <Card.Header>
-        <h3 className="sb-h3">Team plan</h3>
+        <Heading level={3} size="md">
+          Team plan
+        </Heading>
       </Card.Header>
-      <Card.Body>Unlimited projects, priority support, and a shared token library for every brand.</Card.Body>
+      <Card.Body>
+        <Text>Unlimited projects, priority support, and a shared token library for every brand.</Text>
+      </Card.Body>
       <Card.Footer>
         <Button size="sm">Choose</Button>
         <Button size="sm" variant="ghost">
@@ -82,9 +88,13 @@ const matrix = (
     {(['raised', 'outlined', 'sunken'] as const).map((variant) => (
       <Card key={variant} variant={variant} aria-label={variant}>
         <Card.Header>
-          <h3 className="sb-h3">{variant}</h3>
+          <Heading level={3} size="md">
+            {variant}
+          </Heading>
         </Card.Header>
-        <Card.Body>Body text on the card surface.</Card.Body>
+        <Card.Body>
+          <Text>Body text on the card surface.</Text>
+        </Card.Body>
         <Card.Footer>
           <Button size="sm" variant="secondary">
             Action

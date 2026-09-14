@@ -5,7 +5,12 @@
       "node",
       "vitest/globals",
       "@testing-library/jest-dom"
-    ]
+    ],
+    "paths": {
+      "@pearpages/pulp-icons": [
+        "../icons/src/index.ts"
+      ]
+    }
   },
   "include": [
     "src",
