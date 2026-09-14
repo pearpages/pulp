@@ -1,0 +1,79 @@
+/* Every value is a token (--card-*). Slots carry padding and dividers; the root is the surface. */
+
+@layer components {
+  .card {
+    --_pad: var(--card-padding-md);
+
+    display: flex;
+    flex-direction: column;
+    min-inline-size: 0;
+    border: 1px solid transparent;
+    border-radius: var(--card-radius);
+    background-color: var(--card-bg);
+    color: var(--card-fg);
+    text-decoration: none;
+    transition:
+      border-color var(--card-motion-duration) var(--motion-easing-standard),
+      box-shadow var(--card-motion-duration) var(--motion-easing-standard),
+      translate var(--card-motion-duration) var(--motion-easing-standard);
+
+    &[data-padding="sm"] {
+      --_pad: var(--card-padding-sm);
+    }
+
+    &[data-padding="lg"] {
+      --_pad: var(--card-padding-lg);
+    }
+
+    &[data-variant="raised"] {
+      box-shadow: var(--card-shadow);
+    }
+
+    &[data-variant="outlined"] {
+      border-color: var(--card-border);
+    }
+
+    &[data-variant="sunken"] {
+      background-color: var(--card-bg-sunken);
+    }
+
+    &[data-interactive] {
+      cursor: pointer;
+
+      &:hover {
+        border-color: var(--card-border-hover);
+        translate: 0 -1px;
+      }
+
+      &:focus-visible {
+        outline: var(--card-focus-ring-width) solid var(--card-focus-ring);
+        outline-offset: var(--card-focus-ring-offset);
+      }
+    }
+  }
+
+  .header,
+  .body,
+  .footer {
+    padding: var(--_pad);
+  }
+
+  .header {
+    display: flex;
+    flex-direction: column;
+    gap: var(--card-gap);
+    border-block-end: 1px solid var(--card-divider);
+  }
+
+  .body {
+    flex: 1;
+  }
+
+  .footer {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--card-gap);
+    border-block-start: 1px solid var(--card-divider);
+  }
+}

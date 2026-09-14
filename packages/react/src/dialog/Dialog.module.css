@@ -1,0 +1,66 @@
+/*
+ * The vendor (@pearpages/modals) reads --modal-* custom properties. This class
+ * goes on the portal element pulp owns, so every dialog inherits pulp's
+ * --dialog-* tokens and the vendor's :root defaults never apply.
+ */
+
+@layer components {
+  .root {
+    --modal-bg: var(--dialog-surface);
+    --modal-surface-elevated: var(--dialog-surface);
+    --modal-surface-subtle: var(--dialog-surface-subtle);
+    --modal-color: var(--dialog-fg);
+    --modal-text-secondary: var(--dialog-fg-muted);
+    --modal-text-muted: var(--dialog-fg-muted);
+    --modal-backdrop-bg: var(--dialog-backdrop);
+    --modal-border-primary-color: var(--dialog-border);
+    --modal-border-hover-color: var(--dialog-border-hover);
+    --modal-border-focus-color: var(--dialog-focus);
+    --modal-border-accent-color: var(--dialog-border);
+    --modal-radius: var(--dialog-radius);
+    --modal-radius-md: var(--dialog-radius);
+    --modal-radius-sm: var(--radius-control);
+    --modal-button-radius: var(--radius-control);
+    --modal-shadow: var(--dialog-shadow);
+    --modal-padding: var(--dialog-padding);
+    --modal-spacing-xs: var(--space-1);
+    --modal-spacing-sm: var(--space-2);
+    --modal-spacing-md: var(--dialog-gap);
+    --modal-spacing-lg: var(--space-4);
+    --modal-spacing-xl: var(--space-5);
+    --modal-font-family: var(--dialog-font-family);
+    --modal-font-family-mono: var(--font-family-mono);
+    --modal-font-size-title: var(--dialog-title-font-size);
+    --modal-font-size-title-mobile: var(--dialog-title-font-size);
+    --modal-font-weight-title: var(--dialog-title-font-weight);
+    --modal-font-size-description: var(--dialog-description-font-size);
+    --modal-font-size-description-mobile: var(--dialog-description-font-size);
+    --modal-font-size-button: var(--font-size-sm);
+    --modal-close-bg: var(--dialog-close-bg);
+    --modal-close-hover-bg: var(--dialog-close-bg-hover);
+    --modal-close-text: var(--dialog-close-fg);
+    --modal-close-hover-text: var(--dialog-close-fg-hover);
+    --modal-interactive-hover: var(--color-action-secondary-hover);
+    --modal-interactive-active: var(--color-action-secondary-hover);
+    --modal-interactive-focus: var(--color-action-primary-quiet);
+    --modal-transition-duration: var(--dialog-motion-duration);
+    --modal-transition-easing: var(--dialog-motion-easing);
+    --modal-outline-width: var(--focus-ring-width);
+    --modal-outline-offset: var(--focus-ring-offset);
+    --modal-button-focus-color: var(--dialog-focus);
+    --modal-button-primary-bg: var(--color-action-primary);
+    --modal-button-primary-border: var(--color-action-primary);
+    --modal-button-primary-color: var(--color-text-on-action);
+    --modal-button-primary-hover-bg: var(--color-action-primary-hover);
+    --modal-button-primary-hover-border: var(--color-action-primary-hover);
+    --modal-button-primary-active-bg: var(--color-action-primary-active);
+    --modal-button-primary-active-border: var(--color-action-primary-active);
+    --modal-button-secondary-bg: var(--color-action-secondary);
+    --modal-button-secondary-border: var(--color-border-default);
+    --modal-button-secondary-color: var(--color-text-default);
+    --modal-button-secondary-hover-bg: var(--color-action-secondary-hover);
+    --modal-button-secondary-hover-border: var(--color-border-strong);
+    --modal-button-secondary-active-bg: var(--color-action-secondary-hover);
+    --modal-button-secondary-active-border: var(--color-border-strong);
+  }
+}

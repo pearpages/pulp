@@ -1,19 +1,29 @@
 // What an npm consumer gets: the built ESM entries and their CSS, not src/.
 // Driven by the component manifest so every component is covered without
 // editing this file. Run with `pnpm test:dist` after `pnpm build`.
-import { existsSync, readFileSync } from 'node:fs';
+import { existsSync, readdirSync, readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { render, screen } from '@testing-library/react';
 
 const DIST = resolve(import.meta.dirname, '../../dist');
 const manifest = JSON.parse(readFileSync(resolve(DIST, 'component-manifest.json'), 'utf8')) as {
-  components: Array<{ name: string; import: string; css: string; props: Array<{ name: string }> }>;
+  components: Array<{
+    name: string;
+    import: string;
+    css: string;
+    props: Array<{ name: string }>;
+    parts: Array<{ name: string }>;
+  }>;
 };
 const entryOf = (component: { import: string }) => component.import.match(/pulp-react\/([a-z-]+)'/)?.[1] ?? '';
 
 describe('dist', () => {
   it('lists every component in the manifest', () => {
-    expect(manifest.components.map((c) => c.name)).toEqual(expect.arrayContaining(['Button', 'TextField']));
+    expect(manifest.components.map((c) => c.name)).toEqual(
+      expect.arrayContaining(['Button', 'TextField', 'Card', 'Tabs', 'Dialog', 'DialogSystem']),
+    );
+    const card = manifest.components.find((c) => c.name === 'Card');
+    expect(card?.parts.map((p) => p.name)).toEqual(['Card.Header', 'Card.Body', 'Card.Footer']);
   });
 
   it.each(manifest.components)('$name: barrel and per-component entry export the same function', async (component) => {
@@ -33,17 +43,43 @@ describe('dist', () => {
     expect(component.props.length).toBeGreaterThan(0);
   });
 
-  it('renders Button and TextField from the built modules', async () => {
-    const { Button, TextField } = await import(resolve(DIST, 'index.js'));
+  it('renders every component from the built modules', async () => {
+    const { Button, TextField, Card, Tabs, Dialog, DialogSystem } = await import(resolve(DIST, 'index.js'));
     render(
-      <div>
+      <DialogSystem>
         <Button variant="secondary">Built</Button>
         <TextField label="Name" />
-      </div>,
+        <Card aria-label="Card">
+          <Card.Body>Card body</Card.Body>
+        </Card>
+        <Tabs defaultValue="a">
+          <Tabs.List aria-label="Tabs">
+            <Tabs.Tab value="a">A</Tabs.Tab>
+          </Tabs.List>
+          <Tabs.Panel value="a">Panel A</Tabs.Panel>
+        </Tabs>
+        <Dialog.Trigger target="d">Open</Dialog.Trigger>
+        <Dialog id="d">
+          <Dialog.Content>
+            <Dialog.Title>Built dialog</Dialog.Title>
+          </Dialog.Content>
+        </Dialog>
+      </DialogSystem>,
     );
     expect(screen.getByRole('button', { name: 'Built' })).toHaveAttribute('data-variant', 'secondary');
-    expect(screen.getByRole('button').className).toMatch(/button/);
     expect(screen.getByLabelText('Name').className).toMatch(/input/);
+    expect(screen.getByRole('region', { name: 'Card' }).className).toMatch(/card/);
+    expect(screen.getByRole('tab', { name: 'A' })).toHaveAttribute('aria-selected', 'true');
+    expect(document.body.querySelector('[data-pulp-dialogs]')?.className).toMatch(/root/);
+  });
+
+  it('imports the vendor dialog package instead of bundling it', () => {
+    const js = readdirSync(DIST)
+      .filter((file) => file.endsWith('.js'))
+      .map((file) => readFileSync(resolve(DIST, file), 'utf8'))
+      .join('\n');
+    expect(js).toMatch(/from ['"]@pearpages\/modals['"]/);
+    expect(js).not.toMatch(/modalBackdrop/);
   });
 
   it('the combined stylesheet contains every component', () => {

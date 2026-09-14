@@ -20,8 +20,10 @@ const parser = withCustomConfig(resolve(ROOT, 'tsconfig.json'), {
   shouldExtractLiteralValuesFromEnum: true,
   shouldRemoveUndefinedFromOptional: true,
   savePropValueAsString: true,
-  // Only props declared in this package: the HTML attribute surface is implied.
-  propFilter: (prop) => !prop.parent?.fileName.includes('node_modules'),
+  // Only props declared in this package or by a composed pulp dependency: the
+  // HTML attribute surface is implied.
+  propFilter: (prop) =>
+    !prop.parent?.fileName.includes('node_modules') || prop.parent.fileName.includes('/@pearpages/'),
 });
 
 const componentFiles = readdirSync(SRC, { withFileTypes: true })
@@ -31,24 +33,34 @@ const componentFiles = readdirSync(SRC, { withFileTypes: true })
     return { dir: entry.name, file: resolve(SRC, entry.name, `${name}.tsx`) };
   });
 
-const components = componentFiles.flatMap(({ dir, file }) =>
-  parser.parse(file).map((doc) => ({
+const props = (doc) =>
+  Object.values(doc.props)
+    .sort((a, b) => Number(b.required) - Number(a.required) || a.name.localeCompare(b.name))
+    .map((prop) => ({
+      name: prop.name,
+      type: prop.type.name,
+      required: prop.required,
+      default: prop.defaultValue?.value ?? null,
+      description: prop.description,
+    }));
+
+// Sub-components (`Card.Header`) nest under their parent as `parts`: they are
+// reached through the parent, not imported on their own.
+const components = componentFiles.flatMap(({ dir, file }) => {
+  const docs = parser.parse(file);
+  const roots = docs.filter((doc) => !doc.displayName.includes('.'));
+  return roots.map((doc) => ({
     name: doc.displayName,
     description: doc.description,
     import: `import { ${doc.displayName} } from '@pearpages/pulp-react/${dir}';`,
     css: `@pearpages/pulp-react/${dir}.css`,
     tokens: `--${dir}-*`,
-    props: Object.values(doc.props)
-      .sort((a, b) => Number(b.required) - Number(a.required) || a.name.localeCompare(b.name))
-      .map((prop) => ({
-        name: prop.name,
-        type: prop.type.name,
-        required: prop.required,
-        default: prop.defaultValue?.value ?? null,
-        description: prop.description,
-      })),
-  })),
-);
+    props: props(doc),
+    parts: docs
+      .filter((part) => part.displayName.startsWith(`${doc.displayName}.`))
+      .map((part) => ({ name: part.displayName, description: part.description, props: props(part) })),
+  }));
+});
 
 mkdirSync(dirname(OUT), { recursive: true });
 writeFileSync(

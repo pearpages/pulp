@@ -1,0 +1,92 @@
+/* Every value is a token (--tabs-*). The indicator is a logical border on the active tab, so vertical orientation just flips the side. */
+
+@layer components {
+  .root {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+
+    &[data-orientation="vertical"] {
+      flex-direction: row;
+    }
+  }
+
+  .list {
+    display: flex;
+    gap: var(--tabs-gap);
+    border-block-end: 1px solid var(--tabs-list-border);
+
+    &[data-orientation="vertical"] {
+      flex-direction: column;
+      border-block-end: none;
+      border-inline-end: 1px solid var(--tabs-list-border);
+    }
+  }
+
+  .tab {
+    position: relative;
+    padding-block: var(--tabs-tab-padding-block);
+    padding-inline: var(--tabs-tab-padding-inline);
+    border: none;
+    border-radius: var(--tabs-tab-radius) var(--tabs-tab-radius) 0 0;
+    background-color: transparent;
+    color: var(--tabs-tab-fg);
+    font-size: var(--tabs-tab-font-size);
+    font-weight: var(--tabs-tab-font-weight);
+    line-height: 1;
+    white-space: nowrap;
+    cursor: pointer;
+    transition:
+      color var(--tabs-motion-duration) var(--motion-easing-standard),
+      background-color var(--tabs-motion-duration) var(--motion-easing-standard);
+
+    /* Indicator: a transparent border always present, coloured when active, so nothing shifts. */
+    border-block-end: 2px solid transparent;
+
+    &:focus-visible {
+      outline: var(--tabs-focus-ring-width) solid var(--tabs-focus-ring);
+      outline-offset: calc(-1 * var(--tabs-focus-ring-offset));
+    }
+
+    &:disabled {
+      cursor: not-allowed;
+      opacity: 0.55;
+    }
+
+    &[data-state="active"] {
+      color: var(--tabs-tab-fg-active);
+      border-block-end-color: var(--tabs-tab-indicator);
+    }
+
+    &:hover:not(:disabled, [data-state="active"]) {
+      color: var(--tabs-tab-fg-hover);
+      background-color: var(--tabs-tab-bg-hover);
+    }
+  }
+
+  .list[data-orientation="vertical"] .tab {
+    border-radius: var(--tabs-tab-radius) 0 0 var(--tabs-tab-radius);
+    border-block-end: none;
+    border-inline-end: 2px solid transparent;
+    text-align: start;
+
+    &[data-state="active"] {
+      border-inline-end-color: var(--tabs-tab-indicator);
+    }
+  }
+
+  .panel {
+    padding-block: var(--tabs-panel-padding-block);
+    color: var(--tabs-panel-fg);
+
+    &:focus-visible {
+      outline: var(--tabs-focus-ring-width) solid var(--tabs-focus-ring);
+      outline-offset: var(--tabs-focus-ring-offset);
+    }
+  }
+
+  .root[data-orientation="vertical"] .panel {
+    padding-block: 0;
+    padding-inline-start: var(--tabs-tab-padding-inline);
+  }
+}

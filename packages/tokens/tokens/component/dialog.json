@@ -1,0 +1,36 @@
+{
+  "$description": "Dialog component tokens: the pulp side of the mapping onto @pearpages/modals. The vendor reads --modal-*; Dialog.module.css sets those from these --dialog-* tokens on the portal root.",
+  "dialog": {
+    "surface": { "$type": "color", "$value": "{color.surface.raised}" },
+    "surface-subtle": { "$type": "color", "$value": "{color.surface.sunken}" },
+    "fg": { "$type": "color", "$value": "{color.text.default}" },
+    "fg-muted": { "$type": "color", "$value": "{color.text.muted}" },
+    "backdrop": { "$type": "color", "$value": "{color.overlay.backdrop}" },
+    "border": { "$type": "color", "$value": "{color.border.default}" },
+    "border-hover": { "$type": "color", "$value": "{color.border.strong}" },
+    "focus": { "$type": "color", "$value": "{color.border.focus}" },
+    "radius": { "$type": "dimension", "$value": "{radius.surface}" },
+    "shadow": { "$type": "shadow", "$value": "{shadow.overlay}" },
+    "padding": { "$type": "dimension", "$value": "{space.5}" },
+    "gap": { "$type": "dimension", "$value": "{space.3}" },
+    "font-family": { "$type": "fontFamily", "$value": "{font.family.body}" },
+    "title": {
+      "font-size": { "$type": "dimension", "$value": "{font.size.lg}" },
+      "font-weight": { "$type": "fontWeight", "$value": "{font.weight.semibold}" },
+      "font-family": { "$type": "fontFamily", "$value": "{font.family.display}" }
+    },
+    "description": {
+      "font-size": { "$type": "dimension", "$value": "{font.size.sm}" }
+    },
+    "close": {
+      "bg": { "$type": "color", "$value": "{color.action.secondary}" },
+      "bg-hover": { "$type": "color", "$value": "{color.action.secondary-hover}" },
+      "fg": { "$type": "color", "$value": "{color.text.muted}" },
+      "fg-hover": { "$type": "color", "$value": "{color.text.default}" }
+    },
+    "motion": {
+      "duration": { "$type": "duration", "$value": "{motion.duration.base}" },
+      "easing": { "$type": "cubicBezier", "$value": "{motion.easing.standard}" }
+    }
+  }
+}

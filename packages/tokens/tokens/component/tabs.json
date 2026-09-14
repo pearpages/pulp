@@ -1,0 +1,31 @@
+{
+  "$description": "Tabs component tokens. Brand-independent: every value references the semantic layer.",
+  "tabs": {
+    "list-border": { "$type": "color", "$value": "{color.border.default}" },
+    "tab": {
+      "fg": { "$type": "color", "$value": "{color.text.muted}" },
+      "fg-hover": { "$type": "color", "$value": "{color.text.default}" },
+      "fg-active": { "$type": "color", "$value": "{color.text.default}" },
+      "bg-hover": { "$type": "color", "$value": "{color.action.primary-quiet}" },
+      "indicator": { "$type": "color", "$value": "{color.action.primary}" },
+      "padding-block": { "$type": "dimension", "$value": "{space.2}" },
+      "padding-inline": { "$type": "dimension", "$value": "{space.3}" },
+      "font-size": { "$type": "dimension", "$value": "{font.size.sm}" },
+      "font-weight": { "$type": "fontWeight", "$value": "{font.weight.medium}" },
+      "radius": { "$type": "dimension", "$value": "{radius.control}" }
+    },
+    "gap": { "$type": "dimension", "$value": "{space.1}" },
+    "panel": {
+      "padding-block": { "$type": "dimension", "$value": "{space.4}" },
+      "fg": { "$type": "color", "$value": "{color.text.default}" }
+    },
+    "focus": {
+      "ring": { "$type": "color", "$value": "{color.border.focus}" },
+      "ring-width": { "$type": "dimension", "$value": "{focus.ring.width}" },
+      "ring-offset": { "$type": "dimension", "$value": "{focus.ring.offset}" }
+    },
+    "motion": {
+      "duration": { "$type": "duration", "$value": "{motion.duration.fast}" }
+    }
+  }
+}

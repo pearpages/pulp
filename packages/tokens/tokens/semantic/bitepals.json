@@ -192,6 +192,17 @@
         },
         "$description": "Error colour for text (messages, required markers). status.error is a fill/border colour and is below AA as text on light surfaces."
       }
+    },
+    "overlay": {
+      "backdrop": {
+        "$value": "#1f243099",
+        "$extensions": {
+          "com.pearpages.pulp": {
+            "dark": "#000000b3"
+          }
+        },
+        "$description": "Scrim behind dialogs and sheets. Alpha hex, no primitive: it is a role, not a palette colour."
+      }
     }
   },
   "font": {
@@ -410,6 +421,51 @@
           }
         }
       }
+    },
+    "overlay": {
+      "$value": {
+        "offsetX": {
+          "value": 0,
+          "unit": "px"
+        },
+        "offsetY": {
+          "value": 16,
+          "unit": "px"
+        },
+        "blur": {
+          "value": 48,
+          "unit": "px"
+        },
+        "spread": {
+          "value": 0,
+          "unit": "px"
+        },
+        "color": "#1f243033"
+      },
+      "$extensions": {
+        "com.pearpages.pulp": {
+          "dark": {
+            "offsetX": {
+              "value": 0,
+              "unit": "px"
+            },
+            "offsetY": {
+              "value": 16,
+              "unit": "px"
+            },
+            "blur": {
+              "value": 48,
+              "unit": "px"
+            },
+            "spread": {
+              "value": 0,
+              "unit": "px"
+            },
+            "color": "#00000080"
+          }
+        }
+      },
+      "$description": "Elevation for floating surfaces: dialogs, popovers."
     }
   },
   "size": {

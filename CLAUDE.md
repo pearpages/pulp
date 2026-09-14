@@ -130,7 +130,6 @@ trusted publishing: each package name must be registered on npmjs.com as a Trust
 Ordered within each group. Groups 1 and 2 are the gate to everything else being real.
 
 **1. Ship it (needs Pere's accounts)**
-- [ ] Commit the initial tree (`git add -A && git commit`); nothing is committed yet.
 - [ ] Create `github.com/pearpages/pulp`, push `main`, enable Pages (source: GitHub Actions).
 - [ ] DNS: CNAME `pulp` → `pearpages.github.io`; set the custom domain in the repo's Pages settings
       (`apps/storybook/public/CNAME` already carries it).
@@ -158,14 +157,12 @@ Ordered within each group. Groups 1 and 2 are the gate to everything else being 
 - [x] TextField (2026-09-14): label, description, error via `aria-describedby`, `aria-invalid` +
       `data-invalid`, sizes, controlled + uncontrolled. Decision: `color.status.error-text` added
       because `status.error` is a fill/border colour and fails AA as text on light surfaces.
-- [ ] Card: `Card`, `Card.Header`, `Card.Body`, `Card.Footer`; elevation via `--shadow-raised`;
-      `asChild` for link cards.
-- [ ] Tabs: `Tabs`, `Tabs.List`, `Tabs.Tab`, `Tabs.Panel`; roving tabindex, arrow keys, Home/End,
-      `aria-controls`/`aria-labelledby`; controlled + uncontrolled.
-- [ ] Modal: depend on `@pearpages/modals`, re-export as `Modal`, map its `--modal-*` variables to
-      pulp semantic tokens in `modal.module.css`; story with stacking.
-- [ ] Each one: run `pnpm --filter @pearpages/pulp-react scaffold`, fill tokens, tests with axe,
-      stories with `play`, changeset. Add the component to the README table.
+- [x] Card (2026-09-14): `raised|outlined|sunken`, `padding` knob on slots, `interactive`, `asChild` link cards.
+- [x] Tabs (2026-09-14): APG pattern via `src/internal/useRovingFocus.ts` (reusable for Menu, RadioGroup).
+- [x] Dialog (2026-09-14): composes `@pearpages/modals`. Named **Dialog**, not Modal: the vendor owns
+      the `--modal-*` variable namespace, so pulp tokens are `--dialog-*` and `Dialog.module.css` maps
+      them onto the vendor names on the portal element that `DialogSystem` owns. New semantic tokens
+      `color.overlay.backdrop`, `shadow.overlay`; `vendor` cascade layer in `packages/css`.
 
 **4. Guardrails still missing**
 - [ ] Token schema validation: every token has `$type` (the dark-counterpart and component→semantic

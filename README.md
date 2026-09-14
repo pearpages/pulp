@@ -18,7 +18,7 @@ Docs: https://pulp.pearpages.com
 | --- | --- |
 | `@pearpages/pulp-tokens` | `tokens.css`, `tokens.json` |
 | `@pearpages/pulp-css` | `index.css` (layers + tokens + reset + base) |
-| `@pearpages/pulp-react` | `Button`, `TextField` … |
+| `@pearpages/pulp-react` | `Button`, `TextField`, `Card`, `Tabs`, `Dialog` |
 
 ## Use
 

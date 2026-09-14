@@ -22,6 +22,18 @@
       "types": "./dist/index.d.ts",
       "import": "./dist/index.js"
     },
+    "./dialog": {
+      "types": "./dist/dialog.d.ts",
+      "import": "./dist/dialog.js"
+    },
+    "./tabs": {
+      "types": "./dist/tabs.d.ts",
+      "import": "./dist/tabs.js"
+    },
+    "./card": {
+      "types": "./dist/card.d.ts",
+      "import": "./dist/card.js"
+    },
     "./text-field": {
       "types": "./dist/text-field.d.ts",
       "import": "./dist/text-field.js"
@@ -31,6 +43,9 @@
       "import": "./dist/button.js"
     },
     "./styles.css": "./dist/index.css",
+    "./dialog.css": "./dist/dialog.css",
+    "./tabs.css": "./dist/tabs.css",
+    "./card.css": "./dist/card.css",
     "./text-field.css": "./dist/text-field.css",
     "./button.css": "./dist/button.css",
     "./component-manifest.json": "./dist/component-manifest.json",
@@ -45,7 +60,7 @@
     "test:dist": "vitest run --config vitest.dist.config.ts",
     "manifest": "node scripts/manifest.mjs",
     "scaffold": "node scripts/scaffold-component.mjs",
-    "check:package": "publint && attw --pack . --profile esm-only --exclude-entrypoints styles.css button.css text-field.css component-manifest.json",
+    "check:package": "publint && attw --pack . --profile esm-only --exclude-entrypoints styles.css button.css text-field.css card.css tabs.css dialog.css component-manifest.json",
     "prepublishOnly": "pnpm run build && pnpm run test:run && pnpm run check:package"
   },
   "peerDependencies": {
@@ -79,5 +94,8 @@
     "@pearpages/pulp-tokens": {
       "optional": false
     }
+  },
+  "dependencies": {
+    "@pearpages/modals": "^0.2.0"
   }
 }

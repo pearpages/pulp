@@ -1,0 +1,28 @@
+{
+  "$description": "Card component tokens. Brand-independent: every value references the semantic layer.",
+  "card": {
+    "bg": { "$type": "color", "$value": "{color.surface.raised}" },
+    "bg-sunken": { "$type": "color", "$value": "{color.surface.sunken}" },
+    "fg": { "$type": "color", "$value": "{color.text.default}" },
+    "border": { "$type": "color", "$value": "{color.border.default}" },
+    "border-hover": { "$type": "color", "$value": "{color.border.strong}" },
+    "radius": { "$type": "dimension", "$value": "{radius.surface}" },
+    "shadow": { "$type": "shadow", "$value": "{shadow.raised}" },
+    "gap": { "$type": "dimension", "$value": "{space.3}" },
+    "padding": {
+      "$type": "dimension",
+      "sm": { "$value": "{space.3}" },
+      "md": { "$value": "{space.4}" },
+      "lg": { "$value": "{space.5}" }
+    },
+    "divider": { "$type": "color", "$value": "{color.border.default}" },
+    "focus": {
+      "ring": { "$type": "color", "$value": "{color.border.focus}" },
+      "ring-width": { "$type": "dimension", "$value": "{focus.ring.width}" },
+      "ring-offset": { "$type": "dimension", "$value": "{focus.ring.offset}" }
+    },
+    "motion": {
+      "duration": { "$type": "duration", "$value": "{motion.duration.fast}" }
+    }
+  }
+}

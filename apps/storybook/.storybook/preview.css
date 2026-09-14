@@ -1,3 +1,6 @@
+/* Vendor stylesheet below pulp's components; the Modal mapping sets its variables. */
+@import "@pearpages/modals/styles.css" layer(vendor);
+
 /* Layout helpers for stories only. Never shipped. */
 .sb-row {
   display: flex;
@@ -9,4 +12,9 @@
 .sb-grid {
   display: grid;
   gap: var(--space-4);
+}
+
+.sb-h3 {
+  margin: 0;
+  font-size: var(--font-size-md);
 }

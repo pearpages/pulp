@@ -12,6 +12,9 @@ import { defineConfig } from 'tsup';
 export default defineConfig({
   entry: {
     index: 'src/index.ts',
+    dialog: 'src/dialog/index.ts',
+    tabs: 'src/tabs/index.ts',
+    card: 'src/card/index.ts',
     'text-field': 'src/text-field/index.ts',
     button: 'src/button/index.ts',
   },
@@ -22,6 +25,6 @@ export default defineConfig({
   splitting: true,
   treeshake: true,
   target: 'es2022',
-  external: ['react', 'react-dom', 'react/jsx-runtime'],
+  external: ['react', 'react-dom', 'react/jsx-runtime', '@pearpages/modals'],
   loader: { '.css': 'local-css' },
 });
