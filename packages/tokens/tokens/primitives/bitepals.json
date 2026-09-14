@@ -1,0 +1,243 @@
+{
+  "$description": "bitepals primitives. Translated from the bitepals product palette so the second brand is a real one, not a recolour.",
+  "color": {
+    "$type": "color",
+    "orange": {
+      "100": {
+        "$value": "#ffe4d6"
+      },
+      "200": {
+        "$value": "#ffb08a"
+      },
+      "300": {
+        "$value": "#ff8b66"
+      },
+      "400": {
+        "$value": "#ff7a52"
+      },
+      "500": {
+        "$value": "#ff6b3d"
+      },
+      "600": {
+        "$value": "#f45a2a"
+      },
+      "700": {
+        "$value": "#e24e21"
+      },
+      "800": {
+        "$value": "#9f3a14"
+      },
+      "900": {
+        "$value": "#4a1d0e"
+      }
+    },
+    "cream": {
+      "50": {
+        "$value": "#fff6ed"
+      },
+      "100": {
+        "$value": "#fcf3df"
+      },
+      "200": {
+        "$value": "#f8eed9"
+      },
+      "300": {
+        "$value": "#f0e4cf"
+      },
+      "400": {
+        "$value": "#eddcbf"
+      },
+      "500": {
+        "$value": "#e0cba6"
+      }
+    },
+    "sand": {
+      "300": {
+        "$value": "#e2d2b6"
+      },
+      "400": {
+        "$value": "#cab38e"
+      },
+      "500": {
+        "$value": "#a89178"
+      }
+    },
+    "neutral": {
+      "0": {
+        "$value": "#ffffff"
+      },
+      "50": {
+        "$value": "#f7f4ee"
+      },
+      "100": {
+        "$value": "#f0eae2"
+      },
+      "200": {
+        "$value": "#e5dcd1"
+      },
+      "300": {
+        "$value": "#d1c5b6"
+      },
+      "400": {
+        "$value": "#9d968c"
+      },
+      "500": {
+        "$value": "#7c756c"
+      },
+      "600": {
+        "$value": "#5b6475"
+      },
+      "700": {
+        "$value": "#3a4152"
+      },
+      "800": {
+        "$value": "#273040"
+      },
+      "900": {
+        "$value": "#1f2430"
+      }
+    },
+    "ink": {
+      "200": {
+        "$value": "#475467"
+      },
+      "300": {
+        "$value": "#344054"
+      },
+      "400": {
+        "$value": "#2a3240"
+      },
+      "500": {
+        "$value": "#273040"
+      },
+      "600": {
+        "$value": "#202938"
+      },
+      "700": {
+        "$value": "#1d2430"
+      },
+      "800": {
+        "$value": "#171c24"
+      },
+      "900": {
+        "$value": "#11151c"
+      }
+    },
+    "green": {
+      "300": {
+        "$value": "#32c48d"
+      },
+      "500": {
+        "$value": "#22a06b"
+      }
+    },
+    "gold": {
+      "300": {
+        "$value": "#f5b83d"
+      },
+      "500": {
+        "$value": "#d98e04"
+      }
+    },
+    "red": {
+      "300": {
+        "$value": "#ff6b6b"
+      },
+      "500": {
+        "$value": "#d64545"
+      }
+    },
+    "blue": {
+      "300": {
+        "$value": "#5aa9ff"
+      },
+      "500": {
+        "$value": "#2f80ed"
+      }
+    }
+  },
+  "radius": {
+    "$type": "dimension",
+    "sm": {
+      "$value": {
+        "value": 10,
+        "unit": "px"
+      }
+    },
+    "lg": {
+      "$value": {
+        "value": 18,
+        "unit": "px"
+      }
+    },
+    "pill": {
+      "$value": {
+        "value": 9999,
+        "unit": "px"
+      }
+    }
+  },
+  "space": {
+    "$type": "dimension",
+    "unit": {
+      "$value": {
+        "value": 0.28,
+        "unit": "rem"
+      },
+      "$description": "Roomier than pulp: the whole spacing scale grows 12% from this one value."
+    }
+  },
+  "duration": {
+    "$type": "duration",
+    "fast": {
+      "$value": {
+        "value": 120,
+        "unit": "ms"
+      }
+    },
+    "base": {
+      "$value": {
+        "value": 220,
+        "unit": "ms"
+      }
+    }
+  },
+  "easing": {
+    "$type": "cubicBezier",
+    "standard": {
+      "$value": [
+        0.25,
+        0.1,
+        0.25,
+        1
+      ]
+    }
+  },
+  "typeface": {
+    "display": {
+      "$value": [
+        "Nunito Variable",
+        "Nunito",
+        "system-ui",
+        "sans-serif"
+      ]
+    },
+    "body": {
+      "$value": [
+        "Inter Variable",
+        "Inter",
+        "system-ui",
+        "sans-serif"
+      ]
+    },
+    "mono": {
+      "$value": [
+        "ui-monospace",
+        "SF Mono",
+        "Menlo",
+        "monospace"
+      ]
+    },
+    "$type": "fontFamily"
+  }
+}

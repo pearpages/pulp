@@ -1,0 +1,8 @@
+packages:
+  - packages/*
+  - apps/*
+
+# pnpm >= 10 refuses to run install scripts unless the package is allowed.
+# esbuild needs its postinstall to place the platform binary.
+allowBuilds:
+  esbuild: true

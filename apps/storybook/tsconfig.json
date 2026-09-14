@@ -1,0 +1,10 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "types": ["vite/client"],
+    "paths": {
+      "@pearpages/pulp-react": ["../../packages/react/src/index.ts"]
+    }
+  },
+  "include": [".storybook", "docs", "vitest.config.ts"]
+}

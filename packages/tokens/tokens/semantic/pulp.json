@@ -1,0 +1,448 @@
+{
+  "$description": "pulp semantic layer. Names describe a role, values point at primitives. Colours carry a dark counterpart in $extensions; the build emits light-dark().",
+  "color": {
+    "$type": "color",
+    "surface": {
+      "base": {
+        "$value": "{color.neutral.50}",
+        "$extensions": {
+          "com.pearpages.pulp": {
+            "dark": "{color.neutral.975}"
+          }
+        }
+      },
+      "raised": {
+        "$value": "{color.neutral.0}",
+        "$extensions": {
+          "com.pearpages.pulp": {
+            "dark": "{color.neutral.900}"
+          }
+        }
+      },
+      "sunken": {
+        "$value": "{color.neutral.200}",
+        "$extensions": {
+          "com.pearpages.pulp": {
+            "dark": "{color.neutral.1000}"
+          }
+        }
+      }
+    },
+    "text": {
+      "default": {
+        "$value": "{color.neutral.950}",
+        "$extensions": {
+          "com.pearpages.pulp": {
+            "dark": "{color.neutral.100}"
+          }
+        }
+      },
+      "muted": {
+        "$value": "{color.neutral.700}",
+        "$extensions": {
+          "com.pearpages.pulp": {
+            "dark": "{color.neutral.400}"
+          }
+        }
+      },
+      "faint": {
+        "$value": "{color.neutral.600}",
+        "$extensions": {
+          "com.pearpages.pulp": {
+            "dark": "{color.neutral.450}"
+          }
+        },
+        "$description": "Lowest-emphasis text. Promised AA on base and raised surfaces only, not on sunken."
+      },
+      "on-action": {
+        "$value": "{color.neutral.100}",
+        "$extensions": {
+          "com.pearpages.pulp": {
+            "dark": "{color.neutral.950}"
+          }
+        },
+        "$description": "Text on an action fill. Dark scheme fills are light, so the text flips to ink."
+      }
+    },
+    "action": {
+      "primary": {
+        "$value": "{color.ultramarine.500}",
+        "$extensions": {
+          "com.pearpages.pulp": {
+            "dark": "{color.ultramarine.300}"
+          }
+        }
+      },
+      "primary-hover": {
+        "$value": "{color.ultramarine.700}",
+        "$extensions": {
+          "com.pearpages.pulp": {
+            "dark": "{color.ultramarine.200}"
+          }
+        }
+      },
+      "primary-active": {
+        "$value": "{color.ultramarine.800}",
+        "$extensions": {
+          "com.pearpages.pulp": {
+            "dark": "{color.ultramarine.400}"
+          }
+        }
+      },
+      "primary-quiet": {
+        "$value": "{color.ultramarine.100}",
+        "$extensions": {
+          "com.pearpages.pulp": {
+            "dark": "{color.ultramarine.900}"
+          }
+        }
+      },
+      "secondary": {
+        "$value": "{color.neutral.100}",
+        "$extensions": {
+          "com.pearpages.pulp": {
+            "dark": "{color.neutral.850}"
+          }
+        }
+      },
+      "secondary-hover": {
+        "$value": "{color.neutral.200}",
+        "$extensions": {
+          "com.pearpages.pulp": {
+            "dark": "{color.neutral.800}"
+          }
+        }
+      },
+      "text": {
+        "$value": "{color.ultramarine.500}",
+        "$extensions": {
+          "com.pearpages.pulp": {
+            "dark": "{color.ultramarine.300}"
+          }
+        },
+        "$description": "Accent for text and icons sitting on a surface (links, ghost buttons). Meets AA on every surface; action.primary is a fill and need not."
+      }
+    },
+    "border": {
+      "default": {
+        "$value": "{color.neutral.300}",
+        "$extensions": {
+          "com.pearpages.pulp": {
+            "dark": "{color.neutral.850}"
+          }
+        }
+      },
+      "strong": {
+        "$value": "{color.neutral.400}",
+        "$extensions": {
+          "com.pearpages.pulp": {
+            "dark": "{color.neutral.800}"
+          }
+        }
+      },
+      "focus": {
+        "$value": "{color.ultramarine.500}",
+        "$extensions": {
+          "com.pearpages.pulp": {
+            "dark": "{color.ultramarine.300}"
+          }
+        }
+      }
+    },
+    "status": {
+      "success": {
+        "$value": "{color.green.500}",
+        "$extensions": {
+          "com.pearpages.pulp": {
+            "dark": "{color.green.300}"
+          }
+        }
+      },
+      "warning": {
+        "$value": "{color.saffron.500}",
+        "$extensions": {
+          "com.pearpages.pulp": {
+            "dark": "{color.saffron.500}"
+          }
+        }
+      },
+      "error": {
+        "$value": "{color.red.500}",
+        "$extensions": {
+          "com.pearpages.pulp": {
+            "dark": "{color.red.300}"
+          }
+        }
+      },
+      "info": {
+        "$value": "{color.ultramarine.500}",
+        "$extensions": {
+          "com.pearpages.pulp": {
+            "dark": "{color.ultramarine.300}"
+          }
+        }
+      }
+    }
+  },
+  "font": {
+    "family": {
+      "$type": "fontFamily",
+      "display": {
+        "$value": "{typeface.display}"
+      },
+      "body": {
+        "$value": "{typeface.body}"
+      },
+      "mono": {
+        "$value": "{typeface.mono}"
+      }
+    },
+    "size": {
+      "$type": "dimension",
+      "xs": {
+        "$value": {
+          "value": 0.75,
+          "unit": "rem"
+        }
+      },
+      "sm": {
+        "$value": {
+          "value": 0.875,
+          "unit": "rem"
+        }
+      },
+      "md": {
+        "$value": {
+          "value": 1,
+          "unit": "rem"
+        }
+      },
+      "lg": {
+        "$value": {
+          "value": 1.125,
+          "unit": "rem"
+        }
+      },
+      "xl": {
+        "$value": {
+          "value": 1.375,
+          "unit": "rem"
+        }
+      },
+      "2xl": {
+        "$value": {
+          "value": 1.75,
+          "unit": "rem"
+        }
+      }
+    },
+    "weight": {
+      "$type": "fontWeight",
+      "regular": {
+        "$value": 400
+      },
+      "medium": {
+        "$value": 500
+      },
+      "semibold": {
+        "$value": 600
+      }
+    },
+    "line-height": {
+      "$type": "number",
+      "tight": {
+        "$value": 1.2
+      },
+      "normal": {
+        "$value": 1.5
+      }
+    }
+  },
+  "radius": {
+    "$type": "dimension",
+    "control": {
+      "$value": "{radius.sm}",
+      "$description": "Buttons, inputs, chips."
+    },
+    "surface": {
+      "$value": "{radius.lg}",
+      "$description": "Cards, dialogs, popovers."
+    },
+    "full": {
+      "$value": "{radius.pill}"
+    }
+  },
+  "space": {
+    "$type": "dimension",
+    "1": {
+      "$value": "{space.unit}",
+      "$extensions": {
+        "com.pearpages.pulp": {
+          "multiply": 1
+        }
+      }
+    },
+    "2": {
+      "$value": "{space.unit}",
+      "$extensions": {
+        "com.pearpages.pulp": {
+          "multiply": 2
+        }
+      }
+    },
+    "3": {
+      "$value": "{space.unit}",
+      "$extensions": {
+        "com.pearpages.pulp": {
+          "multiply": 3
+        }
+      }
+    },
+    "4": {
+      "$value": "{space.unit}",
+      "$extensions": {
+        "com.pearpages.pulp": {
+          "multiply": 4
+        }
+      }
+    },
+    "5": {
+      "$value": "{space.unit}",
+      "$extensions": {
+        "com.pearpages.pulp": {
+          "multiply": 6
+        }
+      }
+    },
+    "6": {
+      "$value": "{space.unit}",
+      "$extensions": {
+        "com.pearpages.pulp": {
+          "multiply": 8
+        }
+      }
+    },
+    "7": {
+      "$value": "{space.unit}",
+      "$extensions": {
+        "com.pearpages.pulp": {
+          "multiply": 12
+        }
+      }
+    },
+    "8": {
+      "$value": "{space.unit}",
+      "$extensions": {
+        "com.pearpages.pulp": {
+          "multiply": 16
+        }
+      }
+    },
+    "$description": "Spacing scale. Names are steps, not multipliers: 1..8 map to 1, 2, 3, 4, 6, 8, 12, 16 \u00d7 space.unit, so the scale opens up at the top like a type scale. space.unit is the density knob for the brand."
+  },
+  "motion": {
+    "duration": {
+      "$type": "duration",
+      "fast": {
+        "$value": "{duration.fast}"
+      },
+      "base": {
+        "$value": "{duration.base}"
+      }
+    },
+    "easing": {
+      "$type": "cubicBezier",
+      "standard": {
+        "$value": "{easing.standard}"
+      }
+    }
+  },
+  "shadow": {
+    "$type": "shadow",
+    "raised": {
+      "$value": {
+        "offsetX": {
+          "value": 0,
+          "unit": "px"
+        },
+        "offsetY": {
+          "value": 2,
+          "unit": "px"
+        },
+        "blur": {
+          "value": 12,
+          "unit": "px"
+        },
+        "spread": {
+          "value": 0,
+          "unit": "px"
+        },
+        "color": "#0c0e141a"
+      },
+      "$extensions": {
+        "com.pearpages.pulp": {
+          "dark": {
+            "offsetX": {
+              "value": 0,
+              "unit": "px"
+            },
+            "offsetY": {
+              "value": 2,
+              "unit": "px"
+            },
+            "blur": {
+              "value": 12,
+              "unit": "px"
+            },
+            "spread": {
+              "value": 0,
+              "unit": "px"
+            },
+            "color": "#00000059"
+          }
+        }
+      }
+    }
+  },
+  "size": {
+    "$type": "dimension",
+    "control": {
+      "sm": {
+        "$value": {
+          "value": 2,
+          "unit": "rem"
+        }
+      },
+      "md": {
+        "$value": {
+          "value": 2.5,
+          "unit": "rem"
+        }
+      },
+      "lg": {
+        "$value": {
+          "value": 3,
+          "unit": "rem"
+        }
+      },
+      "$description": "Block size of interactive controls: buttons, inputs, selects."
+    }
+  },
+  "focus": {
+    "ring": {
+      "$type": "dimension",
+      "width": {
+        "$value": {
+          "value": 2,
+          "unit": "px"
+        }
+      },
+      "offset": {
+        "$value": {
+          "value": 2,
+          "unit": "px"
+        }
+      }
+    }
+  }
+}

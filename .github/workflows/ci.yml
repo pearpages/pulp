@@ -1,0 +1,42 @@
+name: CI
+
+on:
+  push:
+    branches-ignore: [main]
+  pull_request:
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+
+      # Generated tokens must match their JSON source.
+      - name: Tokens drift
+        run: pnpm check:tokens
+
+      - name: Lint (ESLint + Stylelint + guardrail probe)
+        run: pnpm lint
+      - name: Typecheck
+        run: pnpm typecheck
+      - name: Unit tests
+        run: pnpm test
+      - name: Build packages
+        run: pnpm build
+      - name: Package checks (publint, are-the-types-wrong)
+        run: pnpm check:package
+      - name: Smoke-test the built package
+        run: pnpm test:dist
+
+      - name: Install Playwright browsers
+        run: pnpm --filter storybook exec playwright install --with-deps chromium
+      - name: Stories as tests (browser, a11y)
+        run: pnpm test:storybook
+      - name: Build Storybook
+        run: pnpm storybook:build

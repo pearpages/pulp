@@ -1,0 +1,45 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+
+<Meta title="Contributing" />
+
+# Contributing
+
+## Adding a component
+
+1. `pnpm --filter @pearpages/pulp-react scaffold Name` creates the five files,
+   a component token file, and registers the entry point. (Coding agents: the
+   `add-component` skill runs the same script.)
+2. Fill `tokens/component/<name>.json` with references to the **semantic**
+   layer only. Run `pnpm build:tokens` and commit the generated CSS.
+3. Write the component. Rules that CI enforces:
+   - every colour, radius, font and shadow is a `var(--…)`;
+   - no `style` prop, no CSS-in-JS, no utility classes;
+   - state on the DOM as `data-*` attributes;
+   - variants as union types, never boolean props that conflict;
+   - `ref` is a normal prop; `asChild` for composition where it makes sense.
+4. Tests: behaviour with Testing Library, an `axe` check for every state.
+5. Stories: one per variant, a `play` for anything interactive, and a matrix
+   story. Stories run as tests in a browser and fail on a11y violations.
+6. `pnpm build` regenerates the component manifest from your prop types.
+7. `pnpm changeset` to describe the change for the changelog.
+
+## Checklist before a PR
+
+```
+pnpm check:tokens && pnpm lint && pnpm typecheck && pnpm test && pnpm build && pnpm test:dist && pnpm check:package
+```
+
+## Versioning and deprecation
+
+- Semantic versioning per package, driven by changesets.
+- Removing or renaming a token, a prop, or a `data-*` attribute is a **major**.
+- Anything removed stays for one major with a deprecation note in the
+  changelog and, where the change is mechanical, a codemod.
+- Brands never break: adding a semantic token means adding it to every brand
+  file, and the token tests fail otherwise.
+
+## Releasing
+
+Tag `vX.Y.Z` on `main` after `pnpm version-packages` has landed. The publish
+workflow packs each package with `pnpm pack` (so `workspace:*` becomes a real
+range) and publishes through npm trusted publishing, no tokens involved.

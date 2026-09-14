@@ -1,0 +1,12 @@
+node_modules/
+dist/
+# The tokens build output is committed on purpose: generated CSS is reviewed
+# in pull requests and CI fails when it drifts from the JSON source.
+!packages/tokens/dist/
+storybook-static/
+*.tsbuildinfo
+.DS_Store
+coverage/
+test-results/
+__screenshots__/
+.vitest-attachments/

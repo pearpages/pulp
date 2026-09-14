@@ -1,0 +1,30 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+import manifest from '@pearpages/pulp-tokens/tokens.json';
+import { TokenTable } from './TokenTable';
+
+<Meta title="Tokens" />
+
+# Tokens
+
+Rendered from `tokens.json`, the same file coding agents read. Each table renders
+its own brand; the swatches use the current scheme and the hex values list both.
+
+## Semantic
+
+The layer components consume. Same names in every brand.
+
+<TokenTable tokens={manifest.pulp} tier="semantic" brand="pulp" />
+
+## Component
+
+Brand-independent references into the semantic layer.
+
+<TokenTable tokens={manifest.pulp} tier="component" brand="pulp" />
+
+## Primitives, pulp
+
+<TokenTable tokens={manifest.pulp} tier="primitive" brand="pulp" />
+
+## Primitives, bitepals
+
+<TokenTable tokens={manifest.bitepals} tier="primitive" brand="bitepals" />

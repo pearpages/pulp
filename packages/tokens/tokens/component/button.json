@@ -1,0 +1,118 @@
+{
+  "$description": "Button component tokens. Brand-independent: every value is a reference into the semantic layer, so a brand never needs to know a Button exists.",
+  "button": {
+    "radius": {
+      "$type": "dimension",
+      "$value": "{radius.control}"
+    },
+    "gap": {
+      "$type": "dimension",
+      "$value": "{space.2}"
+    },
+    "font": {
+      "family": {
+        "$type": "fontFamily",
+        "$value": "{font.family.body}"
+      },
+      "weight": {
+        "$type": "fontWeight",
+        "$value": "{font.weight.medium}"
+      },
+      "size": {
+        "$type": "dimension",
+        "sm": {
+          "$value": "{font.size.sm}"
+        },
+        "md": {
+          "$value": "{font.size.md}"
+        },
+        "lg": {
+          "$value": "{font.size.lg}"
+        }
+      }
+    },
+    "height": {
+      "$type": "dimension",
+      "sm": {
+        "$value": "{size.control.sm}"
+      },
+      "md": {
+        "$value": "{size.control.md}"
+      },
+      "lg": {
+        "$value": "{size.control.lg}"
+      }
+    },
+    "padding-inline": {
+      "$type": "dimension",
+      "sm": {
+        "$value": "{space.3}"
+      },
+      "md": {
+        "$value": "{space.4}"
+      },
+      "lg": {
+        "$value": "{space.5}"
+      }
+    },
+    "primary": {
+      "$type": "color",
+      "bg": {
+        "$value": "{color.action.primary}"
+      },
+      "bg-hover": {
+        "$value": "{color.action.primary-hover}"
+      },
+      "bg-active": {
+        "$value": "{color.action.primary-active}"
+      },
+      "fg": {
+        "$value": "{color.text.on-action}"
+      }
+    },
+    "secondary": {
+      "$type": "color",
+      "bg": {
+        "$value": "{color.action.secondary}"
+      },
+      "bg-hover": {
+        "$value": "{color.action.secondary-hover}"
+      },
+      "fg": {
+        "$value": "{color.text.default}"
+      },
+      "border": {
+        "$value": "{color.border.default}"
+      }
+    },
+    "ghost": {
+      "$type": "color",
+      "fg": {
+        "$value": "{color.action.text}"
+      },
+      "bg-hover": {
+        "$value": "{color.action.primary-quiet}"
+      }
+    },
+    "focus": {
+      "ring": {
+        "$type": "color",
+        "$value": "{color.border.focus}"
+      },
+      "ring-width": {
+        "$type": "dimension",
+        "$value": "{focus.ring.width}"
+      },
+      "ring-offset": {
+        "$type": "dimension",
+        "$value": "{focus.ring.offset}"
+      }
+    },
+    "motion": {
+      "duration": {
+        "$type": "duration",
+        "$value": "{motion.duration.fast}"
+      }
+    }
+  }
+}

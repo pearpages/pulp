@@ -1,0 +1,50 @@
+{
+  "name": "pulp",
+  "private": true,
+  "description": "pulp design system: tokens, CSS, React components, and the guardrails around them.",
+  "type": "module",
+  "packageManager": "pnpm@11.15.0",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "build": "pnpm --filter './packages/*' -r build",
+    "build:tokens": "pnpm --filter @pearpages/pulp-tokens build",
+    "check:tokens": "pnpm --filter @pearpages/pulp-tokens check",
+    "lint": "eslint . && pnpm run stylelint && pnpm run check:guardrails",
+    "stylelint": "stylelint \"packages/**/*.css\" \"apps/**/*.css\"",
+    "typecheck": "pnpm -r --if-present typecheck",
+    "test": "pnpm --filter './packages/*' -r --if-present test:run",
+    "test:storybook": "pnpm --filter storybook test:run",
+    "test:dist": "pnpm --filter @pearpages/pulp-react test:dist",
+    "check:package": "pnpm --filter './packages/*' -r --if-present check:package",
+    "manifest": "pnpm --filter @pearpages/pulp-react manifest",
+    "storybook": "pnpm --filter storybook dev",
+    "storybook:build": "pnpm --filter storybook build",
+    "changeset": "changeset",
+    "version-packages": "changeset version && pnpm install --lockfile-only",
+    "release": "pnpm build && changeset publish",
+    "check:guardrails": "node scripts/check-guardrails.mjs"
+  },
+  "devDependencies": {
+    "@changesets/cli": "^3.0.2",
+    "@eslint/js": "^9.0.0",
+    "@types/node": "^22.0.0",
+    "eslint": "^9.0.0",
+    "eslint-plugin-react": "^7.37.5",
+    "eslint-plugin-react-hooks": "^7.1.1",
+    "globals": "^17.12.0",
+    "stylelint": "^17.15.0",
+    "stylelint-config-standard": "^40.0.0",
+    "stylelint-declaration-strict-value": "^1.12.1",
+    "typescript": "^5.9.3",
+    "typescript-eslint": "^8.70.0"
+  },
+  "browserslist": [
+    "Chrome >= 123",
+    "Edge >= 123",
+    "Firefox >= 120",
+    "Safari >= 17.5",
+    "iOS >= 17.5"
+  ]
+}

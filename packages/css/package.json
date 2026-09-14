@@ -1,0 +1,32 @@
+{
+  "name": "@pearpages/pulp-css",
+  "version": "0.0.0",
+  "description": "pulp base styles: cascade layers, a reset, and body defaults on top of the tokens. Framework-agnostic; import once per app.",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pearpages/pulp.git",
+    "directory": "packages/css"
+  },
+  "type": "module",
+  "sideEffects": true,
+  "files": [
+    "src"
+  ],
+  "exports": {
+    ".": "./src/index.css",
+    "./layers.css": "./src/layers.css",
+    "./reset.css": "./src/reset.css",
+    "./base.css": "./src/base.css",
+    "./package.json": "./package.json"
+  },
+  "scripts": {
+    "check:package": "publint"
+  },
+  "dependencies": {
+    "@pearpages/pulp-tokens": "workspace:^"
+  },
+  "devDependencies": {
+    "publint": "^0.3.24"
+  }
+}

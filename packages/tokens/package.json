@@ -1,0 +1,32 @@
+{
+  "name": "@pearpages/pulp-tokens",
+  "version": "0.0.0",
+  "description": "pulp design tokens. W3C Design Tokens (DTCG) JSON in, CSS custom properties and a resolved JSON manifest out. Two brands, light and dark via light-dark().",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pearpages/pulp.git",
+    "directory": "packages/tokens"
+  },
+  "type": "module",
+  "sideEffects": false,
+  "files": [
+    "dist",
+    "tokens"
+  ],
+  "exports": {
+    "./tokens.css": "./dist/tokens.css",
+    "./tokens.json": "./dist/tokens.json",
+    "./package.json": "./package.json"
+  },
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "check": "node scripts/build.mjs --check",
+    "test:run": "node --test \"scripts/*.test.mjs\"",
+    "check:package": "publint"
+  },
+  "devDependencies": {
+    "publint": "^0.3.24",
+    "style-dictionary": "^5.5.3"
+  }
+}

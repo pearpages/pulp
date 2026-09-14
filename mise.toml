@@ -1,0 +1,4 @@
+# Project toolchain. Node comes from .nvmrc (mise reads it); pnpm is pinned here
+# because the global mise config does not set one.
+[tools]
+pnpm = "11.15.0"

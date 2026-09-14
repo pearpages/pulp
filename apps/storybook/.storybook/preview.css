@@ -1,0 +1,12 @@
+/* Layout helpers for stories only. Never shipped. */
+.sb-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.sb-grid {
+  display: grid;
+  gap: var(--space-4);
+}

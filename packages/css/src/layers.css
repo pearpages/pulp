@@ -1,0 +1,6 @@
+/*
+ * Cascade order for everything pulp ships, declared once and first.
+ * Consumers can add their own layers after `utilities`; an unlayered rule
+ * in the app always wins over any of these, which is the intended escape hatch.
+ */
+@layer reset, tokens, base, components, utilities;

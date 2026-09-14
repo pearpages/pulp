@@ -1,0 +1,192 @@
+{
+  "$description": "pulp primitives. Raw values with no meaning attached: the palette, type families, and scales the semantic layer maps onto. Derived from the perepages.com palette.",
+  "color": {
+    "$type": "color",
+    "ultramarine": {
+      "100": {
+        "$value": "#e8eafc"
+      },
+      "200": {
+        "$value": "#a5aeff"
+      },
+      "300": {
+        "$value": "#8b97ff"
+      },
+      "400": {
+        "$value": "#6b7aff"
+      },
+      "500": {
+        "$value": "#1e2ed6"
+      },
+      "700": {
+        "$value": "#1522a8"
+      },
+      "800": {
+        "$value": "#101a80"
+      },
+      "900": {
+        "$value": "#10164a"
+      }
+    },
+    "neutral": {
+      "0": {
+        "$value": "#ffffff"
+      },
+      "50": {
+        "$value": "#f3f4f7"
+      },
+      "100": {
+        "$value": "#ededf2"
+      },
+      "200": {
+        "$value": "#e9ebf1"
+      },
+      "300": {
+        "$value": "#d5d7de"
+      },
+      "400": {
+        "$value": "#adb0bb"
+      },
+      "450": {
+        "$value": "#8f95a8"
+      },
+      "500": {
+        "$value": "#767d92"
+      },
+      "600": {
+        "$value": "#666c80"
+      },
+      "700": {
+        "$value": "#5a6072"
+      },
+      "800": {
+        "$value": "#4a4f5d"
+      },
+      "850": {
+        "$value": "#262a35"
+      },
+      "900": {
+        "$value": "#11141d"
+      },
+      "950": {
+        "$value": "#0c0e14"
+      },
+      "975": {
+        "$value": "#090b11"
+      },
+      "1000": {
+        "$value": "#05070b"
+      },
+      "$description": "Sixteen steps rather than the usual eleven: 450, 850, 975 and 1000 exist because the dark scheme needs three surfaces below 900 (raised, base, sunken). Derived from perepages.com. 450 is the faint text step that still meets AA on the dark raised surface."
+    },
+    "saffron": {
+      "500": {
+        "$value": "#ffb020"
+      },
+      "900": {
+        "$value": "#2a1c00"
+      }
+    },
+    "green": {
+      "300": {
+        "$value": "#3ecf8e"
+      },
+      "500": {
+        "$value": "#1a8f5c"
+      }
+    },
+    "red": {
+      "300": {
+        "$value": "#ff6b70"
+      },
+      "500": {
+        "$value": "#d0393e"
+      }
+    }
+  },
+  "radius": {
+    "$type": "dimension",
+    "sm": {
+      "$value": {
+        "value": 3,
+        "unit": "px"
+      }
+    },
+    "lg": {
+      "$value": {
+        "value": 10,
+        "unit": "px"
+      }
+    },
+    "pill": {
+      "$value": {
+        "value": 9999,
+        "unit": "px"
+      }
+    }
+  },
+  "space": {
+    "$type": "dimension",
+    "unit": {
+      "$value": {
+        "value": 0.25,
+        "unit": "rem"
+      },
+      "$description": "The density knob. Every semantic space token is a multiple of this."
+    }
+  },
+  "duration": {
+    "$type": "duration",
+    "fast": {
+      "$value": {
+        "value": 140,
+        "unit": "ms"
+      }
+    },
+    "base": {
+      "$value": {
+        "value": 260,
+        "unit": "ms"
+      }
+    }
+  },
+  "easing": {
+    "$type": "cubicBezier",
+    "standard": {
+      "$value": [
+        0.2,
+        0.7,
+        0.3,
+        1
+      ]
+    }
+  },
+  "typeface": {
+    "display": {
+      "$value": [
+        "Archivo Variable",
+        "Archivo",
+        "system-ui",
+        "sans-serif"
+      ]
+    },
+    "body": {
+      "$value": [
+        "Instrument Sans Variable",
+        "Instrument Sans",
+        "system-ui",
+        "sans-serif"
+      ]
+    },
+    "mono": {
+      "$value": [
+        "Geist Mono Variable",
+        "ui-monospace",
+        "SF Mono",
+        "Menlo",
+        "monospace"
+      ]
+    },
+    "$type": "fontFamily"
+  }
+}

@@ -1,0 +1,447 @@
+{
+  "$description": "bitepals semantic layer. Same names as pulp, different primitives behind them. This file is the whole brand.",
+  "color": {
+    "$type": "color",
+    "surface": {
+      "base": {
+        "$value": "{color.cream.300}",
+        "$extensions": {
+          "com.pearpages.pulp": {
+            "dark": "{color.ink.900}"
+          }
+        }
+      },
+      "raised": {
+        "$value": "{color.cream.200}",
+        "$extensions": {
+          "com.pearpages.pulp": {
+            "dark": "{color.ink.800}"
+          }
+        }
+      },
+      "sunken": {
+        "$value": "{color.cream.400}",
+        "$extensions": {
+          "com.pearpages.pulp": {
+            "dark": "{color.ink.700}"
+          }
+        }
+      }
+    },
+    "text": {
+      "default": {
+        "$value": "{color.neutral.900}",
+        "$extensions": {
+          "com.pearpages.pulp": {
+            "dark": "{color.neutral.50}"
+          }
+        }
+      },
+      "muted": {
+        "$value": "{color.neutral.700}",
+        "$extensions": {
+          "com.pearpages.pulp": {
+            "dark": "{color.neutral.300}"
+          }
+        }
+      },
+      "faint": {
+        "$value": "{color.neutral.600}",
+        "$extensions": {
+          "com.pearpages.pulp": {
+            "dark": "{color.neutral.400}"
+          }
+        },
+        "$description": "Lowest-emphasis text. Promised AA on base and raised surfaces only, not on sunken."
+      },
+      "on-action": {
+        "$value": "{color.neutral.900}",
+        "$extensions": {
+          "com.pearpages.pulp": {
+            "dark": "{color.neutral.900}"
+          }
+        },
+        "$description": "Ink, not white: white on the brand orange is 2.8:1 and fails AA in both schemes."
+      }
+    },
+    "action": {
+      "primary": {
+        "$value": "{color.orange.500}",
+        "$extensions": {
+          "com.pearpages.pulp": {
+            "dark": "{color.orange.400}"
+          }
+        }
+      },
+      "primary-hover": {
+        "$value": "{color.orange.400}",
+        "$extensions": {
+          "com.pearpages.pulp": {
+            "dark": "{color.orange.300}"
+          }
+        },
+        "$description": "Interaction brightens rather than darkens: the fill carries ink text, and a darker orange would drop below AA."
+      },
+      "primary-active": {
+        "$value": "{color.orange.300}",
+        "$extensions": {
+          "com.pearpages.pulp": {
+            "dark": "{color.orange.200}"
+          }
+        }
+      },
+      "primary-quiet": {
+        "$value": "{color.orange.100}",
+        "$extensions": {
+          "com.pearpages.pulp": {
+            "dark": "{color.orange.900}"
+          }
+        }
+      },
+      "secondary": {
+        "$value": "{color.cream.400}",
+        "$extensions": {
+          "com.pearpages.pulp": {
+            "dark": "{color.ink.700}"
+          }
+        }
+      },
+      "secondary-hover": {
+        "$value": "{color.cream.500}",
+        "$extensions": {
+          "com.pearpages.pulp": {
+            "dark": "{color.ink.500}"
+          }
+        }
+      },
+      "text": {
+        "$value": "{color.orange.800}",
+        "$extensions": {
+          "com.pearpages.pulp": {
+            "dark": "{color.orange.300}"
+          }
+        },
+        "$description": "Accent for text and icons on a surface. The brand orange itself is 2.3:1 on cream, so text uses the 800 step."
+      }
+    },
+    "border": {
+      "default": {
+        "$value": "{color.sand.400}",
+        "$extensions": {
+          "com.pearpages.pulp": {
+            "dark": "{color.ink.300}"
+          }
+        }
+      },
+      "strong": {
+        "$value": "{color.sand.500}",
+        "$extensions": {
+          "com.pearpages.pulp": {
+            "dark": "{color.ink.200}"
+          }
+        }
+      },
+      "focus": {
+        "$value": "{color.orange.200}",
+        "$extensions": {
+          "com.pearpages.pulp": {
+            "dark": "{color.orange.200}"
+          }
+        }
+      }
+    },
+    "status": {
+      "success": {
+        "$value": "{color.green.500}",
+        "$extensions": {
+          "com.pearpages.pulp": {
+            "dark": "{color.green.300}"
+          }
+        }
+      },
+      "warning": {
+        "$value": "{color.gold.500}",
+        "$extensions": {
+          "com.pearpages.pulp": {
+            "dark": "{color.gold.300}"
+          }
+        }
+      },
+      "error": {
+        "$value": "{color.red.500}",
+        "$extensions": {
+          "com.pearpages.pulp": {
+            "dark": "{color.red.300}"
+          }
+        }
+      },
+      "info": {
+        "$value": "{color.blue.500}",
+        "$extensions": {
+          "com.pearpages.pulp": {
+            "dark": "{color.blue.300}"
+          }
+        }
+      }
+    }
+  },
+  "font": {
+    "family": {
+      "$type": "fontFamily",
+      "display": {
+        "$value": "{typeface.display}"
+      },
+      "body": {
+        "$value": "{typeface.body}"
+      },
+      "mono": {
+        "$value": "{typeface.mono}"
+      }
+    },
+    "size": {
+      "$type": "dimension",
+      "xs": {
+        "$value": {
+          "value": 0.75,
+          "unit": "rem"
+        }
+      },
+      "sm": {
+        "$value": {
+          "value": 0.875,
+          "unit": "rem"
+        }
+      },
+      "md": {
+        "$value": {
+          "value": 1,
+          "unit": "rem"
+        }
+      },
+      "lg": {
+        "$value": {
+          "value": 1.125,
+          "unit": "rem"
+        }
+      },
+      "xl": {
+        "$value": {
+          "value": 1.375,
+          "unit": "rem"
+        }
+      },
+      "2xl": {
+        "$value": {
+          "value": 1.75,
+          "unit": "rem"
+        }
+      }
+    },
+    "weight": {
+      "$type": "fontWeight",
+      "regular": {
+        "$value": 400
+      },
+      "medium": {
+        "$value": 600
+      },
+      "semibold": {
+        "$value": 700
+      }
+    },
+    "line-height": {
+      "$type": "number",
+      "tight": {
+        "$value": 1.25
+      },
+      "normal": {
+        "$value": 1.55
+      }
+    }
+  },
+  "radius": {
+    "$type": "dimension",
+    "control": {
+      "$value": "{radius.sm}"
+    },
+    "surface": {
+      "$value": "{radius.lg}"
+    },
+    "full": {
+      "$value": "{radius.pill}"
+    }
+  },
+  "space": {
+    "$type": "dimension",
+    "1": {
+      "$value": "{space.unit}",
+      "$extensions": {
+        "com.pearpages.pulp": {
+          "multiply": 1
+        }
+      }
+    },
+    "2": {
+      "$value": "{space.unit}",
+      "$extensions": {
+        "com.pearpages.pulp": {
+          "multiply": 2
+        }
+      }
+    },
+    "3": {
+      "$value": "{space.unit}",
+      "$extensions": {
+        "com.pearpages.pulp": {
+          "multiply": 3
+        }
+      }
+    },
+    "4": {
+      "$value": "{space.unit}",
+      "$extensions": {
+        "com.pearpages.pulp": {
+          "multiply": 4
+        }
+      }
+    },
+    "5": {
+      "$value": "{space.unit}",
+      "$extensions": {
+        "com.pearpages.pulp": {
+          "multiply": 6
+        }
+      }
+    },
+    "6": {
+      "$value": "{space.unit}",
+      "$extensions": {
+        "com.pearpages.pulp": {
+          "multiply": 8
+        }
+      }
+    },
+    "7": {
+      "$value": "{space.unit}",
+      "$extensions": {
+        "com.pearpages.pulp": {
+          "multiply": 12
+        }
+      }
+    },
+    "8": {
+      "$value": "{space.unit}",
+      "$extensions": {
+        "com.pearpages.pulp": {
+          "multiply": 16
+        }
+      }
+    },
+    "$description": "Spacing scale. Names are steps, not multipliers: 1..8 map to 1, 2, 3, 4, 6, 8, 12, 16 \u00d7 space.unit, so the scale opens up at the top like a type scale. space.unit is the density knob for the brand."
+  },
+  "motion": {
+    "duration": {
+      "$type": "duration",
+      "fast": {
+        "$value": "{duration.fast}"
+      },
+      "base": {
+        "$value": "{duration.base}"
+      }
+    },
+    "easing": {
+      "$type": "cubicBezier",
+      "standard": {
+        "$value": "{easing.standard}"
+      }
+    }
+  },
+  "shadow": {
+    "$type": "shadow",
+    "raised": {
+      "$value": {
+        "offsetX": {
+          "value": 0,
+          "unit": "px"
+        },
+        "offsetY": {
+          "value": 2,
+          "unit": "px"
+        },
+        "blur": {
+          "value": 12,
+          "unit": "px"
+        },
+        "spread": {
+          "value": 0,
+          "unit": "px"
+        },
+        "color": "#1f24301a"
+      },
+      "$extensions": {
+        "com.pearpages.pulp": {
+          "dark": {
+            "offsetX": {
+              "value": 0,
+              "unit": "px"
+            },
+            "offsetY": {
+              "value": 2,
+              "unit": "px"
+            },
+            "blur": {
+              "value": 12,
+              "unit": "px"
+            },
+            "spread": {
+              "value": 0,
+              "unit": "px"
+            },
+            "color": "#00000038"
+          }
+        }
+      }
+    }
+  },
+  "size": {
+    "$type": "dimension",
+    "control": {
+      "sm": {
+        "$value": {
+          "value": 2,
+          "unit": "rem"
+        }
+      },
+      "md": {
+        "$value": {
+          "value": 2.5,
+          "unit": "rem"
+        }
+      },
+      "lg": {
+        "$value": {
+          "value": 3,
+          "unit": "rem"
+        }
+      },
+      "$description": "Block size of interactive controls: buttons, inputs, selects."
+    }
+  },
+  "focus": {
+    "ring": {
+      "$type": "dimension",
+      "width": {
+        "$value": {
+          "value": 2,
+          "unit": "px"
+        }
+      },
+      "offset": {
+        "$value": {
+          "value": 2,
+          "unit": "px"
+        }
+      }
+    }
+  }
+}
