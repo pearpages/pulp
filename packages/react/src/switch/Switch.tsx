@@ -22,6 +22,11 @@ export interface SwitchProps extends Omit<InputHTMLAttributes<HTMLInputElement>,
  * technology announces on and off, and the browser handles keyboard, forms
  * and state. Use it for settings that take effect immediately; use Checkbox
  * for choices submitted with a form. Drawn with `--switch-*` tokens.
+ *
+ * @status stable
+ * @accessibility A native checkbox with `role="switch"`, so on and off are announced; Space toggles; label, description and error wire through Field.
+ * @do Use it for settings that apply immediately.
+ * @dont Use it inside a form that needs a submit; use Checkbox.
  */
 export function Switch({
   label,

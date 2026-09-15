@@ -40,6 +40,14 @@ export interface ${name}Props extends HTMLAttributes<HTMLDivElement> {
   children: ReactNode;
 }
 
+/**
+ * What it is and when to reach for it. Every value comes from \`--${kebab}-*\` tokens.
+ *
+ * @status experimental
+ * @accessibility Roles, keyboard and what is announced. The manifest fails without this paragraph.
+ * @do One bullet per line.
+ * @dont One bullet per line.
+ */
 export function ${name}({ className, ref, children, ...rest }: ${name}Props) {
   return (
     <div {...rest} ref={ref} className={classes(styles.root, className)}>

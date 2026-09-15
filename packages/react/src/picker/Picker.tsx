@@ -47,6 +47,12 @@ export interface PickerProps {
  * closes, and a hidden native select carries the value in forms. For a
  * plain list of words, the native `Select` is the default; for several
  * choices at once, use Listbox.
+ *
+ * @status experimental
+ * @accessibility A `button` named by the label with `aria-haspopup="listbox"` and `aria-expanded`; the popup is a `listbox` with selected and disabled options; a hidden native select carries `name` and value for forms. Arrows open and move, typing jumps, Enter chooses, Escape closes and returns focus.
+ * @do Use a `description` line on options when the label alone is ambiguous.
+ * Prefer the native Select for a plain list of words.
+ * @dont Use `placeholder` as the only label.
  */
 export function Picker({
   label,

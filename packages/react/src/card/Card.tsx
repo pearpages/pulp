@@ -42,6 +42,13 @@ interface SlotProps extends HTMLAttributes<HTMLDivElement> {
  * `Card.Body` and `Card.Footer`; the slots carry the padding and dividers so
  * the root stays a plain surface. Every value comes from `--card-*` tokens;
  * state is exposed as `data-variant`, `data-padding` and `data-interactive`.
+ *
+ * @status stable
+ * @accessibility A `section` by default (a `region` when it has an accessible name); with `asChild` the child element's own semantics apply. `interactive` adds a focus ring and a tab stop only when the element is not already focusable.
+ * @do Give a card an `aria-label` or a heading in `Card.Header` when it is a landmark worth naming.
+ * Use `asChild` with an `a` for a whole-card link.
+ * @dont Put more than one primary action inside an interactive card.
+ * Nest interactive cards.
  */
 export function Card<E extends HTMLElement = HTMLElement>({
   variant = 'raised',

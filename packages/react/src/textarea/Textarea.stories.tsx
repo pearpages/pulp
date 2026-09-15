@@ -11,7 +11,6 @@ const meta = {
     resize: { control: 'select', options: ['vertical', 'none', 'both'] },
     ref: { control: false, table: { disable: true } },
   },
-  parameters: { docs: { description: { component: 'A multi-line input on top of Field. `autoGrow` follows the content where `field-sizing` is supported.' } } },
 } satisfies Meta<typeof Textarea>;
 
 export default meta;

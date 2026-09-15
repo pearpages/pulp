@@ -9,7 +9,6 @@ const meta = {
   argTypes: { value: { control: false }, size: { control: 'inline-radio', options: ['sm', 'md', 'lg'] } },
   parameters: {
     a11y: { context: 'body' },
-    docs: { description: { component: 'A segmented date field with a calendar popover on React Aria (decision 001). Dates cross the API as YYYY-MM-DD strings.' } },
   },
 } satisfies Meta<typeof DatePicker>;
 

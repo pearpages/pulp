@@ -14,6 +14,11 @@ export interface VisuallyHiddenProps extends HTMLAttributes<HTMLElement> {
  * on screen, still in the accessibility tree (unlike `display: none`). Use
  * it to give icon-only controls a name or to add context a sighted user
  * gets from layout.
+ *
+ * @status stable
+ * @accessibility In the accessibility tree, out of the layout (clip-path, not `display: none`).
+ * @do Use it for context a sighted user gets from layout ("Sort by", "Step 2 of 4").
+ * @dont Hide instructions that sighted users also need.
  */
 export function VisuallyHidden({ as = 'span', className, ref, children, ...rest }: VisuallyHiddenProps) {
   return createElement(as, { ...rest, ref, className: classes(styles.root, className) }, children);

@@ -69,7 +69,6 @@ const meta = {
   args: { onSubmit: fn() },
   parameters: {
     layout: 'padded',
-    docs: { description: { component: 'Every form control composed in one form. The play function fills it in and submits; the assertion is on the submitted FormData.' } },
   },
 } satisfies Meta<typeof SignupForm>;
 

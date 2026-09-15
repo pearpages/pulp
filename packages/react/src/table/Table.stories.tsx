@@ -60,7 +60,6 @@ const meta = {
   },
   parameters: {
     layout: 'padded',
-    docs: { description: { component: 'A data grid on React Aria (decision 001): sorting, selection and a sticky header, with row density from the spacing scale.' } },
   },
   render: (args) => <Example {...args} />,
 } satisfies Meta<typeof Table>;

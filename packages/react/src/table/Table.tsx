@@ -71,6 +71,13 @@ export interface TableProps {
  * reports changes and renders them. Compose with `Table.Header`,
  * `Table.Column`, `Table.Body`, `Table.Row` and `Table.Cell`; the selection
  * column appears by itself when rows are selectable.
+ *
+ * @status experimental
+ * @accessibility `role="grid"` named by `aria-label` or `aria-labelledby`; one column is the row header (`isRowHeader`), sortable columns carry `aria-sort`, selectable rows `aria-selected`, and the selection column holds real checkboxes ("Select All" in the header). One tab stop: arrows move between rows and cells, Space toggles selection, Enter runs the row action, the header cells are pressed to sort.
+ * @do Mark exactly one column `isRowHeader`.
+ * Give the table a name that says what the rows are.
+ * @dont Sort the data inside the table; sort your data from `onSortChange` and pass it back.
+ * Use it for layout.
  */
 export function Table({
   selectionMode = 'none',

@@ -13,7 +13,6 @@ const meta = {
     family: { control: 'select', options: ['body', 'mono'] },
     ref: { control: false, table: { disable: true } },
   },
-  parameters: { docs: { description: { component: 'The type scale as a component. Body copy never carries its own font declarations.' } } },
 } satisfies Meta<typeof Text>;
 
 export default meta;

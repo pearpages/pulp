@@ -16,7 +16,6 @@ const meta = {
   },
   parameters: {
     a11y: { context: 'body' },
-    docs: { description: { component: 'A non-modal layer anchored to its trigger. The page stays interactive; Escape, click outside or Popover.Close dismiss it.' } },
   },
   render: (args) => (
     <Popover {...args}>

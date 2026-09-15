@@ -1,0 +1,52 @@
+/* Every value is a token. The docs page is a consumer of the system, so it reads semantic tokens only. */
+
+.status {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  margin-block: var(--space-3) var(--space-5);
+  color: var(--color-text-muted);
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-sm);
+}
+
+.columns {
+  display: grid;
+  gap: var(--space-5);
+  margin-block-end: var(--space-5);
+}
+
+@media (width >= 48rem) {
+  .columns {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.parts {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-sm);
+}
+
+.parts li {
+  padding-block: var(--space-2);
+  border-block-end: var(--size-hairline) solid var(--color-border-default);
+}
+
+.parts code {
+  font-family: var(--font-family-mono);
+}
+
+.list {
+  margin: 0;
+  padding-inline-start: var(--space-4);
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-sm);
+  line-height: var(--font-line-height-normal);
+}
+
+.list li + li {
+  margin-block-start: var(--space-1);
+}

@@ -8,9 +8,6 @@ const meta = {
   component: Pagination,
   args: { page: 5, count: 12, siblings: 1, boundaries: 1, size: 'md', onPageChange: fn() },
   argTypes: { size: { control: 'inline-radio', options: ['sm', 'md'] } },
-  parameters: {
-    docs: { description: { component: 'Page controls in a nav landmark, built from Button and IconButton. Buttons by default, links with getHref.' } },
-  },
 } satisfies Meta<typeof Pagination>;
 
 export default meta;

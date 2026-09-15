@@ -15,7 +15,6 @@ const meta = {
     children: { control: false },
     ref: { control: false, table: { disable: true } },
   },
-  parameters: { docs: { description: { component: 'A flex column whose gap is a step on the spacing scale.' } } },
   render: (args) => (
     <Stack {...args}>
       <Text>First</Text>

@@ -15,7 +15,6 @@ const meta = {
   },
   parameters: {
     a11y: { context: 'body' },
-    docs: { description: { component: 'Extra detail on hover or focus, linked with aria-describedby while visible. Never the only name of a control.' } },
   },
 } satisfies Meta<typeof Tooltip>;
 

@@ -7,7 +7,6 @@ const meta = {
   component: Checkbox,
   args: { label: 'Send me the changelog', size: 'md' },
   argTypes: { size: { control: 'select', options: ['sm', 'md', 'lg'] }, ref: { control: false, table: { disable: true } } },
-  parameters: { docs: { description: { component: 'A native checkbox drawn with tokens. Label, description and error come from Field.' } } },
 } satisfies Meta<typeof Checkbox>;
 
 export default meta;

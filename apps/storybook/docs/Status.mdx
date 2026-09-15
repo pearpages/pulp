@@ -1,0 +1,16 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+import { StatusTable } from './StatusTable';
+
+<Meta title="Status" />
+
+# Component status
+
+Every component carries a `@status` tag in its JSDoc; the manifest fails to build without one,
+so this table can never be out of date with the code.
+
+- **stable**: the props, tokens and `data-*` attributes are a contract. Removing or renaming one is a major.
+- **experimental**: shipped and tested, but the API may still change in a minor while the first
+  consumers use it. Today that is the tier built on React Aria Components (decision record 001).
+- **deprecated**: kept for one major with a note in the changelog and, where mechanical, a codemod.
+
+<StatusTable />

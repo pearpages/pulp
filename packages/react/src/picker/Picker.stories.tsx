@@ -17,7 +17,6 @@ const meta = {
   argTypes: { items: { control: false }, value: { control: false }, size: { control: 'inline-radio', options: ['sm', 'md', 'lg'] } },
   parameters: {
     a11y: { context: 'body' },
-    docs: { description: { component: 'The rich single select on React Aria (decision 001). The native Select stays the default for plain word lists.' } },
   },
 } satisfies Meta<typeof Picker>;
 

@@ -13,7 +13,6 @@ const meta = {
     icon: { control: false },
     ref: { control: false, table: { disable: true } },
   },
-  parameters: { docs: { description: { component: 'A square Button with only an icon. The `label` is required: it is the accessible name and the tooltip.' } } },
 } satisfies Meta<typeof IconButton>;
 
 export default meta;

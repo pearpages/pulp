@@ -17,6 +17,8 @@ const config: StorybookConfig = {
     reactDocgen: 'react-docgen-typescript',
     reactDocgenTypescriptOptions: {
       tsconfigPath: resolve(here, '../../../packages/react/tsconfig.json'),
+      // The plugin's default include is relative to this app; the components live two packages up.
+      include: ['**/**.tsx', resolve(here, '../../../packages/react/src/**/*.tsx')],
       shouldExtractLiteralValuesFromEnum: true,
       shouldRemoveUndefinedFromOptional: true,
       propFilter: (prop) => !prop.parent?.fileName.includes('node_modules'),

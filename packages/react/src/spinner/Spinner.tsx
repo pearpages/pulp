@@ -23,6 +23,11 @@ export interface SpinnerProps extends HTMLAttributes<HTMLSpanElement> {
  * unless `decorative`, in which case the parent is responsible (Button sets
  * `aria-busy`). Under reduced motion the ring stops but keeps its coloured
  * quarter, so it still reads as "in progress".
+ *
+ * @status stable
+ * @accessibility `role="status"` with a visually hidden label ("Loading" by default) unless `decorative`, in which case the parent announces busy. Under reduced motion the ring stops but keeps its coloured quarter.
+ * @do Use `decorative` inside a control that already sets `aria-busy`.
+ * @dont Show several spinners for one operation.
  */
 export function Spinner({ size = 'md', tone = 'default', label = 'Loading', decorative = false, className, ref, ...rest }: SpinnerProps) {
   return (

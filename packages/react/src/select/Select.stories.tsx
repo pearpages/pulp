@@ -17,7 +17,6 @@ const meta = {
   component: Select,
   args: { label: 'Brand', placeholder: 'Choose a brand', size: 'md', children: options },
   argTypes: { size: { control: 'select', options: ['sm', 'md', 'lg'] }, children: { control: false }, ref: { control: false, table: { disable: true } } },
-  parameters: { docs: { description: { component: 'A native select on top of Field. The popup, keyboard and screen-reader behaviour are the browser’s own.' } } },
 } satisfies Meta<typeof Select>;
 
 export default meta;

@@ -7,9 +7,6 @@ const meta = {
   component: Calendar,
   args: { defaultValue: '2026-09-14', onChange: fn() },
   argTypes: { value: { control: false } },
-  parameters: {
-    docs: { description: { component: 'A month grid on React Aria (decision 001). Dates cross the API as YYYY-MM-DD strings; the locale sets names and the first weekday.' } },
-  },
 } satisfies Meta<typeof Calendar>;
 
 export default meta;

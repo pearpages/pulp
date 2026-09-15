@@ -14,7 +14,6 @@ const meta = {
   },
   parameters: {
     a11y: { context: 'body' },
-    docs: { description: { component: 'The WAI-ARIA menu button pattern: arrows open and move, typing jumps, Enter or click selects, Escape and Tab close.' } },
   },
   render: (args) => (
     <Menu {...args}>

@@ -4,8 +4,8 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "storybook dev -p 6006",
-    "build": "storybook build",
+    "dev": "pnpm --filter @pearpages/pulp-react manifest && storybook dev -p 6006",
+    "build": "pnpm --filter @pearpages/pulp-react manifest && storybook build",
     "test": "vitest",
     "test:run": "vitest run",
     "typecheck": "tsc --noEmit"

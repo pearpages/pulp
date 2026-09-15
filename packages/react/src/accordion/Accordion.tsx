@@ -71,6 +71,13 @@ const toSet = (value: string | string[] | undefined): Set<string> =>
  * region; arrows, Home and End move between triggers. Controlled or
  * uncontrolled by `value`. Compose with `Accordion.Item`,
  * `Accordion.Trigger` and `Accordion.Panel`.
+ *
+ * @status stable
+ * @accessibility Each trigger is a `button` inside a heading of the given `headingLevel`; each panel is a `region` labelled by its trigger. Arrows, Home and End move between triggers; Enter or Space toggles.
+ * @do Set `headingLevel` to fit the page outline.
+ * Use `multiple` when sections are independent reference material.
+ * @dont Nest interactive content in the trigger; it is one button.
+ * Use it for a single show-more; use Popover or plain content instead.
  */
 export function Accordion({
   type = 'single',

@@ -20,11 +20,15 @@ export interface StackProps extends HTMLAttributes<HTMLElement> {
 }
 
 /**
+ * A flex column whose gap is a step on the spacing scale, so consumers
+ * compose layout from tokens instead of writing padding and margins.
  * Rendered as `ul`/`ol` it keeps `role="list"` explicitly, because Safari
  * stops announcing a list once `list-style` is removed.
  *
- * A flex column whose gap is a step on the spacing scale, so consumers
- * compose layout from tokens instead of writing padding and margins.
+ * @status stable
+ * @accessibility Layout only: no role unless rendered as `ul`/`ol`, where `role="list"` is kept explicitly because Safari drops list semantics without markers.
+ * @do Use `as="ul"` for a list of like items so the count is announced.
+ * @dont Use it to space unrelated regions; it is one flex column.
  */
 export function Stack({ as = 'div', gap = 3, align, justify, className, ref, children, ...rest }: StackProps) {
   return createElement(

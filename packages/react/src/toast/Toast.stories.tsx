@@ -39,7 +39,6 @@ const meta = {
   parameters: {
     layout: 'padded',
     a11y: { context: 'body' },
-    docs: { description: { component: 'Mount `ToastProvider` once; call `useToast().toast()` anywhere. Timers pause on hover and focus; errors stay until dismissed.' } },
   },
 } satisfies Meta<typeof ToastProvider>;
 

@@ -13,7 +13,6 @@ const meta = {
     children: { control: false },
     ref: { control: false, table: { disable: true } },
   },
-  parameters: { docs: { description: { component: 'A wrapping flex row whose gap is a step on the spacing scale.' } } },
   render: (args) => (
     <Inline {...args}>
       <Button size="sm">One</Button>

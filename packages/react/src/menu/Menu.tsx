@@ -59,6 +59,12 @@ export interface MenuProps {
  * jumps to the next item starting with that letter, Enter, Space or click
  * selects and closes, Escape and Tab close and return focus. Compose with
  * `Menu.Trigger`, `Menu.Content`, `Menu.Item` and `Menu.Separator`.
+ *
+ * @status stable
+ * @accessibility The WAI-ARIA menu button pattern: the trigger has `aria-haspopup="menu"` and `aria-expanded`; the popup is `role="menu"` named by the trigger with `menuitem` children. Down/Up opens to the first/last item, arrows wrap, Home/End jump, typing jumps, Enter/Space/click select and close, Escape and Tab close and return focus.
+ * @do Use `tone="danger"` for destructive items and put them after a separator.
+ * @dont Put form controls or links that navigate inside a menu; those want Popover or a navigation list.
+ * Use it for navigation between pages.
  */
 export function Menu({ open, defaultOpen = false, onOpenChange, placement = 'bottom-start', children }: MenuProps) {
   const [uncontrolled, setUncontrolled] = useState(defaultOpen);

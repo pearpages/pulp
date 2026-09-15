@@ -72,6 +72,13 @@ export interface ComboboxProps {
  * then clears. Static lists filter themselves; for async options, control
  * `inputValue`, fetch, and pass the results with `filter="none"` and
  * `loading` while they arrive. Options look the same as Listbox's.
+ *
+ * @status experimental
+ * @accessibility A `combobox` input with `aria-autocomplete="list"`; the open list is a `listbox` announced through `aria-activedescendant`, so focus stays in the input. Arrows move, Enter selects, Escape closes and then clears. Loading and empty states are announced from inside the list.
+ * @do Use `filter="none"` with controlled `inputValue` for server-side search.
+ * Keep `loading` true until the results for the current text arrive.
+ * @dont Use it for fewer than five fixed options; use Picker or the native Select.
+ * Set `menuTrigger="focus"` on a long list; opening on every focus is noisy.
  */
 export function Combobox({
   label,

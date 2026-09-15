@@ -31,6 +31,13 @@ interface Timer {
  * region; `useToast()` adds notifications to it. Timers pause while the
  * region is hovered or holds focus, Escape dismisses the focused toast, and
  * error toasts stay until dismissed. Each toast is an Alert.
+ *
+ * @status stable
+ * @accessibility Owns a `region` named "Notifications" with `aria-live="polite"`; each toast is an Alert with its live role off (the region announces). Timers pause while the region is hovered or holds focus; Escape dismisses the focused toast; error toasts stay until dismissed.
+ * @do Mount it once near the app root.
+ * Keep messages to one sentence; put detail behind an `action`.
+ * @dont Use a toast for an error the user must fix in a form; show it at the field.
+ * Stack more than a few; the cap drops the oldest.
  */
 export function ToastProvider({ placement = 'bottom-end', max = 5, duration = 6000, label = 'Notifications', children }: ToastProviderProps) {
   const [items, setItems] = useState<ToastItem[]>([]);

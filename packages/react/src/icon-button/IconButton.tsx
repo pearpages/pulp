@@ -18,6 +18,11 @@ export interface IconButtonProps<E extends HTMLElement = HTMLButtonElement>
  * A square Button that shows only an icon and therefore *requires* a name.
  * Everything else (variants, sizes, loading, asChild) is Button's; the
  * `--icon-button-size-*` tokens make it square.
+ *
+ * @status stable
+ * @accessibility A Button with `aria-label` from the required `label`; `title` shows it as a tooltip. Everything else is Button's.
+ * @do Write the label as the action ("Close", "Add item").
+ * @dont Use the icon's name as the label.
  */
 export function IconButton<E extends HTMLElement = HTMLButtonElement>({
   label,

@@ -42,6 +42,13 @@ const DEFAULT_ICON: Record<AlertTone, ReactNode> = {
  * An inline message with a tone. Tint, accent and title colour come from
  * the status tokens; the body keeps the default text colour so long
  * messages stay readable. Toast renders one Alert per notification.
+ *
+ * @status stable
+ * @accessibility `role="alert"` for `tone="error"` (assertive), `role="status"` otherwise (polite); `live="off"` opts out. The glyph is decorative; the tone is carried by the title and text, never by colour alone.
+ * @do Give it a `title` when the body is more than one sentence.
+ * Use `onDismiss` for messages the user can act on and clear.
+ * @dont Announce errors through both an Alert and a Toast.
+ * Use it as a page-level banner for marketing copy.
  */
 export function Alert({
   tone = 'info',

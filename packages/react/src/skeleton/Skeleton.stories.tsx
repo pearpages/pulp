@@ -13,7 +13,6 @@ const meta = {
     size: { control: 'select', options: ['sm', 'md', 'lg'] },
     ref: { control: false, table: { disable: true } },
   },
-  parameters: { docs: { description: { component: 'Decorative placeholders. Mark the container `aria-busy`; the shimmer runs only when motion is allowed.' } } },
   render: (args) => (
     <div className="sb-wide">
       <Skeleton {...args} />

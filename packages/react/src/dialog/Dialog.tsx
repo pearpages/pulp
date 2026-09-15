@@ -27,6 +27,11 @@ export interface DialogSystemProps extends Omit<ComponentProps<typeof VendorSyst
  * current brand and scheme. Because the variables sit on an ancestor of the
  * dialog, they win over the vendor stylesheet regardless of cascade layers
  * or import order.
+ *
+ * @status stable
+ * @accessibility Renders nothing visible itself; the portal element it owns is where every dialog mounts, so the vendor's focus trap and `inert` handling apply to the rest of the page.
+ * @do Mount it once, near the app root, inside any providers dialogs need.
+ * @dont Nest it; one system serves every dialog.
  */
 export function DialogSystem({ children, ...rest }: DialogSystemProps) {
   // Created detached during the first render (no DOM mutation yet, so it is
@@ -62,6 +67,13 @@ export function DialogSystem({ children, ...rest }: DialogSystemProps) {
  * dialog's children render only while it is open. Use pulp's `Button` for
  * actions. Requires `DialogSystem` above it and the vendor stylesheet
  * `@pearpages/modals/styles.css`.
+ *
+ * @status stable
+ * @accessibility `role="dialog"` with `aria-modal`, named by `Dialog.Title` and described by `Dialog.Description`; focus moves in on open and back to the trigger on close; the page behind is inert; Escape and the backdrop close it. Provided by `@pearpages/modals`.
+ * @do Always render a `Dialog.Title`.
+ * Put the destructive action last in `Dialog.Footer` and make the safe one the default focus.
+ * @dont Open a dialog from inside a Menu or Popover that stays open.
+ * Use it for content that does not need the page blocked; use Popover.
  */
 export function Dialog(props: DialogProps) {
   return <VendorModal {...props} />;

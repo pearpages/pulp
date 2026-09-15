@@ -32,6 +32,11 @@ export interface TextProps extends HTMLAttributes<HTMLElement> {
  * family resolves through `--text-*` tokens, so body copy never carries its
  * own font declarations. State on the DOM: `data-size`, `data-weight`,
  * `data-tone`, `data-family`, `data-align`, `data-truncate`.
+ *
+ * @status stable
+ * @accessibility Plain text with no role beyond the element chosen by `as`; `truncate` clips visually while the full text stays in the accessibility tree.
+ * @do Use `tone="faint"` only on base and raised surfaces (its contrast is promised there).
+ * @dont Use `as="label"`; labels belong to Field.
  */
 export function Text({
   as = 'p',

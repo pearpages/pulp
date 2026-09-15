@@ -54,6 +54,13 @@ export interface PopoverProps {
  * `Popover.Close` dismiss it and focus returns to the trigger. Compose with
  * `Popover.Trigger`, `Popover.Content` and `Popover.Close`. For anything that
  * must block the page, use Dialog.
+ *
+ * @status stable
+ * @accessibility A non-modal `role="dialog"` named by `title` (or `aria-label`); the trigger has `aria-haspopup="dialog"` and `aria-expanded`. Focus moves to the first focusable element on open and back to the trigger on close; Escape and a click outside dismiss it.
+ * @do Give it a `title` or `aria-label`.
+ * Use `Popover.Close` inside forms so a keyboard user has a clear exit.
+ * @dont Put a long form or a destructive confirmation in it; use Dialog.
+ * Open it on hover; that is Tooltip.
  */
 export function Popover({ open, defaultOpen = false, onOpenChange, placement = 'bottom-start', children }: PopoverProps) {
   const [uncontrolled, setUncontrolled] = useState(defaultOpen);

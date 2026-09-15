@@ -36,6 +36,13 @@ export interface CalendarProps {
  * announced with its full date and the grid is named by a visually hidden
  * level-2 heading. Dates cross the API as ISO strings. For a date inside a
  * form, DatePicker wraps this in a field with a popover.
+ *
+ * @status experimental
+ * @accessibility The grid is `role="grid"` named by a visually hidden level-2 heading ("Calendar, September 2026"); each day is a button announced with its full date, today and selection state. Arrows move by day and week, Page Up/Down by month, Home/End to the week edges, Enter or Space selects.
+ * @do Pass `locale` when the app's language is not the browser's.
+ * Mark unavailable dates with `isDateUnavailable` rather than removing them.
+ * @dont Use it inside a form; use DatePicker, which adds the field and the popover.
+ * Set `min` after `max`; the vendor disables the whole grid.
  */
 export function Calendar({
   value,

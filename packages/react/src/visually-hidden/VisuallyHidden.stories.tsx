@@ -9,9 +9,6 @@ const meta = {
   component: VisuallyHidden,
   args: { children: 'Only assistive technology reads this.' },
   argTypes: { ref: { control: false, table: { disable: true } } },
-  parameters: {
-    docs: { description: { component: 'Present for screen readers, absent from the layout. The usual way to name an icon-only control.' } },
-  },
 } satisfies Meta<typeof VisuallyHidden>;
 
 export default meta;

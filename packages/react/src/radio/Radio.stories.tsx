@@ -20,7 +20,6 @@ const meta = {
     children: { control: false },
     ref: { control: false, table: { disable: true } },
   },
-  parameters: { docs: { description: { component: 'Native radios under one label. Arrow keys move and select; description and error apply to the group.' } } },
 } satisfies Meta<typeof RadioGroup>;
 
 export default meta;

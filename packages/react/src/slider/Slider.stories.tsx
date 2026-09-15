@@ -9,7 +9,6 @@ const meta = {
   argTypes: { value: { control: false }, defaultValue: { control: false } },
   parameters: {
     layout: 'padded',
-    docs: { description: { component: 'A number or a range on a track, on React Aria (decision 001). The output shows what assistive technology hears.' } },
   },
 } satisfies Meta<typeof Slider>;
 

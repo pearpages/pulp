@@ -11,7 +11,6 @@ const meta = {
     value: { control: { type: 'range', min: 0, max: 100 } },
     ref: { control: false, table: { disable: true } },
   },
-  parameters: { docs: { description: { component: 'Determinate or indeterminate progress with a required label. Indeterminate motion stops under reduced motion.' } } },
   render: (args) => (
     <div className="sb-wide">
       <Progress {...args} />

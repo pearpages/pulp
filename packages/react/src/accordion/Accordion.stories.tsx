@@ -34,7 +34,6 @@ const meta = {
     children: { control: false },
     ref: { control: false, table: { disable: true } },
   },
-  parameters: { docs: { description: { component: 'Stacked sections: buttons in real headings controlling labelled regions. Arrows, Home and End move between triggers.' } } },
   render: (args) => (
     <div className="sb-wide">
       <Accordion {...args} />

@@ -7,7 +7,6 @@ const meta = {
   component: Switch,
   args: { label: 'Dark scheme', size: 'md' },
   argTypes: { size: { control: 'select', options: ['sm', 'md', 'lg'] }, ref: { control: false, table: { disable: true } } },
-  parameters: { docs: { description: { component: 'A native checkbox with `role="switch"` for settings that take effect immediately.' } } },
 } satisfies Meta<typeof Switch>;
 
 export default meta;

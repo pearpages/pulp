@@ -29,6 +29,11 @@ export interface ProgressProps extends Omit<HTMLAttributes<HTMLDivElement>, 'chi
  * labelled by the visible (or visually hidden) label; the fill width is the
  * one place in the library that carries a per-instance inline value, set as
  * a custom property. Indeterminate motion stops under reduced motion.
+ *
+ * @status stable
+ * @accessibility `role="progressbar"` labelled by the required `label` (visible or visually hidden), with `aria-valuenow`/`aria-valuemin`/`aria-valuemax` when determinate and `aria-valuetext` from `valueText`. Indeterminate bars omit `aria-valuenow`.
+ * @do Set `valueText` when the percentage is not the meaningful reading ("3 of 5 files").
+ * @dont Use it for an unknown wait shorter than a few seconds; use Spinner.
  */
 export function Progress({ value, max = 100, label, hideLabel = false, valueText, tone = 'primary', size = 'md', className, ref, ...rest }: ProgressProps) {
   const id = useId();

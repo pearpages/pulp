@@ -31,20 +31,27 @@ CI checks what the pattern promises.
    state as `data-*` attributes, `asChild` only if composition makes sense. In
    `Name.module.css`: every colour/radius/font/shadow is `var(--<kebab-name>-…)` or a
    semantic token. No `style` prop, no literal values (lint fails either).
+   Fill the JSDoc the scaffold left: prose, then `@status experimental`, an
+   `@accessibility` paragraph (roles, keyboard, what is announced) and `@do` / `@dont`
+   bullets, one per line. `pnpm build` fails without status and accessibility; that
+   block is the Docs page and the Status page, and agents read it from the manifest.
 
 4. **Tests.** Behaviour with Testing Library and an `axe` check for every state. Run:
    ```
    pnpm test
    ```
 
-5. **Stories.** One per variant, a `play` function for anything interactive, a matrix
-   story. Stories run as browser tests with a11y checks:
+5. **Stories.** One per variant, a `play` function for anything interactive, the four
+   brand × scheme matrix stories. No `parameters.docs.description` (the JSDoc is the
+   description). Stories run as browser tests with a11y checks:
    ```
    pnpm test:storybook
    ```
 
-6. **Finish.** `pnpm lint && pnpm typecheck && pnpm build && pnpm test:dist && pnpm check:package`,
-   then `pnpm changeset` (minor for a new component). Update the Status section of `CLAUDE.md`.
+6. **Finish.** `pnpm lint && pnpm typecheck && pnpm build && pnpm test:dist && pnpm check:package && pnpm check:size`
+   (the bundle budget: a leaf entry is allowed 2.1 kB brotli; add an override in
+   `packages/react/.size-limit.js` only with a reason), then `pnpm changeset` (minor for a
+   new component). Update the Status section of `CLAUDE.md`.
 
 ## Reference
 

@@ -25,6 +25,13 @@ export interface BadgeProps extends HTMLAttributes<HTMLSpanElement> {
  * through `--badge-*` onto the status tokens, whose contrast is proven by
  * the token tests. Not interactive: for a removable chip, compose with a
  * Button.
+ *
+ * @status stable
+ * @accessibility Plain text: no role, no interaction. Every tone × variant pair meets WCAG AA, proven by the token tests. Tone is reinforced by the text, not only by colour.
+ * @do Keep the text to one or two words.
+ * Pair a leading icon with text, never alone.
+ * @dont Make it clickable; compose a Button for a removable chip.
+ * Use tone alone to convey meaning; say it in the text.
  */
 export function Badge({ tone = 'neutral', variant = 'subtle', size = 'md', icon, className, ref, children, ...rest }: BadgeProps) {
   return (

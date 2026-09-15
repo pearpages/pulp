@@ -8,9 +8,12 @@ components are renderers of them.
 - **CSS**: cascade layers, reset, base styles. Framework-agnostic.
 - **React**: accessible components on CSS modules and native CSS, one entry per component,
   state as `data-*` attributes.
-- **Docs = tests**: every Storybook story runs in a browser with accessibility checks.
-- **Guardrails**: inline styles and literal colours fail lint; stale token output fails CI; a
-  generated component manifest tells coding agents what exists.
+- **Docs = tests**: every Storybook story runs in a browser with accessibility checks. Each
+  component's docs page (usage, accessibility, do/don't, status) is rendered from its JSDoc
+  through the component manifest, so humans and coding agents read one source.
+- **Guardrails**: inline styles and literal colours fail lint; stale token output fails CI; every
+  entry has a bundle-size budget; a vendor renaming a variable fails a test; a generated
+  component manifest tells coding agents what exists.
 
 Docs: https://pulp.pearpages.com
 
@@ -52,7 +55,7 @@ pnpm install
 pnpm storybook          # docs and stories on :6006
 pnpm test               # unit tests
 pnpm test:storybook     # stories as browser tests (once: pnpm --filter storybook exec playwright install chromium)
-pnpm build && pnpm test:dist && pnpm check:package
+pnpm build && pnpm test:dist && pnpm check:package && pnpm check:size
 ```
 
 See `PRINCIPLES.md` for why the system is shaped this way, `docs/decisions/` for the

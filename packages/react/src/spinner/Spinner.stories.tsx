@@ -12,7 +12,6 @@ const meta = {
     tone: { control: 'select', options: ['default', 'inherit'] },
     ref: { control: false, table: { disable: true } },
   },
-  parameters: { docs: { description: { component: 'Indeterminate progress. Announces its label unless decorative; Button uses it decoratively with aria-busy.' } } },
 } satisfies Meta<typeof Spinner>;
 
 export default meta;

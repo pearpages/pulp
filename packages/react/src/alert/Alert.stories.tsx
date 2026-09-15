@@ -14,7 +14,6 @@ const meta = {
     action: { control: false },
     ref: { control: false, table: { disable: true } },
   },
-  parameters: { docs: { description: { component: 'An inline message with a tone. Errors announce assertively; everything else politely.' } } },
 } satisfies Meta<typeof Alert>;
 
 export default meta;

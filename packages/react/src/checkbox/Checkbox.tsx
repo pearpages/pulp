@@ -26,6 +26,13 @@ export interface CheckboxProps extends Omit<InputHTMLAttributes<HTMLInputElement
  * browser's own. Label, description and error come from Field. Controlled and
  * uncontrolled behave like the native input. State is the native `:checked`
  * and `:indeterminate`, plus `data-indeterminate` on the input.
+ *
+ * @status stable
+ * @accessibility A native `input type="checkbox"` with `appearance: none`; label, description and error wire through Field. `indeterminate` sets the DOM property and `aria-checked="mixed"`. Keyboard: Space toggles.
+ * @do Use `indeterminate` for a parent whose children are partly selected.
+ * Group related checkboxes under a `fieldset`.
+ * @dont Use it for an immediate setting; use Switch.
+ * Hide the label; the description does not name the control.
  */
 export function Checkbox({
   label,

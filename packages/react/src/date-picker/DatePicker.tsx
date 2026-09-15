@@ -60,6 +60,13 @@ export interface DatePickerProps {
  * user's locale order (arrows and digits, no free text to parse), and the
  * button opens the same month grid as Calendar. Dates cross the API as
  * ISO strings.
+ *
+ * @status experimental
+ * @accessibility A `group` named by the label holding one `spinbutton` per date segment (day, month, year in the locale's order), a button that opens a `dialog` containing the Calendar grid, and a hidden input for forms. Arrows step a segment, digits type it, Escape closes the dialog and returns focus.
+ * @do Pass `locale` when the app's language is not the browser's.
+ * Use `min`/`max` for ranges the user cannot choose outside of.
+ * @dont Parse the value yourself; it is always `YYYY-MM-DD`.
+ * Use it for a date of birth decades away; the segments are faster than the calendar.
  */
 export function DatePicker({
   label,

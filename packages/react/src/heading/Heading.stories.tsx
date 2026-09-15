@@ -11,7 +11,6 @@ const meta = {
     tone: { control: 'select', options: ['default', 'muted'] },
     ref: { control: false, table: { disable: true } },
   },
-  parameters: { docs: { description: { component: 'Outline level and visual size are separate decisions.' } } },
 } satisfies Meta<typeof Heading>;
 
 export default meta;

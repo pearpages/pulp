@@ -15,9 +15,6 @@ const meta = {
   component: Listbox,
   args: { 'aria-label': 'Fruit', items, selectionMode: 'single', onChange: fn() },
   argTypes: { items: { control: false }, value: { control: false }, defaultValue: { control: false } },
-  parameters: {
-    docs: { description: { component: 'A visible list of options on React Aria (decision 001). Ids in, ids out, an array in both modes.' } },
-  },
 } satisfies Meta<typeof Listbox>;
 
 export default meta;

@@ -33,6 +33,20 @@ const componentFiles = readdirSync(SRC, { withFileTypes: true })
     return { dir: entry.name, file: resolve(SRC, entry.name, `${name}.tsx`) };
   });
 
+const STATUSES = ['experimental', 'stable', 'deprecated'];
+
+// JSDoc block tags are the component's own metadata: one source read by the
+// docs page, the status page and agents. `@do`/`@dont` hold one bullet per line.
+function metadata(doc) {
+  const tags = doc.tags ?? {};
+  if (!STATUSES.includes(tags.status)) {
+    throw new Error(`${doc.displayName}: JSDoc needs "@status ${STATUSES.join(' | ')}" (got "${tags.status ?? ''}")`);
+  }
+  if (!tags.accessibility?.trim()) throw new Error(`${doc.displayName}: JSDoc needs an "@accessibility" paragraph`);
+  const bullets = (text) => (text ?? '').split('\n').map((line) => line.trim()).filter(Boolean);
+  return { status: tags.status, accessibility: tags.accessibility.replace(/\s+/g, ' ').trim(), do: bullets(tags.do), dont: bullets(tags.dont) };
+}
+
 const props = (doc) =>
   Object.values(doc.props)
     .sort((a, b) => Number(b.required) - Number(a.required) || a.name.localeCompare(b.name))
@@ -53,6 +67,7 @@ const components = componentFiles.flatMap(({ dir, file }) => {
   return roots.map((doc) => ({
     name: doc.displayName,
     description: doc.description,
+    ...metadata(doc),
     import: `import { ${doc.displayName} } from '@pearpages/pulp-react/${dir}';`,
     css: `@pearpages/pulp-react/${dir}.css`,
     tokens: `--${dir}-*`,

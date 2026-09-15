@@ -13,7 +13,6 @@ const meta = {
     icon: { control: false },
     ref: { control: false, table: { disable: true } },
   },
-  parameters: { docs: { description: { component: 'Status, counts and tags. Every tone × variant pair meets AA; the token tests prove it.' } } },
 } satisfies Meta<typeof Badge>;
 
 export default meta;

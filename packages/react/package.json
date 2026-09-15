@@ -216,7 +216,8 @@
     "manifest": "node scripts/manifest.mjs",
     "scaffold": "node scripts/scaffold-component.mjs",
     "check:package": "publint && attw --pack . --profile esm-only --exclude-entrypoints styles.css button.css text-field.css card.css tabs.css dialog.css text.css heading.css icon.css visually-hidden.css stack.css inline.css field.css icon-button.css checkbox.css switch.css radio.css textarea.css select.css spinner.css badge.css alert.css toast.css progress.css skeleton.css tooltip.css popover.css accordion.css menu.css combobox.css listbox.css picker.css calendar.css date-picker.css slider.css table.css pagination.css component-manifest.json",
-    "prepublishOnly": "pnpm run build && pnpm run test:run && pnpm run check:package"
+    "prepublishOnly": "pnpm run build && pnpm run test:run && pnpm run check:package",
+    "check:size": "size-limit"
   },
   "peerDependencies": {
     "@pearpages/pulp-tokens": "workspace:^",

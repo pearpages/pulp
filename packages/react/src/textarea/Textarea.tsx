@@ -29,6 +29,11 @@ export interface TextareaProps extends TextareaHTMLAttributes<HTMLTextAreaElemen
  * its own `--textarea-*` tokens so it can diverge. `rows` sets the initial
  * height; `autoGrow` follows the content in browsers that support
  * `field-sizing`, and falls back to `rows` elsewhere.
+ *
+ * @status stable
+ * @accessibility A native `textarea` wired through Field; `autoGrow` uses `field-sizing: content` where supported and falls back to `rows`.
+ * @do Set `rows` to the typical length of the answer.
+ * @dont Disable `resize` without giving the field enough rows.
  */
 export function Textarea({
   label,

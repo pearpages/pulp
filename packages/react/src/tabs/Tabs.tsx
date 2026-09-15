@@ -56,6 +56,13 @@ export interface TabsProps extends Omit<HTMLAttributes<HTMLDivElement>, 'default
  * wired automatically. One tab stop: arrows move between tabs, Home and End
  * jump to the ends, disabled tabs are skipped. State on the DOM:
  * `data-orientation`, `data-state="active|inactive"`.
+ *
+ * @status stable
+ * @accessibility The WAI-ARIA Tabs pattern: `tablist` with `aria-orientation`, `tab`s carrying `aria-selected` and `aria-controls`, `tabpanel`s labelled by their tab. One tab stop: arrows move (and select with automatic activation), Home/End jump, disabled tabs are skipped.
+ * @do Use `activation="manual"` when switching a tab is expensive.
+ * Name the `Tabs.List` with `aria-label`.
+ * @dont Use tabs for sequential steps; use a stepper pattern.
+ * Put a link inside a tab.
  */
 export function Tabs({
   value,

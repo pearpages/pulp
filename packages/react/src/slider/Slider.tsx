@@ -57,6 +57,13 @@ export interface SliderProps<T extends SliderValue = number> {
  * End keys, drag with a thumb that stays under the pointer, and
  * `aria-valuetext` in the formatted form. The output element shows the
  * same text, so what a screen reader hears is what sighted users see.
+ *
+ * @status experimental
+ * @accessibility A `group` named by the label containing one hidden `input type="range"` per thumb (named by `thumbLabels` for a range) with `aria-valuetext` in the formatted form; the `output` element shows the same text. Arrows step, Page Up/Down step by ten, Home/End jump; thumbs drag with mouse or touch.
+ * @do Set `formatOptions` so the spoken value matches the unit ("40%", "€200").
+ * Use `hideLabel` only when a visible heading already names it.
+ * @dont Use it for precise values; provide a numeric field alongside.
+ * Use a `step` so small the keyboard cannot reach the ends in reasonable time.
  */
 export function Slider<T extends SliderValue = number>({
   label,

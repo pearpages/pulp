@@ -19,7 +19,6 @@ const meta = {
   argTypes: { items: { control: false }, value: { control: false }, size: { control: 'inline-radio', options: ['sm', 'md', 'lg'] } },
   parameters: {
     a11y: { context: 'body' },
-    docs: { description: { component: 'A text input that suggests options on React Aria (decision 001). Static lists filter themselves; async lists are yours to fetch.' } },
   },
 } satisfies Meta<typeof Combobox>;
 

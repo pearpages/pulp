@@ -1,6 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { axe } from 'vitest-axe';
+import { getLocalTimeZone, today } from '@internationalized/date';
 import { Calendar } from './Calendar';
 
 // The vendor also renders visually hidden previous/next buttons for screen readers; the visible ones carry a slot.
@@ -12,11 +13,15 @@ describe('Calendar', () => {
     expect(screen.getByRole('heading', { level: 2 })).toHaveTextContent('September 2026');
     expect(screen.getByRole('grid', { name: /September 2026/ })).toBeInTheDocument();
     expect(screen.getByRole('gridcell', { selected: true })).toHaveTextContent('14');
-    const day = screen.getByRole('button', { name: /September 14, 2026/ });
-    expect(day).toHaveAttribute('data-selected');
-    expect(day).toHaveAttribute('data-today');
+    expect(screen.getByRole('button', { name: /September 14, 2026/ })).toHaveAttribute('data-selected');
     expect(nav('previous')).toBeInTheDocument();
     expect(nav('next')).toBeInTheDocument();
+  });
+
+  it('marks today on the DOM', () => {
+    const now = today(getLocalTimeZone()).toString();
+    render(<Calendar defaultValue={now} />);
+    expect(screen.getByRole('gridcell', { selected: true }).firstElementChild).toHaveAttribute('data-today');
   });
 
   it('keyboard: arrows move by day and week, Enter selects, onChange gets YYYY-MM-DD', async () => {

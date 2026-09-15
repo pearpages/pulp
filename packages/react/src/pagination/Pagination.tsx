@@ -38,6 +38,12 @@ export interface PaginationProps extends Omit<HTMLAttributes<HTMLElement>, 'onCh
  * collapse into an ellipsis. Buttons by default; `getHref` renders links so
  * the pages are crawlable and open in new tabs. Built from Button and
  * IconButton, so it needs no keyboard model of its own.
+ *
+ * @status experimental
+ * @accessibility A `nav` landmark named by `aria-label`; the current page carries `aria-current="page"`; previous and next are IconButtons with names; ellipses are hidden from assistive technology. With `getHref` the controls are links.
+ * @do Use `getHref` when pages have URLs so they can be opened in new tabs and crawled.
+ * Keep `siblings` at 1 on narrow screens.
+ * @dont Disable the whole component while a page loads; disable only what cannot be pressed.
  */
 export function Pagination({
   page,

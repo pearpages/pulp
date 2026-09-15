@@ -46,6 +46,7 @@ jobs:
       - run: pnpm test
       - run: pnpm build
       - run: pnpm check:package
+      - run: pnpm check:size
       - run: pnpm test:dist
 
       # pnpm pack rewrites workspace:* to real ranges; npm publish does the

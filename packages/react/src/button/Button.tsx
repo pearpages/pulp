@@ -64,6 +64,13 @@ function hasText(node: ReactNode): boolean {
  * Every value comes from `--button-*` tokens, so a brand restyles it without
  * touching the component. State is exposed as `data-variant`, `data-size` and
  * `data-loading` for styling, tests and agents alike.
+ *
+ * @status stable
+ * @accessibility A native `button` (or the child element with `asChild`). `loading` sets `aria-disabled` and `aria-busy` and keeps focus; only `disabled` removes it from the tab order. Icon-only use warns in development: use IconButton, which requires a name.
+ * @do One `primary` per view.
+ * Use `asChild` for links that look like buttons, keeping the `a` semantics.
+ * @dont Use `loading` on a button that is not the one that started the work.
+ * Rely on colour to tell variants apart; the label carries the meaning.
  */
 export function Button<E extends HTMLElement = HTMLButtonElement>({
   variant = 'primary',

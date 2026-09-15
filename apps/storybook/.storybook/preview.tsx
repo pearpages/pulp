@@ -7,6 +7,7 @@ import '@fontsource-variable/inter';
 import '@fontsource-variable/nunito';
 import '@pearpages/pulp-css';
 import './preview.css';
+import { ComponentDocs } from '../docs/ComponentDocs';
 
 const BRANDS = ['pulp', 'bitepals'] as const;
 const SCHEMES = ['light', 'dark', 'system'] as const;
@@ -33,6 +34,8 @@ const preview: Preview = {
     },
   },
   initialGlobals: { brand: 'pulp', scheme: 'light' },
+  // Every stories file gets a Docs page, rendered from the component manifest (one source: the JSDoc).
+  tags: ['autodocs'],
   decorators: [
     (Story, context) => {
       const brand = String(context.globals.brand ?? 'pulp');
@@ -54,9 +57,10 @@ const preview: Preview = {
       // Violations fail the story in the Vitest run, not just warn in the panel.
       test: 'error',
     },
+    docs: { page: ComponentDocs },
     controls: { expanded: true },
     options: {
-      storySort: { order: ['Introduction', 'Tokens', 'Decisions', 'Contributing', 'Components'] },
+      storySort: { order: ['Introduction', 'Tokens', 'Status', 'Decisions', 'Contributing', 'Components'] },
     },
   },
 };

@@ -31,6 +31,8 @@ jobs:
         run: pnpm build
       - name: Package checks (publint, are-the-types-wrong)
         run: pnpm check:package
+      - name: Bundle-size budget per entry
+        run: pnpm check:size
       - name: Smoke-test the built package
         run: pnpm test:dist
 

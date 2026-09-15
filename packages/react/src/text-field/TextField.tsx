@@ -30,6 +30,13 @@ export interface TextFieldProps extends Omit<InputHTMLAttributes<HTMLInputElemen
  * comes from `--text-field-*` and `--field-*` tokens; state is exposed as
  * `data-size`, `data-invalid`, `data-disabled` and `data-readonly` on the
  * wrapper.
+ *
+ * @status stable
+ * @accessibility A native text `input` wired through Field: `label[for]`, `aria-describedby` for description and error, `aria-invalid` and `aria-required`. Everything the browser gives a native input (autofill, IME, forms) applies.
+ * @do Always pass `label`; use a visible one.
+ * Prefer `error` text that says how to fix the value.
+ * @dont Use `placeholder` as the label.
+ * Use it for multi-line text; use Textarea.
  */
 export function TextField({
   label,

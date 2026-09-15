@@ -21,6 +21,11 @@ export interface IconProps extends Omit<HTMLAttributes<HTMLSpanElement>, 'childr
  * Sizes any SVG to the icon scale and settles its accessibility: decorative
  * by default, an image when given a `label`. Colour is `currentColor`, so an
  * icon inherits the text tone around it.
+ *
+ * @status stable
+ * @accessibility `aria-hidden` by default (decorative); `role="img"` with `aria-label` when `label` is given. Sized in `em` so it follows the text around it.
+ * @do Give `label` only when the icon carries meaning the text around it does not.
+ * @dont Use a labelled icon as the only name of a control; use IconButton.
  */
 export function Icon({ children, size = 'md', label, className, ref, ...rest }: IconProps) {
   return (

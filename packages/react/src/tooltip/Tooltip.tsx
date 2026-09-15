@@ -21,6 +21,12 @@ export interface TooltipProps {
  * A short description shown on hover or focus and linked with
  * `aria-describedby` while visible. Never the only name of a control: use it
  * for extra detail, and give icon-only controls a real label. Escape hides it.
+ *
+ * @status stable
+ * @accessibility Shown on hover after a delay and on focus immediately; the trigger gets `aria-describedby` pointing at the `tooltip` while it is visible; Escape hides it. It is a description, never a name.
+ * @do Use it for extra detail on controls that already have a name.
+ * @dont Put interactive content in it.
+ * Use it to name an icon-only control; use IconButton's `label`.
  */
 export function Tooltip({ content, placement = 'top', delay = 300, children }: TooltipProps) {
   const id = useId();

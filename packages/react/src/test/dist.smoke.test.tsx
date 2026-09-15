@@ -11,6 +11,10 @@ const manifest = JSON.parse(readFileSync(resolve(DIST, 'component-manifest.json'
     name: string;
     import: string;
     css: string;
+    status: string;
+    accessibility: string;
+    do: string[];
+    dont: string[];
     props: Array<{ name: string }>;
     parts: Array<{ name: string }>;
   }>;
@@ -24,6 +28,12 @@ describe('dist', () => {
     );
     const card = manifest.components.find((c) => c.name === 'Card');
     expect(card?.parts.map((p) => p.name)).toEqual(['Card.Header', 'Card.Body', 'Card.Footer']);
+  });
+
+  it.each(manifest.components)('$name: carries a status and an accessibility note for the docs page and agents', (component) => {
+    expect(['experimental', 'stable', 'deprecated']).toContain(component.status);
+    expect(component.accessibility.length).toBeGreaterThan(20);
+    expect(Array.isArray(component.do) && Array.isArray(component.dont)).toBe(true);
   });
 
   it.each(manifest.components)('$name: barrel and per-component entry export the same function', async (component) => {
