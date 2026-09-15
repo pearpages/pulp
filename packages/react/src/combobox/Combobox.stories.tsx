@@ -18,7 +18,13 @@ const meta = {
   args: { label: 'Country', items: countries, placeholder: 'Type to search…', size: 'md', onChange: fn() },
   argTypes: { items: { control: false }, value: { control: false }, size: { control: 'inline-radio', options: ['sm', 'md', 'lg'] } },
   parameters: {
-    a11y: { context: 'body' },
+    a11y: {
+      context: 'body',
+      // The option list is driven from the input through aria-activedescendant and is not focusable
+      // by design (WAI-ARIA combobox); when it overflows, axe's scrollable-region rule cannot know
+      // that arrow keys scroll it. Picker's list takes focus itself and keeps the rule.
+      config: { rules: [{ id: 'scrollable-region-focusable', enabled: false }] },
+    },
   },
 } satisfies Meta<typeof Combobox>;
 
