@@ -1,0 +1,60 @@
+# @pearpages/pulp-tokens
+
+The design tokens of [pulp](https://pulp.pearpages.com): W3C Design Tokens (DTCG) JSON in,
+CSS custom properties and a resolved JSON manifest out. Two brands, light and dark via
+`light-dark()`.
+
+## Install
+
+```sh
+npm install @pearpages/pulp-tokens
+```
+
+Most apps get the tokens through [`@pearpages/pulp-css`](https://www.npmjs.com/package/@pearpages/pulp-css),
+which imports them in the right cascade layer. Import them directly only if you don't use it:
+
+```css
+@import "@pearpages/pulp-tokens/tokens.css";
+```
+
+## Use
+
+Read the semantic names, never the primitives underneath them:
+
+```css
+.panel {
+  background: var(--color-surface-raised);
+  color: var(--color-text-default);
+  padding: var(--space-4);
+  border-radius: var(--radius-surface);
+}
+```
+
+Theme with two attributes on `<html>` or on any element (they nest):
+
+- `data-brand="pulp" | "bitepals"` sets the palette, radius, type families and density.
+  `pulp` is the default on `:root`.
+- `data-scheme="light" | "dark"`, or leave it off to follow the OS. Colours are
+  `light-dark()` pairs.
+
+```html
+<html data-brand="bitepals" data-scheme="dark">
+```
+
+## Tiers
+
+Primitives (raw palette and scales) → semantic tokens (what a value means: surface, text,
+action) → component tokens (one component's knobs, always pointing at semantic ones). A brand
+only remaps primitives onto semantic names, so switching brand never touches a component.
+
+## Files
+
+| Export | |
+| --- | --- |
+| `@pearpages/pulp-tokens/tokens.css` | every brand's custom properties, in `@layer tokens` |
+| `@pearpages/pulp-tokens/tokens.json` | resolved tokens per brand, `{ pulp: [...], bitepals: [...] }`; each entry has `name`, `path`, `type`, `tier`, `css`, `value`. For tooling |
+| `tokens/` | the DTCG source files |
+
+## License
+
+MIT

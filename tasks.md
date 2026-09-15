@@ -37,6 +37,8 @@ Ordered within each group. Groups 1 and 2 are the gate to everything else being 
       publish 0.0.0 placeholders, then register).
 - [x] One first-release changeset per package (`.changeset/first-release-*.md`), replacing the 15
       tier-by-tier ones: there is no earlier release to describe changes against. (2026-09-15)
+- [x] A `README.md` in each of the four packages: npm takes the package page from the package
+      directory, as it does LICENSE. (2026-09-15)
 - [ ] `pnpm version-packages` (consumes `.changeset/first-release-*.md` → 0.1.0), commit, push,
       wait for the deploy run, then `git tag v0.1.0 && git push --tags`; watch `publish.yml`.
 - [ ] Verify `npm view @pearpages/pulp-react` and that `pnpm add` of it in a scratch Vite app works.
