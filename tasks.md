@@ -29,8 +29,8 @@ Ordered within each group. Groups 1 and 2 are the gate to everything else being 
 - [x] Watch the first `deploy.yml` run; confirm https://pulp.pearpages.com serves the Storybook. (2026-09-15, green from `c38f35d`; the two runs before it caught a typecheck that only passed locally and an axe finding only visible in CI)
 - [x] `LICENSE` (MIT) at the root and a copy in each of the four packages: npm packs the file from the
       package directory, not the repo root. All four `pnpm pack` tarballs carry it. (2026-09-15)
-- [ ] Decide about the sample email `pere@soms.cat` in `TextField.stories.tsx` and `Form.stories.tsx`
-      (public on the site and in the repo; a fictional address is the safe default).
+- [x] Sample email in `TextField.stories.tsx` and `Form.stories.tsx` is now `hello@pearpages.com`,
+      the public address (the personal one stays only in git history). (2026-09-15)
 - [ ] npmjs.com: register `@pearpages/pulp-tokens`, `@pearpages/pulp-css`, `@pearpages/pulp-icons`, `@pearpages/pulp-react`
       as Trusted Publishers for `pearpages/pulp` + `publish.yml` (the names cannot be registered
       before a first publish: do a one-off manual `npm publish` from a `pnpm pack` tarball, or

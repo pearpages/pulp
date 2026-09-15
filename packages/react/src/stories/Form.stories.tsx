@@ -79,7 +79,7 @@ export const Default: Story = {
   play: async ({ args, canvasElement }) => {
     const canvas = within(canvasElement);
     await userEvent.type(canvas.getByLabelText(/Workspace name/), 'Acme');
-    await userEvent.type(canvas.getByLabelText('Email'), 'pere@soms.cat');
+    await userEvent.type(canvas.getByLabelText('Email'), 'hello@pearpages.com');
     await userEvent.selectOptions(canvas.getByLabelText(/Brand/), 'bitepals');
     await userEvent.click(canvas.getByRole('radio', { name: 'Team' }));
     await userEvent.type(canvas.getByLabelText('About'), 'A test');
@@ -87,7 +87,7 @@ export const Default: Story = {
     await userEvent.click(canvas.getByRole('button', { name: 'Create workspace' }));
     await expect(args.onSubmit).toHaveBeenCalledWith({
       name: 'Acme',
-      email: 'pere@soms.cat',
+      email: 'hello@pearpages.com',
       brand: 'bitepals',
       plan: 'team',
       about: 'A test',

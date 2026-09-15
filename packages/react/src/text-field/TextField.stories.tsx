@@ -29,8 +29,8 @@ type Story = StoryObj<typeof meta>;
 export const Default: Story = {
   play: async ({ canvasElement }) => {
     const input = within(canvasElement).getByLabelText('Email address');
-    await userEvent.type(input, 'pere@soms.cat');
-    await expect(input).toHaveValue('pere@soms.cat');
+    await userEvent.type(input, 'hello@pearpages.com');
+    await expect(input).toHaveValue('hello@pearpages.com');
   },
 };
 
@@ -49,9 +49,9 @@ export const WithError: Story = {
 
 export const Required: Story = { args: { required: true } };
 
-export const Disabled: Story = { args: { disabled: true, defaultValue: 'pere@soms.cat' } };
+export const Disabled: Story = { args: { disabled: true, defaultValue: 'hello@pearpages.com' } };
 
-export const ReadOnly: Story = { args: { readOnly: true, defaultValue: 'pere@soms.cat' } };
+export const ReadOnly: Story = { args: { readOnly: true, defaultValue: 'hello@pearpages.com' } };
 
 export const Sizes: Story = {
   render: (args) => (
