@@ -35,7 +35,9 @@ Ordered within each group. Groups 1 and 2 are the gate to everything else being 
       as Trusted Publishers for `pearpages/pulp` + `publish.yml` (the names cannot be registered
       before a first publish: do a one-off manual `npm publish` from a `pnpm pack` tarball, or
       publish 0.0.0 placeholders, then register).
-- [ ] `pnpm version-packages` (consumes `.changeset/initial-release.md` → 0.1.0), commit, push,
+- [x] One first-release changeset per package (`.changeset/first-release-*.md`), replacing the 15
+      tier-by-tier ones: there is no earlier release to describe changes against. (2026-09-15)
+- [ ] `pnpm version-packages` (consumes `.changeset/first-release-*.md` → 0.1.0), commit, push,
       wait for the deploy run, then `git tag v0.1.0 && git push --tags`; watch `publish.yml`.
 - [ ] Verify `npm view @pearpages/pulp-react` and that `pnpm add` of it in a scratch Vite app works.
 
