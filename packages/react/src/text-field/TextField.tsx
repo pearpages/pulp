@@ -32,6 +32,7 @@ export interface TextFieldProps extends Omit<InputHTMLAttributes<HTMLInputElemen
  * wrapper.
  *
  * @status stable
+ * @category Forms
  * @accessibility A native text `input` wired through Field: `label[for]`, `aria-describedby` for description and error, `aria-invalid` and `aria-required`. Everything the browser gives a native input (autofill, IME, forms) applies.
  * @do Always pass `label`; use a visible one.
  * Prefer `error` text that says how to fix the value.

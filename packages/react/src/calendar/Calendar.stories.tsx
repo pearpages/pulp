@@ -3,7 +3,7 @@ import { expect, fn, userEvent, within } from 'storybook/test';
 import { Calendar } from './Calendar';
 
 const meta = {
-  title: 'Components/Calendar',
+  title: 'Components/Forms/Calendar',
   component: Calendar,
   args: { defaultValue: '2026-09-14', onChange: fn() },
   argTypes: { value: { control: false } },

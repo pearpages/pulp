@@ -3,7 +3,7 @@ import { Button } from '../button';
 import { Inline } from './Inline';
 
 const meta = {
-  title: 'Components/Inline',
+  title: 'Components/Layout/Inline',
   component: Inline,
   args: { gap: 3, wrap: true, children: null },
   argTypes: {

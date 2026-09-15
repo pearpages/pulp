@@ -4,7 +4,7 @@ import { Close, Plus, Search } from '@pearpages/pulp-icons';
 import { IconButton } from './IconButton';
 
 const meta = {
-  title: 'Components/IconButton',
+  title: 'Components/Actions/IconButton',
   component: IconButton,
   args: { label: 'Search', icon: <Search />, variant: 'primary', size: 'md' },
   argTypes: {

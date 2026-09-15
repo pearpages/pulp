@@ -11,7 +11,7 @@ const options = (
 );
 
 const meta = {
-  title: 'Components/RadioGroup',
+  title: 'Components/Forms/RadioGroup',
   component: RadioGroup,
   args: { label: 'Plan', defaultValue: 'free', orientation: 'vertical', size: 'md', children: options },
   argTypes: {

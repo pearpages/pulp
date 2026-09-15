@@ -4,7 +4,7 @@ import { expect, fn, userEvent, within } from 'storybook/test';
 import { Pagination } from './Pagination';
 
 const meta = {
-  title: 'Components/Pagination',
+  title: 'Components/Navigation/Pagination',
   component: Pagination,
   args: { page: 5, count: 12, siblings: 1, boundaries: 1, size: 'md', onPageChange: fn() },
   argTypes: { size: { control: 'inline-radio', options: ['sm', 'md'] } },

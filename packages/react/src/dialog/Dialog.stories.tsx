@@ -5,7 +5,7 @@ import { TextField } from '../text-field';
 import { Dialog, DialogSystem } from './Dialog';
 
 const meta = {
-  title: 'Components/Dialog',
+  title: 'Components/Overlays/Dialog',
   component: Dialog,
   decorators: [(Story) => <DialogSystem><Story /></DialogSystem>],
   args: { id: 'example', children: null },

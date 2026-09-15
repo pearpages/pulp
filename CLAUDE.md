@@ -33,7 +33,7 @@ pnpm check:size        # bundle-size budget per entry (size-limit, brotli; build
 pnpm test:storybook    # every story in Chromium with a11y checks (needs `playwright install chromium`)
 pnpm storybook         # dev server on :6006
 pnpm storybook:build
-pnpm --filter @pearpages/pulp-react scaffold Name   # new component skeleton
+pnpm --filter @pearpages/pulp-react scaffold Name Category   # new component skeleton (category from scripts/categories.mjs)
 ```
 
 ## Rules that CI enforces
@@ -69,10 +69,14 @@ pnpm --filter @pearpages/pulp-react scaffold Name   # new component skeleton
 - **`ref` is a normal prop** (React 19). The compiler lint rule (`react-hooks/refs`) rejects
   passing a ref, or an object holding one, into any function. An `asChild` helper has to,
   so that one call carries a `eslint-disable-next-line react-hooks/refs -- forwarded, not read`.
-- **Every component's JSDoc carries `@status` and `@accessibility`** (plus optional `@do`/`@dont`,
-  one bullet per line). The manifest build fails without them. That block is the single source: the
-  Docs page (`apps/storybook/docs/ComponentDocs.tsx`), the Status page and agents read it from
-  `component-manifest.json`. Stories carry no `parameters.docs.description`.
+- **Every component's JSDoc carries `@status`, `@category` and `@accessibility`** (plus optional
+  `@do`/`@dont`, one bullet per line). The manifest build fails without them. That block is the single
+  source: the Docs page (`apps/storybook/docs/ComponentDocs.tsx`), the Status page, the sidebar label
+  and agents read it from `component-manifest.json`. Stories carry no `parameters.docs.description`.
+- **Categories are kinds, never tiers**: Typography, Layout, Actions, Forms, Navigation, Overlays,
+  Feedback, Data, Utilities (`packages/react/scripts/categories.mjs`, in sidebar order). A story's
+  title must be `Components/<Category>/<Name>` with the component's own `@category`; the dist smoke
+  test fails otherwise. Compositions live under `Patterns/`.
 - **Every entry has a bundle budget** (`packages/react/.size-limit.js`, driven by tsup's entry list):
   2.1 kB brotli for a leaf entry, named overrides with a reason, the barrel, the stylesheet, and three
   "with React Aria" entries that show the vendor's true cost. `pnpm check:size` runs in CI.
@@ -119,6 +123,9 @@ names. `$extensions["com.pearpages.pulp"].dark` holds a dark counterpart;
 - The Storybook docgen plugin's default `include` is relative to the app, so components two packages
   up got no prop descriptions until `main.ts` widened it; the docs page also needs the manifest, which
   the app's `dev`/`build` scripts generate first (a TypeScript parse, no tsup).
+- Storybook 10 has no native tag badges: `.storybook/manager.ts` appends "· experimental" to a
+  component's sidebar label through `renderLabel`, reading the manifest. `storySort.order` nests
+  (`['Components', [...categories], 'Patterns']`) and the category list comes from the manifest too.
 - An unregistered custom property computes to its specified text: `getComputedStyle().getPropertyValue('--_gap')`
   returned `calc(0.25rem * 2)`, which parsed to 0, so anchored overlays had no gap until tier 5.
   `src/internal/floating.css` registers `--_gap` with `@property`; the Menu story asserts the gap in Chromium.
@@ -306,6 +313,11 @@ copy, not to re-derive.
 - [x] Status page (2026-09-15): `@status` tag → manifest → `Status.mdx`; tier 5 is `experimental`, the
       rest `stable`; the manifest build fails without a status.
 - [x] Vendor-variable guardrail (2026-09-15): `Dialog.vendor.test.ts` (54 mapped names, all declared).
+- [x] Storybook categories (2026-09-15): `@category` tag → manifest `category` + ordered `categories`;
+      story titles `Components/<Category>/<Name>` checked by the dist smoke test; sidebar order, the
+      Status page grouping, docs links (`docs/paths.ts`) and the "· experimental" sidebar label all
+      derive from the manifest. Judgment calls: Menu is an overlay, Calendar a form control, Card layout,
+      Badge feedback, Table its own kind.
 - [x] Bundle-size budget (2026-09-15): `size-limit` with esbuild, entries from `tsup.config.ts`.
       Measured brotli: leaf entries 0.2–1.7 kB (toast 3.0, menu 2.3), barrel 13.6 kB, stylesheet 7.2 kB,
       Combobox/Table/DatePicker with React Aria 54/52/65 kB. Limits sit about 20% above.

@@ -26,6 +26,7 @@ export interface StackProps extends HTMLAttributes<HTMLElement> {
  * stops announcing a list once `list-style` is removed.
  *
  * @status stable
+ * @category Layout
  * @accessibility Layout only: no role unless rendered as `ul`/`ol`, where `role="list"` is kept explicitly because Safari drops list semantics without markers.
  * @do Use `as="ul"` for a list of like items so the count is announced.
  * @dont Use it to space unrelated regions; it is one flex column.

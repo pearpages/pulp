@@ -29,7 +29,7 @@ function Demo() {
 }
 
 const meta = {
-  title: 'Components/Toast',
+  title: 'Components/Feedback/Toast',
   component: ToastProvider,
   args: { placement: 'bottom-end', max: 5, duration: 6000, children: <Demo /> },
   argTypes: {

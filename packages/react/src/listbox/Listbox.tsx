@@ -36,6 +36,7 @@ export interface ListboxProps {
  * that filters as you type, use Combobox. Both render these options.
  *
  * @status experimental
+ * @category Forms
  * @accessibility `role="listbox"` (with `aria-multiselectable` when multiple) named by `aria-label` or `aria-labelledby`; options carry `aria-selected` and `aria-disabled`. One tab stop: arrows move, Space toggles, typing jumps, Shift and Ctrl/Cmd extend, Ctrl/Cmd+A selects all.
  * @do Give it a name: `aria-label`, or `aria-labelledby` pointing at a visible heading.
  * Use `selectionMode="multiple"` for several choices; a group of Checkboxes works too and needs no explanation.

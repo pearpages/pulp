@@ -69,6 +69,7 @@ export interface FieldProps extends HTMLAttributes<HTMLDivElement> {
  * on it yet.
  *
  * @status stable
+ * @category Forms
  * @accessibility Wires `label[for]`, `aria-describedby` (only mounted parts), `aria-invalid`, `aria-required` and `disabled` onto the control. Server-rendered HTML has no `aria-describedby` until hydration (a test pins the gap).
  * @do Use `Field.Label as="span"` with `useField().labelId` for groups that cannot be labelled by `for`.
  * @dont Mount two `Field.Description` or two `Field.Error`; ids would collide (development warns).

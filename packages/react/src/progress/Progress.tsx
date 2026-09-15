@@ -31,6 +31,7 @@ export interface ProgressProps extends Omit<HTMLAttributes<HTMLDivElement>, 'chi
  * a custom property. Indeterminate motion stops under reduced motion.
  *
  * @status stable
+ * @category Feedback
  * @accessibility `role="progressbar"` labelled by the required `label` (visible or visually hidden), with `aria-valuenow`/`aria-valuemin`/`aria-valuemax` when determinate and `aria-valuetext` from `valueText`. Indeterminate bars omit `aria-valuenow`.
  * @do Set `valueText` when the percentage is not the meaningful reading ("3 of 5 files").
  * @dont Use it for an unknown wait shorter than a few seconds; use Spinner.

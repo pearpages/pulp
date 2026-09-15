@@ -16,6 +16,7 @@ export interface VisuallyHiddenProps extends HTMLAttributes<HTMLElement> {
  * gets from layout.
  *
  * @status stable
+ * @category Utilities
  * @accessibility In the accessibility tree, out of the layout (clip-path, not `display: none`).
  * @do Use it for context a sighted user gets from layout ("Sort by", "Step 2 of 4").
  * @dont Hide instructions that sighted users also need.

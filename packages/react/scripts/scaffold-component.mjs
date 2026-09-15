@@ -2,7 +2,7 @@
  * Scaffolds a component the way the system expects it, so a human or an agent
  * starts from the pattern instead of from a blank file.
  *
- *   pnpm --filter @pearpages/pulp-react scaffold TextField
+ *   pnpm --filter @pearpages/pulp-react scaffold TextField Forms
  *
  * Creates src/<dir>/{Name.tsx, Name.module.css, Name.test.tsx, Name.stories.tsx, index.ts},
  * a component token file, and registers the entry in src/index.ts, tsup.config.ts
@@ -12,13 +12,15 @@
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { CATEGORIES } from './categories.mjs';
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const TOKENS = resolve(ROOT, '../tokens/tokens/component');
 
 const name = process.argv[2];
-if (!name || !/^[A-Z][A-Za-z0-9]+$/.test(name)) {
-  console.error('Usage: scaffold-component <PascalCaseName>');
+const category = process.argv[3];
+if (!name || !/^[A-Z][A-Za-z0-9]+$/.test(name) || !CATEGORIES.includes(category)) {
+  console.error(`Usage: scaffold-component <PascalCaseName> <${CATEGORIES.join('|')}>`);
   process.exit(1);
 }
 const kebab = name.replace(/([a-z0-9])([A-Z])/g, '$1-$2').toLowerCase();
@@ -44,6 +46,7 @@ export interface ${name}Props extends HTMLAttributes<HTMLDivElement> {
  * What it is and when to reach for it. Every value comes from \`--${kebab}-*\` tokens.
  *
  * @status experimental
+ * @category ${category}
  * @accessibility Roles, keyboard and what is announced. The manifest fails without this paragraph.
  * @do One bullet per line.
  * @dont One bullet per line.
@@ -86,7 +89,7 @@ describe('${name}', () => {
 import { ${name} } from './${name}';
 
 const meta = {
-  title: 'Components/${name}',
+  title: 'Components/${category}/${name}',
   component: ${name},
   args: { children: '${name}' },
 } satisfies Meta<typeof ${name}>;

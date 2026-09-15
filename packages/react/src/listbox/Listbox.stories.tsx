@@ -11,7 +11,7 @@ const items = [
 ];
 
 const meta = {
-  title: 'Components/Listbox',
+  title: 'Components/Forms/Listbox',
   component: Listbox,
   args: { 'aria-label': 'Fruit', items, selectionMode: 'single', onChange: fn() },
   argTypes: { items: { control: false }, value: { control: false }, defaultValue: { control: false } },

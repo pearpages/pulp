@@ -28,6 +28,7 @@ export interface CheckboxProps extends Omit<InputHTMLAttributes<HTMLInputElement
  * and `:indeterminate`, plus `data-indeterminate` on the input.
  *
  * @status stable
+ * @category Forms
  * @accessibility A native `input type="checkbox"` with `appearance: none`; label, description and error wire through Field. `indeterminate` sets the DOM property and `aria-checked="mixed"`. Keyboard: Space toggles.
  * @do Use `indeterminate` for a parent whose children are partly selected.
  * Group related checkboxes under a `fieldset`.

@@ -31,6 +31,7 @@ export interface TextareaProps extends TextareaHTMLAttributes<HTMLTextAreaElemen
  * `field-sizing`, and falls back to `rows` elsewhere.
  *
  * @status stable
+ * @category Forms
  * @accessibility A native `textarea` wired through Field; `autoGrow` uses `field-sizing: content` where supported and falls back to `rows`.
  * @do Set `rows` to the typical length of the answer.
  * @dont Disable `resize` without giving the field enough rows.

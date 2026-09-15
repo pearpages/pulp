@@ -50,7 +50,7 @@ function Example(props: Partial<React.ComponentProps<typeof Table>> & { rows?: P
 }
 
 const meta = {
-  title: 'Components/Table',
+  title: 'Components/Data/Table',
   component: Table,
   args: { 'aria-label': 'People', selectionMode: 'none', density: 'default', children: null, onSelectedChange: fn(), onSortChange: fn(), onRowAction: fn() },
   argTypes: {

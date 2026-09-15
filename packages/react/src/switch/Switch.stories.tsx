@@ -3,7 +3,7 @@ import { expect, userEvent, within } from 'storybook/test';
 import { Switch } from './Switch';
 
 const meta = {
-  title: 'Components/Switch',
+  title: 'Components/Forms/Switch',
   component: Switch,
   args: { label: 'Dark scheme', size: 'md' },
   argTypes: { size: { control: 'select', options: ['sm', 'md', 'lg'] }, ref: { control: false, table: { disable: true } } },

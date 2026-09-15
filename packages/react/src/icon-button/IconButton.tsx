@@ -20,6 +20,7 @@ export interface IconButtonProps<E extends HTMLElement = HTMLButtonElement>
  * `--icon-button-size-*` tokens make it square.
  *
  * @status stable
+ * @category Actions
  * @accessibility A Button with `aria-label` from the required `label`; `title` shows it as a tooltip. Everything else is Button's.
  * @do Write the label as the action ("Close", "Add item").
  * @dont Use the icon's name as the label.

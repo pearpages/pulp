@@ -4,7 +4,7 @@ import { ArrowRight } from '@pearpages/pulp-icons';
 import { Button } from './Button';
 
 const meta = {
-  title: 'Components/Button',
+  title: 'Components/Actions/Button',
   component: Button,
   args: {
     children: 'Save changes',

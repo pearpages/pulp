@@ -40,6 +40,7 @@ export interface PaginationProps extends Omit<HTMLAttributes<HTMLElement>, 'onCh
  * IconButton, so it needs no keyboard model of its own.
  *
  * @status experimental
+ * @category Navigation
  * @accessibility A `nav` landmark named by `aria-label`; the current page carries `aria-current="page"`; previous and next are IconButtons with names; ellipses are hidden from assistive technology. With `getHref` the controls are links.
  * @do Use `getHref` when pages have URLs so they can be opened in new tabs and crawled.
  * Keep `siblings` at 1 on narrow screens.

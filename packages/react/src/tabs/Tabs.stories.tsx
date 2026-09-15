@@ -20,7 +20,7 @@ const sections = (
 );
 
 const meta = {
-  title: 'Components/Tabs',
+  title: 'Components/Navigation/Tabs',
   component: Tabs,
   args: { defaultValue: 'profile', orientation: 'horizontal', activation: 'automatic', children: sections },
   argTypes: {

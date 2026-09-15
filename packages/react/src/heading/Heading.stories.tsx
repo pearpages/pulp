@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { Heading } from './Heading';
 
 const meta = {
-  title: 'Components/Heading',
+  title: 'Components/Typography/Heading',
   component: Heading,
   args: { level: 2, children: 'Two axes, never mixed' },
   argTypes: {

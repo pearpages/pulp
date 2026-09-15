@@ -5,7 +5,7 @@ import { Button } from '../button';
 import { VisuallyHidden } from './VisuallyHidden';
 
 const meta = {
-  title: 'Components/VisuallyHidden',
+  title: 'Components/Utilities/VisuallyHidden',
   component: VisuallyHidden,
   args: { children: 'Only assistive technology reads this.' },
   argTypes: { ref: { control: false, table: { disable: true } } },

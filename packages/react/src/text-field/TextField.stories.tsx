@@ -3,7 +3,7 @@ import { expect, userEvent, within } from 'storybook/test';
 import { TextField } from './TextField';
 
 const meta = {
-  title: 'Components/TextField',
+  title: 'Components/Forms/TextField',
   component: TextField,
   args: {
     label: 'Email address',

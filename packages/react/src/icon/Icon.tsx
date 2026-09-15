@@ -23,6 +23,7 @@ export interface IconProps extends Omit<HTMLAttributes<HTMLSpanElement>, 'childr
  * icon inherits the text tone around it.
  *
  * @status stable
+ * @category Utilities
  * @accessibility `aria-hidden` by default (decorative); `role="img"` with `aria-label` when `label` is given. Sized in `em` so it follows the text around it.
  * @do Give `label` only when the icon carries meaning the text around it does not.
  * @dont Use a labelled icon as the only name of a control; use IconButton.

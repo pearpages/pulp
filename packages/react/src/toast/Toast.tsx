@@ -33,6 +33,7 @@ interface Timer {
  * error toasts stay until dismissed. Each toast is an Alert.
  *
  * @status stable
+ * @category Feedback
  * @accessibility Owns a `region` named "Notifications" with `aria-live="polite"`; each toast is an Alert with its live role off (the region announces). Timers pause while the region is hovered or holds focus; Escape dismisses the focused toast; error toasts stay until dismissed.
  * @do Mount it once near the app root.
  * Keep messages to one sentence; put detail behind an `action`.

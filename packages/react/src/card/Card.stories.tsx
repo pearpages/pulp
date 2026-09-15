@@ -6,7 +6,7 @@ import { Text } from '../text';
 import { Card } from './Card';
 
 const meta = {
-  title: 'Components/Card',
+  title: 'Components/Layout/Card',
   component: Card,
   args: {
     variant: 'raised',

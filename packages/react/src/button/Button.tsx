@@ -66,6 +66,7 @@ function hasText(node: ReactNode): boolean {
  * `data-loading` for styling, tests and agents alike.
  *
  * @status stable
+ * @category Actions
  * @accessibility A native `button` (or the child element with `asChild`). `loading` sets `aria-disabled` and `aria-busy` and keeps focus; only `disabled` removes it from the tab order. Icon-only use warns in development: use IconButton, which requires a name.
  * @do One `primary` per view.
  * Use `asChild` for links that look like buttons, keeping the `a` semantics.

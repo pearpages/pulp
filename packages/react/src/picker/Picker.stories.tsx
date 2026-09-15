@@ -11,7 +11,7 @@ const currencies = [
 ];
 
 const meta = {
-  title: 'Components/Picker',
+  title: 'Components/Forms/Picker',
   component: Picker,
   args: { label: 'Currency', items: currencies, size: 'md', onChange: fn() },
   argTypes: { items: { control: false }, value: { control: false }, size: { control: 'inline-radio', options: ['sm', 'md', 'lg'] } },

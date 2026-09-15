@@ -13,8 +13,10 @@ CI checks what the pattern promises.
 
 1. **Scaffold.** From the repo root:
    ```
-   pnpm --filter @pearpages/pulp-react scaffold <PascalName>
+   pnpm --filter @pearpages/pulp-react scaffold <PascalName> <Category>
    ```
+   The category is one of Typography, Layout, Actions, Forms, Navigation, Overlays, Feedback,
+   Data, Utilities (`packages/react/scripts/categories.mjs`): the kind a consumer reaches for.
    Creates `packages/react/src/<camelName>/{Name.tsx, Name.module.css, Name.test.tsx,
    Name.stories.tsx, index.ts}`, `packages/tokens/tokens/component/<kebab-name>.json`,
    and registers the entry in `src/index.ts`, `tsup.config.ts`, and `package.json` exports.
@@ -31,9 +33,10 @@ CI checks what the pattern promises.
    state as `data-*` attributes, `asChild` only if composition makes sense. In
    `Name.module.css`: every colour/radius/font/shadow is `var(--<kebab-name>-…)` or a
    semantic token. No `style` prop, no literal values (lint fails either).
-   Fill the JSDoc the scaffold left: prose, then `@status experimental`, an
-   `@accessibility` paragraph (roles, keyboard, what is announced) and `@do` / `@dont`
-   bullets, one per line. `pnpm build` fails without status and accessibility; that
+   Fill the JSDoc the scaffold left: prose, then `@status experimental`, the `@category`,
+   an `@accessibility` paragraph (roles, keyboard, what is announced) and `@do` / `@dont`
+   bullets, one per line. The story title the scaffold wrote (`Components/<Category>/<Name>`)
+   must match the tag; the dist smoke test checks. `pnpm build` fails without status and accessibility; that
    block is the Docs page and the Status page, and agents read it from the manifest.
 
 4. **Tests.** Behaviour with Testing Library and an `axe` check for every state. Run:

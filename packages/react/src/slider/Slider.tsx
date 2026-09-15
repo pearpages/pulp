@@ -59,6 +59,7 @@ export interface SliderProps<T extends SliderValue = number> {
  * same text, so what a screen reader hears is what sighted users see.
  *
  * @status experimental
+ * @category Forms
  * @accessibility A `group` named by the label containing one hidden `input type="range"` per thumb (named by `thumbLabels` for a range) with `aria-valuetext` in the formatted form; the `output` element shows the same text. Arrows step, Page Up/Down step by ten, Home/End jump; thumbs drag with mouse or touch.
  * @do Set `formatOptions` so the spoken value matches the unit ("40%", "€200").
  * Use `hideLabel` only when a visible heading already names it.

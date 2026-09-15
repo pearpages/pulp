@@ -60,7 +60,33 @@ const preview: Preview = {
     docs: { page: ComponentDocs },
     controls: { expanded: true },
     options: {
-      storySort: { order: ['Introduction', 'Tokens', 'Status', 'Decisions', 'Contributing', 'Components'] },
+      // Storybook evaluates storySort statically, so the categories are a literal here; the dist
+      // smoke test asserts it matches the manifest's list (packages/react/scripts/categories.mjs).
+      // Forms is the one category not sorted alphabetically: the wiring first, then the inputs.
+      storySort: {
+        method: 'alphabetical',
+        order: [
+          'Introduction',
+          'Tokens',
+          'Status',
+          'Decisions',
+          'Contributing',
+          'Components',
+          [
+            'Typography',
+            'Layout',
+            'Actions',
+            'Forms',
+            ['Field', 'TextField', 'Textarea', 'Select', 'Picker', 'Combobox', 'Listbox', 'Checkbox', 'Switch', 'RadioGroup', 'Slider', 'DatePicker', 'Calendar'],
+            'Navigation',
+            'Overlays',
+            'Feedback',
+            'Data',
+            'Utilities',
+          ],
+          'Patterns',
+        ],
+      },
     },
   },
 };

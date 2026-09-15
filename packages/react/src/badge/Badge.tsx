@@ -27,6 +27,7 @@ export interface BadgeProps extends HTMLAttributes<HTMLSpanElement> {
  * Button.
  *
  * @status stable
+ * @category Feedback
  * @accessibility Plain text: no role, no interaction. Every tone × variant pair meets WCAG AA, proven by the token tests. Tone is reinforced by the text, not only by colour.
  * @do Keep the text to one or two words.
  * Pair a leading icon with text, never alone.

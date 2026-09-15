@@ -54,6 +54,7 @@ export interface RadioGroupProps extends Omit<HTMLAttributes<HTMLDivElement>, 'd
  * move and select within the group. Controlled or uncontrolled by `value`.
  *
  * @status stable
+ * @category Forms
  * @accessibility A `radiogroup` labelled by reference through Field and described by its description and error. Native radios: arrows move and select within the group, Tab leaves it.
  * @do Use it for two to five exclusive options that should all be visible.
  * @dont Preselect a consequential choice; leave the group empty and mark it required.
@@ -146,6 +147,7 @@ export interface RadioProps
  * One option of a RadioGroup: a native radio with its own visible label.
  *
  * @status stable
+ * @category Forms
  * @accessibility A native `input type="radio"` labelled by its visible text; the group semantics, description and error come from RadioGroup.
  * @do Render it only inside RadioGroup.
  * @dont Disable a single radio without saying why in its label or the group description.

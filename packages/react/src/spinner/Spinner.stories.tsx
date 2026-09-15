@@ -4,7 +4,7 @@ import { Text } from '../text';
 import { Spinner } from './Spinner';
 
 const meta = {
-  title: 'Components/Spinner',
+  title: 'Components/Feedback/Spinner',
   component: Spinner,
   args: { size: 'md', tone: 'default', label: 'Loading', decorative: false },
   argTypes: {

@@ -23,6 +23,7 @@ export interface TooltipProps {
  * for extra detail, and give icon-only controls a real label. Escape hides it.
  *
  * @status stable
+ * @category Overlays
  * @accessibility Shown on hover after a delay and on focus immediately; the trigger gets `aria-describedby` pointing at the `tooltip` while it is visible; Escape hides it. It is a description, never a name.
  * @do Use it for extra detail on controls that already have a name.
  * @dont Put interactive content in it.

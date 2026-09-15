@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { Text } from './Text';
 
 const meta = {
-  title: 'Components/Text',
+  title: 'Components/Typography/Text',
   component: Text,
   args: { children: 'Tokens are the product; components are one renderer of them.', size: 'md', weight: 'regular', tone: 'default', family: 'body' },
   argTypes: {

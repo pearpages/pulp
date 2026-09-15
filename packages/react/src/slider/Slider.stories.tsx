@@ -3,7 +3,7 @@ import { expect, fn, userEvent, within } from 'storybook/test';
 import { Slider } from './Slider';
 
 const meta = {
-  title: 'Components/Slider',
+  title: 'Components/Forms/Slider',
   component: Slider,
   args: { label: 'Volume', defaultValue: 40, onChange: fn(), onChangeEnd: fn() },
   argTypes: { value: { control: false }, defaultValue: { control: false } },

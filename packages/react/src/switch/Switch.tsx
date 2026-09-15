@@ -24,6 +24,7 @@ export interface SwitchProps extends Omit<InputHTMLAttributes<HTMLInputElement>,
  * for choices submitted with a form. Drawn with `--switch-*` tokens.
  *
  * @status stable
+ * @category Forms
  * @accessibility A native checkbox with `role="switch"`, so on and off are announced; Space toggles; label, description and error wire through Field.
  * @do Use it for settings that apply immediately.
  * @dont Use it inside a form that needs a submit; use Checkbox.

@@ -3,7 +3,7 @@ import { Check, Info, Warning } from '@pearpages/pulp-icons';
 import { Badge } from './Badge';
 
 const meta = {
-  title: 'Components/Badge',
+  title: 'Components/Feedback/Badge',
   component: Badge,
   args: { children: 'Beta', tone: 'neutral', variant: 'subtle', size: 'md' },
   argTypes: {

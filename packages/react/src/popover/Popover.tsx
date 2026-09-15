@@ -56,6 +56,7 @@ export interface PopoverProps {
  * must block the page, use Dialog.
  *
  * @status stable
+ * @category Overlays
  * @accessibility A non-modal `role="dialog"` named by `title` (or `aria-label`); the trigger has `aria-haspopup="dialog"` and `aria-expanded`. Focus moves to the first focusable element on open and back to the trigger on close; Escape and a click outside dismiss it.
  * @do Give it a `title` or `aria-label`.
  * Use `Popover.Close` inside forms so a keyboard user has a clear exit.

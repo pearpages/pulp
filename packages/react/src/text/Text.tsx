@@ -34,6 +34,7 @@ export interface TextProps extends HTMLAttributes<HTMLElement> {
  * `data-tone`, `data-family`, `data-align`, `data-truncate`.
  *
  * @status stable
+ * @category Typography
  * @accessibility Plain text with no role beyond the element chosen by `as`; `truncate` clips visually while the full text stays in the accessibility tree.
  * @do Use `tone="faint"` only on base and raised surfaces (its contrast is promised there).
  * @dont Use `as="label"`; labels belong to Field.

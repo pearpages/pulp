@@ -27,6 +27,13 @@
   align-self: center;
 }
 
+.group {
+  grid-column: 1 / -1;
+  padding-block: var(--space-4) var(--space-2);
+  color: var(--color-text-default);
+  font-weight: var(--font-weight-semibold);
+}
+
 .cell code {
   font-family: var(--font-family-mono);
   font-size: var(--font-size-xs);

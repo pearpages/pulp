@@ -3,7 +3,7 @@ import { expect, userEvent, within } from 'storybook/test';
 import { Textarea } from './Textarea';
 
 const meta = {
-  title: 'Components/Textarea',
+  title: 'Components/Forms/Textarea',
   component: Textarea,
   args: { label: 'Message', placeholder: 'What would you like to tell us?', size: 'md', resize: 'vertical', rows: 3 },
   argTypes: {

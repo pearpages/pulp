@@ -25,6 +25,7 @@ const SIZE_BY_LEVEL: Record<HeadingLevel, HeadingSize> = { 1: '2xl', 2: 'xl', 3:
  * Display family and tight leading from `--heading-*` tokens.
  *
  * @status stable
+ * @category Typography
  * @accessibility Renders the `h1`–`h6` element of `level`; `size` changes only the look, so the outline stays truthful.
  * @do Pick `level` from the outline, then `size` from the design.
  * @dont Skip heading levels to get a smaller size; change `size` instead.

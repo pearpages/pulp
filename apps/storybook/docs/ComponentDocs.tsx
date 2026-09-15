@@ -50,7 +50,7 @@ export function ComponentDocs() {
             {entry.status}
           </Badge>
           <span>
-            Tokens <code>{entry.tokens}</code>
+            {entry.category} · Tokens <code>{entry.tokens}</code>
             {matrices.length > 0 && ` · ${matrices.length} matrix stories run as tests in every brand and scheme`}
           </span>
         </div>

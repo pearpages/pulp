@@ -11,6 +11,7 @@ import { mkdirSync, readdirSync, writeFileSync } from 'node:fs';
 import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { withCustomConfig } from 'react-docgen-typescript';
+import { CATEGORIES } from './categories.mjs';
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const SRC = resolve(ROOT, 'src');
@@ -43,8 +44,11 @@ function metadata(doc) {
     throw new Error(`${doc.displayName}: JSDoc needs "@status ${STATUSES.join(' | ')}" (got "${tags.status ?? ''}")`);
   }
   if (!tags.accessibility?.trim()) throw new Error(`${doc.displayName}: JSDoc needs an "@accessibility" paragraph`);
+  if (!CATEGORIES.includes(tags.category)) {
+    throw new Error(`${doc.displayName}: JSDoc needs "@category ${CATEGORIES.join(' | ')}" (got "${tags.category ?? ''}")`);
+  }
   const bullets = (text) => (text ?? '').split('\n').map((line) => line.trim()).filter(Boolean);
-  return { status: tags.status, accessibility: tags.accessibility.replace(/\s+/g, ' ').trim(), do: bullets(tags.do), dont: bullets(tags.dont) };
+  return { status: tags.status, category: tags.category, accessibility: tags.accessibility.replace(/\s+/g, ' ').trim(), do: bullets(tags.do), dont: bullets(tags.dont) };
 }
 
 const props = (doc) =>
@@ -84,6 +88,7 @@ writeFileSync(
   `${JSON.stringify(
     {
       package: '@pearpages/pulp-react',
+      categories: CATEGORIES,
       requires: {
         tokens: '@pearpages/pulp-tokens/tokens.css (every --<component>-* value resolves through it; without it components render unstyled)',
         base: '@pearpages/pulp-css (optional: layer order, reset, body defaults, vendor layer)',

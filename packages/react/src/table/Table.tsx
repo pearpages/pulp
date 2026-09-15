@@ -73,6 +73,7 @@ export interface TableProps {
  * column appears by itself when rows are selectable.
  *
  * @status experimental
+ * @category Data
  * @accessibility `role="grid"` named by `aria-label` or `aria-labelledby`; one column is the row header (`isRowHeader`), sortable columns carry `aria-sort`, selectable rows `aria-selected`, and the selection column holds real checkboxes ("Select All" in the header). One tab stop: arrows move between rows and cells, Space toggles selection, Enter runs the row action, the header cells are pressed to sort.
  * @do Mark exactly one column `isRowHeader`.
  * Give the table a name that says what the rows are.

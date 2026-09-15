@@ -5,7 +5,7 @@ import { Text } from '../text';
 import { Stack } from './Stack';
 
 const meta = {
-  title: 'Components/Stack',
+  title: 'Components/Layout/Stack',
   component: Stack,
   args: { gap: 3, children: null },
   argTypes: {

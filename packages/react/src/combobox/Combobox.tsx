@@ -74,6 +74,7 @@ export interface ComboboxProps {
  * `loading` while they arrive. Options look the same as Listbox's.
  *
  * @status experimental
+ * @category Forms
  * @accessibility A `combobox` input with `aria-autocomplete="list"`; the open list is a `listbox` announced through `aria-activedescendant`, so focus stays in the input. Arrows move, Enter selects, Escape closes and then clears. Loading and empty states are announced from inside the list.
  * @do Use `filter="none"` with controlled `inputValue` for server-side search.
  * Keep `loading` true until the results for the current text arrive.

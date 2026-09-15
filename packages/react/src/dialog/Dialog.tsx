@@ -29,6 +29,7 @@ export interface DialogSystemProps extends Omit<ComponentProps<typeof VendorSyst
  * or import order.
  *
  * @status stable
+ * @category Overlays
  * @accessibility Renders nothing visible itself; the portal element it owns is where every dialog mounts, so the vendor's focus trap and `inert` handling apply to the rest of the page.
  * @do Mount it once, near the app root, inside any providers dialogs need.
  * @dont Nest it; one system serves every dialog.
@@ -69,6 +70,7 @@ export function DialogSystem({ children, ...rest }: DialogSystemProps) {
  * `@pearpages/modals/styles.css`.
  *
  * @status stable
+ * @category Overlays
  * @accessibility `role="dialog"` with `aria-modal`, named by `Dialog.Title` and described by `Dialog.Description`; focus moves in on open and back to the trigger on close; the page behind is inert; Escape and the backdrop close it. Provided by `@pearpages/modals`.
  * @do Always render a `Dialog.Title`.
  * Put the destructive action last in `Dialog.Footer` and make the safe one the default focus.

@@ -62,6 +62,7 @@ export interface DatePickerProps {
  * ISO strings.
  *
  * @status experimental
+ * @category Forms
  * @accessibility A `group` named by the label holding one `spinbutton` per date segment (day, month, year in the locale's order), a button that opens a `dialog` containing the Calendar grid, and a hidden input for forms. Arrows step a segment, digits type it, Escape closes the dialog and returns focus.
  * @do Pass `locale` when the app's language is not the browser's.
  * Use `min`/`max` for ranges the user cannot choose outside of.

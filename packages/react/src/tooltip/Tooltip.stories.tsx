@@ -6,7 +6,7 @@ import { IconButton } from '../icon-button';
 import { Tooltip } from './Tooltip';
 
 const meta = {
-  title: 'Components/Tooltip',
+  title: 'Components/Overlays/Tooltip',
   component: Tooltip,
   args: { content: 'Saves to the cloud and keeps a version.', placement: 'top', delay: 300, children: <Button variant="secondary">Save</Button> },
   argTypes: {

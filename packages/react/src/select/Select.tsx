@@ -30,6 +30,7 @@ export interface SelectProps extends Omit<SelectHTMLAttributes<HTMLSelectElement
  * comes later on a headless layer; this one stays native on purpose.
  *
  * @status stable
+ * @category Forms
  * @accessibility A native `select` on top of Field: the browser's own popup, keyboard and screen-reader behaviour; the placeholder is a disabled empty option when `required`.
  * @do Use it for a plain list of words; it is the most robust choice on every platform.
  * @dont Use it for options that need a description or an icon; use Picker.

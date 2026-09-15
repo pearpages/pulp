@@ -4,7 +4,7 @@ import { Button } from '../button';
 import { Alert } from './Alert';
 
 const meta = {
-  title: 'Components/Alert',
+  title: 'Components/Feedback/Alert',
   component: Alert,
   args: { tone: 'info', title: 'Tokens rebuilt', children: 'The generated CSS matches its JSON source.', onDismiss: fn() },
   argTypes: {

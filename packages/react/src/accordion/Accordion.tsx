@@ -73,6 +73,7 @@ const toSet = (value: string | string[] | undefined): Set<string> =>
  * `Accordion.Trigger` and `Accordion.Panel`.
  *
  * @status stable
+ * @category Navigation
  * @accessibility Each trigger is a `button` inside a heading of the given `headingLevel`; each panel is a `region` labelled by its trigger. Arrows, Home and End move between triggers; Enter or Space toggles.
  * @do Set `headingLevel` to fit the page outline.
  * Use `multiple` when sections are independent reference material.

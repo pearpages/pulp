@@ -2,12 +2,15 @@
 // Driven by the component manifest so every component is covered without
 // editing this file. Run with `pnpm test:dist` after `pnpm build`.
 import { existsSync, readdirSync, readFileSync } from 'node:fs';
-import { resolve } from 'node:path';
+import { basename, resolve } from 'node:path';
 import { render, screen } from '@testing-library/react';
 
 const DIST = resolve(import.meta.dirname, '../../dist');
+const SRC = resolve(import.meta.dirname, '..');
 const manifest = JSON.parse(readFileSync(resolve(DIST, 'component-manifest.json'), 'utf8')) as {
+  categories: string[];
   components: Array<{
+    category: string;
     name: string;
     import: string;
     css: string;
@@ -30,8 +33,9 @@ describe('dist', () => {
     expect(card?.parts.map((p) => p.name)).toEqual(['Card.Header', 'Card.Body', 'Card.Footer']);
   });
 
-  it.each(manifest.components)('$name: carries a status and an accessibility note for the docs page and agents', (component) => {
+  it.each(manifest.components)('$name: carries a status, a category and an accessibility note for the docs page and agents', (component) => {
     expect(['experimental', 'stable', 'deprecated']).toContain(component.status);
+    expect(manifest.categories).toContain(component.category);
     expect(component.accessibility.length).toBeGreaterThan(20);
     expect(Array.isArray(component.do) && Array.isArray(component.dont)).toBe(true);
   });
@@ -51,6 +55,36 @@ describe('dist', () => {
     expect(css).not.toMatch(/#[0-9a-f]{3,8}\b/i);
     expect(existsSync(resolve(DIST, `${entry}.d.ts`))).toBe(true);
     expect(component.props.length).toBeGreaterThan(0);
+  });
+
+  // The sidebar folder comes from the story title; the category comes from the JSDoc. They must agree.
+  it('every story title places the component in its manifest category', () => {
+    // A stories file can be named after a sibling: Radio.stories.tsx documents RadioGroup, Toast.stories.tsx ToastProvider.
+    const STORY_TO_COMPONENT: Record<string, string> = { Radio: 'RadioGroup', Toast: 'ToastProvider' };
+    const STORY_NAME: Record<string, string> = { Radio: 'RadioGroup' };
+    const files = readdirSync(SRC, { withFileTypes: true })
+      .filter((entry) => entry.isDirectory())
+      .flatMap((dir) => readdirSync(resolve(SRC, dir.name)).filter((file) => file.endsWith('.stories.tsx')).map((file) => resolve(SRC, dir.name, file)));
+    expect(files.length).toBeGreaterThan(30);
+    for (const file of files) {
+      const title = readFileSync(file, 'utf8').match(/^\s+title: '([^']+)'/m)?.[1];
+      const story = basename(file, '.stories.tsx');
+      if (file.includes('/src/stories/')) {
+        expect(title, file).toMatch(/^Patterns\//);
+        continue;
+      }
+      const component = manifest.components.find((c) => c.name === (STORY_TO_COMPONENT[story] ?? story));
+      expect(component, `${file}: no manifest component for story ${story}`).toBeDefined();
+      expect(title, file).toBe(`Components/${component?.category}/${STORY_NAME[story] ?? story}`);
+    }
+  });
+
+  // Storybook evaluates storySort statically, so the preview lists the categories as a literal.
+  it('the Storybook sort order lists the manifest categories, in order', () => {
+    const preview = readFileSync(resolve(SRC, '../../../apps/storybook/.storybook/preview.tsx'), 'utf8');
+    const positions = manifest.categories.map((category) => preview.indexOf(`'${category}',`));
+    expect(positions.every((position) => position > 0), 'every category appears in storySort').toBe(true);
+    expect([...positions].sort((a, b) => a - b)).toEqual(positions);
   });
 
   it('renders every component from the built modules', async () => {

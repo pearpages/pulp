@@ -49,6 +49,7 @@ export interface PickerProps {
  * choices at once, use Listbox.
  *
  * @status experimental
+ * @category Forms
  * @accessibility A `button` named by the label with `aria-haspopup="listbox"` and `aria-expanded`; the popup is a `listbox` with selected and disabled options; a hidden native select carries `name` and value for forms. Arrows open and move, typing jumps, Enter chooses, Escape closes and returns focus.
  * @do Use a `description` line on options when the label alone is ambiguous.
  * Prefer the native Select for a plain list of words.

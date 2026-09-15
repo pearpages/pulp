@@ -13,7 +13,7 @@ const options = (
 );
 
 const meta = {
-  title: 'Components/Select',
+  title: 'Components/Forms/Select',
   component: Select,
   args: { label: 'Brand', placeholder: 'Choose a brand', size: 'md', children: options },
   argTypes: { size: { control: 'select', options: ['sm', 'md', 'lg'] }, children: { control: false }, ref: { control: false, table: { disable: true } } },

@@ -8,7 +8,7 @@ import { Icon } from './Icon';
 const glyphs = Object.entries(icons).filter(([name]) => /^[A-Z]/.test(name)) as Array<[string, ComponentType<GlyphProps>]>;
 
 const meta = {
-  title: 'Components/Icon',
+  title: 'Components/Utilities/Icon',
   component: Icon,
   args: { size: 'md', children: <icons.ArrowRight /> },
   argTypes: {

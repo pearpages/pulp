@@ -25,6 +25,7 @@ export interface SpinnerProps extends HTMLAttributes<HTMLSpanElement> {
  * quarter, so it still reads as "in progress".
  *
  * @status stable
+ * @category Feedback
  * @accessibility `role="status"` with a visually hidden label ("Loading" by default) unless `decorative`, in which case the parent announces busy. Under reduced motion the ring stops but keeps its coloured quarter.
  * @do Use `decorative` inside a control that already sets `aria-busy`.
  * @dont Show several spinners for one operation.

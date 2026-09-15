@@ -3,7 +3,7 @@ import { expect, userEvent, within } from 'storybook/test';
 import { Checkbox } from './Checkbox';
 
 const meta = {
-  title: 'Components/Checkbox',
+  title: 'Components/Forms/Checkbox',
   component: Checkbox,
   args: { label: 'Send me the changelog', size: 'md' },
   argTypes: { size: { control: 'select', options: ['sm', 'md', 'lg'] }, ref: { control: false, table: { disable: true } } },

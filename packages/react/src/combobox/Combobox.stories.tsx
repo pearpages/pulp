@@ -13,7 +13,7 @@ const countries = [
 ];
 
 const meta = {
-  title: 'Components/Combobox',
+  title: 'Components/Forms/Combobox',
   component: Combobox,
   args: { label: 'Country', items: countries, placeholder: 'Type to search…', size: 'md', onChange: fn() },
   argTypes: { items: { control: false }, value: { control: false }, size: { control: 'inline-radio', options: ['sm', 'md', 'lg'] } },

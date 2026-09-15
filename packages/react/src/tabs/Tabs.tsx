@@ -58,6 +58,7 @@ export interface TabsProps extends Omit<HTMLAttributes<HTMLDivElement>, 'default
  * `data-orientation`, `data-state="active|inactive"`.
  *
  * @status stable
+ * @category Navigation
  * @accessibility The WAI-ARIA Tabs pattern: `tablist` with `aria-orientation`, `tab`s carrying `aria-selected` and `aria-controls`, `tabpanel`s labelled by their tab. One tab stop: arrows move (and select with automatic activation), Home/End jump, disabled tabs are skipped.
  * @do Use `activation="manual"` when switching a tab is expensive.
  * Name the `Tabs.List` with `aria-label`.

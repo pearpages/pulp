@@ -44,6 +44,7 @@ const DEFAULT_ICON: Record<AlertTone, ReactNode> = {
  * messages stay readable. Toast renders one Alert per notification.
  *
  * @status stable
+ * @category Feedback
  * @accessibility `role="alert"` for `tone="error"` (assertive), `role="status"` otherwise (polite); `live="off"` opts out. The glyph is decorative; the tone is carried by the title and text, never by colour alone.
  * @do Give it a `title` when the body is more than one sentence.
  * Use `onDismiss` for messages the user can act on and clear.

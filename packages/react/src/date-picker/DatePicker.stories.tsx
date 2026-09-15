@@ -3,7 +3,7 @@ import { expect, fn, userEvent, waitFor, within } from 'storybook/test';
 import { DatePicker } from './DatePicker';
 
 const meta = {
-  title: 'Components/DatePicker',
+  title: 'Components/Forms/DatePicker',
   component: DatePicker,
   args: { label: 'Start date', defaultValue: '2026-09-14', locale: 'en-GB', size: 'md', onChange: fn() },
   argTypes: { value: { control: false }, size: { control: 'inline-radio', options: ['sm', 'md', 'lg'] } },

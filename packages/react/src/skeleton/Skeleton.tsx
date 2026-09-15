@@ -22,6 +22,7 @@ export interface SkeletonProps extends Omit<HTMLAttributes<HTMLSpanElement>, 'ch
  * a `className`); the shimmer runs only when motion is allowed.
  *
  * @status stable
+ * @category Feedback
  * @accessibility `aria-hidden`: a placeholder has nothing to announce. Mark the container `aria-busy` while loading and clear it when content arrives; the shimmer stops under reduced motion.
  * @do Match the shape of the content it stands in for.
  * Set `aria-busy` on the region, not on the skeleton.

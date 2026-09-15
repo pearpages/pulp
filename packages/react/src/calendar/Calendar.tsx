@@ -38,6 +38,7 @@ export interface CalendarProps {
  * form, DatePicker wraps this in a field with a popover.
  *
  * @status experimental
+ * @category Forms
  * @accessibility The grid is `role="grid"` named by a visually hidden level-2 heading ("Calendar, September 2026"); each day is a button announced with its full date, today and selection state. Arrows move by day and week, Page Up/Down by month, Home/End to the week edges, Enter or Space selects.
  * @do Pass `locale` when the app's language is not the browser's.
  * Mark unavailable dates with `isDateUnavailable` rather than removing them.

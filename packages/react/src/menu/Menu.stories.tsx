@@ -5,7 +5,7 @@ import { Button } from '../button';
 import { Menu } from './Menu';
 
 const meta = {
-  title: 'Components/Menu',
+  title: 'Components/Overlays/Menu',
   component: Menu,
   args: { placement: 'bottom-start', children: null },
   argTypes: {
