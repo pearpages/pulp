@@ -54,7 +54,7 @@ CI checks what the pattern promises.
 6. **Finish.** `pnpm lint && pnpm typecheck && pnpm build && pnpm test:dist && pnpm check:package && pnpm check:size`
    (the bundle budget: a leaf entry is allowed 2.1 kB brotli; add an override in
    `packages/react/.size-limit.js` only with a reason), then `pnpm changeset` (minor for a
-   new component). Update the Status section of `CLAUDE.md`.
+   new component). Tick the item in `tasks.md`.
 
 ## Reference
 
