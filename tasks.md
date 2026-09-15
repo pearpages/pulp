@@ -31,10 +31,11 @@ Ordered within each group. Groups 1 and 2 are the gate to everything else being 
       package directory, not the repo root. All four `pnpm pack` tarballs carry it. (2026-09-15)
 - [x] Sample email in `TextField.stories.tsx` and `Form.stories.tsx` is now `hello@pearpages.com`,
       the public address (the personal one stays only in git history). (2026-09-15)
-- [ ] npmjs.com: register `@pearpages/pulp-tokens`, `@pearpages/pulp-css`, `@pearpages/pulp-icons`, `@pearpages/pulp-react`
+- [x] npmjs.com: register `@pearpages/pulp-tokens`, `@pearpages/pulp-css`, `@pearpages/pulp-icons`, `@pearpages/pulp-react`
       as Trusted Publishers for `pearpages/pulp` + `publish.yml` (the names cannot be registered
       before a first publish: do a one-off manual `npm publish` from a `pnpm pack` tarball, or
-      publish 0.0.0 placeholders, then register).
+      publish 0.0.0 placeholders, then register). (2026-09-15: 0.0.0 placeholders published by
+      hand from `pnpm pack` tarballs, all four registered; deprecate the 0.0.0s once 0.1.0 is live)
 - [x] One first-release changeset per package (`.changeset/first-release-*.md`), replacing the 15
       tier-by-tier ones: there is no earlier release to describe changes against. (2026-09-15)
 - [x] A `README.md` in each of the four packages: npm takes the package page from the package
