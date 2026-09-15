@@ -122,7 +122,9 @@ names. `$extensions["com.pearpages.pulp"].dark` holds a dark counterpart;
   of `packages/react` (pnpm's strict isolation), and the Storybook app only typechecks its own files.
 - The Storybook docgen plugin's default `include` is relative to the app, so components two packages
   up got no prop descriptions until `main.ts` widened it; the docs page also needs the manifest, which
-  the app's `dev`/`build` scripts generate first (a TypeScript parse, no tsup).
+  the app's `dev`/`build`/`typecheck`/`test:run` scripts generate first (a TypeScript parse, no tsup),
+  and the app's tsconfig maps `@pearpages/pulp-icons` to source like the react package does. No CI
+  step depends on a prior build: the first deploy run failed on exactly that.
 - Storybook 10 has no native tag badges: `.storybook/manager.ts` appends "· experimental" to a
   component's sidebar label through `renderLabel`, reading the manifest. `storySort.order` nests
   (`['Components', [...categories], 'Patterns']`) and the category list comes from the manifest too.

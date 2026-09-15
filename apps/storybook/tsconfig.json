@@ -4,7 +4,8 @@
     "types": ["vite/client"],
     "resolveJsonModule": true,
     "paths": {
-      "@pearpages/pulp-react": ["../../packages/react/src/index.ts"]
+      "@pearpages/pulp-react": ["../../packages/react/src/index.ts"],
+      "@pearpages/pulp-icons": ["../../packages/icons/src/index.ts"]
     }
   },
   "include": [".storybook", "docs", "vitest.config.ts"]

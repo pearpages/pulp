@@ -22,11 +22,15 @@ describe('Picker', () => {
     await user.keyboard('{ArrowDown}');
     await screen.findByRole('listbox');
     await waitFor(() => expect(screen.getByRole('option', { name: /Euro/ })).toHaveFocus());
-    await user.keyboard('{ArrowDown}{Enter}');
+    await user.keyboard('{ArrowDown}');
+    // Each focus move settles before the next key: under load the vendor's focus effect can lag a keystroke.
+    await waitFor(() => expect(screen.getByRole('option', { name: /US dollar/ })).toHaveFocus());
+    await user.keyboard('{Enter}');
     expect(onChange).toHaveBeenLastCalledWith('usd');
     await waitFor(() => expect(screen.queryByRole('listbox')).toBeNull());
     expect(trigger).toHaveTextContent('US dollar');
-    expect(trigger).toHaveFocus();
+    // Focus returns to the trigger after the vendor's close animation frame, not synchronously.
+    await waitFor(() => expect(trigger).toHaveFocus());
   });
 
   it('carries the value in a hidden native select for forms and honours a default', () => {
