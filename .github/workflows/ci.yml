@@ -37,7 +37,7 @@ jobs:
         run: pnpm test:dist
 
       - name: Install Playwright browsers
-        run: pnpm --filter storybook exec playwright install --with-deps chromium
+        run: pnpm --filter pulp-docs exec playwright install --with-deps chromium
       - name: Stories as tests (browser, a11y)
         run: pnpm test:storybook
       - name: Build Storybook

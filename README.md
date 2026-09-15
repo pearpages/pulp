@@ -1,6 +1,7 @@
 # pulp
 
-A design system built to outlive its frameworks. Tokens are the product; CSS and React
+A design system built to outlive its frameworks. By [Pere Pages](https://pearpages.com)
+([@pearpages](https://github.com/pearpages)). Tokens are the product; CSS and React
 components are renderers of them.
 
 - **Tokens**: W3C Design Tokens (DTCG) JSON → CSS custom properties. Two brands (`pulp`,

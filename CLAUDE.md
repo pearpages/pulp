@@ -13,7 +13,7 @@ to humans and coding agents alike.
 | `packages/css` | `layers.css`, `reset.css`, `base.css`, `index.css`. No build. Framework-agnostic |
 | `packages/react` | components in `src/<name>/` (five files each), tsup build, one entry per component |
 | `packages/icons` | `svg/` sources → generated `src/icons/*.tsx` (committed; `check` on drift); one barrel, tree-shakeable |
-| `apps/storybook` | docs + stories-as-tests; deploys to pulp.pearpages.com |
+| `apps/storybook` | docs + stories-as-tests (package `pulp-docs`); deploys to pulp.pearpages.com. `.storybook/theme.ts` derives the site theme from `tokens.json`; `scripts/fonts.mjs` copies the brand typefaces for the manager; `public/` holds the mark and wordmarks |
 | `.claude/skills/add-component` | the scaffold procedure for a new component |
 | `PRINCIPLES.md` | the ten design principles; rendered as the Storybook introduction |
 | `docs/decisions` | decision records (headless layer, positioning, Sheet, Menu); rendered as the Storybook "Decisions" page |
@@ -125,6 +125,12 @@ names. `$extensions["com.pearpages.pulp"].dark` holds a dark counterpart;
   the app's `dev`/`build`/`typecheck`/`test:run` scripts generate first (a TypeScript parse, no tsup),
   and the app's tsconfig maps `@pearpages/pulp-icons` to source like the react package does. No CI
   step depends on a prior build: the first deploy run failed on exactly that.
+- The Storybook manager is its own iframe: it loads none of the preview's CSS, so
+  `manager-head.html` declares the brand `@font-face`s (files copied from fontsource by
+  `scripts/fonts.mjs` into the gitignored `public/fonts`) and the favicon; the theme is built from
+  `tokens.json` (`theme.ts`) and follows the OS scheme, while docs pages take the light one. The
+  page title is the vendor's at both stages ("storybook - Storybook" before hydration, then
+  "<page> ⋅ Storybook"); neither is configurable without patching the manager.
 - Storybook 10 has no native tag badges: `.storybook/manager.ts` appends "· experimental" to a
   component's sidebar label through `renderLabel`, reading the manifest. `storySort.order` nests
   (`['Components', [...categories], 'Patterns']`) and the category list comes from the manifest too.
@@ -341,7 +347,10 @@ copy, not to re-derive.
 - [ ] Tokens page: explain the tiers with a diagram; show the `space.unit` density knob live.
 - [x] Per-component docs page pattern (2026-09-15, see cross-cutting).
 - [ ] README: badges (CI, npm), a short "why native CSS, why no Tailwind in a library" section.
-- [ ] Storybook favicon and title (`pulp`), not the defaults.
+- [x] Storybook branding (2026-09-15): favicon and wordmark (hand-drawn SVG mark: geometric p on
+      ultramarine, saffron signal), manager theme derived from the tokens, brand typefaces in the
+      manager, Introduction masthead, a credit line on every docs page, `author` in every package.
+      The tab title stays the vendor's ("<page> ⋅ Storybook"); it is not configurable.
 
 **6. Testing gaps**
 - [ ] Storybook Vitest in CI needs Chromium: confirm the `playwright install --with-deps` step works

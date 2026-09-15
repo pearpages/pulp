@@ -1,11 +1,11 @@
 {
-  "name": "storybook",
+  "name": "pulp-docs",
   "private": true,
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "pnpm --filter @pearpages/pulp-react manifest && storybook dev -p 6006",
-    "build": "pnpm --filter @pearpages/pulp-react manifest && storybook build",
+    "dev": "node scripts/fonts.mjs && pnpm --filter @pearpages/pulp-react manifest && storybook dev -p 6006",
+    "build": "node scripts/fonts.mjs && pnpm --filter @pearpages/pulp-react manifest && storybook build",
     "test": "vitest",
     "test:run": "pnpm --filter @pearpages/pulp-react manifest && vitest run",
     "typecheck": "pnpm --filter @pearpages/pulp-react manifest && tsc --noEmit"

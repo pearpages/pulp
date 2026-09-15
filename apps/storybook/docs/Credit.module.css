@@ -1,0 +1,14 @@
+/* One muted line on tokens; the docs page is a consumer of the system. */
+
+.credit {
+  margin-block: var(--space-7) 0;
+  padding-block-start: var(--space-3);
+  border-block-start: var(--size-hairline) solid var(--color-border-default);
+  color: var(--color-text-muted);
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-xs);
+}
+
+.credit a {
+  color: var(--color-action-text);
+}

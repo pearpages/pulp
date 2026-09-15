@@ -3,6 +3,7 @@
   "version": "0.0.0",
   "description": "pulp icons: a curated set of stroke icons as React components, generated from SVG. Tree-shakeable, sized by font-size, coloured by currentColor.",
   "license": "MIT",
+  "author": "Pere Pages <hello@pearpages.com> (https://pearpages.com)",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/pearpages/pulp.git",

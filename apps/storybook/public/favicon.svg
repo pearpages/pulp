@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" role="img" aria-label="pulp">
+  <!-- The pulp mark: a geometric lowercase p on ultramarine, with the one saffron signal. -->
+  <rect width="32" height="32" rx="7" fill="#1e2ed6"/>
+  <rect x="8" y="8.5" width="4.6" height="17" rx="2.3" fill="#f3f4f7"/>
+  <circle cx="16.8" cy="15" r="5.6" fill="none" stroke="#f3f4f7" stroke-width="4.4"/>
+  <circle cx="25.2" cy="26" r="2.4" fill="#ffb020"/>
+</svg>

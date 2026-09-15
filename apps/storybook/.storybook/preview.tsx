@@ -8,6 +8,7 @@ import '@fontsource-variable/nunito';
 import '@pearpages/pulp-css';
 import './preview.css';
 import { ComponentDocs } from '../docs/ComponentDocs';
+import { makeTheme } from './theme';
 
 const BRANDS = ['pulp', 'bitepals'] as const;
 const SCHEMES = ['light', 'dark', 'system'] as const;
@@ -57,7 +58,8 @@ const preview: Preview = {
       // Violations fail the story in the Vitest run, not just warn in the panel.
       test: 'error',
     },
-    docs: { page: ComponentDocs },
+    // Docs pages take the same token-derived theme as the manager (typography, link colour).
+    docs: { page: ComponentDocs, theme: makeTheme('light') },
     controls: { expanded: true },
     options: {
       // Storybook evaluates storySort statically, so the categories are a literal here; the dist

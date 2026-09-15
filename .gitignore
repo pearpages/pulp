@@ -10,3 +10,5 @@ coverage/
 test-results/
 __screenshots__/
 .vitest-attachments/
+# Brand typefaces copied from fontsource for the Storybook manager (apps/storybook/scripts/fonts.mjs)
+apps/storybook/public/fonts/

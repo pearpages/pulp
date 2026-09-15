@@ -1,7 +1,11 @@
 import { Markdown, Meta } from '@storybook/addon-docs/blocks';
 import principles from '../../../PRINCIPLES.md?raw';
+import { Credit } from './Credit';
+import { Masthead } from './Masthead';
 
 <Meta title="Introduction" />
+
+<Masthead />
 
 <Markdown>{principles}</Markdown>
 
@@ -41,3 +45,5 @@ import { Button } from '@pearpages/pulp-react/button';
   <Button variant="secondary">Save</Button>
 </html>
 ```
+
+<Credit />

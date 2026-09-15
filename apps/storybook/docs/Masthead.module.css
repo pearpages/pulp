@@ -1,0 +1,48 @@
+/* The branded header of the Introduction, on tokens. */
+
+.masthead {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  margin-block-end: var(--space-6);
+  padding-block-end: var(--space-5);
+  border-block-end: var(--size-hairline) solid var(--color-border-default);
+}
+
+.wordmark {
+  align-self: flex-start;
+  block-size: var(--space-7);
+  inline-size: auto;
+}
+
+.tagline {
+  margin: 0;
+  color: var(--color-text-default);
+  font-family: var(--font-family-display);
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: -0.02em;
+  line-height: var(--font-line-height-tight);
+}
+
+.byline {
+  margin: 0;
+  color: var(--color-text-muted);
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-sm);
+}
+
+.links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-4);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-sm);
+}
+
+.links a {
+  color: var(--color-action-text);
+}

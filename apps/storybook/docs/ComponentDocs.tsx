@@ -1,6 +1,7 @@
 import { Fragment } from 'react';
 import { Canvas, Controls, Description, Markdown, Primary, Source, Stories, Subheading, Title, Unstyled, useOf } from '@storybook/addon-docs/blocks';
 import { Badge } from '@pearpages/pulp-react';
+import { Credit } from './Credit';
 import manifest from '../../../packages/react/dist/component-manifest.json';
 import styles from './ComponentDocs.module.css';
 
@@ -30,6 +31,7 @@ export function ComponentDocs() {
         <Primary />
         <Controls />
         <Stories />
+        <Credit />
       </>
     );
   }
@@ -118,6 +120,7 @@ export function ComponentDocs() {
           <Canvas of={story.moduleExport} />
         </Fragment>
       ))}
+      <Credit />
     </>
   );
 }

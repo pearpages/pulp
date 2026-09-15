@@ -1,4 +1,5 @@
 import { Meta } from '@storybook/addon-docs/blocks';
+import { Credit } from './Credit';
 
 <Meta title="Contributing" />
 
@@ -69,3 +70,5 @@ pnpm check:generated && pnpm lint && pnpm typecheck && pnpm test && pnpm build &
 Tag `vX.Y.Z` on `main` after `pnpm version-packages` has landed. The publish
 workflow packs each package with `pnpm pack` (so `workspace:*` becomes a real
 range) and publishes through npm trusted publishing, no tokens involved.
+
+<Credit />

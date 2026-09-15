@@ -3,6 +3,7 @@
   "version": "0.0.0",
   "description": "pulp base styles: cascade layers, a reset, and body defaults on top of the tokens. Framework-agnostic; import once per app.",
   "license": "MIT",
+  "author": "Pere Pages <hello@pearpages.com> (https://pearpages.com)",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/pearpages/pulp.git",
