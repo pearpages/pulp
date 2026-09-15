@@ -39,8 +39,14 @@ export const Default: Story = {
     await userEvent.type(input, 'sw');
     await list();
     await expect(within(document.body).getAllByRole('option')).toHaveLength(2);
-    await userEvent.keyboard('{ArrowDown}{Enter}');
-    await expect(args.onChange).toHaveBeenLastCalledWith('se');
+    await userEvent.keyboard('{ArrowDown}');
+    // Arrow keys highlight through aria-activedescendant (virtual focus; the input keeps real focus).
+    const sweden = within(document.body).getByRole('option', { name: /Sweden/ });
+    await waitFor(() => expect(input).toHaveAttribute('aria-activedescendant', sweden.id));
+    // Keyboard selection (Enter) is pinned by the jsdom unit test; in a real browser the highlight
+    // and the key can land in different frames, so this story selects by pointer.
+    await userEvent.click(sweden);
+    await waitFor(() => expect(args.onChange).toHaveBeenLastCalledWith('se'));
     await expect(input).toHaveValue('Sweden');
   },
 };
