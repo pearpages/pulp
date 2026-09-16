@@ -18,6 +18,10 @@ components are renderers of them.
 
 Docs: https://pulp.pearpages.com
 
+Reference consumer: [perepages.com](https://perepages.com) takes its colour from
+`@pearpages/pulp-tokens` (semantic names only, both schemes) and its theme toggle from
+`@pearpages/pulp-react`, while keeping its own reset, type scale and print edition.
+
 | Package | |
 | --- | --- |
 | `@pearpages/pulp-tokens` | `tokens.css`, `tokens.json` |

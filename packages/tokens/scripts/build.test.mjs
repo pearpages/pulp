@@ -2,6 +2,7 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { render } from './build.mjs';
 import { toCss } from './format.mjs';
+import { PUBLIC_SEMANTIC_TOKENS } from './public-tokens.mjs';
 
 test('references become var(), composites become CSS', () => {
   assert.equal(toCss('{color.neutral.50}'), 'var(--color-neutral-50)');
@@ -32,6 +33,20 @@ test('both brands render, with light-dark() and calc() from $extensions', async 
   // light-dark() takes colours only: shadows split into geometry + a colour variable.
   assert.match(css, /--shadow-raised-color: light-dark\(#0c0e141a, #00000059\);\n\s+--shadow-raised: 0px 2px 12px 0px var\(--shadow-raised-color\);/);
   assert.doesNotMatch(css, /light-dark\(0px/);
+});
+
+test('the published semantic names are unchanged', async () => {
+  const { json } = await render();
+  const manifest = JSON.parse(json);
+  const actual = manifest.pulp.filter((t) => t.tier === 'semantic').map((t) => t.name).sort();
+  const expected = [...PUBLIC_SEMANTIC_TOKENS].sort();
+  const added = actual.filter((name) => !expected.includes(name));
+  const removed = expected.filter((name) => !actual.includes(name));
+  // These names are what consumers write in their own CSS. A rename does not
+  // error for them: var() of a missing token drops the declaration and the page
+  // silently repaints. Updating scripts/public-tokens.mjs is the deliberate act
+  // that should cost — do it in this commit, and call it breaking in the changeset.
+  assert.deepEqual({ added, removed }, { added: [], removed: [] });
 });
 
 test('every semantic token exists in both brands', async () => {

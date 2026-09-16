@@ -54,18 +54,47 @@ Ordered within each group. Groups 1 and 2 are the gate to everything else being 
 - [ ] `npm deprecate @pearpages/<name>@0.0.0 "placeholder, use 0.1.0"` for all four, once 0.1.0 has
       been used in anger (the placeholders exist only because npm cannot register a Trusted
       Publisher for a name that has never been published).
-- [ ] Verify `npm view @pearpages/pulp-react` and that `pnpm add` of it in a scratch Vite app works.
+- [x] Verified from npm in a scratch Vite app (2026-09-16): all four packages resolve at 0.1.0,
+      per-component entries (`/button`, `/icon`) and the two stylesheets import as the README says,
+      an icon from `@pearpages/pulp-icons` renders inside `Icon`, and `vite build` emits a 98.8 kB
+      stylesheet carrying the tokens, the `--button-*` variables and `@layer components`.
+- [ ] README: say that pnpm 11 defaults `minimumReleaseAge` to 1440 minutes, so a fresh pulp
+      release cannot be installed for 24 hours; consumers who want it sooner add
+      `minimumReleaseAgeExclude: ['@pearpages/*']` to their `pnpm-workspace.yaml`. This bit the
+      scratch app and it will bite the CV site if it adopts pulp on release day.
 
 **2. Consumer: the CV site (`~/Projects/cv`)**
-- [ ] Add `@pearpages/pulp-css` and `@pearpages/pulp-react`; import the CSS once in `src/styles/index.scss`.
-- [ ] Set `data-brand="pulp"` on `<html>`; map the site's existing `data-theme` toggle to `data-scheme`
-      (or rename the attribute) so the CV's dark mode drives the tokens.
-- [ ] Replace the theme toggle `<button>` in `Nav.tsx` and the link-buttons in `Contact.tsx` with
-      `Button` (`asChild` for the links). Delete the CSS they no longer need.
-- [ ] Decide what the CV keeps as its own tokens (hero ultramarine act, print stylesheet) and what
-      it now takes from pulp; remove duplicates from `_tokens.scss`.
-- [ ] Build, run the PDF script, check both schemes and the print page; commit and deploy.
-- [ ] Link the CV repo from pulp's README as the reference consumer.
+Done 2026-09-16, uncommitted in that repo. The CV uses npm, so pnpm's 24h `minimumReleaseAge`
+quarantine never applied.
+
+- [x] `@pearpages/pulp-tokens` + `@pearpages/pulp-react` installed. **Not `pulp-css`**: it carries
+      pulp's reset and base, and the CV keeps its own. `main.tsx` imports `tokens.css` plus the
+      `button`/`icon-button`/`icon` stylesheets.
+- [x] `data-brand="pulp"` on `<html>`; `data-theme` renamed to `data-scheme` in the pre-paint script
+      and `useTheme.ts`. The CV's "absent until an explicit choice" invariant is pulp's contract
+      already, so the model transferred unchanged.
+- [x] **No alias layer**: the CV's colour tokens are deleted and its 17 stylesheets read pulp's
+      semantic names directly (96 uses). Pere's call, and the right one — an alias shim would have
+      let the site drift back to its own vocabulary silently.
+- [x] `_tokens.scss` 164 → 91 lines. Gone: the raw palette, the semantic colours, the `dark-scheme`
+      mixin, both emissions and the "[data-theme] blocks must stay last" specificity trap. Kept:
+      `--ultramarine` (Act I paints it as a ground; `--color-action-primary` lifts in dark and must
+      not), `--signal`/`--on-signal`, `--logo-chip`, and the site's own type, space and motion scales.
+- [x] Theme toggle → `IconButton variant="ghost"`, keeping the static `label` + `aria-pressed` +
+      `title` design. `.nav__theme` deleted. It renders 40×40 where the hand-rolled box was 36×36.
+- [x] New `src/styles/layers.css`, imported **first** (layers rank by first appearance), and
+      `_reset.scss` wrapped in `@layer reset` — otherwise its unlayered `button { font: inherit }`
+      beats pulp's layered button styles. The CV's component CSS stays unlayered and still wins.
+- [x] Verified: typecheck, `npm run build` incl. the five PDF gates (`1 page, 59 KB`), and a
+      Playwright pass over the built site — all six scheme combinations correct (OS-follow, forced
+      light and forced dark under both OS preferences) and the toggle round-trips `aria-pressed`,
+      `data-scheme`, `localStorage` and the `theme-color` meta. Vite 8's Lightning CSS rewrites
+      `light-dark()` into its own polyfill but emits all three axes, so forcing still works.
+- [x] Linked from pulp's README as the reference consumer. (2026-09-16)
+- [ ] Commit and deploy the CV (Pere's call; nothing git has been run in that repo).
+- [ ] Later, once the tokens have settled: the skip link, project links, nav links and the parked
+      "Download CV" pill are all anchors — a `Button asChild` pass. Contact's "link-buttons" are
+      **not** buttons (icon spanning two text rows) and stay as they are.
 
 **3. Components: the library, by tier**
 
@@ -199,6 +228,10 @@ copy, not to re-derive.
 **4. Guardrails still missing**
 - [ ] Token schema validation: every token has `$type` (the dark-counterpart and component→semantic
       checks exist in `build.test.mjs`).
+- [x] Published semantic token names pinned in `packages/tokens/scripts/public-tokens.mjs` and
+      asserted by `build.test.mjs` (2026-09-16). The CV writes those names in 17 stylesheets, and a
+      rename fails *silently* there: `var()` of a missing token drops the declaration and the page
+      repaints. The test turns that into a deliberate edit plus a changeset.
 - [ ] `component-manifest.json` snapshot test so a prop change without a changeset fails CI.
 - [x] Bundle-size budget for `packages/react/dist` (2026-09-15, see cross-cutting).
 - [ ] Storybook: enable the a11y addon's `test: 'error'` verification in CI is already on; add a
