@@ -40,8 +40,20 @@ Ordered within each group. Groups 1 and 2 are the gate to everything else being 
       tier-by-tier ones: there is no earlier release to describe changes against. (2026-09-15)
 - [x] A `README.md` in each of the four packages: npm takes the package page from the package
       directory, as it does LICENSE. (2026-09-15)
-- [ ] `pnpm version-packages` (consumes `.changeset/first-release-*.md` → 0.1.0), commit, push,
-      wait for the deploy run, then `git tag v0.1.0 && git push --tags`; watch `publish.yml`.
+- [x] `pnpm version-packages` → 0.1.0, committed (`a9458ba`), pushed, tagged `v0.1.0`. (2026-09-16)
+- [x] **0.1.0 is on npm**, all four packages, published by hand with 2FA codes. (2026-09-16)
+      `publish.yml` ran on the tag and failed at npm's OIDC exchange with
+      `404 … package not found` → `ENEEDAUTH`. Not our configuration: GitHub gives repos created
+      after 2026-07-15 immutable OIDC subject claims (ours:
+      `use_immutable_subject: true`, `sub_claim_prefix: repo:pearpages@3802915/pulp@1371223116`,
+      not switchable), and npm's registry rejects the exchange for them —
+      https://github.com/npm/cli/issues/9969, open, no fix. The Trusted Publisher config is correct
+      and stays; on the next release just run the workflow again
+      (`gh workflow run publish.yml --ref vX.Y.Z`), it skips versions that already exist.
+      Cost: 0.1.0 has no provenance attestation.
+- [ ] `npm deprecate @pearpages/<name>@0.0.0 "placeholder, use 0.1.0"` for all four, once 0.1.0 has
+      been used in anger (the placeholders exist only because npm cannot register a Trusted
+      Publisher for a name that has never been published).
 - [ ] Verify `npm view @pearpages/pulp-react` and that `pnpm add` of it in a scratch Vite app works.
 
 **2. Consumer: the CV site (`~/Projects/cv`)**
@@ -209,6 +221,12 @@ copy, not to re-derive.
 **6. Testing gaps**
 - [x] Storybook Vitest in CI needs Chromium: confirm the `playwright install --with-deps` step works (2026-09-15: works)
       on `ubuntu-latest` (first push will tell).
+- [x] Combobox `Default` story flake, twice red in `deploy.yml` (2026-09-16): `{ArrowDown}` left
+      `aria-activedescendant` null. React Aria clears the focused key when the filtered collection
+      re-renders, so a key pressed mid-filter highlights nothing. The story now waits for the
+      collection to settle and presses until the highlight sticks (the exact id stays pinned by the
+      jsdom unit test), and the storybook Vitest project retries once: a real browser can drop an
+      event, anything failing twice is real.
 - [ ] Visual regression: Playwright screenshots of every story in both brands and schemes, stored in
       the repo, diffed in CI.
 - [ ] Keyboard-only interaction tests for Button `asChild` links (Enter/Space semantics).

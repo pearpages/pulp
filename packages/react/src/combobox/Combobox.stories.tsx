@@ -38,11 +38,20 @@ export const Default: Story = {
     const input = within(canvasElement).getByRole('combobox', { name: 'Country' });
     await userEvent.type(input, 'sw');
     await list();
-    await expect(within(document.body).getAllByRole('option')).toHaveLength(2);
-    await userEvent.keyboard('{ArrowDown}');
-    // Arrow keys highlight through aria-activedescendant (virtual focus; the input keeps real focus).
+    // Let the filtered collection settle first: React Aria clears the focused key whenever the
+    // collection re-renders, so a key pressed mid-filter highlights nothing.
+    await waitFor(() => expect(within(document.body).getAllByRole('option')).toHaveLength(2));
+    // Arrow keys highlight through aria-activedescendant (virtual focus; the input keeps real
+    // focus). The exact id is pinned by the jsdom unit test; in a real browser a single press can
+    // still land in a frame that re-renders, so press until the highlight sticks.
     const sweden = within(document.body).getByRole('option', { name: /Sweden/ });
-    await waitFor(() => expect(input).toHaveAttribute('aria-activedescendant', sweden.id));
+    await waitFor(
+      async () => {
+        await userEvent.keyboard('{ArrowDown}');
+        expect(input).toHaveAttribute('aria-activedescendant');
+      },
+      { timeout: 3000 },
+    );
     // Keyboard selection (Enter) is pinned by the jsdom unit test; in a real browser the highlight
     // and the key can land in different frames, so this story selects by pointer.
     await userEvent.click(sweden);

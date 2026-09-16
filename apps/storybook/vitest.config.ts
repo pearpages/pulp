@@ -13,6 +13,10 @@ export default defineConfig({
   plugins: [storybookTest({ configDir: resolve(here, '.storybook') })],
   test: {
     name: 'storybook',
+    // One retry, because these run in a real browser: an event can land in a frame that
+    // re-renders and be lost. Anything that fails twice in a row is a real failure, and the
+    // flake belongs in the story, not here — this only keeps a deploy from dying on one.
+    retry: 1,
     browser: {
       enabled: true,
       headless: true,

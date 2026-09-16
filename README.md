@@ -57,6 +57,7 @@ pnpm storybook          # docs and stories on :6006
 pnpm test               # unit tests
 pnpm test:storybook     # stories as browser tests (once: pnpm --filter storybook exec playwright install chromium)
 pnpm build && pnpm test:dist && pnpm check:package && pnpm check:size
+pnpm verify             # everything CI runs, in the same order; run it before pushing to main
 ```
 
 See `PRINCIPLES.md` for why the system is shaped this way, `docs/decisions/` for the

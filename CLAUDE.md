@@ -34,7 +34,12 @@ pnpm test:storybook    # every story in Chromium with a11y checks (needs `playwr
 pnpm storybook         # dev server on :6006
 pnpm storybook:build
 pnpm --filter @pearpages/pulp-react scaffold Name Category   # new component skeleton (category from scripts/categories.mjs)
+pnpm verify            # everything deploy.yml runs, in the same order. Run it before pushing to main
 ```
+
+`ci.yml` ignores `main`, so a push to `main` is verified only by `deploy.yml`, after the fact, and
+a failure there also blocks the site. `pnpm verify` is the same chain locally; after pushing, watch
+the run (`gh run watch`) instead of assuming it passed.
 
 ## Rules that CI enforces
 
