@@ -1,0 +1,54 @@
+name: Update visual baselines
+
+# The baselines in apps/storybook/visual-baselines are rendered here and nowhere else: text
+# rasterises differently on macOS and on Linux, so a laptop-made baseline never matches CI.
+#   gh workflow run visual-update.yml              # on main
+#   gh workflow run visual-update.yml --ref branch
+# Review the change as the image diff of the commit this pushes.
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write # commit the baselines
+  actions: write # start the deploy afterwards: a push by this token does not trigger it
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm --filter pulp-docs exec playwright install --with-deps chromium
+
+      # From scratch, so a baseline whose story is gone does not linger.
+      - run: rm -rf apps/storybook/visual-baselines
+      - name: Render the baselines
+        run: pnpm --filter pulp-docs test:run -u
+        env:
+          VITE_VISUAL: '1'
+
+      - name: Commit
+        id: commit
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A apps/storybook/visual-baselines
+          if git diff --cached --quiet; then
+            echo "Baselines unchanged."
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+          else
+            git commit -m "Update visual baselines" -m "Rendered by visual-update.yml on ${GITHUB_SHA::7}."
+            git push
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Deploy the new state of main
+        if: steps.commit.outputs.changed == 'true' && github.ref == 'refs/heads/main'
+        run: gh workflow run deploy.yml --ref main
+        env:
+          GH_TOKEN: ${{ github.token }}

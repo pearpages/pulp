@@ -274,8 +274,16 @@ copy, not to re-derive.
       collection to settle and presses until the highlight sticks (the exact id stays pinned by the
       jsdom unit test), and the storybook Vitest project retries once: a real browser can drop an
       event, anything failing twice is real.
-- [ ] Visual regression: Playwright screenshots of every story in both brands and schemes, stored in
-      the repo, diffed in CI.
+- [ ] Visual regression of the 136 matrix stories (2026-09-17, **built; bootstrap pending**). Vitest's
+      `toMatchScreenshot` from one `afterEach` in `preview.tsx`, bridged by
+      `.storybook/vitest.visual.setup.ts` and live only under `VITE_VISUAL=1`; baselines in
+      `apps/storybook/visual-baselines/`, rendered only by `visual-update.yml` because macOS and
+      Linux rasterise text differently. Proven locally before deleting the macOS PNGs: 136 shots,
+      2.8 MB; two clean runs identical; a border nudged `#d5d7de → #c0c3cc` fails 20 stories with a
+      readable diff — but only at threshold 0.02, the default 0.1 passed it; Calendar's "today" is
+      frozen. **Left to do:** push, run `gh workflow run visual-update.yml` so CI commits the
+      baselines, then set `VITE_VISUAL: '1'` on the `test:storybook` step of `deploy.yml` and
+      `ci.yml` and tick this.
 - [ ] Keyboard-only interaction tests for Button `asChild` links (Enter/Space semantics).
 - [ ] Forced-colors (Windows high contrast) story and a `@media (forced-colors: active)` rule set.
 - [ ] Reduced-motion: the global reset freezes the spinner to a static ring; decide whether that is

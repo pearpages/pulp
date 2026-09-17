@@ -39,6 +39,13 @@ jobs:
       - run: pnpm test:dist
       - run: pnpm --filter pulp-docs exec playwright install --with-deps chromium
       - run: pnpm test:storybook
+      # A failed visual check leaves <Component>/<brand>-<scheme>-actual|-diff.png here.
+      - if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: visual-diffs
+          path: apps/storybook/.vitest-attachments/visual
+          if-no-files-found: ignore
       - run: pnpm storybook:build
 
       - uses: actions/configure-pages@v5

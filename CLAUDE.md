@@ -85,6 +85,17 @@ the run (`gh run watch`) instead of assuming it passed.
 - **Every entry has a bundle budget** (`packages/react/.size-limit.js`, driven by tsup's entry list):
   2.1 kB brotli for a leaf entry, named overrides with a reason, the barrel, the stylesheet, and three
   "with React Aria" entries that show the vendor's true cost. `pnpm check:size` runs in CI.
+- **The matrix stories are compared with committed screenshots**, in CI only
+  (`apps/storybook/visual-baselines/<Component>/<brand>-<scheme>.png`, 136 of them). One
+  `afterEach` in `.storybook/preview.tsx` shoots every story named `Matrix…` after its `play`, with
+  Storybook's animations already paused; overlays (`parameters.a11y.context === 'body'`) are shot
+  as the whole body, and `Date` is frozen so Calendar's "today" never moves. It is live only under
+  `VITE_VISUAL=1`, which the workflows set: text rasterises differently on macOS and Linux, so
+  **CI owns the baselines** and local runs skip the check. After an intended visual change run
+  `gh workflow run visual-update.yml` (add `--ref <branch>` off main); it re-renders everything,
+  commits the PNGs and redeploys, and the commit's image diff is the review. A failing run uploads
+  `visual-diffs` (actual and diff images). The comparator threshold is 0.02, not the default 0.1,
+  which let a border go from `#d5d7de` to `#c0c3cc` unnoticed.
 - **Vendor variables are checked against the installed vendor.** `Dialog.vendor.test.ts` fails when
   Dialog maps a `--modal-*` name `@pearpages/modals` no longer declares.
 - **Complex widgets build on `react-aria-components`** (decision record 001), never on a
