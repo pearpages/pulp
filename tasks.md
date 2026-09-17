@@ -5,12 +5,10 @@ this file holds what is left to do, ticked with a date when done. Ordered within
 
 ## Recommended order (2026-09-16)
 
-1. Visual regression across brands × schemes (group 6). Screenshots plus pixel diffs were the only
-   check that caught the CV's opaque hairlines and lighter dark text; nothing else noticed.
-2. `@pearpages/modals` 0.3.0 (placement is built, uncommitted in that repo), then Sheet.
-3. Decision record 005 on the shape of the token output (group 4).
-4. Docs (group 5): README badges now that npm is live, brand walkthrough, tokens diagram.
-5. The remaining guardrails, testing gaps and housekeeping.
+1. `@pearpages/modals` 0.3.0 (placement is built, uncommitted in that repo), then Sheet.
+2. Decision record 005 on the shape of the token output (group 4).
+3. Docs (group 5): README badges now that npm is live, brand walkthrough, tokens diagram.
+4. The remaining guardrails, testing gaps and housekeeping.
 
 ## Session log
 
@@ -274,16 +272,16 @@ copy, not to re-derive.
       collection to settle and presses until the highlight sticks (the exact id stays pinned by the
       jsdom unit test), and the storybook Vitest project retries once: a real browser can drop an
       event, anything failing twice is real.
-- [ ] Visual regression of the 136 matrix stories (2026-09-17, **built; bootstrap pending**). Vitest's
+- [x] Visual regression of the 136 matrix stories (2026-09-17, live in CI). Vitest's
       `toMatchScreenshot` from one `afterEach` in `preview.tsx`, bridged by
       `.storybook/vitest.visual.setup.ts` and live only under `VITE_VISUAL=1`; baselines in
       `apps/storybook/visual-baselines/`, rendered only by `visual-update.yml` because macOS and
       Linux rasterise text differently. Proven locally before deleting the macOS PNGs: 136 shots,
       2.8 MB; two clean runs identical; a border nudged `#d5d7de → #c0c3cc` fails 20 stories with a
       readable diff — but only at threshold 0.02, the default 0.1 passed it; Calendar's "today" is
-      frozen. **Left to do:** push, run `gh workflow run visual-update.yml` so CI commits the
-      baselines, then set `VITE_VISUAL: '1'` on the `test:storybook` step of `deploy.yml` and
-      `ci.yml` and tick this.
+      frozen. Bootstrapped without a red deploy: pushed with the flag off, `visual-update.yml`
+      committed the 136 Linux baselines (`44564ef`) and redeployed, then `VITE_VISUAL: '1'` went
+      onto the `test:storybook` step of `deploy.yml` and `ci.yml`.
 - [ ] Keyboard-only interaction tests for Button `asChild` links (Enter/Space semantics).
 - [ ] Forced-colors (Windows high contrast) story and a `@media (forced-colors: active)` rule set.
 - [ ] Reduced-motion: the global reset freezes the spinner to a static ring; decide whether that is
