@@ -45,6 +45,18 @@ The complex widgets (Combobox, Listbox, Picker, Calendar, DatePicker, Slider, Ta
 on React Aria Components, installed with the package and tree-shaken per entry. Their
 props are pulp's; dates cross the API as `YYYY-MM-DD` strings.
 
+`Dialog` and `DialogSystem` build on [`@pearpages/modals`](https://www.npmjs.com/package/@pearpages/modals)
+(focus trap, inert page, stacking, Escape and backdrop dismissal), also installed with the
+package. pulp themes it by mapping its tokens onto the vendor's `--modal-*` variables, so dialogs
+follow brand and scheme. It is the one vendor whose stylesheet you import yourself, into the
+`vendor` layer so pulp's styles win:
+
+```css
+@import "@pearpages/modals/styles.css" layer(vendor);
+```
+
+Skip it if you never render a `Dialog`.
+
 ```tsx
 import { Button } from '@pearpages/pulp-react/button';
 

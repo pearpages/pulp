@@ -55,6 +55,26 @@ theme everything inside the element they're on.
 React Aria Components, installed with this package and tree-shaken per entry. Their props are
 pulp's, and dates cross the API as `YYYY-MM-DD` strings.
 
+## Dialogs need one more stylesheet
+
+`Dialog` and `DialogSystem` build on
+[`@pearpages/modals`](https://www.npmjs.com/package/@pearpages/modals): the focus trap, the inert
+page behind the dialog, stacking, Escape and backdrop dismissal are its work, and it is installed
+with this package. pulp maps its own tokens onto the vendor's `--modal-*` variables, so a dialog
+follows `data-brand` and `data-scheme` like everything else.
+
+The vendor's stylesheet is the one you import yourself. Put it in the `vendor` layer, which
+`@pearpages/pulp-css` declares below `components`, so pulp's styles win:
+
+```css
+@import "@pearpages/pulp-css";
+@import "@pearpages/modals/styles.css" layer(vendor);
+@import "@pearpages/pulp-react/styles.css";
+```
+
+Then mount `DialogSystem` once near the root. Without the stylesheet a dialog opens unstyled; if
+you never render a `Dialog`, skip it.
+
 ## For tooling and coding agents
 
 `@pearpages/pulp-react/component-manifest.json` lists every component with its status, category,
