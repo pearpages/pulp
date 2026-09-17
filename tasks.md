@@ -308,6 +308,14 @@ copy, not to re-derive.
       passes on the retry: find the cause with `pnpm ci:local visual 10`, starting with
       `--no-file-parallelism`. Same family: Combobox `Default` (interaction, not visual) failed
       once in ten Linux runs.
+      More evidence (2026-09-17): `visual-update.yml` re-renders all shots, and while adding
+      Sheet it also rewrote four baselines Sheet cannot touch. Measured old vs new: DatePicker pulp
+      light 1,405 px along the field border (the `data-focus-within` ring, present or not);
+      Combobox, two shots, 7 and 11 px in the last three pixel columns at field height (the ring's
+      edge, clipped by the viewport); Form pulp dark 37 px with a channel delta of 2/255, below the
+      comparator's threshold, i.e. rendering noise. All focus rings: fix the ring's state at shot
+      time, and consider padding the body so a ring is never clipped at the viewport edge. Until
+      then every re-render may flip those shots between their two states.
       Also known: bitepals' mono family is system fonts, so those shots depend on the runner
       image's fonts and need re-rendering when GitHub changes them.
 - [ ] Keyboard-only interaction tests for Button `asChild` links (Enter/Space semantics).
