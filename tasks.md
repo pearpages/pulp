@@ -3,17 +3,23 @@
 The pending work and the tiered roadmap. `CLAUDE.md` holds the rules and the toolchain facts;
 this file holds what is left to do, ticked with a date when done. Ordered within each group.
 
-## Recommended order (2026-09-15)
+## Recommended order (2026-09-16)
 
-1. LICENSE file and the sample-email decision, then publish 0.1.0 (group 1).
-2. The CV site as the reference consumer (group 2): turns the packaging story into a real one.
+1. The `component-manifest.json` snapshot (group 4): the React-props sibling of the token-name
+   guard. A prop change without a changeset fails CI.
+2. Visual regression across brands × schemes (group 6). Screenshots plus pixel diffs were the only
+   check that caught the CV's opaque hairlines and lighter dark text; nothing else noticed.
 3. `@pearpages/modals` 0.3.0 (placement is built, uncommitted in that repo), then Sheet.
-4. The manifest snapshot guardrail (group 4): a prop change without a changeset fails CI.
-5. Docs (group 5): brand walkthrough, tokens diagram, README badges once npm exists.
+4. Decision record 005 on the shape of the token output (group 4).
+5. Docs (group 5): README badges now that npm is live, brand walkthrough, tokens diagram.
 6. The remaining guardrails, testing gaps and housekeeping.
 
 ## Session log
 
+- 2026-09-16: 0.1.0 published by hand (trusted publishing blocked by npm/cli#9969); Combobox story
+  flake fixed and `pnpm verify` added; the CV adopted pulp's tokens and `IconButton`, verified
+  against the deployed site by screenshot diff; semantic token names pinned by a test; task list
+  triaged.
 - 2026-09-15: tier 5 (React Aria), cross-cutting docs/status/guardrails, Storybook categories,
   branding and credit; repo pushed, CI and Pages green, site live at https://pulp.pearpages.com.
 - 2026-09-14: workspace, tokens, Button, tiers 1–4, decisions.
@@ -59,13 +65,13 @@ Ordered within each group. Groups 1 and 2 are the gate to everything else being 
       an icon from `@pearpages/pulp-icons` renders inside `Icon`, and `vite build` emits a 98.8 kB
       stylesheet carrying the tokens, the `--button-*` variables and `@layer components`.
 - [ ] README: say that pnpm 11 defaults `minimumReleaseAge` to 1440 minutes, so a fresh pulp
-      release cannot be installed for 24 hours; consumers who want it sooner add
-      `minimumReleaseAgeExclude: ['@pearpages/*']` to their `pnpm-workspace.yaml`. This bit the
-      scratch app and it will bite the CV site if it adopts pulp on release day.
+      release cannot be installed with pnpm for 24 hours; consumers who want it sooner add
+      `minimumReleaseAgeExclude: ['@pearpages/*']` to their `pnpm-workspace.yaml`. It bit the
+      scratch install test; npm users (the CV) are unaffected.
 
 **2. Consumer: the CV site (`~/Projects/cv`)**
-Done 2026-09-16, uncommitted in that repo. The CV uses npm, so pnpm's 24h `minimumReleaseAge`
-quarantine never applied.
+Done 2026-09-16, committed in that repo (`7b2ac44`). The CV is pulp's reference consumer; its own
+follow-ups (deploying, a `Button asChild` pass over its anchors) live in that repo, not here.
 
 - [x] `@pearpages/pulp-tokens` + `@pearpages/pulp-react` installed. **Not `pulp-css`**: it carries
       pulp's reset and base, and the CV keeps its own. `main.tsx` imports `tokens.css` plus the
@@ -91,10 +97,6 @@ quarantine never applied.
       `data-scheme`, `localStorage` and the `theme-color` meta. Vite 8's Lightning CSS rewrites
       `light-dark()` into its own polyfill but emits all three axes, so forcing still works.
 - [x] Linked from pulp's README as the reference consumer. (2026-09-16)
-- [ ] Commit and deploy the CV (Pere's call; nothing git has been run in that repo).
-- [ ] Later, once the tokens have settled: the skip link, project links, nav links and the parked
-      "Download CV" pill are all anchors — a `Button asChild` pass. Contact's "link-buttons" are
-      **not** buttons (icon spanning two text rows) and stay as they are.
 
 **3. Components: the library, by tier**
 
@@ -234,11 +236,20 @@ copy, not to re-derive.
       repaints. The test turns that into a deliberate edit plus a changeset.
 - [ ] `component-manifest.json` snapshot test so a prop change without a changeset fails CI.
 - [x] Bundle-size budget for `packages/react/dist` (2026-09-15, see cross-cutting).
-- [ ] Storybook: enable the a11y addon's `test: 'error'` verification in CI is already on; add a
-      `storybook-static` link check so a broken MDX import fails the build.
-- [ ] Pre-commit hook (lefthook or simple-git-hooks): `check:tokens`, lint-staged eslint/stylelint.
+- [ ] Fail `storybook:build` on a broken MDX import: a link check over `storybook-static`. (The a11y
+      addon's `test: 'error'` in CI is already on.)
 - [ ] A tool that honours `browserslist` (lightningcss in the build) so the support floor is enforced,
       not only declared.
+- [ ] Decision record 005, the shape of the token output. Measured 2026-09-16 on `tokens.css`
+      (46.4 kB raw): **component tokens are 66% of it** (30.8 kB), the bitepals block only 7.8 kB.
+      Splitting per brand is the wrong cut: it saves at most 1.4 kB brotli for a one-brand consumer,
+      costs ~760 B for anyone loading both, and breaks brand nesting and the Storybook brand toolbar
+      (an attribute flip over a stylesheet that holds both). The cut that would pay is shipping each
+      component's tokens in its own stylesheet, so a consumer carries only what it renders. Record
+      the decision first; the refactor touches `build.mjs`, the component→semantic test, the dist
+      smoke test and the docs.
+- Dropped (2026-09-16): a pre-commit hook. `pnpm verify` runs the same chain before pushing, and a
+  hook would slow every commit to duplicate it.
 
 **5. Docs**
 - [ ] Introduction: add a "how a brand is added" walkthrough (copy `semantic/pulp.json`, change
@@ -271,7 +282,8 @@ copy, not to re-derive.
 - [ ] Upgrade path notes: Vitest 5 once `@storybook/addon-vitest` accepts it; ESLint 10 once
       `eslint-plugin-react` accepts it; TypeScript 7 once tsup's dts build accepts it.
 - [ ] Dependabot or Renovate config with grouped updates.
-- [ ] CODEOWNERS and a PR template that repeats the contributing checklist.
+- Dropped (2026-09-16): CODEOWNERS and a PR template. One maintainer committing to `main`; revisit if
+  the repo takes outside contributions.
 
 **8. Known vendor limits (react-aria-components 1.21, react-aria 3.52)**
 - A pointer press on a calendar day registers window focus listeners that throw on a focus event whose
