@@ -57,6 +57,9 @@ const props = (doc) =>
     .map((prop) => ({
       name: prop.name,
       type: prop.type.name,
+      // A literal union reports only "enum"; keep its members, as written in source
+      // ('"ghost"', '1'), so removing a value is visible in the manifest.
+      ...(prop.type.name === 'enum' && Array.isArray(prop.type.value) ? { values: prop.type.value.map((member) => member.value) } : {}),
       required: prop.required,
       default: prop.defaultValue?.value ?? null,
       description: prop.description,

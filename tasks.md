@@ -5,14 +5,12 @@ this file holds what is left to do, ticked with a date when done. Ordered within
 
 ## Recommended order (2026-09-16)
 
-1. The `component-manifest.json` snapshot (group 4): the React-props sibling of the token-name
-   guard. A prop change without a changeset fails CI.
-2. Visual regression across brands × schemes (group 6). Screenshots plus pixel diffs were the only
+1. Visual regression across brands × schemes (group 6). Screenshots plus pixel diffs were the only
    check that caught the CV's opaque hairlines and lighter dark text; nothing else noticed.
-3. `@pearpages/modals` 0.3.0 (placement is built, uncommitted in that repo), then Sheet.
-4. Decision record 005 on the shape of the token output (group 4).
-5. Docs (group 5): README badges now that npm is live, brand walkthrough, tokens diagram.
-6. The remaining guardrails, testing gaps and housekeeping.
+2. `@pearpages/modals` 0.3.0 (placement is built, uncommitted in that repo), then Sheet.
+3. Decision record 005 on the shape of the token output (group 4).
+4. Docs (group 5): README badges now that npm is live, brand walkthrough, tokens diagram.
+5. The remaining guardrails, testing gaps and housekeeping.
 
 ## Session log
 
@@ -57,9 +55,6 @@ Ordered within each group. Groups 1 and 2 are the gate to everything else being 
       and stays; on the next release just run the workflow again
       (`gh workflow run publish.yml --ref vX.Y.Z`), it skips versions that already exist.
       Cost: 0.1.0 has no provenance attestation.
-- [ ] `npm deprecate @pearpages/<name>@0.0.0 "placeholder, use 0.1.0"` for all four, once 0.1.0 has
-      been used in anger (the placeholders exist only because npm cannot register a Trusted
-      Publisher for a name that has never been published).
 - [x] Verified from npm in a scratch Vite app (2026-09-16): all four packages resolve at 0.1.0,
       per-component entries (`/button`, `/icon`) and the two stylesheets import as the README says,
       an icon from `@pearpages/pulp-icons` renders inside `Icon`, and `vite build` emits a 98.8 kB
@@ -234,7 +229,15 @@ copy, not to re-derive.
       asserted by `build.test.mjs` (2026-09-16). The CV writes those names in 17 stylesheets, and a
       rename fails *silently* there: `var()` of a missing token drops the declaration and the page
       repaints. The test turns that into a deliberate edit plus a changeset.
-- [ ] `component-manifest.json` snapshot test so a prop change without a changeset fails CI.
+- [x] The React package's public API pinned in `packages/react/api.snapshot.txt` (412 lines) and
+      asserted by `src/test/dist.smoke.test.tsx` via `toMatchFileSnapshot` (2026-09-16). Pinned:
+      components, parts, status, prop names, required, types and defaults. Not pinned: prose, so
+      docs edits do not churn it. The manifest now keeps literal-union members (`values`), which
+      it used to flatten to `"enum"` — before that, removing `variant="ghost"` changed nothing.
+      Checked: dropping a prop line fails, and with `CI=true` a missing snapshot fails rather than
+      being rewritten. Limit, stated honestly: commits go straight to `main`, so "without a
+      changeset" cannot be checked against a PR base; the snapshot makes the change a deliberate
+      `test:dist -u` plus a changeset instead.
 - [x] Bundle-size budget for `packages/react/dist` (2026-09-15, see cross-cutting).
 - [ ] Fail `storybook:build` on a broken MDX import: a link check over `storybook-static`. (The a11y
       addon's `test: 'error'` in CI is already on.)
@@ -284,6 +287,10 @@ copy, not to re-derive.
 - [ ] Dependabot or Renovate config with grouped updates.
 - Dropped (2026-09-16): CODEOWNERS and a PR template. One maintainer committing to `main`; revisit if
   the repo takes outside contributions.
+- [ ] Least important, optional hygiene: `npm deprecate @pearpages/<name>@0.0.0 "placeholder, use
+      0.1.0"` for all four (four authenticator codes). It barely matters: `latest` is 0.1.0, a
+      `^0.0.0` range matches only 0.0.0, and nothing depends on the placeholders, which existed only
+      so the names could be registered as Trusted Publishers.
 
 **8. Known vendor limits (react-aria-components 1.21, react-aria 3.52)**
 - A pointer press on a calendar day registers window focus listeners that throw on a focus event whose

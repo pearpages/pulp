@@ -1,0 +1,412 @@
+# @pearpages/pulp-react public API. Regenerate: pnpm --filter @pearpages/pulp-react test:dist -u
+
+Accordion (stable)
+  collapsible?: boolean = true
+  defaultValue?: string | string[]
+  headingLevel?: 2 | 3 | 4 | 5 | 6 = 3
+  onValueChange?: ((value: string | string[]) => void)
+  ref?: Ref<HTMLDivElement>
+  type?: "single" | "multiple" = single
+  value?: string | string[]
+  Accordion.Item
+    disabled?: boolean = false
+    ref?: Ref<HTMLDivElement>
+    value: string
+  Accordion.Panel
+    ref?: Ref<HTMLDivElement>
+  Accordion.Trigger
+    ref?: Ref<HTMLButtonElement>
+Alert (stable)
+  action?: ReactNode
+  dismissLabel?: string = Dismiss
+  icon?: ReactNode
+  live?: "polite" | "assertive" | "off"
+  onDismiss?: (() => void)
+  ref?: Ref<HTMLDivElement>
+  title?: ReactNode
+  tone?: "info" | "success" | "warning" | "error" = info
+Badge (stable)
+  icon?: ReactNode
+  ref?: Ref<HTMLSpanElement>
+  size?: "sm" | "md" = md
+  tone?: "neutral" | "info" | "success" | "warning" | "error" = neutral
+  variant?: "solid" | "subtle" = subtle
+Button (stable)
+  asChild?: boolean = false
+  iconEnd?: ReactNode
+  iconStart?: ReactNode
+  loading?: boolean = false
+  ref?: Ref<E>
+  size?: "sm" | "md" | "lg" = md
+  variant?: "primary" | "secondary" | "ghost" = primary
+Calendar (experimental)
+  aria-label?: string = Calendar
+  className?: string
+  defaultValue?: string | null
+  disabled?: boolean = false
+  id?: string
+  isDateUnavailable?: ((date: string) => boolean)
+  locale?: string
+  max?: string
+  min?: string
+  onChange?: ((value: string | null) => void)
+  readOnly?: boolean = false
+  ref?: Ref<HTMLDivElement>
+  value?: string | null
+Card (stable)
+  asChild?: boolean = false
+  interactive?: boolean = false
+  padding?: "sm" | "md" | "lg" = md
+  ref?: Ref<E>
+  variant?: "raised" | "outlined" | "sunken" = raised
+  Card.Body
+    ref?: Ref<HTMLDivElement>
+  Card.Footer
+    ref?: Ref<HTMLDivElement>
+  Card.Header
+    ref?: Ref<HTMLDivElement>
+Checkbox (stable)
+  className?: string
+  description?: ReactNode
+  error?: ReactNode
+  indeterminate?: boolean = false
+  label: ReactNode
+  ref?: Ref<HTMLInputElement>
+  size?: "sm" | "md" | "lg" = md
+Combobox (experimental)
+  allowsCustomValue?: boolean = false
+  autoFocus?: boolean
+  className?: string
+  defaultInputValue?: string
+  defaultValue?: string | null
+  description?: ReactNode
+  disabled?: boolean = false
+  emptyMessage?: ReactNode = No results
+  error?: ReactNode
+  filter?: "contains" | "startsWith" | "none" = contains
+  inputValue?: string
+  items: readonly ListboxItem[]
+  label: ReactNode
+  loading?: boolean = false
+  loadingMessage?: ReactNode = Loading…
+  menuTrigger?: "focus" | "input" | "manual" = input
+  name?: string
+  onChange?: ((value: string | null) => void)
+  onInputChange?: ((text: string) => void)
+  placeholder?: string
+  readOnly?: boolean = false
+  ref?: Ref<HTMLInputElement>
+  required?: boolean = false
+  size?: "sm" | "md" | "lg" = md
+  value?: string | null
+DatePicker (experimental)
+  autoFocus?: boolean
+  className?: string
+  defaultValue?: string | null
+  description?: ReactNode
+  disabled?: boolean = false
+  error?: ReactNode
+  isDateUnavailable?: ((date: string) => boolean)
+  label: ReactNode
+  locale?: string
+  max?: string
+  min?: string
+  name?: string
+  onChange?: ((value: string | null) => void)
+  readOnly?: boolean = false
+  ref?: Ref<HTMLDivElement>
+  required?: boolean = false
+  size?: "sm" | "md" | "lg" = md
+  value?: string | null
+Dialog (stable)
+  children: ReactNode
+  id: string
+  onOpenChange?: ((open: boolean) => void)
+  open?: boolean
+DialogSystem (stable)
+  baseZIndex?: number
+  children: ReactNode
+Field (stable)
+  disabled?: boolean = false
+  id?: string
+  invalid?: boolean = false
+  ref?: Ref<HTMLDivElement>
+  required?: boolean = false
+  Field.Control
+    aria-describedby?: string
+    children: ReactNode
+  Field.Description
+    ref?: Ref<HTMLParagraphElement>
+  Field.Error
+    ref?: Ref<HTMLParagraphElement>
+  Field.Label
+    as?: "label" | "span" = label
+    ref?: Ref<HTMLLabelElement>
+Heading (stable)
+  level: 1 | 2 | 3 | 4 | 5 | 6
+  ref?: Ref<HTMLHeadingElement>
+  size?: "sm" | "md" | "lg" | "xl" | "2xl"
+  tone?: "default" | "muted" = default
+Icon (stable)
+  children: ReactNode
+  label?: string
+  ref?: Ref<HTMLSpanElement>
+  size?: "sm" | "md" | "lg" | "inherit" = md
+IconButton (stable)
+  asChild?: boolean = false
+  children?: ReactElement<unknown, string | JSXElementConstructor<any>>
+  icon: ReactNode
+  label: string
+  loading?: boolean = false
+  ref?: Ref<E>
+  size?: "sm" | "md" | "lg" = 'md'
+  variant?: "primary" | "secondary" | "ghost" = 'primary'
+Inline (stable)
+  align?: "start" | "center" | "end" | "stretch"
+  as?: "div" | "section" | "nav" | "ul" | "ol" | "li" = div
+  gap?: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 = 3
+  justify?: "start" | "center" | "end" | "between"
+  ref?: Ref<HTMLElement>
+  wrap?: boolean = true
+Listbox (experimental)
+  aria-label?: string
+  aria-labelledby?: string
+  className?: string
+  defaultValue?: readonly string[] = []
+  disabled?: boolean = false
+  emptyMessage?: ReactNode = No options
+  id?: string
+  items: readonly ListboxItem[]
+  onChange?: ((value: string[]) => void)
+  ref?: Ref<HTMLDivElement>
+  selectionMode?: "single" | "multiple" = single
+  value?: readonly string[]
+Menu (stable)
+  defaultOpen?: boolean = false
+  onOpenChange?: ((open: boolean) => void)
+  open?: boolean
+  placement?: "top" | "right" | "bottom" | "left" | "top-start" | "top-end" | "bottom-start" | "bottom-end" = bottom-start
+  Menu.Content
+    ref?: Ref<HTMLDivElement>
+  Menu.Item
+    icon?: ReactNode
+    onSelect?: (() => void)
+    ref?: Ref<HTMLButtonElement>
+    tone?: "default" | "danger" = default
+  Menu.Separator
+  Menu.Trigger
+    asChild?: boolean = false
+    ref?: Ref<HTMLButtonElement>
+Pagination (experimental)
+  aria-label?: string = Pagination
+  boundaries?: number = 1
+  count: number
+  getHref?: ((page: number) => string)
+  nextLabel?: string = Next page
+  onPageChange?: ((page: number) => void)
+  page: number
+  pageLabel?: ((page: number) => string) = (n) => `Page ${n}`
+  previousLabel?: string = Previous page
+  ref?: Ref<HTMLElement>
+  siblings?: number = 1
+  size?: "sm" | "md" = md
+Picker (experimental)
+  autoFocus?: boolean
+  className?: string
+  defaultValue?: string | null
+  description?: ReactNode
+  disabled?: boolean = false
+  emptyMessage?: ReactNode = No options
+  error?: ReactNode
+  items: readonly ListboxItem[]
+  label: ReactNode
+  name?: string
+  onChange?: ((value: string | null) => void)
+  placeholder?: string = Select…
+  ref?: Ref<HTMLButtonElement>
+  required?: boolean = false
+  size?: "sm" | "md" | "lg" = md
+  value?: string | null
+Popover (stable)
+  defaultOpen?: boolean = false
+  onOpenChange?: ((open: boolean) => void)
+  open?: boolean
+  placement?: "top" | "right" | "bottom" | "left" | "top-start" | "top-end" | "bottom-start" | "bottom-end" = bottom-start
+  Popover.Close
+    asChild?: boolean = false
+  Popover.Content
+    ref?: Ref<HTMLDivElement>
+    title?: ReactNode
+  Popover.Trigger
+    asChild?: boolean = false
+    ref?: Ref<HTMLButtonElement>
+Progress (stable)
+  hideLabel?: boolean = false
+  label: ReactNode
+  max?: number = 100
+  ref?: Ref<HTMLDivElement>
+  size?: "sm" | "md" = md
+  tone?: "primary" | "success" | "warning" | "error" = primary
+  value?: number
+  valueText?: string
+Radio (stable)
+  className?: string
+  label: ReactNode
+  ref?: Ref<HTMLInputElement>
+  value: string
+RadioGroup (stable)
+  defaultValue?: string
+  description?: ReactNode
+  disabled?: boolean = false
+  error?: ReactNode
+  label: ReactNode
+  name?: string
+  onValueChange?: ((value: string) => void)
+  orientation?: "vertical" | "horizontal" = vertical
+  ref?: Ref<HTMLDivElement>
+  required?: boolean = false
+  size?: "sm" | "md" | "lg" = md
+  value?: string
+Select (stable)
+  children: ReactNode
+  className?: string
+  description?: ReactNode
+  error?: ReactNode
+  label: ReactNode
+  placeholder?: string
+  ref?: Ref<HTMLSelectElement>
+  size?: "sm" | "md" | "lg" = md
+Skeleton (stable)
+  lines?: number = 1
+  ref?: Ref<HTMLSpanElement>
+  shape?: "text" | "rect" | "circle" = text
+  size?: "sm" | "md" | "lg" = md
+Slider (experimental)
+  className?: string
+  defaultValue?: SliderValue
+  description?: ReactNode
+  disabled?: boolean = false
+  formatOptions?: NumberFormatOptions
+  hideLabel?: boolean = false
+  label: ReactNode
+  max?: number = 100
+  min?: number = 0
+  name?: string
+  onChange?: ((value: T) => void)
+  onChangeEnd?: ((value: T) => void)
+  orientation?: "horizontal" | "vertical" = horizontal
+  ref?: Ref<HTMLDivElement>
+  showOutput?: boolean = true
+  step?: number = 1
+  thumbLabels?: readonly [string, string] = ['Minimum', 'Maximum']
+  value?: SliderValue
+Spinner (stable)
+  decorative?: boolean = false
+  label?: string = Loading
+  ref?: Ref<HTMLSpanElement>
+  size?: "sm" | "md" | "lg" | "inherit" = md
+  tone?: "inherit" | "default" = default
+Stack (stable)
+  align?: "start" | "center" | "end" | "stretch"
+  as?: "div" | "section" | "nav" | "ul" | "ol" | "li" = div
+  gap?: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 = 3
+  justify?: "start" | "center" | "end" | "between"
+  ref?: Ref<HTMLElement>
+Switch (stable)
+  className?: string
+  description?: ReactNode
+  error?: ReactNode
+  label: ReactNode
+  ref?: Ref<HTMLInputElement>
+  size?: "sm" | "md" | "lg" = md
+Table (experimental)
+  aria-label?: string
+  aria-labelledby?: string
+  children: ReactNode
+  className?: string
+  defaultSelected?: readonly string[] = []
+  defaultSort?: TableSort
+  density?: "default" | "compact" = default
+  disabledIds?: readonly string[]
+  onRowAction?: ((id: string) => void)
+  onSelectedChange?: ((ids: string[]) => void)
+  onSortChange?: ((sort: TableSort) => void)
+  ref?: Ref<HTMLTableElement>
+  selected?: readonly string[]
+  selectionMode?: "none" | "single" | "multiple" = none
+  sort?: TableSort | null
+  stickyHeader?: boolean = false
+  Table.Body
+    children: ReactNode | ((item: T) => ReactElement<unknown, string | JSXElementConstructor<any>>)
+    className?: string
+    emptyMessage?: ReactNode = No rows
+    items?: Iterable<T>
+  Table.Cell
+    align?: "start" | "end" = start
+    className?: string
+  Table.Column
+    align?: "start" | "end" = start
+    allowsSorting?: boolean = false
+    className?: string
+    id?: string
+    isRowHeader?: boolean = false
+  Table.Header
+    children: ReactNode
+    className?: string
+  Table.Row
+    children: ReactNode
+    className?: string
+    id?: string
+Tabs (stable)
+  activation?: "automatic" | "manual" = automatic
+  defaultValue?: string
+  onValueChange?: ((value: string) => void)
+  orientation?: "horizontal" | "vertical" = horizontal
+  ref?: Ref<HTMLDivElement>
+  value?: string
+  Tabs.List
+    ref?: Ref<HTMLDivElement>
+  Tabs.Panel
+    ref?: Ref<HTMLDivElement>
+    value: string
+  Tabs.Tab
+    ref?: Ref<HTMLButtonElement>
+    value: string
+Text (stable)
+  align?: "start" | "center" | "end"
+  as?: "p" | "span" | "div" | "strong" | "em" | "small" = p
+  family?: "body" | "mono" = body
+  ref?: Ref<HTMLElement>
+  size?: "xs" | "sm" | "md" | "lg" | "xl" = md
+  tone?: "default" | "muted" | "faint" = default
+  truncate?: boolean = false
+  weight?: "regular" | "medium" | "semibold" = regular
+TextField (stable)
+  className?: string
+  description?: ReactNode
+  error?: ReactNode
+  label: ReactNode
+  ref?: Ref<HTMLInputElement>
+  size?: "sm" | "md" | "lg" = md
+Textarea (stable)
+  autoGrow?: boolean = false
+  className?: string
+  description?: ReactNode
+  error?: ReactNode
+  label: ReactNode
+  ref?: Ref<HTMLTextAreaElement>
+  resize?: "vertical" | "none" | "both" = vertical
+  size?: "sm" | "md" | "lg" = md
+ToastProvider (stable)
+  duration?: number = 6000
+  label?: string = Notifications
+  max?: number = 5
+  placement?: "bottom-end" | "top-end" | "top-center" = bottom-end
+Tooltip (stable)
+  children: ReactElement<unknown, string | JSXElementConstructor<any>>
+  content: ReactNode
+  delay?: number = 300
+  placement?: "top" | "right" | "bottom" | "left" | "top-start" | "top-end" | "bottom-start" | "bottom-end" = top
+VisuallyHidden (stable)
+  as?: "span" | "div" = span
+  ref?: Ref<HTMLElement>

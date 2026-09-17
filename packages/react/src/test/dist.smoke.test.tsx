@@ -7,6 +7,7 @@ import { render, screen } from '@testing-library/react';
 
 const DIST = resolve(import.meta.dirname, '../../dist');
 const SRC = resolve(import.meta.dirname, '..');
+type Prop = { name: string; type: string; values?: string[]; required: boolean; default: string | null };
 const manifest = JSON.parse(readFileSync(resolve(DIST, 'component-manifest.json'), 'utf8')) as {
   categories: string[];
   components: Array<{
@@ -18,8 +19,8 @@ const manifest = JSON.parse(readFileSync(resolve(DIST, 'component-manifest.json'
     accessibility: string;
     do: string[];
     dont: string[];
-    props: Array<{ name: string }>;
-    parts: Array<{ name: string }>;
+    props: Prop[];
+    parts: Array<{ name: string; props: Prop[] }>;
   }>;
 };
 const entryOf = (component: { import: string }) => component.import.match(/pulp-react\/([a-z-]+)'/)?.[1] ?? '';
@@ -132,6 +133,27 @@ describe('dist', () => {
     expect(js).toMatch(/from ['"]react-aria-components['"]/);
     expect(js).not.toMatch(/data-rac/);
     expect(js).toMatch(/from ['"]@internationalized\/date['"]/);
+  });
+
+  // The React package's public API: every component, part and prop a consumer can write, with
+  // required-ness, type (union members spelled out) and default. Prose (descriptions,
+  // accessibility, do/don't) is left out so docs edits do not churn it. When this fails the API
+  // changed: review the diff, update with `pnpm --filter @pearpages/pulp-react test:dist -u`, and
+  // add a changeset. A removed prop or value, a narrowed type or a new required prop is breaking.
+  it('the public API matches api.snapshot.txt', async () => {
+    const byName = <T extends { name: string }>(a: T, b: T) => (a.name < b.name ? -1 : a.name > b.name ? 1 : 0);
+    const prop = (p: Prop) =>
+      `${p.name}${p.required ? '' : '?'}: ${p.values ? p.values.join(' | ') : p.type}${p.default === null ? '' : ` = ${p.default}`}`;
+    const lines = ['# @pearpages/pulp-react public API. Regenerate: pnpm --filter @pearpages/pulp-react test:dist -u', ''];
+    for (const component of [...manifest.components].sort(byName)) {
+      lines.push(`${component.name} (${component.status})`);
+      for (const p of [...component.props].sort(byName)) lines.push(`  ${prop(p)}`);
+      for (const part of [...component.parts].sort(byName)) {
+        lines.push(`  ${part.name}`);
+        for (const p of [...part.props].sort(byName)) lines.push(`    ${prop(p)}`);
+      }
+    }
+    await expect(`${lines.join('\n')}\n`).toMatchFileSnapshot('../../api.snapshot.txt');
   });
 
   it('the combined stylesheet contains every component', () => {
