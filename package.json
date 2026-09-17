@@ -26,6 +26,7 @@
     "version-packages": "changeset version && pnpm install --lockfile-only",
     "release": "pnpm build && changeset publish",
     "verify": "pnpm check:generated && pnpm lint && pnpm typecheck && pnpm test && pnpm build && pnpm check:package && pnpm check:size && pnpm test:dist && pnpm test:storybook && pnpm storybook:build",
+    "ci:local": "bash scripts/ci-local.sh",
     "check:guardrails": "node scripts/check-guardrails.mjs",
     "check:generated": "pnpm check:tokens && pnpm --filter @pearpages/pulp-icons check"
   },

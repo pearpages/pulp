@@ -272,7 +272,8 @@ copy, not to re-derive.
       collection to settle and presses until the highlight sticks (the exact id stays pinned by the
       jsdom unit test), and the storybook Vitest project retries once: a real browser can drop an
       event, anything failing twice is real.
-- [x] Visual regression of the 136 matrix stories (2026-09-17, live in CI). Vitest's
+- [ ] Visual regression of the 136 matrix stories (2026-09-17, **built, baselines in place, check
+      switched off in CI while two flaky shots are fixed**). Vitest's
       `toMatchScreenshot` from one `afterEach` in `preview.tsx`, bridged by
       `.storybook/vitest.visual.setup.ts` and live only under `VITE_VISUAL=1`; baselines in
       `apps/storybook/visual-baselines/`, rendered only by `visual-update.yml` because macOS and
@@ -281,7 +282,24 @@ copy, not to re-derive.
       readable diff — but only at threshold 0.02, the default 0.1 passed it; Calendar's "today" is
       frozen. Bootstrapped without a red deploy: pushed with the flag off, `visual-update.yml`
       committed the 136 Linux baselines (`44564ef`) and redeployed, then `VITE_VISUAL: '1'` went
-      onto the `test:storybook` step of `deploy.yml` and `ci.yml`.
+      onto the `test:storybook` step of `deploy.yml` and `ci.yml`. The first live run went red:
+      134 of 136 matched, Toast in bitepals timed out. Reproduced with `pnpm ci:local`
+      (`docs/ci-local.md`): not a hang but `expect.element` retrying a real mismatch until the test
+      timeout (now bounded to 4 s, so it fails with its message and diff). Against baselines
+      rendered in the same container, 5 compares: Toast bitepals 3/5 (one description line,
+      "dist/tokens.css matches its source."), DatePicker pulp light 1/5 (focus ring present or
+      not); everything else deterministic. Disproved by running them: frozen `Date`, font-load order.
+      **Fixed:** Toast — animations and transitions are off from before the first render, for
+      shot stories only (Chromium keeps text rasterised while its layer animated; blanket-off broke
+      Combobox's interaction story): 0 mismatches in 25 compares. Final container run 10/10 green.
+      **Still open:** DatePicker pulp light mismatched on a first attempt in 4 of those 10 (its
+      `data-focus-within` ring; Combobox bitepals light once), absorbed by `retry: 1`. Waiting for
+      focus to settle did not cure it; it is always the first matrix story of the file, so suspect
+      window focus under file parallelism (try `--no-file-parallelism`). `pnpm ci:local visual N`
+      lists such hidden flakes per run. **Left:** land, re-render on GitHub (the shots changed:
+      no animations), `VITE_VISUAL` back on, then tick.
+      Also known: bitepals' mono family is system fonts, so those shots depend on the runner
+      image's fonts and need re-rendering when GitHub changes them.
 - [ ] Keyboard-only interaction tests for Button `asChild` links (Enter/Space semantics).
 - [ ] Forced-colors (Windows high contrast) story and a `@media (forced-colors: active)` rule set.
 - [ ] Reduced-motion: the global reset freezes the spinner to a static ring; decide whether that is
