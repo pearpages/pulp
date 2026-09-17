@@ -6,3 +6,9 @@ packages:
 # esbuild needs its postinstall to place the platform binary.
 allowBuilds:
   esbuild: true
+
+# pnpm 11 refuses packages published less than 24 hours ago (minimumReleaseAge: 1440), a guard
+# against a hijacked release being pulled in at once. @pearpages is this repo's own scope: pulp
+# depends on @pearpages/modals and often needs a release the day it ships.
+minimumReleaseAgeExclude:
+  - '@pearpages/*'

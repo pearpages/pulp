@@ -691,6 +691,20 @@
         "unit": "rem"
       },
       "$description": "Maximum height of an option list before it scrolls (Combobox, Picker, Listbox)."
+    },
+    "sheet-width": {
+      "$value": {
+        "value": 24,
+        "unit": "rem"
+      },
+      "$description": "Width of a sheet docked to the start or end edge."
+    },
+    "sheet-height": {
+      "$value": {
+        "value": 60,
+        "unit": "vh"
+      },
+      "$description": "Height of a sheet docked to the top or bottom edge: a share of the viewport, so the page stays visible behind it."
     }
   },
   "focus": {

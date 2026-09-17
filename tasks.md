@@ -3,15 +3,17 @@
 The pending work and the tiered roadmap. `CLAUDE.md` holds the rules and the toolchain facts;
 this file holds what is left to do, ticked with a date when done. Ordered within each group.
 
-## Recommended order (2026-09-16)
+## Recommended order (2026-09-17)
 
-1. `@pearpages/modals` 0.3.0 (placement is built, uncommitted in that repo), then Sheet.
-2. Decision record 005 on the shape of the token output (group 4).
-3. Docs (group 5): README badges now that npm is live, brand walkthrough, tokens diagram.
-4. The remaining guardrails, testing gaps and housekeeping.
+1. Decision record 005 on the shape of the token output (group 4).
+2. Docs (group 5): README badges now that npm is live, brand walkthrough, tokens diagram.
+3. The remaining guardrails, testing gaps and housekeeping.
 
 ## Session log
 
+- 2026-09-17: visual regression live in CI (136 shots, CI-owned baselines) and `pnpm ci:local`
+  (Colima, linux/amd64) built to reproduce and fix its first failures; `@pearpages/modals` 0.3.0
+  released with `placement`; Sheet added on it; READMEs name the modals dependency.
 - 2026-09-16: 0.1.0 published by hand (trusted publishing blocked by npm/cli#9969); Combobox story
   flake fixed and `pnpm verify` added; the CV adopted pulp's tokens and `IconButton`, verified
   against the deployed site by screenshot diff; semantic token names pinned by a test; task list
@@ -161,11 +163,15 @@ copy, not to re-derive.
       roving focus, `single|multiple`, `collapsible`.
 - [x] Menu (2026-09-14): WAI-ARIA menu button: arrows open to first/last, wraparound, typeahead,
       Enter/Space/click select and close, Escape/Tab close and return focus, `tone="danger"` items.
-- [ ] Sheet: **blocked on `@pearpages/modals` ≥ 0.3.0 `placement`**. Docking the vendor dialog to
-      an edge cannot be done from pulp's layered stylesheet (the vendor's layout rules are
-      unlayered). Decision (2026-09-14): the vendor learns to dock, pulp maps colours. Then `Sheet`
-      = `Dialog` with `placement` forwarded and `--sheet-*` tokens mapped onto
-      `--modal-width-sheet` / `--modal-height-sheet`.
+- [x] Sheet (2026-09-17): Dialog docked to an edge. `@pearpages/modals` 0.3.0 shipped `placement`
+      the same day (decision 003: the vendor learns to dock, pulp maps sizes). `Sheet.Content` is a
+      real wrapper, unlike `Dialog.Content`, which *is* the vendor's: it adds `placement`
+      (`start | end | top | bottom`, default `end`; no `center`) and the class that sets
+      `--modal-width-sheet`, `--modal-height-sheet` and `--modal-animation-translate-sheet` from
+      `--sheet-*` on the dialog element itself, where an own declaration beats the vendor's `:root`
+      default whatever the layer. New semantic `size.sheet-width`/`size.sheet-height` in both
+      brands and in the pinned name list. The vendor-variable test now discovers stylesheets.
+      Landed through a branch so the four new visual baselines existed before `main` saw it.
 - Decisions after tier 4 (2026-09-14): positioning stays on `@floating-ui/react-dom` behind
   `src/internal/floating.ts`; revisit when Safari 26 is an acceptable floor (CSS anchor positioning)
   or when modals moves to the top layer (native Popover API; until then, top-layer overlays would

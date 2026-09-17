@@ -276,6 +276,20 @@ Select (stable)
   placeholder?: string
   ref?: Ref<HTMLSelectElement>
   size?: "sm" | "md" | "lg" = md
+Sheet (experimental)
+  children: ReactNode
+  id: string
+  onOpenChange?: ((open: boolean) => void)
+  open?: boolean
+  Sheet.Content
+    animated?: boolean
+    asChild?: boolean
+    children: ReactNode
+    closeOnBackdrop?: boolean
+    closeOnEscape?: boolean
+    onInteractOutside?: ((e: { target: EventTarget; preventDefault(): void; }) => void)
+    placement?: "start" | "end" | "top" | "bottom" = end
+    size?: "auto" | "md" | "full"
 Skeleton (stable)
   lines?: number = 1
   ref?: Ref<HTMLSpanElement>

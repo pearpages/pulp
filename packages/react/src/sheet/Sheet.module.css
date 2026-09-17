@@ -1,0 +1,15 @@
+/*
+ * The vendor (@pearpages/modals) docks the dialog and sizes it from three variables it declares on
+ * :root. This class sits on the dialog element itself, so its own declarations beat the inherited
+ * :root defaults whatever the cascade layer or import order: no specificity fight with the
+ * vendor's unlayered rules, which only *read* these. Colour, type and motion timing come from
+ * Dialog's mapping on the portal root.
+ */
+
+@layer components {
+  .content {
+    --modal-width-sheet: var(--sheet-width);
+    --modal-height-sheet: var(--sheet-height);
+    --modal-animation-translate-sheet: var(--sheet-motion-translate);
+  }
+}

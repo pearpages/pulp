@@ -1,6 +1,9 @@
 # 003. Sheet waits for a `placement` feature in `@pearpages/modals`
 
-Date: 2026-09-14 (tier 4). Status: accepted; unblocked by modals 0.3.0 once published.
+Date: 2026-09-14 (tier 4). Status: done. `@pearpages/modals` 0.3.0 shipped `placement` on
+2026-09-17 and `Sheet` followed the same day: Dialog with `placement` (`start | end | top | bottom`,
+no `center`) and `--sheet-width`, `--sheet-height` and `--sheet-motion-translate` mapped onto the
+vendor's sheet variables on the dialog element itself.
 
 ## Context
 

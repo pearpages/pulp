@@ -140,6 +140,8 @@
     --size-popover-width: 20rem;
     --size-menu-width: 14rem;
     --size-listbox-height: 18rem;
+    --size-sheet-width: 24rem;
+    --size-sheet-height: 60vh;
     --focus-ring-width: 2px;
     --focus-ring-offset: 2px;
     --layer-toast: 1100;
@@ -560,6 +562,9 @@
     --select-focus-ring-width: var(--focus-ring-width);
     --select-focus-ring-offset: var(--focus-ring-offset);
     --select-motion-duration: var(--motion-duration-fast);
+    --sheet-width: var(--size-sheet-width);
+    --sheet-height: var(--size-sheet-height);
+    --sheet-motion-translate: var(--space-5);
     --skeleton-base: var(--color-surface-sunken);
     --skeleton-highlight: var(--color-surface-raised);
     --skeleton-radius: var(--radius-control);
@@ -904,6 +909,8 @@
     --size-popover-width: 20rem;
     --size-menu-width: 14rem;
     --size-listbox-height: 18rem;
+    --size-sheet-width: 24rem;
+    --size-sheet-height: 60vh;
     --focus-ring-width: 2px;
     --focus-ring-offset: 2px;
     --layer-toast: 1100;

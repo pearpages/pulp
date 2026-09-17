@@ -34,3 +34,4 @@ export * from './date-picker';
 export * from './slider';
 export * from './table';
 export * from './pagination';
+export * from './sheet';

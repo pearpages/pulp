@@ -1,0 +1,8 @@
+{
+  "$description": "Sheet component tokens: the size side of the mapping onto @pearpages/modals. The vendor docks the dialog and reads --modal-width-sheet, --modal-height-sheet and --modal-animation-translate-sheet; Sheet.module.css sets those from these --sheet-* tokens on the dialog element. Colour, type and motion timing are Dialog's.",
+  "sheet": {
+    "width": { "$type": "dimension", "$value": "{size.sheet-width}" },
+    "height": { "$type": "dimension", "$value": "{size.sheet-height}" },
+    "motion-translate": { "$type": "dimension", "$value": "{space.5}" }
+  }
+}

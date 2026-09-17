@@ -88,8 +88,8 @@ importers:
         version: 19.3.0(react@19.3.0)
     devDependencies:
       '@pearpages/modals':
-        specifier: ^0.2.0
-        version: 0.2.0(react-dom@19.3.0(react@19.3.0))(react@19.3.0)
+        specifier: ^0.3.0
+        version: 0.3.0(react-dom@19.3.0(react@19.3.0))(react@19.3.0)
       '@pearpages/pulp-icons':
         specifier: workspace:*
         version: link:../../packages/icons
@@ -197,8 +197,8 @@ importers:
         specifier: ^3.12.4
         version: 3.12.4
       '@pearpages/modals':
-        specifier: ^0.2.0
-        version: 0.2.0(react-dom@19.3.0(react@19.3.0))(react@19.3.0)
+        specifier: ^0.3.0
+        version: 0.3.0(react-dom@19.3.0(react@19.3.0))(react@19.3.0)
       '@pearpages/pulp-icons':
         specifier: workspace:^
         version: link:../icons
@@ -1398,8 +1398,8 @@ packages:
     cpu: [x64]
     os: [win32]
 
-  '@pearpages/modals@0.2.0':
-    resolution: {integrity: sha512-sJA4IP1xuJoQFVZqHT0MaRIXc16peI2TfurCu/ImUU022vl9hiI1fkRZr29x6Xp8W9KW61eqEfl34e6My79EPg==}
+  '@pearpages/modals@0.3.0':
+    resolution: {integrity: sha512-AePx9dPhChH4r2yQXl9vQ7hsMzSRUMbxx6GdIE8RCio2dELJuuaKAJea3PDYYFkc/iR37c1C/2soBN8/N86SEA==}
     peerDependencies:
       react: ^19.1.1
       react-dom: ^19.1.1
@@ -5294,7 +5294,7 @@ snapshots:
   '@oxc-resolver/binding-win32-x64-msvc@11.21.2':
     optional: true
 
-  '@pearpages/modals@0.2.0(react-dom@19.3.0(react@19.3.0))(react@19.3.0)':
+  '@pearpages/modals@0.3.0(react-dom@19.3.0(react@19.3.0))(react@19.3.0)':
     dependencies:
       react: 19.3.0
       react-dom: 19.3.0(react@19.3.0)

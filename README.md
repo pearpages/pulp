@@ -26,7 +26,7 @@ Reference consumer: [perepages.com](https://perepages.com) takes its colour from
 | --- | --- |
 | `@pearpages/pulp-tokens` | `tokens.css`, `tokens.json` |
 | `@pearpages/pulp-css` | `index.css` (layers + tokens + reset + base) |
-| `@pearpages/pulp-react` | `Text`, `Heading`, `Icon`, `VisuallyHidden`, `Stack`, `Inline`, `Field`, `Button`, `IconButton`, `TextField`, `Textarea`, `Select`, `Checkbox`, `Switch`, `RadioGroup`, `Card`, `Tabs`, `Dialog`, `Spinner`, `Badge`, `Alert`, `Toast`, `Progress`, `Skeleton`, `Tooltip`, `Popover`, `Menu`, `Accordion`, `Combobox`, `Listbox`, `Picker`, `Calendar`, `DatePicker`, `Slider`, `Table`, `Pagination` |
+| `@pearpages/pulp-react` | `Text`, `Heading`, `Icon`, `VisuallyHidden`, `Stack`, `Inline`, `Field`, `Button`, `IconButton`, `TextField`, `Textarea`, `Select`, `Checkbox`, `Switch`, `RadioGroup`, `Card`, `Tabs`, `Dialog`, `Sheet`, `Spinner`, `Badge`, `Alert`, `Toast`, `Progress`, `Skeleton`, `Tooltip`, `Popover`, `Menu`, `Accordion`, `Combobox`, `Listbox`, `Picker`, `Calendar`, `DatePicker`, `Slider`, `Table`, `Pagination` |
 | `@pearpages/pulp-icons` | stroke icons as React components, tree-shakeable |
 
 ## Use
@@ -45,7 +45,7 @@ The complex widgets (Combobox, Listbox, Picker, Calendar, DatePicker, Slider, Ta
 on React Aria Components, installed with the package and tree-shaken per entry. Their
 props are pulp's; dates cross the API as `YYYY-MM-DD` strings.
 
-`Dialog` and `DialogSystem` build on [`@pearpages/modals`](https://www.npmjs.com/package/@pearpages/modals)
+`Dialog`, `DialogSystem` and `Sheet` build on [`@pearpages/modals`](https://www.npmjs.com/package/@pearpages/modals)
 (focus trap, inert page, stacking, Escape and backdrop dismissal), also installed with the
 package. pulp themes it by mapping its tokens onto the vendor's `--modal-*` variables, so dialogs
 follow brand and scheme. It is the one vendor whose stylesheet you import yourself, into the

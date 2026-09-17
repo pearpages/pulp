@@ -45,19 +45,19 @@ theme everything inside the element they're on.
 - **Forms**: `Field`, `TextField`, `Textarea`, `Select`, `Checkbox`, `Switch`, `RadioGroup`,
   `Radio`, `Combobox`, `Listbox`, `Picker`, `Calendar`, `DatePicker`, `Slider`
 - **Navigation**: `Tabs`, `Accordion`, `Pagination`
-- **Overlays**: `Dialog`, `DialogSystem`, `Menu`, `Popover`, `Tooltip`
+- **Overlays**: `Dialog`, `DialogSystem`, `Sheet`, `Menu`, `Popover`, `Tooltip`
 - **Feedback**: `Alert`, `Badge`, `ToastProvider` and `useToast`, `Progress`, `Skeleton`, `Spinner`
 - **Data**: `Table`
 - **Utilities**: `Icon`, `VisuallyHidden`
 
-`Combobox`, `Listbox`, `Picker`, `Calendar`, `DatePicker`, `Slider`, `Table` and `Pagination` are
-**experimental**: their API may still change in a minor release. All but `Pagination` build on
+`Combobox`, `Listbox`, `Picker`, `Calendar`, `DatePicker`, `Slider`, `Table`, `Pagination` and
+`Sheet` are **experimental**: their API may still change in a minor release. All but `Pagination` build on
 React Aria Components, installed with this package and tree-shaken per entry. Their props are
 pulp's, and dates cross the API as `YYYY-MM-DD` strings.
 
 ## Dialogs need one more stylesheet
 
-`Dialog` and `DialogSystem` build on
+`Dialog`, `DialogSystem` and `Sheet` (a dialog docked to an edge) build on
 [`@pearpages/modals`](https://www.npmjs.com/package/@pearpages/modals): the focus trap, the inert
 page behind the dialog, stacking, Escape and backdrop dismissal are its work, and it is installed
 with this package. pulp maps its own tokens onto the vendor's `--modal-*` variables, so a dialog
