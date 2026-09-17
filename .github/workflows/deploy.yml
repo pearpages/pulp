@@ -40,9 +40,8 @@ jobs:
       - run: pnpm --filter pulp-docs exec playwright install --with-deps chromium
       # VITE_VISUAL: the matrix stories are compared with apps/storybook/visual-baselines.
       - run: pnpm test:storybook
-        # The visual check is off while two flaky shots are fixed (tasks.md, docs/ci-local.md):
-        # env:
-        #   VITE_VISUAL: '1'
+        env:
+          VITE_VISUAL: '1'
       # A failed visual check leaves <Component>/<brand>-<scheme>-actual|-diff.png here.
       - if: failure()
         uses: actions/upload-artifact@v4

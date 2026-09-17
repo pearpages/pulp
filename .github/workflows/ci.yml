@@ -41,9 +41,8 @@ jobs:
       # VITE_VISUAL: the matrix stories are compared with apps/storybook/visual-baselines.
       - name: Stories as tests (browser, a11y, visual)
         run: pnpm test:storybook
-        # The visual check is off while two flaky shots are fixed (tasks.md, docs/ci-local.md):
-        # env:
-        #   VITE_VISUAL: '1'
+        env:
+          VITE_VISUAL: '1'
       # A failed visual check leaves <Component>/<brand>-<scheme>-actual|-diff.png here.
       - name: Upload visual diffs
         if: failure()

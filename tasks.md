@@ -272,8 +272,8 @@ copy, not to re-derive.
       collection to settle and presses until the highlight sticks (the exact id stays pinned by the
       jsdom unit test), and the storybook Vitest project retries once: a real browser can drop an
       event, anything failing twice is real.
-- [ ] Visual regression of the 136 matrix stories (2026-09-17, **built, baselines in place, check
-      switched off in CI while two flaky shots are fixed**). Vitest's
+- [x] Visual regression of the 136 matrix stories (2026-09-17, live in CI; one hidden flake still
+      open, below). Vitest's
       `toMatchScreenshot` from one `afterEach` in `preview.tsx`, bridged by
       `.storybook/vitest.visual.setup.ts` and live only under `VITE_VISUAL=1`; baselines in
       `apps/storybook/visual-baselines/`, rendered only by `visual-update.yml` because macOS and
@@ -296,8 +296,12 @@ copy, not to re-derive.
       `data-focus-within` ring; Combobox bitepals light once), absorbed by `retry: 1`. Waiting for
       focus to settle did not cure it; it is always the first matrix story of the file, so suspect
       window focus under file parallelism (try `--no-file-parallelism`). `pnpm ci:local visual N`
-      lists such hidden flakes per run. **Left:** land, re-render on GitHub (the shots changed:
-      no animations), `VITE_VISUAL` back on, then tick.
+      lists such hidden flakes per run. Landed: baselines re-rendered on GitHub (`312a8d7`, 5 shots
+      changed) and `VITE_VISUAL` back on in `deploy.yml` and `ci.yml`.
+- [ ] DatePicker's first matrix shot (and Combobox's, rarely) mismatches on a first attempt and
+      passes on the retry: find the cause with `pnpm ci:local visual 10`, starting with
+      `--no-file-parallelism`. Same family: Combobox `Default` (interaction, not visual) failed
+      once in ten Linux runs.
       Also known: bitepals' mono family is system fonts, so those shots depend on the runner
       image's fonts and need re-rendering when GitHub changes them.
 - [ ] Keyboard-only interaction tests for Button `asChild` links (Enter/Space semantics).
