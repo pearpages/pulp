@@ -33,11 +33,14 @@ Avatar (experimental)
   size?: "sm" | "md" | "lg" | "xl" = md
   src?: string
 Badge (stable)
+  count?: number
   icon?: ReactNode
+  label?: string
+  max?: number = 99
   ref?: Ref<HTMLSpanElement>
   size?: "sm" | "md" = md
   tone?: "neutral" | "info" | "success" | "warning" | "error" = neutral
-  variant?: "solid" | "subtle" = subtle
+  variant?: "solid" | "subtle" | "dot" = subtle
 Button (stable)
   asChild?: boolean = false
   iconEnd?: ReactNode

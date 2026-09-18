@@ -23,6 +23,9 @@ export const WithIcon: Story = { args: { tone: 'success', icon: <Check />, child
 
 const tones = ['neutral', 'info', 'success', 'warning', 'error'] as const;
 const icons = { neutral: undefined, info: <Info />, success: <Check />, warning: <Warning />, error: <Warning /> };
+export const Dot: Story = { args: { variant: 'dot', tone: 'error', label: 'Unread messages', children: undefined } };
+export const Count: Story = { args: { count: 120, tone: 'error', variant: 'solid', label: 'unread', children: undefined } };
+
 const matrix = (
   <div className="sb-grid">
     {(['subtle', 'solid'] as const).map((variant) => (
@@ -37,6 +40,14 @@ const matrix = (
         </Badge>
       </div>
     ))}
+    <div className="sb-row">
+      {tones.map((tone) => (
+        <Badge key={tone} tone={tone} variant="dot" label={`${tone} mark`} />
+      ))}
+      <Badge count={3} tone="error" variant="solid" label="unread" />
+      <Badge count={120} tone="error" variant="solid" label="unread" />
+      <Badge count={12} size="sm" label="places" />
+    </div>
   </div>
 );
 

@@ -501,8 +501,12 @@ Extensions to existing components
       `variant="filter"` is `iconStart` with a Filter glyph (comes with the icons). The browser's own
       search cancel button is hidden. Seen while here: `TextField.stories.tsx` also carries a
       `parameters.docs.description`, like Dialog's (group 5).
-- [ ] Badge: `variant="dot"` (needs a `label`, rendered visually hidden) and a count clamp
-      (`max = 99` → "99+"). Covers bitepals' `NavBadge`.
+- [x] Badge `variant="dot"`, `count`, `max`, `label` (2026-09-18): the dot is the tone's solid fill
+      with no text, and its `label` is rendered visually hidden (a dev warning without one; flat
+      props rather than bitepals' discriminated union, so the manifest stays readable). `count`
+      clamps to `max` (default 99 → "99+") and renders nothing at zero or below; with a `label` it
+      reads "3 unread". No `role="status"`: bitepals' NavBadge made every badge a live region,
+      which announces a count that was there when the page loaded. Covers NavBadge (6 uses).
 - [ ] Sheet: drag to dismiss for `placement="bottom"`: pointer events, offset + velocity threshold,
       no animation library, off under `prefers-reduced-motion`; port bitepals' tested
       `shouldDismiss()` (`apps/web/design-system/ui/components/bottom-sheet/`). Decision record 003
