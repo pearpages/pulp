@@ -23,9 +23,18 @@ Branch `bitepals-consumer`, off `main`. Nothing pushed.
 | `f7813da` | Group 10 opened in `tasks.md` |
 | `9cb4d70` | **Divider**: the worked example for a leaf, hook-free component |
 | `7faf287` | **Link**: the worked example for `asChild` and a generic `ref` |
+| `a67db76` | Avatar |
+| `f339ace`, `322679c` | Chip, and its hover without `:has()` |
+| `739b6a4` | SegmentedControl with `SegmentedControl.Nav` |
+| `a33cd6d` | EmptyState |
+| `087fc7c` | Button / IconButton `tone="danger"` + `color.status.error-hover` / `-active` (agreed with Pere) |
+| `225419b` | `toast.undo` (the `action` half already existed as `{ label, onClick }`) |
+| `c98e287` | TextField search affordance |
+| `b67331b` | Badge dot and count |
+| `bb65f9b` | Sheet drag to dismiss |
 
-Both went through every check listed below except the full `pnpm verify` chain (`test:site` and the
-full `test:storybook` were not run; their own stories were). Run `pnpm verify` once before building on them.
+Everything above went through the full `pnpm verify` before its commit, and was looked at in the built
+site (all four brand × scheme pairs). **Left: the icons, then the infrastructure.**
 
 ## How to work
 
@@ -39,6 +48,19 @@ full `test:storybook` were not run; their own stories were). Run `pnpm verify` o
   What carries over is the *need*; the table says what each call site actually uses.
 
 Things already met, so they cost nothing the second time:
+
+- **Look at the built site before committing.** Four bugs in this group passed every check and were
+  plain in a screenshot (see the session log). A scratch script that serves `storybook-static` and shoots
+  the four `--matrix…` stories of one component is enough.
+- No `:has()` in component CSS: Firefox 120 is the floor and `check:floor` cannot see it.
+- A constant between a component's JSDoc block and its `export function` detaches the block: the
+  manifest then fails with "JSDoc needs @status". Put constants above the JSDoc.
+- The compiler lint rejects handing a callback that touches refs to any function (`Object.assign` too):
+  one `eslint-disable-next-line react-hooks/refs` with the reason, as `asChild` does.
+- Elements stacked in one grid cell paint in DOM order: a decorative glyph goes *after* the input it
+  sits on, or the input's background covers it.
+- Synthetic pointer events in jsdom are a millisecond apart: read time from `performance.now()` and
+  step it in the test, or every drag is a flick.
 
 - A new entry changes the public API: `test:dist` fails on `api.snapshot.txt`. Re-run it with `-u`
   (`pnpm --filter @pearpages/pulp-react exec vitest run --config vitest.dist.config.ts -u`) and commit the file.

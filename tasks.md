@@ -14,6 +14,13 @@ this file holds what is left to do, ticked with a date when done. Ordered within
 
 ## Session log
 
+- 2026-09-18 (night): group 10 on branch `bitepals-consumer`, one item per commit, `pnpm verify`
+  green and the built site looked at before each: Avatar, Chip, SegmentedControl (+ `.Nav`),
+  EmptyState, Button/IconButton `tone="danger"` (two new semantic tokens, agreed), `toast.undo`,
+  TextField search, Badge dot and count, Sheet drag to dismiss. Looking caught what no check did:
+  Avatar's fallback invisible on the light surface, SegmentedControl's thumb lost in bitepals dark,
+  TextField's search glyph painted under its own input, and `:has()` below the Firefox floor (Chip
+  fixed; Select recorded in group 9). Left: the icons and the infrastructure. Nothing pushed.
 - 2026-09-18 (evening): Pere: "even buttons don't seem correct". They were not: the deployed site
   linked a split `Icon-*.css` before the entry CSS, `components` became the weakest cascade layer
   and the reset beat every component; all tests were green because all of them render through the
