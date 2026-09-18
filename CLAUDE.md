@@ -9,14 +9,14 @@ to humans and coding agents alike.
 
 | Path | What |
 | --- | --- |
-| `packages/tokens` | W3C DTCG JSON in `tokens/{primitives,semantic,component}`; `scripts/build.mjs` → `dist/tokens.css` + `dist/tokens.json` (**committed**, CI checks drift) |
+| `packages/tokens` | W3C DTCG JSON in `tokens/{primitives,semantic,component}`; `scripts/build.mjs` → `dist/tokens.css` + `dist/tokens.json`, and two views of the semantic tier, `dist/theme.css` (Tailwind v4) + `dist/native.{js,cjs,d.ts}` (React Native), record 005 (all **committed**, CI checks drift) |
 | `packages/css` | `layers.css`, `reset.css`, `base.css`, `index.css`. No build. Framework-agnostic |
 | `packages/react` | components in `src/<name>/` (five files each), tsup build, one entry per component |
 | `packages/icons` | `svg/` sources → generated `src/icons/*.tsx` (committed; `check` on drift); one barrel, tree-shakeable |
 | `apps/storybook` | docs + stories-as-tests (package `pulp-docs`); deploys to pulp.pearpages.com. `.storybook/theme.ts` derives the site theme from `tokens.json`; `scripts/fonts.mjs` copies the brand typefaces for the manager; `public/` holds the mark and wordmarks |
 | `.claude/skills/add-component` | the scaffold procedure for a new component |
 | `PRINCIPLES.md` | the ten design principles; rendered as the Storybook introduction |
-| `docs/decisions` | decision records (headless layer, positioning, Sheet, Menu); rendered as the Storybook "Decisions" page |
+| `docs/decisions` | decision records (headless layer, positioning, Sheet, Menu, token outputs); rendered as the Storybook "Decisions" page |
 
 ## Commands (run from the repo root)
 

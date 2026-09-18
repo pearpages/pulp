@@ -53,6 +53,8 @@ only remaps primitives onto semantic names, so switching brand never touches a c
 | --- | --- |
 | `@pearpages/pulp-tokens/tokens.css` | every brand's custom properties, in `@layer tokens` |
 | `@pearpages/pulp-tokens/tokens.json` | resolved tokens per brand, `{ pulp: [...], bitepals: [...] }`; each entry has `name`, `path`, `type`, `tier`, `css`, `value`. For tooling |
+| `@pearpages/pulp-tokens/theme.css` | Tailwind v4: an `@theme inline reference` block over the semantic colours, radii, shadows and font families, so `bg-surface-base` or `rounded-control` read pulp's variables. Import it after `tailwindcss` and `tokens.css` |
+| `@pearpages/pulp-tokens/native` | React Native / NativeWind and Tailwind v3: per brand `{ colors, radius, space, themeVars: { light, dark } }`. Names are `var(--…)` references for the config; `themeVars` are resolved hex and px for `vars()`. ESM and `require` |
 | `tokens/` | the DTCG source files |
 
 ## License
