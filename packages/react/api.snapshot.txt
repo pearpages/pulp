@@ -456,9 +456,13 @@ Text (stable)
   weight?: "regular" | "medium" | "semibold" = regular
 TextField (stable)
   className?: string
+  clearLabel?: string = Clear
   description?: ReactNode
   error?: ReactNode
+  hideLabel?: boolean = false
+  iconStart?: ReactNode
   label: ReactNode
+  onClear?: (() => void)
   ref?: Ref<HTMLInputElement>
   size?: "sm" | "md" | "lg" = md
 Textarea (stable)

@@ -491,8 +491,16 @@ Extensions to existing components
       does not take focus, outlives the provider's default, and timing out never calls `onUndo`.
       bitepals' per-variant durations (4 / 6 / 5 s, errors included) do not carry over: pulp keeps
       error toasts until dismissed.
-- [ ] TextField: the search affordance: leading Search icon, a labelled clear button that appears
-      with a value, `onClear`; `type="search"` semantics, Escape clears.
+- [x] TextField search affordance (2026-09-18): `iconStart` (decorative; `type="search"` defaults
+      to the Search glyph, `null` opts out), `onClear` + `clearLabel` (a real button after the
+      input, present only with a value and never while disabled or read-only; it empties an
+      uncontrolled input itself and returns focus to the input), Escape clears and stops there, so
+      a dialog around the field does not also close, and `hideLabel` (Slider's precedent), because
+      bitepals' search boxes have a placeholder and no label. The wrapper exists only when there is
+      an icon or `onClear`: a plain TextField renders the same DOM as before. bitepals'
+      `variant="filter"` is `iconStart` with a Filter glyph (comes with the icons). The browser's own
+      search cancel button is hidden. Seen while here: `TextField.stories.tsx` also carries a
+      `parameters.docs.description`, like Dialog's (group 5).
 - [ ] Badge: `variant="dot"` (needs a `label`, rendered visually hidden) and a count clamp
       (`max = 99` → "99+"). Covers bitepals' `NavBadge`.
 - [ ] Sheet: drag to dismiss for `placement="bottom"`: pointer events, offset + velocity threshold,

@@ -85,6 +85,22 @@
         "$type": "duration",
         "$value": "{motion.duration.fast}"
       }
+    },
+    "icon": {
+      "fg": {
+        "$type": "color",
+        "$description": "The leading glyph and the clear button at rest.",
+        "$value": "{color.text.muted}"
+      },
+      "fg-hover": {
+        "$type": "color",
+        "$value": "{color.text.default}"
+      },
+      "gap": {
+        "$type": "dimension",
+        "$description": "Between the glyph and the text.",
+        "$value": "{space.2}"
+      }
     }
   }
 }

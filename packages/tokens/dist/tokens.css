@@ -807,6 +807,9 @@
     --text-field-focus-ring-width: var(--focus-ring-width);
     --text-field-focus-ring-offset: var(--focus-ring-offset);
     --text-field-motion-duration: var(--motion-duration-fast);
+    --text-field-icon-fg: var(--color-text-muted);
+    --text-field-icon-fg-hover: var(--color-text-default);
+    --text-field-icon-gap: var(--space-2);
     --text-font-family-body: var(--font-family-body);
     --text-font-family-mono: var(--font-family-mono);
     --text-size-xs: var(--font-size-xs);

@@ -63,6 +63,25 @@ export const Sizes: Story = {
   ),
 };
 
+export const SearchBox: Story = {
+  args: { label: 'Search places', hideLabel: true, type: 'search', placeholder: 'Tapas, wine, a street…', onClear: () => {} },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const input = canvas.getByRole('searchbox', { name: 'Search places' });
+    await expect(canvas.queryByRole('button', { name: 'Clear' })).toBeNull();
+    await userEvent.type(input, 'tapas');
+    // The clear button comes after the input in the tab order, and gives focus back.
+    await userEvent.tab();
+    await expect(canvas.getByRole('button', { name: 'Clear' })).toHaveFocus();
+    await userEvent.keyboard('{Enter}');
+    await expect(input).toHaveValue('');
+    await expect(input).toHaveFocus();
+    await userEvent.type(input, 'wine');
+    await userEvent.keyboard('{Escape}');
+    await expect(input).toHaveValue('');
+  },
+};
+
 const matrix = (
   <div className="sb-grid">
     <TextField label="Default" placeholder="Placeholder" />
@@ -71,6 +90,9 @@ const matrix = (
     <TextField label="Required" required />
     <TextField label="Disabled" disabled defaultValue="Disabled" />
     <TextField label="Read only" readOnly defaultValue="Read only" />
+    <TextField label="Search" type="search" placeholder="Search places" onClear={() => {}} />
+    <TextField label="Search with a value" type="search" defaultValue="tapas" onClear={() => {}} />
+    <TextField label="Search, small" size="sm" type="search" defaultValue="tapas" onClear={() => {}} />
   </div>
 );
 
