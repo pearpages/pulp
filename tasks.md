@@ -427,6 +427,13 @@ copy, not to re-derive.
       pixel diff across the two sets is therefore meaningless; sampled by eye (Button, Alert,
       Table, Menu): same design, nothing lost. Noted for the component review: in bitepals the
       Table's selection checkboxes render as circles (pill radius) and read as radios.
+- [ ] `:has()` below the floor: `select/Select.module.css` colours the placeholder with
+      `&:has(option[value=""]:checked)`, and Firefox 120 (the declared floor) has no `:has()` (121
+      does). `check:floor` cannot see it: lightningcss does not lower `:has()`. Found 2026-09-18
+      while building Chip, whose own `:has()` hover was replaced before it shipped. Either set a
+      `data-placeholder` from React, or raise the Firefox floor to 121; and teach `check:floor` a
+      small deny-list of selectors and properties lightningcss passes through (`:has(`,
+      `field-sizing`, `@property`) with the documented exceptions named.
 - [ ] Consumer fixture: a Vite app built from `pnpm pack` tarballs, imports in the README order and
       in the wrong order, same painted-value checks (replaces the by-hand check of 2026-09-16).
 - [ ] Component review by eye on the deployed site, tier order, four brand × scheme pairs each;
@@ -505,11 +512,18 @@ New components (scaffold + the add-component skill; `@status experimental`; one 
       `disabled`. The pill is painted once on the root; both buttons are transparent. bitepals
       nested the remove button inside the chip's button, and passed a literal `color`: neither
       carries over. A static chip is a Badge: said in `@dont`.
-- [ ] SegmentedControl (Forms): generic `<T extends string>`, `options`, `value`, `onValueChange`,
-      `size`; radiogroup semantics with a roving tabindex, the same keyboard model as Radio (share
-      it, do not copy it). A link flavour through `asChild` items for view switches that navigate
-      (bitepals' `PairedViewToggle`), which is then navigation, not a radiogroup: decide whether that
-      is this component or Tabs.
+- [x] SegmentedControl (Forms, 2026-09-18): generic `<T extends string>`, `options`
+      (`value`, `label`, decorative `icon`, `disabled`), `value` / `defaultValue` / `onValueChange`,
+      `name`, `look: 'segmented' | 'chips'`, `size: 'sm' | 'md'`, `fullWidth`, `disabled`. Built on
+      **native radio inputs**, visually hidden over each segment: RadioGroup has no keyboard hook
+      to share, its model is the browser's, so sharing it means using the same element; arrows,
+      the single tab stop and form submission come with it (bitepals' `role="radio"` buttons had
+      no arrow keys at all). Selection is a `data-selected` from state and the focus ring is drawn
+      by `input:focus-visible + .segment`, so nothing needs `:has()` (Firefox 120 has none).
+      The link flavour is **`SegmentedControl.Nav` + `SegmentedControl.NavItem`** (`current`,
+      `asChild`): a labelled `nav` with a list of links and `aria-current="page"`, same tokens and
+      stylesheet. Decided: navigation is neither a radiogroup nor Tabs; bitepals' `PairedViewToggle`
+      marked links as `role="tab"`.
 - [ ] EmptyState (Feedback): `icon`, `title`, `description`, `action`, `tone: 'neutral' | 'error'`,
       `headingLevel`. Compose Heading, Text and Stack; no new type tokens.
 - [ ] Icons: the ~58 generic glyphs from bitepals'

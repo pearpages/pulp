@@ -293,6 +293,29 @@ RadioGroup (stable)
   required?: boolean = false
   size?: "sm" | "md" | "lg" = md
   value?: string
+SegmentedControl (experimental)
+  defaultValue?: string
+  disabled?: boolean = false
+  fullWidth?: boolean = false
+  label?: string
+  look?: "segmented" | "chips" = segmented
+  name?: string
+  onValueChange?: ((value: T) => void)
+  options: readonly SegmentedControlOption<T>[]
+  ref?: Ref<HTMLDivElement>
+  size?: "sm" | "md" = md
+  value?: string
+  SegmentedControl.Nav
+    children: ReactNode
+    fullWidth?: boolean = false
+    label: string
+    look?: "segmented" | "chips" = segmented
+    ref?: Ref<HTMLElement>
+    size?: "sm" | "md" = md
+  SegmentedControl.NavItem
+    asChild?: boolean = false
+    current?: boolean = false
+    ref?: Ref<E>
 Select (stable)
   children: ReactNode
   className?: string
