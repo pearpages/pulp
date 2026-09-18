@@ -398,9 +398,11 @@ copy, not to re-derive.
       background and colour; on the fixed build 263 stories pass. Proven again after tuning by
       stripping the statement from the built CSS. Checker limits met and handled: em and
       currentcolor dependence (font-size and color pinned), logical/physical twins, inline styles.
-- [ ] Release 0.2.2 (react, tokens, css patches): npm consumers are exposed to the same ordering
-      bug whenever their bundler loads a component stylesheet before `@pearpages/pulp-css`.
-- [ ] Look at the deployed site after the fix lands (Button docs page first) and keep the screenshot.
+- [ ] Release 0.2.2 (react 0.2.2, tokens 0.2.1, css 0.1.3; icons stay 0.1.0): npm consumers were
+      exposed to the same ordering bug whenever their bundler loaded a component stylesheet before
+      `@pearpages/pulp-css`. Versioned after `deploy.yml` 35376088522 went green on `a397b2d`.
+- [x] Looked at the deployed site after the fix landed (2026-09-18, run 35372565351): the Button
+      docs page paints a filled button, 16 px padding, 1 px border.
 - [x] The matrix screenshots are now of the *built* site (2026-09-18): `@playwright/test` over
       `storybook-static`, same baseline paths, threshold 0.02; the Vitest `toMatchScreenshot` path
       and `VITE_VISUAL` are gone (`PULP_VISUAL` replaces it). Locally: 140 shots in 26 s, two

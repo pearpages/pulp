@@ -1,6 +1,6 @@
 {
   "name": "@pearpages/pulp-css",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "pulp base styles: cascade layers, a reset, and body defaults on top of the tokens. Framework-agnostic; import once per app.",
   "license": "MIT",
   "author": "Pere Pages <hello@pearpages.com> (https://pearpages.com)",
