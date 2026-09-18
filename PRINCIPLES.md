@@ -39,7 +39,8 @@ tool on the app that uses it.
 
 The price of native CSS is a support floor. The shipped stylesheets rely on native nesting
 and `light-dark()` and are not lowered: Chrome and Edge 123, Firefox 120, Safari 17.5 and
-later (the `browserslist` in the root `package.json`). Component rules sit in the
+later (the `browserslist` in the root `package.json`, which `pnpm check:floor` holds every shipped
+stylesheet to). Component rules sit in the
 `components` cascade layer, so an app overrides them from any later layer or from unlayered
 CSS, never by fighting specificity.
 

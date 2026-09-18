@@ -23,6 +23,9 @@ importers:
       '@types/node':
         specifier: ^22.0.0
         version: 22.20.2
+      browserslist:
+        specifier: ^4.28.9
+        version: 4.28.9
       eslint:
         specifier: ^9.0.0
         version: 9.39.5(supports-color@10.2.2)
@@ -35,6 +38,9 @@ importers:
       globals:
         specifier: ^17.12.0
         version: 17.12.0
+      lightningcss:
+        specifier: ^1.33.0
+        version: 1.33.0
       size-limit:
         specifier: ^13.1.1
         version: 13.1.1

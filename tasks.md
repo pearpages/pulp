@@ -7,10 +7,14 @@ this file holds what is left to do, ticked with a date when done. Ordered within
 
 1. Decision record 005 on the shape of the token output (group 4).
 2. Docs (group 5): README badges now that npm is live, brand walkthrough, tokens diagram.
-3. The remaining guardrails, testing gaps and housekeeping.
+3. The testing gaps and housekeeping (the guardrails are done except record 005).
 
 ## Session log
 
+- 2026-09-18 (later): the three code guardrails of group 4: token `$type` schema check, link check
+  inside `storybook:build`, `pnpm check:floor` with lightningcss; the floor check's first run found
+  Safari's missing `user-select` and iOS's `text-size-adjust`, both fixed with patch changesets
+  (unreleased).
 - 2026-09-18: Sheet landed on `main` through a branch and is on the site; a second Claude session
   had built a parallel Sheet in a worktree (identical API), its two extra doc edits ported and the
   worktree removed; the pnpm release-age note added to both READMEs. 0.2.0 released through
@@ -237,8 +241,9 @@ copy, not to re-derive.
       Combobox/Table/DatePicker with React Aria 54/52/65 kB. Limits sit about 20% above.
 
 **4. Guardrails still missing**
-- [ ] Token schema validation: every token has `$type` (the dark-counterpart and component→semantic
-      checks exist in `build.test.mjs`).
+- [x] Token schema validation (2026-09-18): `scripts/schema.mjs` walks the raw JSON; every one of
+      the 1,081 tokens has a known *effective* `$type` (about 600 inherit a group's, so "own" would
+      have been the wrong rule), unknown `$` keys fail, and a fixture test proves each message fires.
 - [x] Published semantic token names pinned in `packages/tokens/scripts/public-tokens.mjs` and
       asserted by `build.test.mjs` (2026-09-16). The CV writes those names in 17 stylesheets, and a
       rename fails *silently* there: `var()` of a missing token drops the declaration and the page
@@ -253,10 +258,20 @@ copy, not to re-derive.
       changeset" cannot be checked against a PR base; the snapshot makes the change a deliberate
       `test:dist -u` plus a changeset instead.
 - [x] Bundle-size budget for `packages/react/dist` (2026-09-15, see cross-cutting).
-- [ ] Fail `storybook:build` on a broken MDX import: a link check over `storybook-static`. (The a11y
-      addon's `test: 'error'` in CI is already on.)
-- [ ] A tool that honours `browserslist` (lightningcss in the build) so the support floor is enforced,
-      not only declared.
+- [x] Link check at the end of `storybook:build` (2026-09-18): `apps/storybook/scripts/check-links.mjs`
+      over `storybook-static/index.json`. A broken *import* already failed the build; this covers
+      what did not: an MDX page missing from the index, a component whose `docsPath()` is no page
+      (checked with the Status page's own function), a dead literal `?path=`, and a decision record
+      missing from `Decisions.mdx` or the folder README. Proven by breaking `STORY_OF` and by a
+      stray record file.
+- [x] Support floor enforced (2026-09-18): `pnpm check:floor` (`scripts/check-support-floor.mjs`, in
+      `verify`, `ci.yml`, `deploy.yml`) transforms the 43 shipped stylesheets with lightningcss, floor
+      as targets against no targets, and fails on any difference; a built-in probe fails the script
+      if lightningcss ever lowers nothing. As a check, not a build step: the stylesheets stay
+      unlowered (PRINCIPLES §4). First run found two real gaps, fixed at the source with patch
+      changesets: Button's `user-select: none` did nothing in Safari (no unprefixed support), and the
+      reset's `text-size-adjust` nothing on iOS. Limit: unknown properties pass (`field-sizing`,
+      `@property`).
 - [ ] Decision record 005, the shape of the token output. Measured 2026-09-16 on `tokens.css`
       (46.4 kB raw): **component tokens are 66% of it** (30.8 kB), the bitepals block only 7.8 kB.
       Splitting per brand is the wrong cut: it saves at most 1.4 kB brotli for a one-brand consumer,

@@ -50,6 +50,10 @@ export default {
     'selector-class-pattern': null,
     'custom-property-pattern': null,
     'import-notation': 'string',
+    // Prefixes stay banned except where the support floor still needs one: Safari has no unprefixed
+    // user-select, iOS and Firefox for Android no unprefixed text-size-adjust. `pnpm check:floor` is what
+    // says so; when it stops asking for a prefix, drop it here too.
+    'property-no-vendor-prefix': [true, { ignoreProperties: ['/user-select$/', '/text-size-adjust$/'] }],
   },
   overrides: [
     {

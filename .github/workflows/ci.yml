@@ -33,6 +33,8 @@ jobs:
         run: pnpm check:package
       - name: Bundle-size budget per entry
         run: pnpm check:size
+      - name: Support floor (browserslist, enforced with lightningcss)
+        run: pnpm check:floor
       - name: Smoke-test the built package
         run: pnpm test:dist
 

@@ -3,12 +3,43 @@ import assert from 'node:assert/strict';
 import { render } from './build.mjs';
 import { toCss } from './format.mjs';
 import { PUBLIC_SEMANTIC_TOKENS } from './public-tokens.mjs';
+import { validateTokens } from './schema.mjs';
+import { readdirSync, readFileSync } from 'node:fs';
+import { resolve } from 'node:path';
+
+const TOKENS = resolve(import.meta.dirname, '../tokens');
 
 test('references become var(), composites become CSS', () => {
   assert.equal(toCss('{color.neutral.50}'), 'var(--color-neutral-50)');
   assert.equal(toCss({ value: 0.25, unit: 'rem' }), '0.25rem');
   assert.equal(toCss([0.2, 0.7, 0.3, 1]), 'cubic-bezier(0.2, 0.7, 0.3, 1)');
   assert.equal(toCss(['Archivo Variable', 'system-ui']), "'Archivo Variable', system-ui");
+});
+
+test('every token has a known $type, its own or its group\'s', () => {
+  const problems = [];
+  let files = 0;
+  for (const tier of ['primitives', 'semantic', 'component']) {
+    for (const name of readdirSync(resolve(TOKENS, tier)).filter((f) => f.endsWith('.json'))) {
+      const tree = JSON.parse(readFileSync(resolve(TOKENS, tier, name), 'utf8'));
+      problems.push(...validateTokens(tree, `${tier}/${name}`));
+      files += 1;
+    }
+  }
+  assert.ok(files > 4, 'no token files found');
+  assert.deepEqual(problems, []);
+});
+
+test('the schema check fires: missing type, unknown type, misspelt key', () => {
+  // Fixtures, not files: a wrong JSON dropped into tokens/ would enter the build glob.
+  assert.deepEqual(validateTokens({ size: { $type: 'dimension', sm: { $value: '{space.1}' } } }), []);
+  assert.deepEqual(validateTokens({ size: { sm: { $value: '{space.1}' } } }, 'x.json'), ["x.json: size.sm has no $type, its own or a group's"]);
+  assert.deepEqual(validateTokens({ a: { $value: 1, $type: 'fontSize' } }, 'x.json'), ['x.json: a has an unknown $type "fontSize"']);
+  assert.deepEqual(validateTokens({ size: { $typ: 'dimension', sm: { $value: 1 } } }, 'x.json'), [
+    'x.json: size has an unknown key $typ',
+    "x.json: size.sm has no $type, its own or a group's",
+  ]);
+  assert.deepEqual(validateTokens({ size: { sm: '4px' } }, 'x.json'), ['x.json: size.sm is neither a group nor a token']);
 });
 
 test('both brands render, with light-dark() and calc() from $extensions', async () => {

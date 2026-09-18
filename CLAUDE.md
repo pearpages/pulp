@@ -30,9 +30,10 @@ pnpm build             # tokens, react (tsup) + component manifest
 pnpm test:dist         # smoke test against packages/react/dist (build first)
 pnpm check:package     # publint + are-the-types-wrong
 pnpm check:size        # bundle-size budget per entry (size-limit, brotli; build first)
+pnpm check:floor       # every shipped stylesheet runs unlowered on the root browserslist (lightningcss; build first)
 pnpm test:storybook    # every story in Chromium with a11y checks (needs `playwright install chromium`)
 pnpm storybook         # dev server on :6006
-pnpm storybook:build
+pnpm storybook:build   # ends with scripts/check-links.mjs: a dead docs link fails the build
 pnpm --filter @pearpages/pulp-react scaffold Name Category   # new component skeleton (category from scripts/categories.mjs)
 pnpm verify            # everything deploy.yml runs, in the same order. Run it before pushing to main
 pnpm ci:local up|sync|verify|visual|diffs|shell|down   # the pipeline in CI's image, linux/amd64, via Colima (docs/ci-local.md)
@@ -74,6 +75,20 @@ copy of the working tree, two-minute loops. Colima only, never Docker Desktop; f
   matrix stories), `index.ts`, and a `tokens/component/<kebab-name>.json`. Directory, entry point
   and CSS file are kebab-case (`text-field`); the export is PascalCase. The scaffold script
   creates all of them, and the dist smoke test covers every component listed in the manifest.
+- **Every token has a known `$type`, its own or its nearest group's** (`packages/tokens/scripts/schema.mjs`,
+  run over the raw JSON by the token tests, because Style Dictionary's output hides inheritance). A
+  new DTCG type is an edit to `TOKEN_TYPES` there. A misspelt `$` key fails too.
+- **The support floor is enforced, not only declared.** `pnpm check:floor` runs the 43 shipped
+  stylesheets (react `dist`, `packages/css/src`, `tokens.css`) through lightningcss with the root
+  `browserslist` as targets and with none; any difference means the floor needs lowering or a prefix,
+  and fails. Its first run found two: Safari has no unprefixed `user-select`, iOS no unprefixed
+  `text-size-adjust`. Those two are the only prefixes Stylelint lets through. Limit: lightningcss
+  passes unknown properties, so `field-sizing` and `@property` (progressive enhancements) go unseen.
+- **`storybook:build` ends with a link check** (`apps/storybook/scripts/check-links.mjs`, over
+  `storybook-static/index.json`): every MDX page is indexed, every component's `docsPath()` lands on
+  a page, every literal `?path=` resolves, and every `docs/decisions/NNN-*.md` is both imported and
+  rendered by `Decisions.mdx` and listed in the folder's README. It imports `docs/paths.ts` directly
+  (Node strips the types), so that file must stay type-only syntax.
 - **Adding a semantic token means adding it to every brand file.** The token tests diff the
   brands and fail otherwise.
 - **`ref` is a normal prop** (React 19). The compiler lint rule (`react-hooks/refs`) rejects
