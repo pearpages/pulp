@@ -524,8 +524,13 @@ New components (scaffold + the add-component skill; `@status experimental`; one 
       `asChild`): a labelled `nav` with a list of links and `aria-current="page"`, same tokens and
       stylesheet. Decided: navigation is neither a radiogroup nor Tabs; bitepals' `PairedViewToggle`
       marked links as `role="tab"`.
-- [ ] EmptyState (Feedback): `icon`, `title`, `description`, `action`, `tone: 'neutral' | 'error'`,
-      `headingLevel`. Compose Heading, Text and Stack; no new type tokens.
+- [x] EmptyState (Feedback, 2026-09-18): `title` (a real heading at `headingLevel`, default 3),
+      `description`, decorative `icon` in a tinted disc, one `action`, `tone: 'neutral' | 'error'`.
+      Composes Heading, Text and Stack; its only tokens are the padding and the icon disc. Covers
+      bitepals' EmptyState and ErrorState (39 uses): the retry is just the `action`. bitepals'
+      ErrorState was always `role="alert"`, which shouts an empty region that renders with the
+      page; here nothing is announced unless the caller passes `role="status"` / `"alert"`, and the
+      JSDoc says when. Its glow and dot decorations are bitepals' own and stay there.
 - [ ] Icons: the ~58 generic glyphs from bitepals'
       `apps/web/design-system/ui/primitives/icons/icons.tsx` as `packages/icons/svg/*.svg`,
       normalised to the set's grid (24 viewBox, stroke 2, `currentColor`); several are filled or

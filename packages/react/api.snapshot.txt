@@ -147,6 +147,14 @@ Divider (experimental)
   orientation?: "horizontal" | "vertical" = horizontal
   ref?: Ref<HTMLDivElement>
   spacing?: "none" | "sm" | "md" | "lg" = none
+EmptyState (experimental)
+  action?: ReactNode
+  description?: ReactNode
+  headingLevel?: 1 | 2 | 3 | 4 | 5 | 6 = 3
+  icon?: ReactNode
+  ref?: Ref<HTMLDivElement>
+  title: ReactNode
+  tone?: "neutral" | "error" = neutral
 Field (stable)
   disabled?: boolean = false
   id?: string

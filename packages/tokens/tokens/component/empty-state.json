@@ -1,0 +1,15 @@
+{
+  "$description": "EmptyState component tokens. Reference the semantic layer only. Type comes from Heading and Text.",
+  "empty-state": {
+    "padding": { "$type": "dimension", "$value": "{space.6}" },
+    "icon": {
+      "size": { "$type": "dimension", "$description": "The disc the glyph sits in.", "$value": "{size.control.lg}" },
+      "glyph-size": { "$type": "dimension", "$value": "{font.size.xl}" },
+      "radius": { "$type": "dimension", "$value": "{radius.full}" },
+      "neutral-bg": { "$type": "color", "$value": "{color.status.neutral-subtle}" },
+      "neutral-fg": { "$type": "color", "$value": "{color.status.neutral-text}" },
+      "error-bg": { "$type": "color", "$value": "{color.status.error-subtle}" },
+      "error-fg": { "$type": "color", "$value": "{color.status.error-text}" }
+    }
+  }
+}

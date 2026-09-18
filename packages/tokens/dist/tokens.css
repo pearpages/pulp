@@ -433,6 +433,14 @@
     --divider-spacing-sm: var(--space-2);
     --divider-spacing-md: var(--space-4);
     --divider-spacing-lg: var(--space-6);
+    --empty-state-padding: var(--space-6);
+    --empty-state-icon-size: var(--size-control-lg);
+    --empty-state-icon-glyph-size: var(--font-size-xl);
+    --empty-state-icon-radius: var(--radius-full);
+    --empty-state-icon-neutral-bg: var(--color-status-neutral-subtle);
+    --empty-state-icon-neutral-fg: var(--color-status-neutral-text);
+    --empty-state-icon-error-bg: var(--color-status-error-subtle);
+    --empty-state-icon-error-fg: var(--color-status-error-text);
     --field-gap: var(--space-1);
     --field-label-fg: var(--color-text-default);
     --field-label-font-size: var(--font-size-sm);
