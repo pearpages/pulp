@@ -482,9 +482,15 @@ Extensions to existing components
       so bitepals darkens here although its action colours brighten), with three new red
       primitives per brand, pinned in `public-tokens.mjs`, and in the contrast test (lowest pair:
       bitepals dark active, above 4.5 only after moving `red.400` from #eb5858 to #ee6060).
-- [ ] Toast: `action: { label, onAction }` on a toast, and `toast.undo(message, onUndo)` as the
-      named case (longer duration, dismisses on action). The action is a real button inside the
-      live region; the toast must not steal focus. bitepals: `useToast` in 20 files.
+- [x] Toast `toast.undo(message, onUndo, options?)` (2026-09-18). The `action` half was already
+      there and tested (`action: { label, onClick }`, runs then dismisses; shipped in 0.1.0), so
+      the sketch's `onAction` name was **not** adopted: renaming a published prop is a breaking
+      change for nothing. `toast` is now a function with an `undo` property: message as the title,
+      an "Undo" button (`label` for other languages), 8 s by default because there is something
+      to read, decide and reach; `description`, `tone`, `duration` can be set. Tested: the toast
+      does not take focus, outlives the provider's default, and timing out never calls `onUndo`.
+      bitepals' per-variant durations (4 / 6 / 5 s, errors included) do not carry over: pulp keeps
+      error toasts until dismissed.
 - [ ] TextField: the search affordance: leading Search icon, a labelled clear button that appears
       with a value, `onClear`; `type="search"` semantics, Escape clears.
 - [ ] Badge: `variant="dot"` (needs a `label`, rendered visually hidden) and a count clamp
