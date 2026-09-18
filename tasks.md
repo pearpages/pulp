@@ -3,11 +3,13 @@
 The pending work and the tiered roadmap. `CLAUDE.md` holds the rules and the toolchain facts;
 this file holds what is left to do, ticked with a date when done. Ordered within each group.
 
-## Recommended order (2026-09-17)
+## Recommended order (2026-09-18)
 
-1. Decision record 005 on the shape of the token output (group 4).
-2. Docs (group 5): README badges now that npm is live, brand walkthrough, tokens diagram.
-3. The remaining guardrails, testing gaps and housekeeping.
+1. Release 0.2.0 (group 1): Sheet and its tokens are on `main` with a changeset, but npm still has
+   0.1.0. A component nobody can install is not shipped.
+2. Decision record 005 on the shape of the token output (group 4).
+3. Docs (group 5): README badges now that npm is live, brand walkthrough, tokens diagram.
+4. The remaining guardrails, testing gaps and housekeeping.
 
 ## Session log
 
@@ -42,7 +44,7 @@ Ordered within each group. Groups 1 and 2 are the gate to everything else being 
       as Trusted Publishers for `pearpages/pulp` + `publish.yml` (the names cannot be registered
       before a first publish: do a one-off manual `npm publish` from a `pnpm pack` tarball, or
       publish 0.0.0 placeholders, then register). (2026-09-15: 0.0.0 placeholders published by
-      hand from `pnpm pack` tarballs, all four registered; deprecate the 0.0.0s once 0.1.0 is live)
+      hand from `pnpm pack` tarballs, all four registered; deprecating the 0.0.0s is the last item of group 7)
 - [x] One first-release changeset per package (`.changeset/first-release-*.md`), replacing the 15
       tier-by-tier ones: there is no earlier release to describe changes against. (2026-09-15)
 - [x] A `README.md` in each of the four packages: npm takes the package page from the package
@@ -65,6 +67,14 @@ Ordered within each group. Groups 1 and 2 are the gate to everything else being 
 - [x] README (root and `packages/react`): pnpm 11 defaults `minimumReleaseAge` to 1440 minutes, so a
       fresh release cannot be installed with pnpm for 24 hours; consumers who want it sooner add
       `minimumReleaseAgeExclude: ['@pearpages/*']`. npm and yarn have no delay. (2026-09-18)
+- [ ] **Release 0.2.0**: Sheet, its two semantic tokens and the modals `^0.3.0` bump are on `main`
+      with `.changeset/sheet.md`, and npm still serves 0.1.0. Steps: `pnpm version-packages`
+      (react and tokens → 0.2.0, css follows its tokens dependency), `pnpm verify`, commit
+      "Version packages: 0.2.0", push, wait for `deploy.yml`, tag `v0.2.0`, push the tag, watch
+      `publish.yml`. Expect the OIDC exchange to fail again (npm/cli#9969 still open); then
+      `pnpm build`, `pnpm pack` each changed package and `npm publish <tgz> --access public
+      --otp=<code>` in dependency order (tokens → css → react), one authenticator code each, as
+      for 0.1.0. Then `npm view` all four and tick this with what happened.
 
 **2. Consumer: the CV site (`~/Projects/cv`)**
 Done 2026-09-16, committed in that repo (`7b2ac44`). The CV is pulp's reference consumer; its own
@@ -257,6 +267,11 @@ copy, not to re-derive.
       component's tokens in its own stylesheet, so a consumer carries only what it renders. Record
       the decision first; the refactor touches `build.mjs`, the component→semantic test, the dist
       smoke test and the docs.
+- [x] `pnpm ci:local` (2026-09-17): the pipeline in CI's Playwright image as linux/amd64, in a
+      throwaway Colima profile (`scripts/ci-local.sh`, `docs/ci-local.md`). Built to reproduce the
+      visual check's first failures; it turned "Toast hangs" into a bounded matcher and an
+      animation fix in two-minute loops, and it reports flakes the retry hides. Limits: system
+      fonts differ from the runner's, Rosetta is emulation.
 - Dropped (2026-09-16): a pre-commit hook. `pnpm verify` runs the same chain before pushing, and a
   hook would slow every commit to duplicate it.
 
@@ -266,6 +281,9 @@ copy, not to re-derive.
 - [ ] Tokens page: explain the tiers with a diagram; show the `space.unit` density knob live.
 - [x] Per-component docs page pattern (2026-09-15, see cross-cutting).
 - [ ] README: badges (CI, npm), a short "why native CSS, why no Tailwind in a library" section.
+- [ ] `Dialog.stories.tsx` still carries a `parameters.docs.description` although the rule is that
+      stories carry none (the docs page reads the JSDoc). Either a one-line "known exception" note in
+      the file saying why, or remove it and put the vendor-stylesheet sentence in Dialog's JSDoc.
 - [x] Storybook branding (2026-09-15): favicon and wordmark (hand-drawn SVG mark: geometric p on
       ultramarine, saffron signal), manager theme derived from the tokens, brand typefaces in the
       manager, Introduction masthead, a credit line on every docs page, `author` in every package.
