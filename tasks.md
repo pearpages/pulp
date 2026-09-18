@@ -439,6 +439,7 @@ Promoted from "Later". bitepals (`~/Projects/bitepals`, Next.js 16 App Router + 
 NativeWind mobile) drops its own `packages/tokens` and hand-rolled design system for pulp, then takes
 Tailwind out of the web app. Its side of the plan, with the token and component reconciliation
 tables, is `~/Projects/bitepals/tasks.md`. What it needs from pulp, in the order it unblocks it:
+How to run this group, and where to look in bitepals for each item: [`docs/bitepals-consumer.md`](docs/bitepals-consumer.md).
 
 Infrastructure (unblocks the token swap; nothing in bitepals can start before the first two)
 - [ ] `'use client'` survives the build. No source or dist file carries it today, and 14 source files
