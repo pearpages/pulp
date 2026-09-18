@@ -126,6 +126,11 @@ Dialog (stable)
 DialogSystem (stable)
   baseZIndex?: number
   children: ReactNode
+Divider (experimental)
+  decorative?: boolean = true
+  orientation?: "horizontal" | "vertical" = horizontal
+  ref?: Ref<HTMLDivElement>
+  spacing?: "none" | "sm" | "md" | "lg" = none
 Field (stable)
   disabled?: boolean = false
   id?: string

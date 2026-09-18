@@ -1,0 +1,13 @@
+{
+  "$description": "Divider component tokens. Reference the semantic layer only.",
+  "divider": {
+    "color": { "$type": "color", "$value": "{color.border.default}" },
+    "thickness": { "$type": "dimension", "$value": "{size.hairline}" },
+    "spacing": {
+      "$type": "dimension",
+      "sm": { "$value": "{space.2}" },
+      "md": { "$value": "{space.4}" },
+      "lg": { "$value": "{space.6}" }
+    }
+  }
+}

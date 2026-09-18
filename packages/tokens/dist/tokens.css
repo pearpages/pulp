@@ -386,6 +386,11 @@
     --dialog-close-fg-hover: var(--color-text-default);
     --dialog-motion-duration: var(--motion-duration-base);
     --dialog-motion-easing: var(--motion-easing-standard);
+    --divider-color: var(--color-border-default);
+    --divider-thickness: var(--size-hairline);
+    --divider-spacing-sm: var(--space-2);
+    --divider-spacing-md: var(--space-4);
+    --divider-spacing-lg: var(--space-6);
     --field-gap: var(--space-1);
     --field-label-fg: var(--color-text-default);
     --field-label-font-size: var(--font-size-sm);

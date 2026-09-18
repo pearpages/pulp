@@ -481,8 +481,8 @@ Extensions to existing components
       gets a paragraph.
 
 New components (scaffold + the add-component skill; `@status experimental`; one changeset each)
-- [ ] Divider (Layout): `orientation: 'horizontal' | 'vertical'`, `spacing: 'none' | 1…8` on the
-      space steps, `decorative` (default true → `role="none"`; false → `role="separator"` with
+- [x] Divider (Layout, 2026-09-18): `orientation: 'horizontal' | 'vertical'`, `spacing: 'none' | 'sm' | 'md' | 'lg'`
+      (space 2 / 4 / 6), `decorative` (default true → `role="none"`; false → `role="separator"` with
       `aria-orientation`). Tokens: `divider.color` → `color.border.default`, `divider.thickness` →
       `size.hairline`.
 - [ ] Link (Typography): `tone: 'default' | 'muted' | 'action'`, `asChild` so a router's link slots

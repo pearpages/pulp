@@ -1,0 +1,30 @@
+/* Every value is a token: --divider-* in packages/tokens/tokens/component/divider.json */
+
+@layer reset, tokens, vendor, base, components, utilities;
+
+@layer components {
+  .divider {
+    flex-shrink: 0;
+    margin: 0;
+    border: 0;
+    background-color: var(--divider-color);
+
+    &[data-orientation="horizontal"] {
+      inline-size: 100%;
+      block-size: var(--divider-thickness);
+
+      &[data-spacing="sm"] { margin-block: var(--divider-spacing-sm); }
+      &[data-spacing="md"] { margin-block: var(--divider-spacing-md); }
+      &[data-spacing="lg"] { margin-block: var(--divider-spacing-lg); }
+    }
+
+    &[data-orientation="vertical"] {
+      align-self: stretch;
+      inline-size: var(--divider-thickness);
+
+      &[data-spacing="sm"] { margin-inline: var(--divider-spacing-sm); }
+      &[data-spacing="md"] { margin-inline: var(--divider-spacing-md); }
+      &[data-spacing="lg"] { margin-inline: var(--divider-spacing-lg); }
+    }
+  }
+}
