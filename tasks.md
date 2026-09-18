@@ -5,7 +5,7 @@ this file holds what is left to do, ticked with a date when done. Ordered within
 
 ## Recommended order (2026-09-18)
 
-0. Group 9 (confidence): release 0.2.2, then the consumer fixture and the component review.
+0. Group 9 (confidence): the consumer fixture, then the component review by eye.
 1. Decision record 005 on the shape of the token output (group 4).
 2. Docs (group 5): README badges now that npm is live, brand walkthrough, tokens diagram.
 3. The testing gaps and housekeeping (the guardrails are done except record 005).
@@ -16,7 +16,9 @@ this file holds what is left to do, ticked with a date when done. Ordered within
   linked a split `Icon-*.css` before the entry CSS, `components` became the weakest cascade layer
   and the reset beat every component; all tests were green because all of them render through the
   dev transform. Fixed by restating the layer order in every stylesheet; new test level
-  `pnpm test:site` opens the built site in Chromium (263 stories) and blocks the deploy. The
+  `pnpm test:site` opens the built site in Chromium (263 stories) and blocks the deploy; the 140
+  matrix screenshots moved from the dev server to the built site (Playwright), which also showed
+  the old ones were shot at 0.8 scale. Released as react 0.2.2 / tokens 0.2.1 / css 0.1.3. The
   coverage plan was dropped for a confidence plan: group 9.
 - 2026-09-18 (later): the three code guardrails of group 4: token `$type` schema check, link check
   inside `storybook:build`, `pnpm check:floor` with lightningcss; the floor check's first run found
@@ -398,9 +400,14 @@ copy, not to re-derive.
       background and colour; on the fixed build 263 stories pass. Proven again after tuning by
       stripping the statement from the built CSS. Checker limits met and handled: em and
       currentcolor dependence (font-size and color pinned), logical/physical twins, inline styles.
-- [ ] Release 0.2.2 (react 0.2.2, tokens 0.2.1, css 0.1.3; icons stay 0.1.0): npm consumers were
-      exposed to the same ordering bug whenever their bundler loaded a component stylesheet before
-      `@pearpages/pulp-css`. Versioned after `deploy.yml` 35376088522 went green on `a397b2d`.
+- [x] **Release 0.2.2** (2026-09-18): react 0.2.2, tokens 0.2.1, css 0.1.3; icons stay 0.1.0. npm
+      consumers were exposed to the same ordering bug whenever their bundler loaded a component
+      stylesheet before `@pearpages/pulp-css`. `50ef5db` "Version packages: 0.2.2" (deploy run
+      35377802296) → annotated tag `v0.2.2` → `publish.yml` 35381380788, first try, with provenance.
+      Verified in the published tarballs: the `@layer reset, …` statement opens `dist/button.css`
+      and `dist/index.css` (react), `dist/tokens.css` and `src/reset.css`; react's peer is tokens
+      `^0.2.1`. The statement repeats once per bundled module (4× in `button.css`): harmless, a
+      few bytes after compression, could be deduplicated in tsup's `onSuccess` if it ever matters.
 - [x] Looked at the deployed site after the fix landed (2026-09-18, run 35372565351): the Button
       docs page paints a filled button, 16 px padding, 1 px border.
 - [x] The matrix screenshots are now of the *built* site (2026-09-18): `@playwright/test` over
