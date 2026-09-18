@@ -33,8 +33,17 @@ import { Icon } from '@pearpages/pulp-react/icon';
 
 ## Icons
 
-`ArrowLeft`, `ArrowRight`, `Calendar`, `Check`, `ChevronDown`, `ChevronLeft`, `ChevronRight`,
-`Close`, `Info`, `Plus`, `Search`, `Warning`
+`AlertCircle`, `Archive`, `ArrowLeft`, `ArrowRight`, `Ban`, `Bookmark`, `Calendar`, `Car`, `Chain`,
+`Check`, `CheckCircle`, `ChevronDown`, `ChevronLeft`, `ChevronRight`, `Close`, `Compass`,
+`Crosshair`, `Export`, `Filter`, `GripVertical`, `Heart`, `HelpCircle`, `Info`, `Mail`, `MapFolded`,
+`MapPin`, `Meh`, `Message`, `Moon`, `Note`, `Page`, `Pencil`, `Picture`, `Plus`, `Search`, `Send`,
+`Settings`, `Share`, `ShieldCheck`, `Star`, `Sun`, `Tag`, `Trash`, `TrendingUp`, `Trophy`,
+`Umbrella`, `Undo`, `User`, `Users`, `Utensils`, `Warning`, `ZoomIn`
+
+Outline only. For a filled state (a saved bookmark, a liked heart) set `fill: currentColor` on the glyph
+from your own CSS: a stylesheet beats the `fill="none"` attribute, so no second glyph is needed.
+
+Every glyph is drawn for this set on a 24 grid with a 2 px round stroke; none is copied from another library.
 
 ## License
 

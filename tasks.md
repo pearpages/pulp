@@ -567,11 +567,21 @@ New components (scaffold + the add-component skill; `@status experimental`; one 
       ErrorState was always `role="alert"`, which shouts an empty region that renders with the
       page; here nothing is announced unless the caller passes `role="status"` / `"alert"`, and the
       JSDoc says when. Its glow and dot decorations are bitepals' own and stay there.
-- [ ] Icons: the ~58 generic glyphs from bitepals'
-      `apps/web/design-system/ui/primitives/icons/icons.tsx` as `packages/icons/svg/*.svg`,
-      normalised to the set's grid (24 viewBox, stroke 2, `currentColor`); several are filled or
-      multi-colour there and need redrawing, not copying. The six Hub / follow glyphs are bitepals'
-      domain and stay there. The barrel's size budget moves.
+- [x] Icons (2026-09-18): 40 new glyphs, 52 in the set. **All drawn for pulp**, none copied:
+      bitepals' file records no source and several glyphs look like a published set's, which is
+      not something to paste into a package pulp publishes under its own licence. Of bitepals' 64:
+      8 are its domain and stay (five Hub glyphs, Following, Followers, Requests); 9 already
+      existed here (Search, X→Close, two chevrons, Plus, Check, AlertTriangle→Warning,
+      InfoCircle→Info, Calendar); duplicates collapsed (Person→User, Circles/Follow/ShareNodes→
+      Share, Share/PaperAirplane→Send, People/Friends→Users); the two filled variants are
+      `fill: currentColor` on the outline glyph, said in the README. Mapping for bitepals:
+      Feed→Page, Document→Note, Map→MapFolded, Favorites→Heart, Edit→Pencil, Delete→Trash,
+      Pin→MapPin, Shield→ShieldCheck, Photo→Picture, Discover→ZoomIn, Grip→GripVertical,
+      QuestionMark→HelpCircle, Comment→Message, ShareOut→Export, Link→Chain, Settings (sliders,
+      not a gear); the rest keep their names. `MapFolded`, `Picture` and `Chain` are named so
+      because `Map` and `Image` shadow globals and `Link` is pulp's own component. No size budget
+      moved: there is none for the icons barrel, and the react entries only bundle the glyphs
+      they import.
 - Not in this pass: ChipInput (wants React Aria's TagGroup), ImageGrid, a full-screen push sheet.
 
 ## Later (not scheduled)
