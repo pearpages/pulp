@@ -25,6 +25,13 @@ Alert (stable)
   ref?: Ref<HTMLDivElement>
   title?: ReactNode
   tone?: "info" | "success" | "warning" | "error" = info
+Avatar (experimental)
+  alt?: string
+  children?: ReactElement<unknown, string | JSXElementConstructor<any>>
+  name?: string
+  ref?: Ref<HTMLSpanElement>
+  size?: "sm" | "md" | "lg" | "xl" = md
+  src?: string
 Badge (stable)
   icon?: ReactNode
   ref?: Ref<HTMLSpanElement>

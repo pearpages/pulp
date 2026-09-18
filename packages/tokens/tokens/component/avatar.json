@@ -1,0 +1,26 @@
+{
+  "$description": "Avatar component tokens. Reference the semantic layer only.",
+  "avatar": {
+    "size": {
+      "$type": "dimension",
+      "$description": "sm and md are the control heights, so an avatar lines up with a button in a row. lg and xl are multiples of them: they follow a brand's density.",
+      "sm": { "$value": "{size.control.sm}" },
+      "md": { "$value": "{size.control.md}" },
+      "lg": { "$value": "{size.control.md}", "$extensions": { "com.pearpages.pulp": { "multiply": 1.4 } } },
+      "xl": { "$value": "{size.control.lg}", "$extensions": { "com.pearpages.pulp": { "multiply": 2 } } }
+    },
+    "font-size": {
+      "$type": "dimension",
+      "sm": { "$value": "{font.size.xs}" },
+      "md": { "$value": "{font.size.sm}" },
+      "lg": { "$value": "{font.size.lg}" },
+      "xl": { "$value": "{font.size.2xl}" }
+    },
+    "bg": { "$type": "color", "$value": "{color.status.neutral-subtle}" },
+    "border": { "$type": "color", "$description": "Fallback only: the subtle fill barely separates from the base surface in light schemes.", "$value": "{color.border.default}" },
+    "border-width": { "$type": "dimension", "$value": "{size.hairline}" },
+    "fg": { "$type": "color", "$value": "{color.status.neutral-text}" },
+    "weight": { "$type": "fontWeight", "$value": "{font.weight.semibold}" },
+    "radius": { "$type": "dimension", "$value": "{radius.full}" }
+  }
+}

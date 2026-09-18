@@ -23,6 +23,10 @@
       "types": "./dist/index.d.ts",
       "import": "./dist/index.js"
     },
+    "./avatar": {
+      "types": "./dist/avatar.d.ts",
+      "import": "./dist/avatar.js"
+    },
     "./link": {
       "types": "./dist/link.d.ts",
       "import": "./dist/link.js"
@@ -180,6 +184,7 @@
       "import": "./dist/button.js"
     },
     "./styles.css": "./dist/index.css",
+    "./avatar.css": "./dist/avatar.css",
     "./link.css": "./dist/link.css",
     "./divider.css": "./dist/divider.css",
     "./sheet.css": "./dist/sheet.css",
@@ -231,7 +236,7 @@
     "test:dist": "vitest run --config vitest.dist.config.ts",
     "manifest": "node scripts/manifest.mjs",
     "scaffold": "node scripts/scaffold-component.mjs",
-    "check:package": "publint && attw --pack . --profile esm-only --exclude-entrypoints styles.css button.css text-field.css card.css tabs.css dialog.css text.css heading.css icon.css visually-hidden.css stack.css inline.css field.css icon-button.css checkbox.css switch.css radio.css textarea.css select.css spinner.css badge.css alert.css toast.css progress.css skeleton.css tooltip.css popover.css accordion.css menu.css combobox.css listbox.css picker.css calendar.css date-picker.css slider.css table.css pagination.css sheet.css divider.css link.css component-manifest.json",
+    "check:package": "publint && attw --pack . --profile esm-only --exclude-entrypoints styles.css button.css text-field.css card.css tabs.css dialog.css text.css heading.css icon.css visually-hidden.css stack.css inline.css field.css icon-button.css checkbox.css switch.css radio.css textarea.css select.css spinner.css badge.css alert.css toast.css progress.css skeleton.css tooltip.css popover.css accordion.css menu.css combobox.css listbox.css picker.css calendar.css date-picker.css slider.css table.css pagination.css sheet.css divider.css link.css avatar.css component-manifest.json",
     "prepublishOnly": "pnpm run build && pnpm run test:run && pnpm run check:package",
     "check:size": "size-limit"
   },

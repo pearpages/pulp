@@ -489,9 +489,13 @@ New components (scaffold + the add-component skill; `@status experimental`; one 
 - [x] Link (Typography, 2026-09-18): `tone: 'action' | 'default' | 'muted'`, `underline: 'always' | 'hover'`, `asChild` so a router's link slots
       in (next-intl's `Link` in bitepals), underline rules, the focus ring from the semantic tier.
       Replaces bitepals' TextLink and, with Button `asChild`, its ButtonLink.
-- [ ] Avatar (Utilities): `src`, `alt`, `name` → initials when the image is missing or fails,
-      `size: 'sm' | 'md' | 'lg' | 'xl'`, an image slot (`asChild`-style) so `next/image` fits.
-      The initials' background comes from a token, never from a hash of the name into literal colours.
+- [x] Avatar (Utilities, 2026-09-18): `name` → initials (first and last word, by code point) when
+      there is no image or it fails (keyed on the failed source, so a new `src` retries without an
+      effect), `src`, `alt` (defaults to `name`; `""` → decorative), `size: 'sm' | 'md' | 'lg' | 'xl'`
+      (control sm / md, then md × 1.4 and lg × 2, so density follows the brand), an image element as
+      the child so `next/image` takes the styles and the error handling. With initials the root is
+      `role="img"` and the letters are `aria-hidden`. Background: `color.status.neutral-subtle`,
+      one token for everyone; bitepals' `color` prop and `stringToColor` do not carry over.
 - [ ] Chip (Actions): `selected` (a toggle: `aria-pressed`), `onRemove` (a second, labelled button,
       never a nested one), `size`, `tone: 'neutral' | 'action'`. A static chip is a Badge: say so in `@dont`.
 - [ ] SegmentedControl (Forms): generic `<T extends string>`, `options`, `value`, `onValueChange`,

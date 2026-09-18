@@ -1,0 +1,53 @@
+/* Every value is a token: --avatar-* in packages/tokens/tokens/component/avatar.json */
+
+@layer reset, tokens, vendor, base, components, utilities;
+
+@layer components {
+  .root {
+    display: inline-flex;
+    flex: none;
+    align-items: center;
+    justify-content: center;
+    inline-size: var(--avatar-size-md);
+    block-size: var(--avatar-size-md);
+    overflow: hidden;
+    box-sizing: border-box;
+    border-radius: var(--avatar-radius);
+    background: var(--avatar-bg);
+    color: var(--avatar-fg);
+    font-family: var(--font-family-body);
+    font-size: var(--avatar-font-size-md);
+    font-weight: var(--avatar-weight);
+    line-height: 1;
+    vertical-align: middle;
+
+    /* Initials only: a picture has its own edge. */
+    &[data-fallback] {
+      border: var(--avatar-border-width) solid var(--avatar-border);
+    }
+
+    &[data-size='sm'] {
+      inline-size: var(--avatar-size-sm);
+      block-size: var(--avatar-size-sm);
+      font-size: var(--avatar-font-size-sm);
+    }
+
+    &[data-size='lg'] {
+      inline-size: var(--avatar-size-lg);
+      block-size: var(--avatar-size-lg);
+      font-size: var(--avatar-font-size-lg);
+    }
+
+    &[data-size='xl'] {
+      inline-size: var(--avatar-size-xl);
+      block-size: var(--avatar-size-xl);
+      font-size: var(--avatar-font-size-xl);
+    }
+  }
+
+  .image {
+    inline-size: 100%;
+    block-size: 100%;
+    object-fit: cover;
+  }
+}
