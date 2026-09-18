@@ -77,6 +77,10 @@ Ordered within each group. Groups 1 and 2 are the gate to everything else being 
       `gh run rerun 35322825711 --failed` published tokens, and a second re-run css and react, all
       with provenance and no 2FA codes; already-published versions are skipped. `npm view`: tokens
       0.2.0, css 0.1.1, react 0.2.0 (peer tokens `^0.2.0`, modals `^0.3.0`), icons 0.1.0.
+- [ ] **Release 0.2.1**: the two fixes the support-floor check found (Button `-webkit-user-select`,
+      the reset's prefixed `text-size-adjust`). `pnpm version-packages` → react 0.2.1, css 0.1.2;
+      tokens 0.2.0 and icons 0.1.0 unchanged. `deploy.yml` green on `63b6449` first (the new checks'
+      first Linux run). Then: version commit, push, deploy green, tag `v0.2.1`, `publish.yml`.
 
 **2. Consumer: the CV site (`~/Projects/cv`)**
 Done 2026-09-16, committed in that repo (`7b2ac44`). The CV is pulp's reference consumer; its own

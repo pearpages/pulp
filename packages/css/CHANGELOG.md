@@ -1,5 +1,11 @@
 # @pearpages/pulp-css
 
+## 0.1.2
+
+### Patch Changes
+
+- 63b6449: The reset now declares `-webkit-text-size-adjust` and `-moz-text-size-adjust` next to `text-size-adjust: none`. iOS Safari and Firefox for Android only know the prefixed property, so text was still inflated in landscape there. Found by the new support-floor check.
+
 ## 0.1.1
 
 ### Patch Changes
