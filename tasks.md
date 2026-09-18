@@ -408,7 +408,14 @@ copy, not to re-derive.
       IconButton and TextField shot fails. The new shots are the page as served (story centred by
       Storybook's layout), so a trigger no longer sits at the viewport edge with its ring clipped.
       Landed through branch `visual-built-site` so the re-rendered baselines exist before `main`
-      runs the check. Still to record here: what the old-vs-new image diff showed.
+      runs the check. Baselines re-rendered from the built site by `visual-update.yml` run
+      35373533548 (`c110667`, 140 PNGs). Old against new: every new shot is exactly 1.25× the old
+      one (Spinner row 276×32 → 344×40): the Vitest shots were taken inside its scaled-down test
+      iframe, so a 40 px Button measured 32 px in its own baseline, and some carried a band of the
+      iframe's unthemed background. The new ones are true size, cropped to `#storybook-root`. A
+      pixel diff across the two sets is therefore meaningless; sampled by eye (Button, Alert,
+      Table, Menu): same design, nothing lost. Noted for the component review: in bitepals the
+      Table's selection checkboxes render as circles (pill radius) and read as radios.
 - [ ] Consumer fixture: a Vite app built from `pnpm pack` tarballs, imports in the README order and
       in the wrong order, same painted-value checks (replaces the by-hand check of 2026-09-16).
 - [ ] Component review by eye on the deployed site, tier order, four brand × scheme pairs each;
