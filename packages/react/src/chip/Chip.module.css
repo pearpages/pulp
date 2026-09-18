@@ -101,7 +101,8 @@
     }
   }
 
-  .root[data-interactive]:not([data-selected], [data-disabled]):has(.label:hover) {
+  /* On the label, not `.root:has(.label:hover)`: Firefox 120, the support floor, has no :has(). */
+  .root:not([data-selected], [data-disabled]) button.label:hover {
     background: var(--_bg-hover);
   }
 
