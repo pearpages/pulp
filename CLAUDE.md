@@ -174,7 +174,11 @@ names. `$extensions["com.pearpages.pulp"].dark` holds a dark counterpart;
 `pnpm changeset` per notable change → `pnpm version-packages` on main → push, wait for the deploy
 run, then tag `vX.Y.Z` and push the tag. `publish.yml` packs with `pnpm pack` and publishes via npm
 trusted publishing: each package name must be registered on npmjs.com as a Trusted Publisher for
-`pearpages/pulp` + `publish.yml` before the first release.
+`pearpages/pulp` + `publish.yml` before the first release. The workflow filename in that entry must
+be exactly `publish.yml` (not `deploy.yml`, which is the one with an environment): npm reports an
+entry that does not match the token as `OIDC token exchange error - package not found` →
+`ENEEDAUTH`, which is what blocked 0.1.0. After fixing the entry, `gh run rerun <id> --failed`
+resumes the tag's run; versions already on the registry are skipped.
 
 ## Status
 

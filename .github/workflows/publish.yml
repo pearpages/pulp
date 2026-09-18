@@ -51,7 +51,10 @@ jobs:
 
       # pnpm pack rewrites workspace:* to real ranges; npm publish does the
       # OIDC exchange. Each package name is registered as a Trusted Publisher
-      # for this repository + this workflow file on npmjs.com.
+      # for this repository + this workflow file on npmjs.com. The entry's
+      # workflow filename must be exactly publish.yml: an entry that does not
+      # match the token fails as "OIDC token exchange error - package not
+      # found" → ENEEDAUTH (0.1.0's entries said deploy.yml).
       - name: Publish packages
         run: |
           set -euo pipefail

@@ -5,21 +5,22 @@ this file holds what is left to do, ticked with a date when done. Ordered within
 
 ## Recommended order (2026-09-18)
 
-1. Release 0.2.0 (group 1): Sheet and its tokens are on `main` with a changeset, but npm still has
-   0.1.0. A component nobody can install is not shipped.
-2. Decision record 005 on the shape of the token output (group 4).
-3. Docs (group 5): README badges now that npm is live, brand walkthrough, tokens diagram.
-4. The remaining guardrails, testing gaps and housekeeping.
+1. Decision record 005 on the shape of the token output (group 4).
+2. Docs (group 5): README badges now that npm is live, brand walkthrough, tokens diagram.
+3. The remaining guardrails, testing gaps and housekeeping.
 
 ## Session log
 
 - 2026-09-18: Sheet landed on `main` through a branch and is on the site; a second Claude session
   had built a parallel Sheet in a worktree (identical API), its two extra doc edits ported and the
-  worktree removed; the pnpm release-age note added to both READMEs.
+  worktree removed; the pnpm release-age note added to both READMEs. 0.2.0 released through
+  `publish.yml` once the Trusted Publisher entries on npmjs.com pointed at `publish.yml` (they
+  named `deploy.yml`; that, not npm/cli#9969, was why 0.1.0 had to be published by hand).
 - 2026-09-17: visual regression live in CI (136 shots, CI-owned baselines) and `pnpm ci:local`
   (Colima, linux/amd64) built to reproduce and fix its first failures; `@pearpages/modals` 0.3.0
   released with `placement`; Sheet added on it; READMEs name the modals dependency.
-- 2026-09-16: 0.1.0 published by hand (trusted publishing blocked by npm/cli#9969); Combobox story
+- 2026-09-16: 0.1.0 published by hand (trusted publishing failed; cause found 2026-09-18: wrong
+  workflow file in the npmjs.com entries); Combobox story
   flake fixed and `pnpm verify` added; the CV adopted pulp's tokens and `IconButton`, verified
   against the deployed site by screenshot diff; semantic token names pinned by a test; task list
   triaged.
@@ -52,14 +53,11 @@ Ordered within each group. Groups 1 and 2 are the gate to everything else being 
 - [x] `pnpm version-packages` → 0.1.0, committed (`a9458ba`), pushed, tagged `v0.1.0`. (2026-09-16)
 - [x] **0.1.0 is on npm**, all four packages, published by hand with 2FA codes. (2026-09-16)
       `publish.yml` ran on the tag and failed at npm's OIDC exchange with
-      `404 … package not found` → `ENEEDAUTH`. Not our configuration: GitHub gives repos created
-      after 2026-07-15 immutable OIDC subject claims (ours:
-      `use_immutable_subject: true`, `sub_claim_prefix: repo:pearpages@3802915/pulp@1371223116`,
-      not switchable), and npm's registry rejects the exchange for them —
-      https://github.com/npm/cli/issues/9969, open, no fix. The Trusted Publisher config is correct
-      and stays; on the next release just run the workflow again
-      (`gh workflow run publish.yml --ref vX.Y.Z`), it skips versions that already exist.
-      Cost: 0.1.0 has no provenance attestation.
+      `404 … package not found` → `ENEEDAUTH`. Diagnosed that day as npm/cli#9969 (immutable OIDC
+      subject claims); wrong. Found on 2026-09-18: the Trusted Publisher entries on npmjs.com named
+      `deploy.yml` as the workflow file, not `publish.yml`, and npm reports an entry that does not
+      match the token as "package not found". Fixed in the four entries; the workflow has published
+      on its own since. Cost: 0.1.0 has no provenance attestation.
 - [x] Verified from npm in a scratch Vite app (2026-09-16): all four packages resolve at 0.1.0,
       per-component entries (`/button`, `/icon`) and the two stylesheets import as the README says,
       an icon from `@pearpages/pulp-icons` renders inside `Icon`, and `vite build` emits a 98.8 kB
@@ -67,14 +65,14 @@ Ordered within each group. Groups 1 and 2 are the gate to everything else being 
 - [x] README (root and `packages/react`): pnpm 11 defaults `minimumReleaseAge` to 1440 minutes, so a
       fresh release cannot be installed with pnpm for 24 hours; consumers who want it sooner add
       `minimumReleaseAgeExclude: ['@pearpages/*']`. npm and yarn have no delay. (2026-09-18)
-- [ ] **Release 0.2.0**: Sheet, its two semantic tokens and the modals `^0.3.0` bump are on `main`
-      with `.changeset/sheet.md`, and npm still serves 0.1.0. Steps: `pnpm version-packages`
-      (react and tokens → 0.2.0, css follows its tokens dependency), `pnpm verify`, commit
-      "Version packages: 0.2.0", push, wait for `deploy.yml`, tag `v0.2.0`, push the tag, watch
-      `publish.yml`. Expect the OIDC exchange to fail again (npm/cli#9969 still open); then
-      `pnpm build`, `pnpm pack` each changed package and `npm publish <tgz> --access public
-      --otp=<code>` in dependency order (tokens → css → react), one authenticator code each, as
-      for 0.1.0. Then `npm view` all four and tick this with what happened.
+- [x] **Release 0.2.0** (2026-09-18): Sheet, its two semantic tokens and the modals `^0.3.0` bump.
+      `pnpm version-packages` → react and tokens 0.2.0, css 0.1.1; `pnpm verify` green; commit
+      `9d658a3` "Version packages: 0.2.0", `deploy.yml` green, tag `v0.2.0`. `publish.yml` failed
+      at the OIDC exchange for tokens with the same "package not found" as 0.1.0; the cause was the
+      Trusted Publisher entries naming `deploy.yml`. Once they said `publish.yml`,
+      `gh run rerun 35322825711 --failed` published tokens, and a second re-run css and react, all
+      with provenance and no 2FA codes; already-published versions are skipped. `npm view`: tokens
+      0.2.0, css 0.1.1, react 0.2.0 (peer tokens `^0.2.0`, modals `^0.3.0`), icons 0.1.0.
 
 **2. Consumer: the CV site (`~/Projects/cv`)**
 Done 2026-09-16, committed in that repo (`7b2ac44`). The CV is pulp's reference consumer; its own
