@@ -674,6 +674,12 @@
     --sheet-width: var(--size-sheet-width);
     --sheet-height: var(--size-sheet-height);
     --sheet-motion-translate: var(--space-5);
+    --sheet-handle-width: var(--space-7);
+    --sheet-handle-height: var(--space-1);
+    --sheet-handle-hit-height: var(--space-5);
+    --sheet-handle-bg: var(--color-border-strong);
+    --sheet-handle-radius: var(--radius-full);
+    --sheet-handle-snap-duration: var(--motion-duration-base);
     --skeleton-base: var(--color-surface-sunken);
     --skeleton-highlight: var(--color-surface-raised);
     --skeleton-radius: var(--radius-control);

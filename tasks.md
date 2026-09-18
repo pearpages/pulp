@@ -507,10 +507,15 @@ Extensions to existing components
       clamps to `max` (default 99 → "99+") and renders nothing at zero or below; with a `label` it
       reads "3 unread". No `role="status"`: bitepals' NavBadge made every badge a live region,
       which announces a count that was there when the page loaded. Covers NavBadge (6 uses).
-- [ ] Sheet: drag to dismiss for `placement="bottom"`: pointer events, offset + velocity threshold,
-      no animation library, off under `prefers-reduced-motion`; port bitepals' tested
-      `shouldDismiss()` (`apps/web/design-system/ui/components/bottom-sheet/`). Decision record 003
-      gets a paragraph.
+- [x] Sheet drag to dismiss (2026-09-18): `Sheet.Content` renders a grab handle when
+      `placement="bottom"` (`dragToDismiss`, default true). Pointer events with pointer capture,
+      the offset delivered as `--_drag` and applied with `translate` (the vendor animates
+      `transform`), closing through the vendor's `useModalStack().close(id)` so `onOpenChange`
+      and the focus return are the usual ones. `sheet/drag.ts` holds bitepals' `shouldDismiss()`
+      with its thresholds and test cases, and `releaseVelocity()` over the last 100 ms. The handle
+      is `aria-hidden` and not focusable (Escape and `Sheet.Close` remain the keyboard's way out)
+      and is not rendered under `prefers-reduced-motion`. No animation library. Decision record
+      003 has the paragraph.
 
 New components (scaffold + the add-component skill; `@status experimental`; one changeset each)
 - [x] Divider (Layout, 2026-09-18): `orientation: 'horizontal' | 'vertical'`, `spacing: 'none' | 'sm' | 'md' | 'lg'`

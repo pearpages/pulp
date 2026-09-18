@@ -25,3 +25,12 @@ colour and size.
 - `Sheet` is blocked on modals ≥ 0.3.0 being on npm.
 - Longer term, modals shipping its stylesheet in a named layer would make every pulp
   override win by design; that is a major for modals and a separate decision.
+- Drag to dismiss (2026-09-18) is pulp's, not the vendor's, and costs no dependency: a bottom
+  sheet gets a grab handle (pointer events, pointer capture) and moves with the independent
+  `translate` property, because the vendor animates with `transform` and the two must not
+  fight. Release closes it through the vendor's own `useModalStack().close(id)`, so
+  `onOpenChange`, the exit transition and the focus return are the ones every other dismissal
+  gets. The thresholds (a quarter of the height, or 500 px/s) and their test cases are
+  bitepals', which tuned them on devices with a `motion` dependency that was not carried over.
+  The handle is a shortcut, hidden from assistive technology and gone under
+  `prefers-reduced-motion`; if the vendor ever learns to drag, this moves there.

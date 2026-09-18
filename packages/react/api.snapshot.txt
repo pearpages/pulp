@@ -349,6 +349,7 @@ Sheet (experimental)
     children: ReactNode
     closeOnBackdrop?: boolean
     closeOnEscape?: boolean
+    dragToDismiss?: boolean = true
     onInteractOutside?: ((e: { target: EventTarget; preventDefault(): void; }) => void)
     placement?: "start" | "end" | "top" | "bottom" = end
     size?: "auto" | "md" | "full"
