@@ -36,6 +36,17 @@ Reference consumer: [perepages.com](https://perepages.com) takes its colour from
 @import "@pearpages/pulp-react/styles.css";
 ```
 
+With pnpm 11, a release less than 24 hours old will not install: `minimumReleaseAge` defaults to
+1440 minutes, as a guard against a hijacked package reaching you at once. To take a release on the day
+it ships, exempt the scope in `pnpm-workspace.yaml`:
+
+```yaml
+minimumReleaseAgeExclude:
+  - '@pearpages/*'
+```
+
+npm and yarn have no such delay.
+
 Load the brand typefaces yourself (pulp: Archivo, Instrument Sans, Geist Mono; bitepals:
 Nunito, Inter), for example from `@fontsource-variable/*`. The tokens name the families
 with system fallbacks but ship no font files. Shipped CSS uses native nesting and

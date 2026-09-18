@@ -53,9 +53,11 @@ pnpm check:generated && pnpm lint && pnpm typecheck && pnpm test && pnpm build &
 
 ## Guardrails that watch vendors
 
-- `Dialog.vendor.test.ts` reads the installed `@pearpages/modals` stylesheet and fails if
-  Dialog maps a `--modal-*` variable the vendor no longer declares, so a vendor rename
-  cannot silently unstyle Dialog.
+- `dialog/Dialog.vendor.test.ts` reads the installed `@pearpages/modals` stylesheet and finds
+  every component stylesheet that maps a `--modal-*` variable (Dialog's colours and spacing,
+  Sheet's sizes). It fails if one maps a name the vendor no longer declares, or drops below its
+  lower bound, so a vendor rename cannot silently unstyle Dialog or Sheet. A new stylesheet
+  that maps vendor variables gets a bound in that file.
 - The dist smoke test asserts every vendor (`@pearpages/modals`, `@floating-ui/react-dom`,
   `react-aria-components`) is imported, never bundled.
 

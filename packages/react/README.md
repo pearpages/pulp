@@ -12,6 +12,17 @@ npm install @pearpages/pulp-react @pearpages/pulp-css @pearpages/pulp-tokens
 
 Requires React 19 and `react-dom`. `@pearpages/pulp-tokens` is a peer dependency.
 
+With pnpm 11, a release less than 24 hours old will not install: `minimumReleaseAge` defaults to
+1440 minutes, as a guard against a hijacked package reaching you at once. To take a pulp release
+on the day it ships, exempt the scope in `pnpm-workspace.yaml`:
+
+```yaml
+minimumReleaseAgeExclude:
+  - '@pearpages/*'
+```
+
+npm and yarn have no such delay.
+
 ## Use
 
 Load the styles once:

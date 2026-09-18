@@ -96,7 +96,7 @@ writeFileSync(
         tokens: '@pearpages/pulp-tokens/tokens.css (every --<component>-* value resolves through it; without it components render unstyled)',
         base: '@pearpages/pulp-css (optional: layer order, reset, body defaults, vendor layer)',
         icons: '@pearpages/pulp-icons (optional: stroke glyphs; wrap them in Icon or pass them to Button slots)',
-        dialogs: '@pearpages/modals/styles.css (only when using Dialog; import it into the vendor layer)',
+        dialogs: '@pearpages/modals/styles.css (only when using Dialog or Sheet, which needs 0.3.0 or later; import it into the vendor layer)',
         headless: 'react-aria-components (installed automatically; Combobox, Listbox, Picker, Calendar, DatePicker, Slider and Table build on it, see docs/decisions/001)',
         fonts: 'consumers load the brand typefaces themselves (pulp: Archivo, Instrument Sans, Geist Mono; bitepals: Nunito, Inter)',
       },

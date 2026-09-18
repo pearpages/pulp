@@ -11,6 +11,9 @@ this file holds what is left to do, ticked with a date when done. Ordered within
 
 ## Session log
 
+- 2026-09-18: Sheet landed on `main` through a branch and is on the site; a second Claude session
+  had built a parallel Sheet in a worktree (identical API), its two extra doc edits ported and the
+  worktree removed; the pnpm release-age note added to both READMEs.
 - 2026-09-17: visual regression live in CI (136 shots, CI-owned baselines) and `pnpm ci:local`
   (Colima, linux/amd64) built to reproduce and fix its first failures; `@pearpages/modals` 0.3.0
   released with `placement`; Sheet added on it; READMEs name the modals dependency.
@@ -59,10 +62,9 @@ Ordered within each group. Groups 1 and 2 are the gate to everything else being 
       per-component entries (`/button`, `/icon`) and the two stylesheets import as the README says,
       an icon from `@pearpages/pulp-icons` renders inside `Icon`, and `vite build` emits a 98.8 kB
       stylesheet carrying the tokens, the `--button-*` variables and `@layer components`.
-- [ ] README: say that pnpm 11 defaults `minimumReleaseAge` to 1440 minutes, so a fresh pulp
-      release cannot be installed with pnpm for 24 hours; consumers who want it sooner add
-      `minimumReleaseAgeExclude: ['@pearpages/*']` to their `pnpm-workspace.yaml`. It bit the
-      scratch install test; npm users (the CV) are unaffected.
+- [x] README (root and `packages/react`): pnpm 11 defaults `minimumReleaseAge` to 1440 minutes, so a
+      fresh release cannot be installed with pnpm for 24 hours; consumers who want it sooner add
+      `minimumReleaseAgeExclude: ['@pearpages/*']`. npm and yarn have no delay. (2026-09-18)
 
 **2. Consumer: the CV site (`~/Projects/cv`)**
 Done 2026-09-16, committed in that repo (`7b2ac44`). The CV is pulp's reference consumer; its own
