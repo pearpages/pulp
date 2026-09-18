@@ -1,6 +1,7 @@
 name: Update visual baselines
 
-# The baselines in apps/storybook/visual-baselines are rendered here and nowhere else: text
+# The baselines in apps/storybook/visual-baselines are rendered here and nowhere else, from the
+# *built* site (storybook-static), which is the page that gets deployed: text
 # rasterises differently on macOS and on Linux, so a laptop-made baseline never matches CI.
 #   gh workflow run visual-update.yml              # on main
 #   gh workflow run visual-update.yml --ref branch
@@ -27,10 +28,9 @@ jobs:
 
       # From scratch, so a baseline whose story is gone does not linger.
       - run: rm -rf apps/storybook/visual-baselines
-      - name: Render the baselines
-        run: pnpm --filter pulp-docs test:run -u
-        env:
-          VITE_VISUAL: '1'
+      - run: pnpm storybook:build
+      - name: Render the baselines from the built site
+        run: pnpm --filter pulp-docs test:visual:update
 
       - name: Commit
         id: commit

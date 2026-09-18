@@ -39,20 +39,19 @@ jobs:
       - run: pnpm check:floor
       - run: pnpm test:dist
       - run: pnpm --filter pulp-docs exec playwright install --with-deps chromium
-      # VITE_VISUAL: the matrix stories are compared with apps/storybook/visual-baselines.
       - run: pnpm test:storybook
+      - run: pnpm storybook:build
+      # The production build, opened for real: every other test renders through the dev transform.
+      - run: pnpm test:site
         env:
-          VITE_VISUAL: '1'
-      # A failed visual check leaves <Component>/<brand>-<scheme>-actual|-diff.png here.
+          PULP_VISUAL: '1'
+      # A failed shot leaves its expected, actual and diff images here.
       - if: failure()
         uses: actions/upload-artifact@v4
         with:
           name: visual-diffs
-          path: apps/storybook/.vitest-attachments/visual
+          path: apps/storybook/test-results
           if-no-files-found: ignore
-      - run: pnpm storybook:build
-      # The production build, opened for real: every other test renders through the dev transform.
-      - run: pnpm test:site
 
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3

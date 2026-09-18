@@ -7,7 +7,8 @@
     "dev": "node scripts/fonts.mjs && pnpm --filter @pearpages/pulp-react manifest && storybook dev -p 6006",
     "build": "node scripts/fonts.mjs && pnpm --filter @pearpages/pulp-react manifest && storybook build && node scripts/check-links.mjs",
     "test": "vitest",
-    "test:site": "node scripts/check-built-site.mjs",
+    "test:site": "node scripts/check-built-site.mjs && playwright test",
+    "test:visual:update": "PULP_VISUAL=1 playwright test --update-snapshots",
     "test:run": "pnpm --filter @pearpages/pulp-react manifest && vitest run",
     "typecheck": "pnpm --filter @pearpages/pulp-react manifest && tsc --noEmit"
   },
@@ -26,6 +27,7 @@
   "devDependencies": {
     "@pearpages/modals": "^0.3.0",
     "@pearpages/pulp-icons": "workspace:*",
+    "@playwright/test": "1.63.0",
     "@storybook/addon-a11y": "^10.6.0",
     "@storybook/addon-docs": "^10.6.0",
     "@storybook/addon-vitest": "^10.6.0",

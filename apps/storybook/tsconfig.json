@@ -8,5 +8,5 @@
       "@pearpages/pulp-icons": ["../../packages/icons/src/index.ts"]
     }
   },
-  "include": [".storybook", "docs", "vitest.config.ts"]
+  "include": [".storybook", "docs", "tests", "vitest.config.ts", "playwright.config.ts"]
 }

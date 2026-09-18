@@ -34,7 +34,7 @@ pnpm check:floor       # every shipped stylesheet runs unlowered on the root bro
 pnpm test:storybook    # every story in Chromium with a11y checks (needs `playwright install chromium`)
 pnpm storybook         # dev server on :6006
 pnpm storybook:build   # ends with scripts/check-links.mjs: a dead docs link fails the build
-pnpm test:site         # the built site in Chromium: layer order and what is painted (after storybook:build)
+pnpm test:site         # the built site in Chromium: cascade check, then the matrix screenshots under PULP_VISUAL=1 (after storybook:build)
 pnpm --filter @pearpages/pulp-react scaffold Name Category   # new component skeleton (category from scripts/categories.mjs)
 pnpm verify            # everything deploy.yml runs, in the same order. Run it before pushing to main
 pnpm ci:local up|sync|verify|visual|diffs|shell|down   # the pipeline in CI's image, linux/amd64, via Colima (docs/ci-local.md)
@@ -71,8 +71,8 @@ copy of the working tree, two-minute loops. Colima only, never Docker Desktop; f
   `components` became the weakest layer and the reset beat every component (a primary Button painted
   as bare text) on the deployed site, with every test green. The dist smoke test, the tokens test
   and `packages/css/scripts/css.test.mjs` compare each copy with `packages/css/src/layers.css`.
-- **The production build is tested as built.** Story tests, axe and the visual baselines all render
-  through Vite's dev transform (styles injected in import order); only `pnpm test:site`
+- **The production build is tested as built.** Story tests and axe render through Vite's dev
+  transform (styles injected in import order); only `pnpm test:site`
   (`apps/storybook/scripts/check-built-site.mjs`) serves `storybook-static` to Chromium. Per story it
   checks the layer order the browser met, and that every property a `components` rule sets computes
   to a value some matching component rule asked for (each candidate rule is forced inline and
@@ -122,17 +122,21 @@ copy of the working tree, two-minute loops. Colima only, never Docker Desktop; f
 - **Every entry has a bundle budget** (`packages/react/.size-limit.js`, driven by tsup's entry list):
   2.1 kB brotli for a leaf entry, named overrides with a reason, the barrel, the stylesheet, and three
   "with React Aria" entries that show the vendor's true cost. `pnpm check:size` runs in CI.
-- **The matrix stories are compared with committed screenshots**, in CI only
-  (`apps/storybook/visual-baselines/<Component>/<brand>-<scheme>.png`, 136 of them). One
-  `afterEach` in `.storybook/preview.tsx` shoots every story named `Matrix…` after its `play`, with
-  Storybook's animations already paused; overlays (`parameters.a11y.context === 'body'`) are shot
-  as the whole body, and `Date` is frozen so Calendar's "today" never moves. It is live only under
-  `VITE_VISUAL=1`, which the workflows set: text rasterises differently on macOS and Linux, so
-  **CI owns the baselines** and local runs skip the check. After an intended visual change run
-  `gh workflow run visual-update.yml` (add `--ref <branch>` off main); it re-renders everything,
-  commits the PNGs and redeploys, and the commit's image diff is the review. A failing run uploads
-  `visual-diffs` (actual and diff images). The comparator threshold is 0.02, not the default 0.1,
-  which let a border go from `#d5d7de` to `#c0c3cc` unnoticed.
+- **The matrix stories are compared with committed screenshots of the *built* site**, in CI only
+  (`apps/storybook/visual-baselines/<Component>/<brand>-<scheme>.png`, 140 of them).
+  `apps/storybook/tests/visual.spec.ts` (`@playwright/test`, `playwright.config.ts`) serves
+  `storybook-static` and shoots every story named `Matrix…` after its `play`: animations and
+  transitions off from before the first render, `Date` frozen so Calendar's "today" never moves,
+  focus settled, pointer parked; overlays (`parameters.a11y.context === 'body'`) are shot as the
+  whole body. It is the second half of `pnpm test:site` and runs only under `PULP_VISUAL=1`, which
+  the workflows set: text rasterises differently on macOS and Linux, so **CI owns the baselines**.
+  After an intended visual change run `gh workflow run visual-update.yml` (add `--ref <branch>` off
+  main); it builds the site, re-renders everything, commits the PNGs and redeploys, and the commit's
+  image diff is the review. A failing run uploads `visual-diffs` (Playwright's `test-results`:
+  expected, actual, diff); a shot that only passed on the retry is reported as flaky. Threshold
+  0.02, not the default, which let a border go from `#d5d7de` to `#c0c3cc` unnoticed. Until
+  2026-09-18 the shots were taken by the Vitest run, through the dev transform: all green while
+  the deployed Button was bare text. Never move them back to a dev render.
 - **Vendor variables are checked against the installed vendor.** `dialog/Dialog.vendor.test.ts`
   discovers every component stylesheet that sets a `--modal-*` name (Dialog, Sheet) and fails when
   one maps a name `@pearpages/modals` no longer declares, or drops below its lower bound. A new

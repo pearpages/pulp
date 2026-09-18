@@ -32,13 +32,13 @@ pnpm ci:local up          # ~1 min; the first time also pulls ~2 GB
 pnpm ci:local sync        # copy the tree in, pnpm install --frozen-lockfile
 pnpm ci:local verify      # everything deploy.yml runs
 pnpm ci:local visual -u 5 # render baselines in the container, then compare 5 times
-pnpm ci:local diffs       # failed shots → apps/storybook/.vitest-attachments/ci-local (gitignored)
+pnpm ci:local diffs       # failed shots → apps/storybook/test-results/ci-local (gitignored)
 pnpm ci:local stop        # between sessions: frees the RAM, keeps the image and the copy
 pnpm ci:local down        # delete the profile; prints what is left
 ```
 
 Edit, `sync`, run again: `sync` replaces everything in `/work` except `node_modules`, so a re-sync
-is quick. `pnpm ci:local run <cmd>` runs anything (`VITE_VISUAL=1 pnpm ci:local run pnpm test:storybook`),
+is quick. `pnpm ci:local run <cmd>` runs anything (`PULP_VISUAL=1 pnpm ci:local run pnpm test:site`),
 and `pnpm ci:local shell` opens a shell in the container.
 
 **Never leave it up.** The profile holds 8 GB of RAM while it runs. `stop` frees that and keeps the

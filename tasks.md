@@ -401,9 +401,14 @@ copy, not to re-derive.
 - [ ] Release 0.2.2 (react, tokens, css patches): npm consumers are exposed to the same ordering
       bug whenever their bundler loads a component stylesheet before `@pearpages/pulp-css`.
 - [ ] Look at the deployed site after the fix lands (Button docs page first) and keep the screenshot.
-- [ ] The matrix screenshots against the *built* site too (same baselines): deferred, the harness
-      differs (Vitest browser iframe vs a plain page) and pixel parity needs work. `test:site`
-      covers the cascade; this would cover everything else that differs between dev and build.
+- [x] The matrix screenshots are now of the *built* site (2026-09-18): `@playwright/test` over
+      `storybook-static`, same baseline paths, threshold 0.02; the Vitest `toMatchScreenshot` path
+      and `VITE_VISUAL` are gone (`PULP_VISUAL` replaces it). Locally: 140 shots in 26 s, two
+      compares identical; with the layer statement stripped from the built CSS every Button,
+      IconButton and TextField shot fails. The new shots are the page as served (story centred by
+      Storybook's layout), so a trigger no longer sits at the viewport edge with its ring clipped.
+      Landed through branch `visual-built-site` so the re-rendered baselines exist before `main`
+      runs the check. Still to record here: what the old-vs-new image diff showed.
 - [ ] Consumer fixture: a Vite app built from `pnpm pack` tarballs, imports in the README order and
       in the wrong order, same painted-value checks (replaces the by-hand check of 2026-09-16).
 - [ ] Component review by eye on the deployed site, tier order, four brand × scheme pairs each;

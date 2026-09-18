@@ -35,18 +35,6 @@ const preview: Preview = {
     },
   },
   initialGlobals: { brand: 'pulp', scheme: 'light' },
-  // Visual regression. `__pulpVisual` exists only in the CI Vitest run (vitest.visual.setup.ts);
-  // in Storybook itself and in local runs both hooks do nothing. Only the matrix stories are
-  // shot: they are the brand × scheme surface of every component. They render with animations and
-  // transitions off (see `prepare`), which is what makes spinners, shimmers and toasts stable.
-  beforeEach: (context) => globalThis.__pulpVisual?.prepare(context.name.startsWith('Matrix')),
-  afterEach: async (context) => {
-    const visual = globalThis.__pulpVisual;
-    if (!visual || !context.name.startsWith('Matrix')) return;
-    // Overlays portal out of the canvas. Those components already say so for axe.
-    const portals = (context.parameters.a11y as { context?: string } | undefined)?.context === 'body';
-    await visual.match(portals ? document.body : context.canvasElement, `${context.globals.brand}-${context.globals.scheme}`);
-  },
   // Every stories file gets a Docs page, rendered from the component manifest (one source: the JSDoc).
   tags: ['autodocs'],
   decorators: [

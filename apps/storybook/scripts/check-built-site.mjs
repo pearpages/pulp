@@ -20,11 +20,11 @@
  *   node scripts/check-built-site.mjs              every story
  *   node scripts/check-built-site.mjs button menu  only ids containing a word
  */
-import { createServer } from 'node:http';
-import { existsSync, readFileSync, statSync } from 'node:fs';
-import { dirname, extname, join, normalize, resolve } from 'node:path';
+import { existsSync, readFileSync } from 'node:fs';
+import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { chromium } from 'playwright';
+import { serve } from './serve-static.mjs';
 
 const APP = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const STATIC = resolve(APP, 'storybook-static');
@@ -42,17 +42,7 @@ if (!existsSync(resolve(STATIC, 'index.json'))) {
   process.exit(1);
 }
 
-const TYPES = { '.html': 'text/html', '.js': 'text/javascript', '.mjs': 'text/javascript', '.css': 'text/css', '.json': 'application/json', '.svg': 'image/svg+xml', '.woff2': 'font/woff2', '.png': 'image/png' };
-const server = createServer((request, response) => {
-  const path = normalize(decodeURIComponent(new URL(request.url, 'http://localhost').pathname));
-  let file = join(STATIC, path);
-  if (!file.startsWith(STATIC)) return response.writeHead(403).end();
-  if (existsSync(file) && statSync(file).isDirectory()) file = join(file, 'index.html');
-  if (!existsSync(file)) return response.writeHead(404).end();
-  response.writeHead(200, { 'content-type': TYPES[extname(file)] ?? 'application/octet-stream' }).end(readFileSync(file));
-});
-await new Promise((done) => server.listen(0, '127.0.0.1', done));
-const origin = `http://127.0.0.1:${server.address().port}`;
+const { server, origin } = await serve();
 
 /** Runs in the page. Returns { layers, losses }. */
 function inspect() {

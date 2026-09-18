@@ -6,8 +6,8 @@
 #   pnpm ci:local sync        copy the working tree in (uncommitted changes included) and install
 #   pnpm ci:local run <cmd>   run anything in the copy, with CI=true
 #   pnpm ci:local verify      the whole chain deploy.yml runs
-#   pnpm ci:local visual [-u] [N]   story tests with the visual check, N times (default 1)
-#   pnpm ci:local diffs       copy failed-shot images out to apps/storybook/.vitest-attachments/ci-local
+#   pnpm ci:local visual [-u] [N]   build the site, then the screenshot suite against it, N times (default 1)
+#   pnpm ci:local diffs       copy failed-shot images out to apps/storybook/test-results/ci-local
 #   pnpm ci:local shell       a shell in the container
 #   pnpm ci:local stop        free the RAM, keep the image and the copy (`up` resumes in seconds)
 #   pnpm ci:local down        delete the profile and everything in it
@@ -81,7 +81,7 @@ cmd_run() {
   require_up
   [ "$#" -gt 0 ] || { echo "ci-local: run what? e.g. pnpm ci:local run pnpm test" >&2; exit 1; }
   local envs=()
-  [ -n "${VITE_VISUAL:-}" ] && envs+=(-e "VITE_VISUAL=$VITE_VISUAL")
+  [ -n "${PULP_VISUAL:-}" ] && envs+=(-e "PULP_VISUAL=$PULP_VISUAL")
   in_work "${envs[@]}" "$CONTAINER" bash -lc "$*"
 }
 
@@ -95,28 +95,31 @@ cmd_visual() {
       *) count="$arg" ;;
     esac
   done
-  local summarise="sed 's/\x1b\[[0-9;]*m//g' | grep -E ' FAIL |Tests ' | sort | uniq -c | sort -rn | head -12"
+  local summarise="sed 's/\x1b\[[0-9;]*m//g' | grep -E '^ +[0-9]+ (passed|failed|flaky)|✘|flaky' | sort | uniq -c | sort -rn | head -16"
+  # The shots are of the built site, so build it first (once: the loop below only re-shoots).
+  echo "== building storybook-static inside the container"
+  in_work "$CONTAINER" bash -lc 'pnpm storybook:build 2>&1 | tail -2'
   if [ -n "$update" ]; then
     # Baselines rendered *here*. Use this before asking "is it stable?": the committed baselines are
     # the GitHub runner's, and its system fonts are not this image's (docs/ci-local.md).
     echo "== rendering baselines inside the container"
-    dk exec -w "$WORK/apps/storybook" -e VITE_VISUAL=1 "$CONTAINER" bash -lc "rm -rf visual-baselines .vitest-attachments; pnpm exec vitest run -u 2>&1 | $summarise"
+    dk exec -w "$WORK/apps/storybook" -e PULP_VISUAL=1 "$CONTAINER" bash -lc "rm -rf visual-baselines test-results; pnpm exec playwright test --update-snapshots 2>&1 | tail -2"
   fi
   local i
   for i in $(seq 1 "$count"); do
     echo "== compare $i/$count"
-    # Attachments are cleared first so the count below is this run's. A shot that mismatched and then
-    # passed on the retry still leaves its diff: that is a flake the pass/fail line hides.
-    dk exec -w "$WORK/apps/storybook" -e VITE_VISUAL=1 -e CI=true "$CONTAINER" bash -lc "rm -rf .vitest-attachments; pnpm exec vitest run 2>&1 | $summarise; echo \"   shots that mismatched at least once: \$(find .vitest-attachments/visual -name '*-diff.png' 2>/dev/null | sed 's#.*/visual/##; s#-diff.png##' | tr '\n' ' ')\"" || true
+    # Playwright reports a shot that mismatched and then passed on the retry as "flaky": that is the
+    # flake a plain pass/fail line hides, and its diff stays in test-results.
+    dk exec -w "$WORK/apps/storybook" -e PULP_VISUAL=1 -e CI=true "$CONTAINER" bash -lc "rm -rf test-results; pnpm exec playwright test 2>&1 | $summarise" || true
   done
 }
 
 cmd_diffs() {
   require_up
-  local out="$ROOT/apps/storybook/.vitest-attachments/ci-local"
+  local out="$ROOT/apps/storybook/test-results/ci-local"
   rm -rf "$out"; mkdir -p "$out"
-  if dk exec "$CONTAINER" test -d "$WORK/apps/storybook/.vitest-attachments/visual"; then
-    dk cp "$CONTAINER:$WORK/apps/storybook/.vitest-attachments/visual/." "$out" >/dev/null
+  if dk exec "$CONTAINER" test -d "$WORK/apps/storybook/test-results"; then
+    dk cp "$CONTAINER:$WORK/apps/storybook/test-results/." "$out" >/dev/null
     echo "ci-local: $(find "$out" -name '*-diff.png' | wc -l | tr -d ' ') diff(s) in ${out#"$ROOT"/}"
   else
     echo "ci-local: no failed shots in the container"
@@ -127,7 +130,7 @@ cmd_down() {
   need colima "brew install colima"
   # Deleting the profile removes the VM, the image, the container and its volumes in one go.
   colima delete "$PROFILE" --force 2>&1 | tail -1 || true
-  rm -rf "$ROOT/apps/storybook/.vitest-attachments/ci-local"
+  rm -rf "$ROOT/apps/storybook/test-results/ci-local"
   echo "== colima profiles left:"; colima list 2>&1
   echo "== docker contexts:"; docker context ls 2>&1
 }
