@@ -1,6 +1,6 @@
 {
   "name": "@pearpages/pulp-tokens",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "pulp design tokens. W3C Design Tokens (DTCG) JSON in, CSS custom properties and a resolved JSON manifest out. Two brands, light and dark via light-dark().",
   "license": "MIT",
   "author": "Pere Pages <hello@pearpages.com> (https://pearpages.com)",
