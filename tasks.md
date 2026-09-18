@@ -9,6 +9,8 @@ this file holds what is left to do, ticked with a date when done. Ordered within
 1. Decision record 005 on the shape of the token output (group 4).
 2. Docs (group 5): README badges now that npm is live, brand walkthrough, tokens diagram.
 3. The testing gaps and housekeeping (the guardrails are done except record 005).
+4. Group 10 (bitepals as the second consumer): `'use client'` and the token outputs first, then
+   Divider as the pattern for the new components.
 
 ## Session log
 
@@ -431,7 +433,80 @@ copy, not to re-derive.
       findings get a failing test at the level that would have caught them, then the fix. Start:
       Button, IconButton, TextField, Checkbox, Dialog, Menu, Combobox. Pere: Safari + VoiceOver.
 
+**10. bitepals as the second consumer (2026-09-18, branch `bitepals-consumer`)**
+
+Promoted from "Later". bitepals (`~/Projects/bitepals`, Next.js 16 App Router + Tailwind v4 web, Expo +
+NativeWind mobile) drops its own `packages/tokens` and hand-rolled design system for pulp, then takes
+Tailwind out of the web app. Its side of the plan, with the token and component reconciliation
+tables, is `~/Projects/bitepals/tasks.md`. What it needs from pulp, in the order it unblocks it:
+
+Infrastructure (unblocks the token swap; nothing in bitepals can start before the first two)
+- [ ] `'use client'` survives the build. No source or dist file carries it today, and 14 source files
+      plus everything on React Aria use client-only APIs, so every interactive entry fails in a Server
+      Component. tsup drops module directives when bundling: keep them per entry (a preserve-directives
+      esbuild plugin, or a banner on the entries that need it; `splitting: true` moves code into shared
+      chunks, so check the chunks too). Leaf, hook-free entries (Heading, Text, Stack, Inline, Card,
+      Badge, Skeleton, Spinner, Icon, VisuallyHidden, the icons) stay server-safe: that is worth a
+      column in the manifest. `test:dist` asserts the directive per entry, and the consumer fixture
+      of group 9 gets an RSC import.
+- [ ] Decision record 005 (group 4) now has its consumer. Two new outputs of
+      `packages/tokens/scripts/build.mjs`, committed and drift-checked like the other two:
+      `./theme.css`, a Tailwind v4 `@theme inline` block over the **semantic** tier only
+      (`--color-surface-base: var(--color-surface-base)`, radius, shadow, font family; a bridge for a
+      consumer on its way out of Tailwind, not an endorsement of utilities, and PRINCIPLES §4 still
+      holds for what pulp itself ships); and `./native`, per brand
+      `{ colors, radius, space, themeVars: { light, dark } }` with resolved values (hex, px), ESM + a
+      `require` condition because Metro and a Tailwind v3 config load it with `require`. Check first
+      that `tokens.json` carries both schemes' resolved values for a `light-dark()` token; if it only
+      has light, the JSON gains a `valueDark`.
+- [ ] Two semantic gaps the reconciliation found; each either lands in **both** brand files or is
+      recorded as "consumers snap": a fourth surface for overlays (bitepals `bg-elevated`, cream-100 /
+      ink-600, today between `raised` and nothing) and a quieter border step (bitepals has subtle /
+      default / strong on sand-300 / 400 / 500; pulp has default / strong).
+
+Extensions to existing components
+- [ ] Button and IconButton: `tone: 'default' | 'danger'` (a union, orthogonal to `variant`, so
+      `variant="ghost" tone="danger"` exists). Tokens `--button-danger-*` on `color.status.error*`;
+      the contrast test gets the new pairs. bitepals: 98 Button uses, `destructive` among them.
+- [ ] Toast: `action: { label, onAction }` on a toast, and `toast.undo(message, onUndo)` as the
+      named case (longer duration, dismisses on action). The action is a real button inside the
+      live region; the toast must not steal focus. bitepals: `useToast` in 20 files.
+- [ ] TextField: the search affordance: leading Search icon, a labelled clear button that appears
+      with a value, `onClear`; `type="search"` semantics, Escape clears.
+- [ ] Badge: `variant="dot"` (needs a `label`, rendered visually hidden) and a count clamp
+      (`max = 99` → "99+"). Covers bitepals' `NavBadge`.
+- [ ] Sheet: drag to dismiss for `placement="bottom"`: pointer events, offset + velocity threshold,
+      no animation library, off under `prefers-reduced-motion`; port bitepals' tested
+      `shouldDismiss()` (`apps/web/design-system/ui/components/bottom-sheet/`). Decision record 003
+      gets a paragraph.
+
+New components (scaffold + the add-component skill; `@status experimental`; one changeset each)
+- [ ] Divider (Layout): `orientation: 'horizontal' | 'vertical'`, `spacing: 'none' | 1…8` on the
+      space steps, `decorative` (default true → `role="none"`; false → `role="separator"` with
+      `aria-orientation`). Tokens: `divider.color` → `color.border.default`, `divider.thickness` →
+      `size.hairline`.
+- [ ] Link (Typography): `tone: 'default' | 'muted' | 'action'`, `asChild` so a router's link slots
+      in (next-intl's `Link` in bitepals), underline rules, the focus ring from the semantic tier.
+      Replaces bitepals' TextLink and, with Button `asChild`, its ButtonLink.
+- [ ] Avatar (Utilities): `src`, `alt`, `name` → initials when the image is missing or fails,
+      `size: 'sm' | 'md' | 'lg' | 'xl'`, an image slot (`asChild`-style) so `next/image` fits.
+      The initials' background comes from a token, never from a hash of the name into literal colours.
+- [ ] Chip (Actions): `selected` (a toggle: `aria-pressed`), `onRemove` (a second, labelled button,
+      never a nested one), `size`, `tone: 'neutral' | 'action'`. A static chip is a Badge: say so in `@dont`.
+- [ ] SegmentedControl (Forms): generic `<T extends string>`, `options`, `value`, `onValueChange`,
+      `size`; radiogroup semantics with a roving tabindex, the same keyboard model as Radio (share
+      it, do not copy it). A link flavour through `asChild` items for view switches that navigate
+      (bitepals' `PairedViewToggle`), which is then navigation, not a radiogroup: decide whether that
+      is this component or Tabs.
+- [ ] EmptyState (Feedback): `icon`, `title`, `description`, `action`, `tone: 'neutral' | 'error'`,
+      `headingLevel`. Compose Heading, Text and Stack; no new type tokens.
+- [ ] Icons: the ~58 generic glyphs from bitepals'
+      `apps/web/design-system/ui/primitives/icons/icons.tsx` as `packages/icons/svg/*.svg`,
+      normalised to the set's grid (24 viewBox, stroke 2, `currentColor`); several are filled or
+      multi-colour there and need redrawing, not copying. The six Hub / follow glyphs are bitepals'
+      domain and stay there. The barrel's size budget moves.
+- Not in this pass: ChipInput (wants React Aria's TagGroup), ImageGrid, a full-screen push sheet.
+
 ## Later (not scheduled)
 Deprecation codemods, Tailwind preset emitted from tokens, Figma sync (Tokens Studio reads the
-DTCG files; dark values live in pulp's extension), a second consumer (bitepals web) to prove the
-bitepals brand in production, a third brand to prove "one JSON file, zero component changes".
+DTCG files; dark values live in pulp's extension), a third brand to prove "one JSON file, zero component changes".
