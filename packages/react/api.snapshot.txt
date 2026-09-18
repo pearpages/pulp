@@ -173,6 +173,11 @@ Inline (stable)
   justify?: "start" | "center" | "end" | "between"
   ref?: Ref<HTMLElement>
   wrap?: boolean = true
+Link (experimental)
+  asChild?: boolean = false
+  ref?: Ref<E>
+  tone?: "action" | "default" | "muted" = action
+  underline?: "always" | "hover" = always
 Listbox (experimental)
   aria-label?: string
   aria-labelledby?: string

@@ -1,0 +1,45 @@
+{
+  "$description": "Link component tokens. Reference the semantic layer only.",
+  "link": {
+    "tone": {
+      "$type": "color",
+      "action": {
+        "$value": "{color.action.text}"
+      },
+      "default": {
+        "$value": "{color.text.default}"
+      },
+      "muted": {
+        "$value": "{color.text.muted}"
+      }
+    },
+    "hover": {
+      "$type": "color",
+      "$value": "{color.text.default}"
+    },
+    "weight": {
+      "$type": "fontWeight",
+      "$value": "{font.weight.medium}"
+    },
+    "radius": {
+      "$type": "dimension",
+      "$value": "{radius.control}"
+    },
+    "focus-ring-width": {
+      "$type": "dimension",
+      "$value": "{focus.ring.width}"
+    },
+    "focus-ring-offset": {
+      "$type": "dimension",
+      "$value": "{focus.ring.offset}"
+    },
+    "focus-ring-color": {
+      "$type": "color",
+      "$value": "{color.border.focus}"
+    },
+    "duration": {
+      "$type": "duration",
+      "$value": "{motion.duration.fast}"
+    }
+  }
+}

@@ -485,7 +485,7 @@ New components (scaffold + the add-component skill; `@status experimental`; one 
       (space 2 / 4 / 6), `decorative` (default true → `role="none"`; false → `role="separator"` with
       `aria-orientation`). Tokens: `divider.color` → `color.border.default`, `divider.thickness` →
       `size.hairline`.
-- [ ] Link (Typography): `tone: 'default' | 'muted' | 'action'`, `asChild` so a router's link slots
+- [x] Link (Typography, 2026-09-18): `tone: 'action' | 'default' | 'muted'`, `underline: 'always' | 'hover'`, `asChild` so a router's link slots
       in (next-intl's `Link` in bitepals), underline rules, the focus ring from the semantic tier.
       Replaces bitepals' TextLink and, with Button `asChild`, its ButtonLink.
 - [ ] Avatar (Utilities): `src`, `alt`, `name` → initials when the image is missing or fails,

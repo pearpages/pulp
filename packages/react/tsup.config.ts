@@ -12,6 +12,7 @@ import { defineConfig } from 'tsup';
 export default defineConfig({
   entry: {
     index: 'src/index.ts',
+    'link': 'src/link/index.ts',
     'divider': 'src/divider/index.ts',
     'sheet': 'src/sheet/index.ts',
     'pagination': 'src/pagination/index.ts',

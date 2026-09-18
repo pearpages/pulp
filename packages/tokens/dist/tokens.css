@@ -425,6 +425,16 @@
     --inline-gap-6: var(--space-6);
     --inline-gap-7: var(--space-7);
     --inline-gap-8: var(--space-8);
+    --link-tone-action: var(--color-action-text);
+    --link-tone-default: var(--color-text-default);
+    --link-tone-muted: var(--color-text-muted);
+    --link-hover: var(--color-text-default);
+    --link-weight: var(--font-weight-medium);
+    --link-radius: var(--radius-control);
+    --link-focus-ring-width: var(--focus-ring-width);
+    --link-focus-ring-offset: var(--focus-ring-offset);
+    --link-focus-ring-color: var(--color-border-focus);
+    --link-duration: var(--motion-duration-fast);
     --listbox-bg: var(--color-surface-raised);
     --listbox-fg: var(--color-text-default);
     --listbox-border: var(--color-border-default);
