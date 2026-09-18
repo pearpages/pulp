@@ -12,6 +12,7 @@ const meta = {
   },
   argTypes: {
     variant: { control: 'select', options: ['primary', 'secondary', 'ghost'] },
+    tone: { control: 'select', options: ['default', 'danger'] },
     size: { control: 'select', options: ['sm', 'md', 'lg'] },
     iconStart: { control: false },
     iconEnd: { control: false },
@@ -73,6 +74,8 @@ export const Loading: Story = {
 };
 
 export const Disabled: Story = { args: { disabled: true } };
+export const Danger: Story = { args: { tone: 'danger', children: 'Delete place' } };
+export const DangerGhost: Story = { args: { tone: 'danger', variant: 'ghost', children: 'Remove' } };
 
 export const AsLink: Story = {
   name: 'As a link (asChild)',
@@ -100,6 +103,19 @@ const matrix = (
           loading
         </Button>
         <Button variant={variant} disabled>
+          disabled
+        </Button>
+      </div>
+    ))}
+    {(['primary', 'secondary', 'ghost'] as const).map((variant) => (
+      <div className="sb-row" key={variant}>
+        <Button variant={variant} tone="danger">
+          delete
+        </Button>
+        <Button variant={variant} tone="danger" loading>
+          loading
+        </Button>
+        <Button variant={variant} tone="danger" disabled>
           disabled
         </Button>
       </div>

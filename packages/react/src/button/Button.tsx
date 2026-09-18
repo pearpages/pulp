@@ -5,6 +5,7 @@ import { Spinner } from '../spinner';
 import { classes } from '../internal/classes';
 import styles from './Button.module.css';
 
+export type ButtonTone = 'default' | 'danger';
 export type ButtonVariant = 'primary' | 'secondary' | 'ghost';
 export type ButtonSize = 'sm' | 'md' | 'lg';
 
@@ -15,6 +16,13 @@ export interface ButtonProps<E extends HTMLElement = HTMLButtonElement> extends 
    * @default 'primary'
    */
   variant?: ButtonVariant;
+  /**
+   * `danger` for an action that destroys something (delete, remove, leave). It
+   * recolours whichever `variant` is in use, so emphasis and danger stay two
+   * separate decisions: `variant="ghost" tone="danger"` is a quiet delete.
+   * @default 'default'
+   */
+  tone?: ButtonTone;
   /** @default 'md' */
   size?: ButtonSize;
   /**
@@ -70,11 +78,13 @@ function hasText(node: ReactNode): boolean {
  * @accessibility A native `button` (or the child element with `asChild`). `loading` sets `aria-disabled` and `aria-busy` and keeps focus; only `disabled` removes it from the tab order. Icon-only use warns in development: use IconButton, which requires a name.
  * @do One `primary` per view.
  * Use `asChild` for links that look like buttons, keeping the `a` semantics.
+ * @do Use `tone="danger"` for the action that destroys, and say what it destroys in the label ("Delete place"), since colour alone must not carry it.
  * @dont Use `loading` on a button that is not the one that started the work.
  * Rely on colour to tell variants apart; the label carries the meaning.
  */
 export function Button<E extends HTMLElement = HTMLButtonElement>({
   variant = 'primary',
+  tone = 'default',
   size = 'md',
   loading = false,
   iconStart,
@@ -106,6 +116,7 @@ export function Button<E extends HTMLElement = HTMLButtonElement>({
     ref,
     className: classes(styles.button, className),
     'data-variant': variant,
+    'data-tone': tone === 'danger' ? tone : undefined,
     'data-size': size,
     'data-loading': loading ? '' : undefined,
     'aria-busy': loading || undefined,

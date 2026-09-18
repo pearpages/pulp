@@ -94,6 +94,28 @@
         "$value": "{color.action.primary-quiet}"
       }
     },
+    "danger": {
+      "$type": "color",
+      "$description": "tone=\"danger\". Filled for the primary variant; the quiet variants keep their shape and take the error text colour.",
+      "bg": {
+        "$value": "{color.status.error}"
+      },
+      "bg-hover": {
+        "$value": "{color.status.error-hover}"
+      },
+      "bg-active": {
+        "$value": "{color.status.error-active}"
+      },
+      "fg": {
+        "$value": "{color.status.on-error}"
+      },
+      "text": {
+        "$value": "{color.status.error-text}"
+      },
+      "quiet-bg-hover": {
+        "$value": "{color.status.error-subtle}"
+      }
+    },
     "focus": {
       "ring": {
         "$type": "color",

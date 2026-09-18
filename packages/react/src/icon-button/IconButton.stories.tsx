@@ -34,6 +34,7 @@ const matrix = (
         <IconButton variant={variant} size="lg" label="Close" icon={<Close />} />
         <IconButton variant={variant} label="Loading" icon={<Plus />} loading />
         <IconButton variant={variant} label="Disabled" icon={<Plus />} disabled />
+        <IconButton variant={variant} tone="danger" label="Delete" icon={<Close />} />
       </div>
     ))}
   </div>

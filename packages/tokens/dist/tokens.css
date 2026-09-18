@@ -45,9 +45,12 @@
     --color-green-700: #146e47;
     --color-green-900: #0e2e20;
     --color-red-100: #fbe5e6;
+    --color-red-200: #ff9699;
     --color-red-300: #ff6b70;
+    --color-red-400: #ea5459;
     --color-red-500: #d0393e;
     --color-red-700: #a52c30;
+    --color-red-800: #86242a;
     --color-red-900: #3d1113;
     --color-surface-base: light-dark(var(--color-neutral-50), var(--color-neutral-975));
     --color-surface-raised: light-dark(var(--color-neutral-0), var(--color-neutral-900));
@@ -71,6 +74,8 @@
     --color-status-success: light-dark(var(--color-green-500), var(--color-green-300));
     --color-status-warning: light-dark(var(--color-saffron-500), var(--color-saffron-500));
     --color-status-error: light-dark(var(--color-red-500), var(--color-red-300));
+    --color-status-error-hover: light-dark(var(--color-red-700), var(--color-red-200));
+    --color-status-error-active: light-dark(var(--color-red-800), var(--color-red-400));
     --color-status-info: light-dark(var(--color-ultramarine-500), var(--color-ultramarine-300));
     --color-status-error-text: light-dark(var(--color-red-700), var(--color-red-300));
     --color-status-success-text: light-dark(var(--color-green-700), var(--color-green-300));
@@ -254,6 +259,12 @@
     --button-secondary-border: var(--color-border-default);
     --button-ghost-fg: var(--color-action-text);
     --button-ghost-bg-hover: var(--color-action-primary-quiet);
+    --button-danger-bg: var(--color-status-error);
+    --button-danger-bg-hover: var(--color-status-error-hover);
+    --button-danger-bg-active: var(--color-status-error-active);
+    --button-danger-fg: var(--color-status-on-error);
+    --button-danger-text: var(--color-status-error-text);
+    --button-danger-quiet-bg-hover: var(--color-status-error-subtle);
     --button-focus-ring: var(--color-border-focus);
     --button-focus-ring-width: var(--focus-ring-width);
     --button-focus-ring-offset: var(--focus-ring-offset);
@@ -901,10 +912,13 @@
     --color-gold-700: #7a4e00;
     --color-gold-900: #3d2800;
     --color-red-100: #fde7e7;
+    --color-red-200: #ff9797;
     --color-red-300: #ff6b6b;
+    --color-red-400: #ee6060;
     --color-red-500: #d64545;
     --color-red-600: #c43a3a;
     --color-red-700: #a83333;
+    --color-red-800: #8a2a2a;
     --color-red-900: #3f1414;
     --color-blue-100: #e3efff;
     --color-blue-300: #5aa9ff;
@@ -934,6 +948,8 @@
     --color-status-success: light-dark(var(--color-green-500), var(--color-green-300));
     --color-status-warning: light-dark(var(--color-gold-500), var(--color-gold-300));
     --color-status-error: light-dark(var(--color-red-600), var(--color-red-300));
+    --color-status-error-hover: light-dark(var(--color-red-700), var(--color-red-200));
+    --color-status-error-active: light-dark(var(--color-red-800), var(--color-red-400));
     --color-status-info: light-dark(var(--color-blue-600), var(--color-blue-300));
     --color-status-error-text: light-dark(var(--color-red-700), var(--color-red-300));
     --color-status-success-text: light-dark(var(--color-green-700), var(--color-green-300));

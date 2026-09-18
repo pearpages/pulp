@@ -28,6 +28,8 @@ export const PUBLIC_SEMANTIC_TOKENS = [
   '--color-border-strong',
   '--color-overlay-backdrop',
   '--color-status-error',
+  '--color-status-error-active',
+  '--color-status-error-hover',
   '--color-status-error-subtle',
   '--color-status-error-text',
   '--color-status-info',

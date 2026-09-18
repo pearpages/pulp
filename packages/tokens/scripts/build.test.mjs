@@ -140,6 +140,9 @@ const PAIRS = [
   ['--color-text-default', ['--color-action-secondary', '--color-action-secondary-hover']],
   ['--color-status-error-text', ['--color-surface-base', '--color-surface-raised', '--color-surface-sunken']],
   ['--color-text-on-inverse', ['--color-surface-inverse']],
+  // A danger Button: filled (on-error over the three error fills), and quiet (error text over the subtle hover).
+  ['--color-status-on-error', ['--color-status-error-hover', '--color-status-error-active']],
+  ['--color-status-error-text', ['--color-action-secondary']],
   ...['success', 'warning', 'error', 'info', 'neutral'].flatMap((tone) => [
     [`--color-status-${tone}-text`, ['--color-surface-base', '--color-surface-raised', '--color-surface-sunken', `--color-status-${tone}-subtle`]],
     [`--color-status-on-${tone}`, [`--color-status-${tone}`]],

@@ -91,6 +91,30 @@
     }
   }
 
+  /* tone="danger", after the variants so it wins at equal specificity plus one attribute. */
+  .button[data-tone="danger"] {
+    &[data-variant="primary"] {
+      background-color: var(--button-danger-bg);
+      color: var(--button-danger-fg);
+
+      &:hover:not(:disabled, [aria-disabled="true"]) {
+        background-color: var(--button-danger-bg-hover);
+      }
+
+      &:active:not(:disabled, [aria-disabled="true"]) {
+        background-color: var(--button-danger-bg-active);
+      }
+    }
+
+    &:is([data-variant="secondary"], [data-variant="ghost"]) {
+      color: var(--button-danger-text);
+
+      &:hover:not(:disabled, [aria-disabled="true"]) {
+        background-color: var(--button-danger-quiet-bg-hover);
+      }
+    }
+  }
+
   .label {
     display: inline-block;
   }

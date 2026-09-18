@@ -473,9 +473,15 @@ Infrastructure (unblocks the token swap; nothing in bitepals can start before th
       default / strong on sand-300 / 400 / 500; pulp has default / strong).
 
 Extensions to existing components
-- [ ] Button and IconButton: `tone: 'default' | 'danger'` (a union, orthogonal to `variant`, so
-      `variant="ghost" tone="danger"` exists). Tokens `--button-danger-*` on `color.status.error*`;
-      the contrast test gets the new pairs. bitepals: 98 Button uses, `destructive` among them.
+- [x] Button and IconButton `tone: 'default' | 'danger'` (2026-09-18), orthogonal to `variant`:
+      filled for `primary` (`status.error` / `error-hover` / `error-active`, `on-error` text), and
+      the error text colour with an `error-subtle` hover for `secondary` and `ghost`. `data-tone`
+      only when it is `danger`. **Two new semantic tokens, agreed with Pere:**
+      `color.status.error-hover` and `color.status.error-active` in both brands (pulp and bitepals
+      `red.700` / `red.800` in light, `red.200` / `red.400` in dark: away from the on-error text,
+      so bitepals darkens here although its action colours brighten), with three new red
+      primitives per brand, pinned in `public-tokens.mjs`, and in the contrast test (lowest pair:
+      bitepals dark active, above 4.5 only after moving `red.400` from #eb5858 to #ee6060).
 - [ ] Toast: `action: { label, onAction }` on a toast, and `toast.undo(message, onUndo)` as the
       named case (longer duration, dismisses on action). The action is a real button inside the
       live region; the toast must not steal focus. bitepals: `useToast` in 20 files.

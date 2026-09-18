@@ -45,6 +45,7 @@ Button (stable)
   loading?: boolean = false
   ref?: Ref<E>
   size?: "sm" | "md" | "lg" = md
+  tone?: "default" | "danger" = default
   variant?: "primary" | "secondary" | "ghost" = primary
 Calendar (experimental)
   aria-label?: string = Calendar
@@ -189,6 +190,7 @@ IconButton (stable)
   loading?: boolean = false
   ref?: Ref<E>
   size?: "sm" | "md" | "lg" = 'md'
+  tone?: "default" | "danger" = 'default'
   variant?: "primary" | "secondary" | "ghost" = 'primary'
 Inline (stable)
   align?: "start" | "center" | "end" | "stretch"
