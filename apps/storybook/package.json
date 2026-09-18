@@ -7,6 +7,7 @@
     "dev": "node scripts/fonts.mjs && pnpm --filter @pearpages/pulp-react manifest && storybook dev -p 6006",
     "build": "node scripts/fonts.mjs && pnpm --filter @pearpages/pulp-react manifest && storybook build && node scripts/check-links.mjs",
     "test": "vitest",
+    "test:site": "node scripts/check-built-site.mjs",
     "test:run": "pnpm --filter @pearpages/pulp-react manifest && vitest run",
     "typecheck": "pnpm --filter @pearpages/pulp-react manifest && tsc --noEmit"
   },

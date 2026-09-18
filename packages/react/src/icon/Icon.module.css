@@ -1,5 +1,7 @@
 /* Every value is a token (--icon-*). The child SVG fills the box; colour is currentColor. */
 
+@layer reset, tokens, vendor, base, components, utilities;
+
 @layer components {
   .icon {
     display: inline-flex;

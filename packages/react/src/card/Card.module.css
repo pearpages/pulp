@@ -1,5 +1,7 @@
 /* Every value is a token (--card-*). Slots carry padding and dividers; the root is the surface. */
 
+@layer reset, tokens, vendor, base, components, utilities;
+
 @layer components {
   .card {
     --_pad: var(--card-padding-md);

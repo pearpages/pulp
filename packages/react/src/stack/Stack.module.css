@@ -1,5 +1,7 @@
 /* Every value is a token (--stack-gap-*). Gap, alignment and justification are data attributes. */
 
+@layer reset, tokens, vendor, base, components, utilities;
+
 @layer components {
   .stack {
     display: flex;

@@ -7,6 +7,8 @@ import { render, screen } from '@testing-library/react';
 
 const DIST = resolve(import.meta.dirname, '../../dist');
 const SRC = resolve(import.meta.dirname, '..');
+// The documented order: packages/css/src/layers.css. Read from there so the copies cannot drift.
+const LAYER_ORDER = readFileSync(resolve(SRC, '../../css/src/layers.css'), 'utf8').match(/@layer [^;{]+;/)![0];
 type Prop = { name: string; type: string; values?: string[]; required: boolean; default: string | null };
 const manifest = JSON.parse(readFileSync(resolve(DIST, 'component-manifest.json'), 'utf8')) as {
   categories: string[];
@@ -52,6 +54,9 @@ describe('dist', () => {
     const entry = entryOf(component);
     const css = readFileSync(resolve(DIST, `${entry}.css`), 'utf8');
     expect(css).toMatch(/@layer components\s*\{/);
+  // Layers rank by first appearance and a bundler picks the load order: every entry restates the list first.
+  expect(css.indexOf(LAYER_ORDER)).toBeGreaterThan(-1);
+  expect(css.indexOf(LAYER_ORDER)).toBeLessThan(css.search(/@layer components\s*\{/));
     expect(css).toMatch(new RegExp(`var\\(--${entry}-`));
     expect(css).not.toMatch(/#[0-9a-f]{3,8}\b/i);
     expect(existsSync(resolve(DIST, `${entry}.d.ts`))).toBe(true);

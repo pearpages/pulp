@@ -1,5 +1,7 @@
 /* Every value is a token (--text-*). Variants are data attributes. */
 
+@layer reset, tokens, vendor, base, components, utilities;
+
 @layer components {
   .text {
     margin: 0;

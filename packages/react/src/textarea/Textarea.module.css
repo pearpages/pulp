@@ -1,5 +1,7 @@
 /* Every value is a token (--textarea-*). Label, description and error come from Field. */
 
+@layer reset, tokens, vendor, base, components, utilities;
+
 @layer components {
   .field {
     font-family: var(--textarea-font-family);

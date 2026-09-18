@@ -1,5 +1,7 @@
 /* Every value is a token (--heading-*). Size is a data attribute, independent of the level. */
 
+@layer reset, tokens, vendor, base, components, utilities;
+
 @layer components {
   .heading {
     margin: 0;

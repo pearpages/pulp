@@ -63,6 +63,8 @@ ${name}.displayName = '${name}';
 `,
   [`${name}.module.css`]: `/* Every value is a token: --${kebab}-* in packages/tokens/tokens/component/${kebab}.json */
 
+@layer reset, tokens, vendor, base, components, utilities;
+
 @layer components {
   .root {
     color: var(--color-text-default);

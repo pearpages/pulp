@@ -5,6 +5,8 @@
  * every option and revealed by data-selected.
  */
 
+@layer reset, tokens, vendor, base, components, utilities;
+
 @layer components {
   .list {
     display: flex;

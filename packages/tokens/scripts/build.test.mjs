@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { render } from './build.mjs';
+import { LAYERS, render } from './build.mjs';
 import { toCss } from './format.mjs';
 import { PUBLIC_SEMANTIC_TOKENS } from './public-tokens.mjs';
 import { validateTokens } from './schema.mjs';
@@ -40,6 +40,14 @@ test('the schema check fires: missing type, unknown type, misspelt key', () => {
     "x.json: size.sm has no $type, its own or a group's",
   ]);
   assert.deepEqual(validateTokens({ size: { sm: '4px' } }, 'x.json'), ['x.json: size.sm is neither a group nor a token']);
+});
+
+test('tokens.css restates the layer order of the css package before its own block', async () => {
+  // Layers rank by first appearance; a bundler may load tokens.css before layers.css.
+  const { css } = await render();
+  const documented = readFileSync(resolve(TOKENS, '../../css/src/layers.css'), 'utf8').match(/@layer ([^;{]+);/)[1].split(',').map((name) => name.trim());
+  assert.deepEqual(LAYERS, documented);
+  assert.ok(css.indexOf(`@layer ${LAYERS.join(', ')};`) !== -1 && css.indexOf(`@layer ${LAYERS.join(', ')};`) < css.indexOf('@layer tokens {'));
 });
 
 test('both brands render, with light-dark() and calc() from $extensions', async () => {

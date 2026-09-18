@@ -34,6 +34,7 @@ pnpm check:floor       # every shipped stylesheet runs unlowered on the root bro
 pnpm test:storybook    # every story in Chromium with a11y checks (needs `playwright install chromium`)
 pnpm storybook         # dev server on :6006
 pnpm storybook:build   # ends with scripts/check-links.mjs: a dead docs link fails the build
+pnpm test:site         # the built site in Chromium: layer order and what is painted (after storybook:build)
 pnpm --filter @pearpages/pulp-react scaffold Name Category   # new component skeleton (category from scripts/categories.mjs)
 pnpm verify            # everything deploy.yml runs, in the same order. Run it before pushing to main
 pnpm ci:local up|sync|verify|visual|diffs|shell|down   # the pipeline in CI's image, linux/amd64, via Colima (docs/ci-local.md)
@@ -63,6 +64,22 @@ copy of the working tree, two-minute loops. Colima only, never Docker Desktop; f
 - **`pnpm check:guardrails`** (part of `pnpm lint`) drops deliberately wrong files in and fails
   unless every rule above fires. Relaxing a rule by accident fails CI.
 - **Component CSS is wrapped in `@layer components { … }`.** The dist smoke test asserts it.
+- **Every stylesheet pulp ships restates the layer order first**
+  (`@layer reset, tokens, vendor, base, components, utilities;`: each `*.module.css`, `reset.css`,
+  `base.css`, `tokens.css`; the scaffold writes it). Layers rank by first appearance and the bundler
+  picks the load order: the production Storybook linked a split `Icon-*.css` before the entry CSS, so
+  `components` became the weakest layer and the reset beat every component (a primary Button painted
+  as bare text) on the deployed site, with every test green. The dist smoke test, the tokens test
+  and `packages/css/scripts/css.test.mjs` compare each copy with `packages/css/src/layers.css`.
+- **The production build is tested as built.** Story tests, axe and the visual baselines all render
+  through Vite's dev transform (styles injected in import order); only `pnpm test:site`
+  (`apps/storybook/scripts/check-built-site.mjs`) serves `storybook-static` to Chromium. Per story it
+  checks the layer order the browser met, and that every property a `components` rule sets computes
+  to a value some matching component rule asked for (each candidate rule is forced inline and
+  compared, so no specificity is re-implemented; font-size and color are pinned because em and
+  currentcolor values follow them; logical and physical twins are one slot; an inline style may
+  win). It runs in `verify`, `ci.yml` and in `deploy.yml` before the Pages upload. When UI work is
+  done, look at the built page too: a green run said nothing about this bug.
 - **`loading` never uses the `disabled` attribute** (focus would be lost); it uses
   `aria-disabled` + `aria-busy` and blocks activation. Only `disabled` uses the attribute.
   With `asChild`, an inert control does not run the child's handler either.

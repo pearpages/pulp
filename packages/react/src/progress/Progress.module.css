@@ -1,5 +1,7 @@
 /* Every value is a token (--progress-*). The fill width is the per-instance --_value custom property. */
 
+@layer reset, tokens, vendor, base, components, utilities;
+
 @layer components {
   .progress {
     --_height: var(--progress-height-md);

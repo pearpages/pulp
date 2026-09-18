@@ -83,6 +83,9 @@ The vendor's stylesheet is the one you import yourself. Put it in the `vendor` l
 @import "@pearpages/pulp-react/styles.css";
 ```
 
+Every pulp stylesheet restates the layer order, so the result does not depend on which file your
+bundler loads first; importing `@pearpages/pulp-css` first stays the recommended setup.
+
 Then mount `DialogSystem` once near the root. Without the stylesheet a dialog opens unstyled; if
 you never render a `Dialog`, skip it.
 

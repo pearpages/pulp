@@ -1,5 +1,7 @@
 /* The clip-path technique: present in the accessibility tree, absent from the layout. */
 
+@layer reset, tokens, vendor, base, components, utilities;
+
 @layer components {
   .root {
     position: absolute;

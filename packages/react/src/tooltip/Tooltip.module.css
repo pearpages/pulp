@@ -1,5 +1,7 @@
 /* Every value is a token (--tooltip-*). Position comes in as --_x/--_y from the floating hook. */
 
+@layer reset, tokens, vendor, base, components, utilities;
+
 @layer components {
   .tooltip {
     --_gap: var(--tooltip-gap);

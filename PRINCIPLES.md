@@ -41,7 +41,8 @@ The price of native CSS is a support floor. The shipped stylesheets rely on nati
 and `light-dark()` and are not lowered: Chrome and Edge 123, Firefox 120, Safari 17.5 and
 later (the `browserslist` in the root `package.json`, which `pnpm check:floor` holds every shipped
 stylesheet to). Component rules sit in the
-`components` cascade layer, so an app overrides them from any later layer or from unlayered
+`components` cascade layer (every stylesheet restates the layer order, so it holds whatever
+loads first), so an app overrides them from any later layer or from unlayered
 CSS, never by fighting specificity.
 
 ## 5. State lives on the DOM

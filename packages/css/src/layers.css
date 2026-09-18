@@ -1,5 +1,7 @@
 /*
- * Cascade order for everything pulp ships, declared once and first.
+ * Cascade order for everything pulp ships. Layers rank by first appearance and a bundler
+ * decides which file loads first, so every other pulp stylesheet (reset, base, tokens.css,
+ * each component) restates this exact list before its own block; tests keep the copies equal.
  * `vendor` is for third-party stylesheets (`@import "…" layer(vendor)`), so they sit
  * below pulp's own components. Consumers can add their own layers after `utilities`;
  * an unlayered rule in the app always wins over any of these, which is the intended

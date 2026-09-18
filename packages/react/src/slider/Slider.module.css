@@ -6,6 +6,8 @@
  * data-hovered, data-focus-visible on a thumb.
  */
 
+@layer reset, tokens, vendor, base, components, utilities;
+
 @layer components {
   .root {
     --_thumb: var(--slider-thumb-size);

@@ -1,5 +1,7 @@
 /* Every value is a token (--accordion-*). Open state is a data attribute; the chevron rotates on it. */
 
+@layer reset, tokens, vendor, base, components, utilities;
+
 @layer components {
   .accordion {
     display: flex;

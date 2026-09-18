@@ -4,6 +4,8 @@
  * properties on the root.
  */
 
+@layer reset, tokens, vendor, base, components, utilities;
+
 @layer components {
   .switch {
     --_size: var(--switch-size-md);

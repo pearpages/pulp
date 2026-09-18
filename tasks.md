@@ -5,16 +5,23 @@ this file holds what is left to do, ticked with a date when done. Ordered within
 
 ## Recommended order (2026-09-18)
 
+0. Group 9 (confidence): release 0.2.2, then the consumer fixture and the component review.
 1. Decision record 005 on the shape of the token output (group 4).
 2. Docs (group 5): README badges now that npm is live, brand walkthrough, tokens diagram.
 3. The testing gaps and housekeeping (the guardrails are done except record 005).
 
 ## Session log
 
+- 2026-09-18 (evening): Pere: "even buttons don't seem correct". They were not: the deployed site
+  linked a split `Icon-*.css` before the entry CSS, `components` became the weakest cascade layer
+  and the reset beat every component; all tests were green because all of them render through the
+  dev transform. Fixed by restating the layer order in every stylesheet; new test level
+  `pnpm test:site` opens the built site in Chromium (263 stories) and blocks the deploy. The
+  coverage plan was dropped for a confidence plan: group 9.
 - 2026-09-18 (later): the three code guardrails of group 4: token `$type` schema check, link check
   inside `storybook:build`, `pnpm check:floor` with lightningcss; the floor check's first run found
-  Safari's missing `user-select` and iOS's `text-size-adjust`, both fixed with patch changesets
-  (unreleased).
+  Safari's missing `user-select` and iOS's `text-size-adjust`, both fixed and released as react 0.2.1 /
+  css 0.1.2.
 - 2026-09-18: Sheet landed on `main` through a branch and is on the site; a second Claude session
   had built a parallel Sheet in a worktree (identical API), its two extra doc edits ported and the
   worktree removed; the pnpm release-age note added to both READMEs. 0.2.0 released through
@@ -77,10 +84,14 @@ Ordered within each group. Groups 1 and 2 are the gate to everything else being 
       `gh run rerun 35322825711 --failed` published tokens, and a second re-run css and react, all
       with provenance and no 2FA codes; already-published versions are skipped. `npm view`: tokens
       0.2.0, css 0.1.1, react 0.2.0 (peer tokens `^0.2.0`, modals `^0.3.0`), icons 0.1.0.
-- [ ] **Release 0.2.1**: the two fixes the support-floor check found (Button `-webkit-user-select`,
-      the reset's prefixed `text-size-adjust`). `pnpm version-packages` → react 0.2.1, css 0.1.2;
-      tokens 0.2.0 and icons 0.1.0 unchanged. `deploy.yml` green on `63b6449` first (the new checks'
-      first Linux run). Then: version commit, push, deploy green, tag `v0.2.1`, `publish.yml`.
+- [x] **Release 0.2.1** (2026-09-18): the two fixes the support-floor check found (Button
+      `-webkit-user-select`, the reset's prefixed `text-size-adjust`). react 0.2.1, css 0.1.2; tokens
+      0.2.0 and icons 0.1.0 unchanged. `63b6449` (deploy run 35352192635, the new checks' first
+      Linux run) → `f2b8c48` "Version packages: 0.2.1" (35355470363) → tag `v0.2.1` → `publish.yml`
+      35356661150, the first publish that needed no re-run, with provenance. The registry served
+      the old `latest` for about a minute afterwards: check `registry.npmjs.org` or wait before
+      concluding a publish failed. Verified in the published tarballs (`dist/button.css`,
+      `src/reset.css`). `v0.2.1` is a lightweight tag where `v0.2.0` is annotated; no effect.
 
 **2. Consumer: the CV site (`~/Projects/cv`)**
 Done 2026-09-16, committed in that repo (`7b2ac44`). The CV is pulp's reference consumer; its own
@@ -377,6 +388,27 @@ copy, not to re-derive.
   too). Console error only, no state corruption. Track upstream; the calendar stories use the keyboard.
 - `Select`/`ComboBox` support `selectionMode="multiple"` in this version; pulp exposes single only for
   Picker and Combobox and points multiple choice at Listbox. Revisit if a multi-select field is needed.
+
+**9. Confidence: what is actually painted (2026-09-18)**
+- [x] Layer order restated in every shipped stylesheet (38 component modules, `reset.css`,
+      `base.css`, `tokens.css`, the scaffold template), with drift tests against `layers.css` in
+      the dist smoke test, the tokens test and the css package's first test file.
+- [x] `pnpm test:site` (`apps/storybook/scripts/check-built-site.mjs`): on the broken build it
+      reported the layer order `components, reset, …` and Button losing padding, border, weight,
+      background and colour; on the fixed build 263 stories pass. Proven again after tuning by
+      stripping the statement from the built CSS. Checker limits met and handled: em and
+      currentcolor dependence (font-size and color pinned), logical/physical twins, inline styles.
+- [ ] Release 0.2.2 (react, tokens, css patches): npm consumers are exposed to the same ordering
+      bug whenever their bundler loads a component stylesheet before `@pearpages/pulp-css`.
+- [ ] Look at the deployed site after the fix lands (Button docs page first) and keep the screenshot.
+- [ ] The matrix screenshots against the *built* site too (same baselines): deferred, the harness
+      differs (Vitest browser iframe vs a plain page) and pixel parity needs work. `test:site`
+      covers the cascade; this would cover everything else that differs between dev and build.
+- [ ] Consumer fixture: a Vite app built from `pnpm pack` tarballs, imports in the README order and
+      in the wrong order, same painted-value checks (replaces the by-hand check of 2026-09-16).
+- [ ] Component review by eye on the deployed site, tier order, four brand × scheme pairs each;
+      findings get a failing test at the level that would have caught them, then the fix. Start:
+      Button, IconButton, TextField, Checkbox, Dialog, Menu, Combobox. Pere: Safari + VoiceOver.
 
 ## Later (not scheduled)
 Deprecation codemods, Tailwind preset emitted from tokens, Figma sync (Tokens Studio reads the

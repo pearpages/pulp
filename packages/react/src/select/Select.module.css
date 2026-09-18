@@ -4,6 +4,8 @@
  * custom properties on the root.
  */
 
+@layer reset, tokens, vendor, base, components, utilities;
+
 @layer components {
   .field {
     --_height: var(--select-height-md);

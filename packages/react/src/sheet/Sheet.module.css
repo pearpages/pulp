@@ -6,6 +6,8 @@
  * Dialog's mapping on the portal root.
  */
 
+@layer reset, tokens, vendor, base, components, utilities;
+
 @layer components {
   .content {
     --modal-width-sheet: var(--sheet-width);

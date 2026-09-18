@@ -6,6 +6,8 @@
  * the vendor) makes it as wide as the control.
  */
 
+@layer reset, tokens, vendor, base, components, utilities;
+
 @layer components {
   .root {
     --_height: var(--combobox-height-md);

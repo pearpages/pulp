@@ -51,6 +51,8 @@ jobs:
           path: apps/storybook/.vitest-attachments/visual
           if-no-files-found: ignore
       - run: pnpm storybook:build
+      # The production build, opened for real: every other test renders through the dev transform.
+      - run: pnpm test:site
 
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3

@@ -6,6 +6,8 @@
  * on each segment.
  */
 
+@layer reset, tokens, vendor, base, components, utilities;
+
 @layer components {
   .root {
     --_height: var(--date-picker-height-md);

@@ -1,5 +1,7 @@
 /* Every value is a token (--tabs-*). The indicator is a logical border on the active tab, so vertical orientation just flips the side. */
 
+@layer reset, tokens, vendor, base, components, utilities;
+
 @layer components {
   .root {
     display: flex;

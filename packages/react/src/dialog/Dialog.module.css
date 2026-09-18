@@ -4,6 +4,8 @@
  * --dialog-* tokens and the vendor's :root defaults never apply.
  */
 
+@layer reset, tokens, vendor, base, components, utilities;
+
 @layer components {
   .root {
     --modal-bg: var(--dialog-surface);

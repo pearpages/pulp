@@ -1,5 +1,7 @@
 /* Every value is a token (--skeleton-*). Shimmer is a moving background-image; off under reduced motion. */
 
+@layer reset, tokens, vendor, base, components, utilities;
+
 @layer components {
   .skeleton {
     --_size: var(--skeleton-circle-md);

@@ -1,5 +1,7 @@
 /* Every value is a token (--badge-*). Tone × variant resolve into private custom properties. */
 
+@layer reset, tokens, vendor, base, components, utilities;
+
 @layer components {
   .badge {
     --_bg: var(--badge-neutral-subtle-bg);

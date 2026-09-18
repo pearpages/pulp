@@ -4,6 +4,8 @@
  * property and no selector ordering to maintain.
  */
 
+@layer reset, tokens, vendor, base, components, utilities;
+
 @layer components {
   .checkbox {
     --_size: var(--checkbox-size-md);

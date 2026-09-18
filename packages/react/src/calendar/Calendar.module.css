@@ -4,6 +4,8 @@
  * data-disabled, data-unavailable, data-today, data-outside-month.
  */
 
+@layer reset, tokens, vendor, base, components, utilities;
+
 @layer components {
   .root {
     display: inline-flex;

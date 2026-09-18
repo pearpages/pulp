@@ -4,6 +4,8 @@
  * React Aria; the gap is its own padding and --trigger-width (vendor) sizes it.
  */
 
+@layer reset, tokens, vendor, base, components, utilities;
+
 @layer components {
   .root {
     --_height: var(--picker-height-md);

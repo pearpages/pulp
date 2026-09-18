@@ -1,5 +1,7 @@
 /* Every value is a token (--spinner-*). The ring is a border with one coloured side. */
 
+@layer reset, tokens, vendor, base, components, utilities;
+
 @layer components {
   .spinner {
     --_size: var(--spinner-size-md);

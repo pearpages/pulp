@@ -8,6 +8,8 @@
  * specificity than an earlier one for the same element.
  */
 
+@layer reset, tokens, vendor, base, components, utilities;
+
 @layer components {
   .container {
     overflow: auto;
