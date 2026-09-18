@@ -456,14 +456,17 @@ tables, is `~/Projects/bitepals/tasks.md`. What it needs from pulp, in the order
 How to run this group, and where to look in bitepals for each item: [`docs/bitepals-consumer.md`](docs/bitepals-consumer.md).
 
 Infrastructure (unblocks the token swap; nothing in bitepals can start before the first two)
-- [ ] `'use client'` survives the build. No source or dist file carries it today, and 14 source files
-      plus everything on React Aria use client-only APIs, so every interactive entry fails in a Server
-      Component. tsup drops module directives when bundling: keep them per entry (a preserve-directives
-      esbuild plugin, or a banner on the entries that need it; `splitting: true` moves code into shared
-      chunks, so check the chunks too). Leaf, hook-free entries (Heading, Text, Stack, Inline, Card,
-      Badge, Skeleton, Spinner, Icon, VisuallyHidden, the icons) stay server-safe: that is worth a
-      column in the manifest. `test:dist` asserts the directive per entry, and the consumer fixture
-      of group 9 gets an RSC import.
+- [x] `'use client'` (2026-09-18). `scripts/client-entries.mjs` decides per entry from source
+      (client-only React APIs or a client package anywhere in its relative imports), `pnpm build`
+      stamps `"use client";` on those built entries (26 of 44, the barrel included), the manifest
+      gains `client`, the Status page a "Renders in" column, the react README a section. Chunks
+      need no directive: esbuild's splitting puts a shared module in the chunk of exactly the
+      entries that reach it, so a server-safe entry never imports client code; proven rather than
+      assumed, by importing all 18 server-safe entries under `node --conditions=react-server` in
+      `test:dist` (where Tabs fails with "Named export 'createContext' not found": the error an
+      App Router consumer got). Server-safe: Text, Heading, Stack, Inline, Card, Divider, Badge,
+      Skeleton, Spinner, Progress, Icon, VisuallyHidden, Link, Button, IconButton, Alert,
+      Pagination, EmptyState. Still to do with group 9's consumer fixture: an RSC import there.
 - [ ] Decision record 005 (group 4) now has its consumer. Two new outputs of
       `packages/tokens/scripts/build.mjs`, committed and drift-checked like the other two:
       `./theme.css`, a Tailwind v4 `@theme inline` block over the **semantic** tier only

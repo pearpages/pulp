@@ -32,13 +32,16 @@ export function StatusTable() {
           Entry
         </span>
         <span className={styles.cell} role="columnheader">
+          Renders in
+        </span>
+        <span className={styles.cell} role="columnheader">
           Parts
         </span>
       </div>
       {groups.map(({ category, rows }) => (
         <Fragment key={category}>
           <div className={styles.row} role="row">
-            <span className={styles.group} role="rowheader" aria-colspan={4}>
+            <span className={styles.group} role="rowheader" aria-colspan={5}>
               {category}
             </span>
           </div>
@@ -60,6 +63,9 @@ export function StatusTable() {
               </span>
               <span className={styles.cell} role="cell">
                 <code>{component.import.match(/'([^']+)'/)?.[1]}</code>
+              </span>
+              <span className={styles.cell} role="cell">
+                {component.client ? 'client' : 'server and client'}
               </span>
               <span className={styles.cell} role="cell">
                 {component.parts.length || ""}

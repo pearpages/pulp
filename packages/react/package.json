@@ -243,7 +243,7 @@
     "./package.json": "./package.json"
   },
   "scripts": {
-    "build": "tsup && node scripts/manifest.mjs",
+    "build": "tsup && node scripts/client-entries.mjs && node scripts/manifest.mjs",
     "dev": "tsup --watch",
     "typecheck": "tsc --noEmit",
     "test": "vitest",

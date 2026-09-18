@@ -89,6 +89,20 @@ bundler loads first; importing `@pearpages/pulp-css` first stays the recommended
 Then mount `DialogSystem` once near the root. Without the stylesheet a dialog opens unstyled; if
 you never render a `Dialog`, skip it.
 
+## React Server Components
+
+Every entry that needs the browser ships with `'use client'` as its first statement, so on the
+Next.js App Router (or any RSC setup) you import pulp from a server file and it works: the client
+entries become client boundaries on their own. The leaf, hook-free entries carry no directive and
+render on the server as they are: Text, Heading, Stack, Inline, Card, Divider, Badge, Skeleton,
+Spinner, Progress, Icon, VisuallyHidden, Link, Button, IconButton, Alert, Pagination, EmptyState
+(the `client` field of the component manifest is the list). Two things to know:
+
+- The barrel (`@pearpages/pulp-react`) is a client module, because it re-exports everything. Import
+  from the per-component entries (`@pearpages/pulp-react/text`) to keep server-safe ones on the server.
+- A function cannot cross from a server file into any component, pulp's or not. `<Button asChild>`
+  around a link is fine in a Server Component; `<Button onClick={…}>` belongs in a client file.
+
 ## For tooling and coding agents
 
 `@pearpages/pulp-react/component-manifest.json` lists every component with its status, category,

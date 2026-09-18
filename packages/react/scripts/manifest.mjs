@@ -12,6 +12,7 @@ import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { withCustomConfig } from 'react-docgen-typescript';
 import { CATEGORIES } from './categories.mjs';
+import { clientEntries } from './client-entries.mjs';
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const SRC = resolve(ROOT, 'src');
@@ -67,6 +68,9 @@ const props = (doc) =>
 
 // Sub-components (`Card.Header`) nest under their parent as `parts`: they are
 // reached through the parent, not imported on their own.
+// Server-safe or client, from the same analysis that stamps 'use client' on the built entries.
+const client = clientEntries(Object.fromEntries(componentFiles.map(({ dir }) => [dir, `src/${dir}/index.ts`])));
+
 const components = componentFiles.flatMap(({ dir, file }) => {
   const docs = parser.parse(file);
   // Hooks (useField), helpers (lower-case names) and sub-components (Card.Header) are not root components.
@@ -77,6 +81,8 @@ const components = componentFiles.flatMap(({ dir, file }) => {
     ...metadata(doc),
     import: `import { ${doc.displayName} } from '@pearpages/pulp-react/${dir}';`,
     css: `@pearpages/pulp-react/${dir}.css`,
+    // true: the entry carries 'use client'. false: it renders in a React Server Component as it is.
+    client: client.get(dir) ?? true,
     tokens: `--${dir}-*`,
     props: props(doc),
     parts: docs
