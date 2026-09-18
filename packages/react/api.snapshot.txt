@@ -80,6 +80,15 @@ Checkbox (stable)
   label: ReactNode
   ref?: Ref<HTMLInputElement>
   size?: "sm" | "md" | "lg" = md
+Chip (experimental)
+  defaultSelected?: boolean
+  onRemove?: (() => void)
+  onSelectedChange?: ((selected: boolean) => void)
+  ref?: Ref<HTMLButtonElement>
+  removeLabel?: string = Remove
+  selected?: boolean
+  size?: "sm" | "md" | "lg" = md
+  tone?: "neutral" | "action" = neutral
 Combobox (experimental)
   allowsCustomValue?: boolean = false
   autoFocus?: boolean

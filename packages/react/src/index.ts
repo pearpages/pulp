@@ -38,3 +38,4 @@ export * from './sheet';
 export * from './divider';
 export * from './link';
 export * from './avatar';
+export * from './chip';

@@ -496,8 +496,15 @@ New components (scaffold + the add-component skill; `@status experimental`; one 
       the child so `next/image` takes the styles and the error handling. With initials the root is
       `role="img"` and the letters are `aria-hidden`. Background: `color.status.neutral-subtle`,
       one token for everyone; bitepals' `color` prop and `stringToColor` do not carry over.
-- [ ] Chip (Actions): `selected` (a toggle: `aria-pressed`), `onRemove` (a second, labelled button,
-      never a nested one), `size`, `tone: 'neutral' | 'action'`. A static chip is a Badge: say so in `@dont`.
+- [x] Chip (Actions, 2026-09-18): a toggle when it has `selected` / `defaultSelected` /
+      `onSelectedChange` (native button, `aria-pressed`; an `onClick` that prevents default cancels
+      the toggle), `onRemove` → a second button *beside* the label named "Remove <label>" through
+      `aria-labelledby` (`removeLabel` for other languages), the pair in a `role="group"` only when
+      there are two controls; label-only when it neither toggles nor has `onClick`. `size`
+      (24 / 32 / 40 px: `sm` is the WCAG 2.2 minimum target), `tone: 'neutral' | 'action'`,
+      `disabled`. The pill is painted once on the root; both buttons are transparent. bitepals
+      nested the remove button inside the chip's button, and passed a literal `color`: neither
+      carries over. A static chip is a Badge: said in `@dont`.
 - [ ] SegmentedControl (Forms): generic `<T extends string>`, `options`, `value`, `onValueChange`,
       `size`; radiogroup semantics with a roving tabindex, the same keyboard model as Radio (share
       it, do not copy it). A link flavour through `asChild` items for view switches that navigate

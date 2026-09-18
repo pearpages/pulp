@@ -1,0 +1,49 @@
+{
+  "$description": "Chip component tokens. Reference the semantic layer only.",
+  "chip": {
+    "height": {
+      "$type": "dimension",
+      "$description": "sm is 24px at the default density: the WCAG 2.2 minimum target size, not below it.",
+      "sm": { "$value": "{space.5}" },
+      "md": { "$value": "{size.control.sm}" },
+      "lg": { "$value": "{size.control.md}" }
+    },
+    "padding-x": {
+      "$type": "dimension",
+      "sm": { "$value": "{space.2}" },
+      "md": { "$value": "{space.3}" },
+      "lg": { "$value": "{space.4}" }
+    },
+    "gap": { "$type": "dimension", "$value": "{space.1}" },
+    "font-size": {
+      "$type": "dimension",
+      "sm": { "$value": "{font.size.xs}" },
+      "md": { "$value": "{font.size.sm}" },
+      "lg": { "$value": "{font.size.md}" }
+    },
+    "weight": { "$type": "fontWeight", "$value": "{font.weight.medium}" },
+    "radius": { "$type": "dimension", "$value": "{radius.full}" },
+    "border-width": { "$type": "dimension", "$value": "{size.hairline}" },
+    "neutral": {
+      "$type": "color",
+      "bg": { "$value": "{color.action.secondary}" },
+      "bg-hover": { "$value": "{color.action.secondary-hover}" },
+      "fg": { "$value": "{color.text.default}" },
+      "border": { "$value": "{color.border.default}" },
+      "selected-bg": { "$value": "{color.surface.inverse}" },
+      "selected-fg": { "$value": "{color.text.on-inverse}" }
+    },
+    "action": {
+      "$type": "color",
+      "bg": { "$value": "{color.action.primary-quiet}" },
+      "bg-hover": { "$value": "{color.action.primary-quiet}" },
+      "fg": { "$value": "{color.action.text}" },
+      "border": { "$value": "{color.action.primary-quiet}" },
+      "selected-bg": { "$value": "{color.action.primary}" },
+      "selected-fg": { "$value": "{color.text.on-action}" }
+    },
+    "focus-ring": { "$type": "color", "$value": "{color.border.focus}" },
+    "focus-ring-width": { "$type": "dimension", "$value": "{focus.ring.width}" },
+    "focus-ring-offset": { "$type": "dimension", "$value": "{focus.ring.offset}" }
+  }
+}
