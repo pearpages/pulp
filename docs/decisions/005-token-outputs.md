@@ -1,7 +1,7 @@
 # 005. One `tokens.css`, plus two views of the semantic tier for Tailwind and React Native
 
-Date: 2026-09-19 (group 10). Status: accepted for the two new outputs; the per-component split
-is deferred, with the trigger below. For Pere to confirm.
+Date: 2026-09-19 (group 10). Status: accepted. The per-component split is deferred, with the
+trigger below.
 
 ## Context
 

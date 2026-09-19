@@ -6,7 +6,7 @@ this file holds what is left to do, ticked with a date when done. Ordered within
 ## Recommended order (2026-09-18)
 
 0. Group 9 (confidence): the consumer fixture, then the component review by eye.
-1. ~~Decision record 005~~ done in group 10 (2026-09-19); Pere to confirm the record.
+1. ~~Decision record 005~~ done in group 10 and confirmed (2026-09-19).
 2. Docs (group 5): README badges now that npm is live, brand walkthrough, tokens diagram.
 3. The testing gaps and housekeeping (the guardrails are done except record 005).
 4. Group 10 (bitepals as the second consumer): `'use client'` and the token outputs first, then
@@ -477,7 +477,7 @@ Infrastructure (unblocks the token swap; nothing in bitepals can start before th
       Pagination, EmptyState. Still to do with group 9's consumer fixture: an RSC import there.
 - [x] Decision record 005 and its two outputs (2026-09-19): `docs/decisions/005-token-outputs.md`
       (one `tokens.css`; per-brand split rejected, per-component split deferred with its trigger;
-      **for Pere to confirm**). `./theme.css` is `@theme inline reference` over semantic colour,
+      confirmed by Pere 2026-09-19). `./theme.css` is `@theme inline reference` over semantic colour,
       radius, shadow and font family. `reference` is load-bearing: compiled with tailwindcss 4.3.0,
       plain `@theme inline` still writes `:root { --x: var(--x) }` into Tailwind's `theme` layer,
       which outranks `@layer tokens`, and the cycle invalidates the token (bitepals got away with
