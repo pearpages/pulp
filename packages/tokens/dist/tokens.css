@@ -31,6 +31,7 @@
     --color-neutral-700: #5a6072;
     --color-neutral-800: #4a4f5d;
     --color-neutral-850: #262a35;
+    --color-neutral-875: #1a1e29;
     --color-neutral-900: #11141d;
     --color-neutral-950: #0c0e14;
     --color-neutral-975: #090b11;
@@ -54,6 +55,7 @@
     --color-red-900: #3d1113;
     --color-surface-base: light-dark(var(--color-neutral-50), var(--color-neutral-975));
     --color-surface-raised: light-dark(var(--color-neutral-0), var(--color-neutral-900));
+    --color-surface-overlay: light-dark(var(--color-neutral-0), var(--color-neutral-875));
     --color-surface-sunken: light-dark(var(--color-neutral-200), var(--color-neutral-1000));
     --color-surface-inverse: light-dark(var(--color-neutral-950), var(--color-neutral-100));
     --color-text-default: light-dark(var(--color-neutral-950), var(--color-neutral-100));
@@ -381,6 +383,7 @@
     --combobox-border-invalid: var(--color-status-error);
     --combobox-popover-shadow: var(--shadow-overlay);
     --combobox-popover-duration: var(--motion-duration-fast);
+    --combobox-popover-bg: var(--color-surface-overlay);
     --combobox-focus-ring: var(--color-border-focus);
     --combobox-focus-ring-width: var(--focus-ring-width);
     --combobox-focus-ring-offset: var(--focus-ring-offset);
@@ -414,10 +417,10 @@
     --date-picker-segment-radius: var(--radius-control);
     --date-picker-segment-bg-focus: var(--color-action-primary-quiet);
     --date-picker-segment-fg-placeholder: var(--color-text-faint);
-    --date-picker-dialog-bg: var(--color-surface-raised);
+    --date-picker-dialog-bg: var(--color-surface-overlay);
     --date-picker-dialog-border: var(--color-border-default);
     --date-picker-dialog-radius: var(--radius-surface);
-    --dialog-surface: var(--color-surface-raised);
+    --dialog-surface: var(--color-surface-overlay);
     --dialog-surface-subtle: var(--color-surface-sunken);
     --dialog-fg: var(--color-text-default);
     --dialog-fg-muted: var(--color-text-muted);
@@ -521,7 +524,7 @@
     --listbox-focus-ring: var(--color-border-focus);
     --listbox-focus-ring-width: var(--focus-ring-width);
     --listbox-focus-ring-offset: var(--focus-ring-offset);
-    --menu-bg: var(--color-surface-raised);
+    --menu-bg: var(--color-surface-overlay);
     --menu-fg: var(--color-text-default);
     --menu-border: var(--color-border-default);
     --menu-radius: var(--radius-surface);
@@ -572,11 +575,12 @@
     --picker-border-invalid: var(--color-status-error);
     --picker-popover-shadow: var(--shadow-overlay);
     --picker-popover-duration: var(--motion-duration-fast);
+    --picker-popover-bg: var(--color-surface-overlay);
     --picker-focus-ring: var(--color-border-focus);
     --picker-focus-ring-width: var(--focus-ring-width);
     --picker-focus-ring-offset: var(--focus-ring-offset);
     --picker-motion-duration: var(--motion-duration-fast);
-    --popover-bg: var(--color-surface-raised);
+    --popover-bg: var(--color-surface-overlay);
     --popover-fg: var(--color-text-default);
     --popover-border: var(--color-border-default);
     --popover-radius: var(--radius-surface);
@@ -938,6 +942,7 @@
     --color-blue-900: #10284d;
     --color-surface-base: light-dark(var(--color-cream-300), var(--color-ink-900));
     --color-surface-raised: light-dark(var(--color-cream-200), var(--color-ink-800));
+    --color-surface-overlay: light-dark(var(--color-cream-100), var(--color-ink-600));
     --color-surface-sunken: light-dark(var(--color-cream-400), var(--color-ink-700));
     --color-surface-inverse: light-dark(var(--color-neutral-900), var(--color-neutral-50));
     --color-text-default: light-dark(var(--color-neutral-900), var(--color-neutral-50));

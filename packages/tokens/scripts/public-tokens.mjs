@@ -51,6 +51,7 @@ export const PUBLIC_SEMANTIC_TOKENS = [
   '--color-status-warning-text',
   '--color-surface-base',
   '--color-surface-inverse',
+  '--color-surface-overlay',
   '--color-surface-raised',
   '--color-surface-sunken',
   '--color-text-default',

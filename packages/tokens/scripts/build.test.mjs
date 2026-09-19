@@ -142,6 +142,8 @@ const PAIRS = [
   ['--color-text-default', ['--color-action-secondary', '--color-action-secondary-hover']],
   ['--color-status-error-text', ['--color-surface-base', '--color-surface-raised', '--color-surface-sunken']],
   ['--color-text-on-inverse', ['--color-surface-inverse']],
+  // What overlays paint: body text, muted text, links and ghost actions, and a Menu's danger item.
+  ...['--color-text-default', '--color-text-muted', '--color-action-text', '--color-status-error-text'].map((fg) => [fg, ['--color-surface-overlay']]),
   // A danger Button: filled (on-error over the three error fills), and quiet (error text over the subtle hover).
   ['--color-status-on-error', ['--color-status-error-hover', '--color-status-error-active']],
   ['--color-status-error-text', ['--color-action-secondary']],

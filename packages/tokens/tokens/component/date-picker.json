@@ -130,7 +130,7 @@
     "dialog": {
       "bg": {
         "$type": "color",
-        "$value": "{color.surface.raised}"
+        "$value": "{color.surface.overlay}"
       },
       "border": {
         "$type": "color",

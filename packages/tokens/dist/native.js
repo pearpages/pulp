@@ -5,6 +5,7 @@ const brands = {
       "surface": {
         "base": "var(--color-surface-base)",
         "raised": "var(--color-surface-raised)",
+        "overlay": "var(--color-surface-overlay)",
         "sunken": "var(--color-surface-sunken)",
         "inverse": "var(--color-surface-inverse)"
       },
@@ -76,6 +77,7 @@ const brands = {
       "light": {
         "--color-surface-base": "#f3f4f7",
         "--color-surface-raised": "#ffffff",
+        "--color-surface-overlay": "#ffffff",
         "--color-surface-sunken": "#e9ebf1",
         "--color-surface-inverse": "#0c0e14",
         "--color-text-default": "#0c0e14",
@@ -131,6 +133,7 @@ const brands = {
       "dark": {
         "--color-surface-base": "#090b11",
         "--color-surface-raised": "#11141d",
+        "--color-surface-overlay": "#1a1e29",
         "--color-surface-sunken": "#05070b",
         "--color-surface-inverse": "#ededf2",
         "--color-text-default": "#ededf2",
@@ -190,6 +193,7 @@ const brands = {
       "surface": {
         "base": "var(--color-surface-base)",
         "raised": "var(--color-surface-raised)",
+        "overlay": "var(--color-surface-overlay)",
         "sunken": "var(--color-surface-sunken)",
         "inverse": "var(--color-surface-inverse)"
       },
@@ -261,6 +265,7 @@ const brands = {
       "light": {
         "--color-surface-base": "#f0e4cf",
         "--color-surface-raised": "#f8eed9",
+        "--color-surface-overlay": "#fcf3df",
         "--color-surface-sunken": "#eddcbf",
         "--color-surface-inverse": "#1f2430",
         "--color-text-default": "#1f2430",
@@ -316,6 +321,7 @@ const brands = {
       "dark": {
         "--color-surface-base": "#11151c",
         "--color-surface-raised": "#171c24",
+        "--color-surface-overlay": "#202938",
         "--color-surface-sunken": "#1d2430",
         "--color-surface-inverse": "#f7f4ee",
         "--color-text-default": "#f7f4ee",

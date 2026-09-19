@@ -5,6 +5,7 @@
 @theme inline reference {
   --color-surface-base: var(--color-surface-base);
   --color-surface-raised: var(--color-surface-raised);
+  --color-surface-overlay: var(--color-surface-overlay);
   --color-surface-sunken: var(--color-surface-sunken);
   --color-surface-inverse: var(--color-surface-inverse);
   --color-text-default: var(--color-text-default);

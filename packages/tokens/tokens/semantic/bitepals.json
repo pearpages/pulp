@@ -19,6 +19,15 @@
           }
         }
       },
+      "overlay": {
+        "$value": "{color.cream.100}",
+        "$extensions": {
+          "com.pearpages.pulp": {
+            "dark": "{color.ink.600}"
+          }
+        },
+        "$description": "What floats above the page: dialogs, sheets, popovers, menus. One step lighter than raised in dark schemes, where a shadow alone does not separate a menu from a card; in light it may equal raised."
+      },
       "sunken": {
         "$value": "{color.cream.400}",
         "$extensions": {
