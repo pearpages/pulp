@@ -5,7 +5,8 @@ this file holds what is left to do, ticked with a date when done. Ordered within
 
 ## Recommended order (2026-09-18)
 
-0. Group 9 (confidence): the consumer fixture, then the component review by eye.
+0. Group 9 (confidence): the consumer fixture (now with an RSC import and a Tailwind compile of
+   `theme.css`), then the component review by eye. bitepals' migration runs in its own repo.
 1. ~~Decision record 005~~ done in group 10 and confirmed (2026-09-19).
 2. Docs (group 5): README badges now that npm is live, brand walkthrough, tokens diagram.
 3. The testing gaps and housekeeping (the guardrails are done except record 005).
@@ -15,7 +16,9 @@ this file holds what is left to do, ticked with a date when done. Ordered within
 ## Session log
 
 - 2026-09-19 (later): PR #1 merged by Pere after a green CI on the re-rendered baselines (24 new,
-  42 changed, each change measured and accounted for); 0.3.0 versioned.
+  42 changed, each change measured and accounted for); 0.3.0 versioned, a Combobox story flaw
+  found and fixed on the way (the click went to a replaced node), published and verified from
+  the registry.
 - 2026-09-19: group 10 finished on `bitepals-consumer`: 40 icons drawn for the set (none copied:
   bitepals' file records no source), `'use client'` decided from source and proven under
   `--conditions=react-server`, decision record 005 with `theme.css` (`@theme inline reference`:
@@ -112,12 +115,16 @@ Ordered within each group. Groups 1 and 2 are the gate to everything else being 
       the old `latest` for about a minute afterwards: check `registry.npmjs.org` or wait before
       concluding a publish failed. Verified in the published tarballs (`dist/button.css`,
       `src/reset.css`). `v0.2.1` is a lightweight tag where `v0.2.0` is annotated; no effect.
-- [ ] **Release 0.3.0**: group 10, merged as PR #1 (`690ae19`, deploy run 35430572833 green with
-      164 production screenshots). `pnpm version-packages` → react 0.3.0, tokens 0.3.0, icons
-      0.2.0, css 0.1.4 (its tokens dependency). 15 changesets, all `minor`. Then: version commit,
-      push, deploy green, tag `v0.3.0`, `publish.yml`, verify the tarballs (`"use client"` on
-      `dist/tabs.js` and not on `dist/text.js`; `dist/theme.css` and `dist/native.cjs` in tokens;
-      the new glyphs in icons). `docs/bitepals-consumer.md` deleted with this release, as it asked.
+- [x] **Release 0.3.0** (2026-09-19): group 10, merged as PR #1 (`690ae19`). react 0.3.0, tokens
+      0.3.0, icons 0.2.0, css 0.1.4 (its tokens dependency); 15 changesets. `5cda6f3` "Version
+      packages: 0.3.0": its deploy run (35431216843) went red on the Combobox `Default` story, a
+      flaw in the story fixed in `adaa7d1` (group 6), and green on the re-run; annotated tag
+      `v0.3.0` on the version commit → `publish.yml` 35432436765, first try, with provenance.
+      Verified in the published tarballs: `"use client";` opens `dist/tabs.js` and not
+      `dist/text.js`; the 18 files of the six new entries are there; tokens carries `theme.css`
+      (`@theme inline reference`), `native.{js,cjs,d.ts}` and `--color-surface-overlay`; icons has
+      the new glyphs; react's peer is tokens `^0.3.0` and its icons dependency `^0.2.0`.
+      `docs/bitepals-consumer.md` deleted with this release, as it asked. **bitepals can start.**
 
 **2. Consumer: the CV site (`~/Projects/cv`)**
 Done 2026-09-16, committed in that repo (`7b2ac44`). The CV is pulp's reference consumer; its own
