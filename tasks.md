@@ -379,6 +379,14 @@ copy, not to re-derive.
       window focus under file parallelism (try `--no-file-parallelism`). `pnpm ci:local visual N`
       lists such hidden flakes per run. Landed: baselines re-rendered on GitHub (`312a8d7`, 5 shots
       changed) and `VITE_VISUAL` back on in `deploy.yml` and `ci.yml`.
+- [x] Combobox `Default` (interaction) failed **twice in a row** in the deploy run of the 0.3.0 version
+      commit (35431216843, 2026-09-19), on code that had just passed in the PR and in the merge
+      deploy. Cause, read from the failure dump: `onChange` was never called. The story captured
+      the Sweden option *before* its ArrowDown retry loop; React Aria re-renders the options as the
+      highlight moves, so `userEvent.click` was handed a node no longer in the document. A flaw in
+      the story, not the component (a real pointer hits what is under it). Fixed: the option is
+      looked up at click time inside the `waitFor`, as the arrow step already did. Five clean local
+      runs; the retry stays, but this was not what it is for.
 - [ ] DatePicker's first matrix shot (and Combobox's, rarely) mismatches on a first attempt and
       passes on the retry: find the cause with `pnpm ci:local visual 10`, starting with
       `--no-file-parallelism`. Same family: Combobox `Default` (interaction, not visual) failed

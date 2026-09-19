@@ -44,7 +44,6 @@ export const Default: Story = {
     // Arrow keys highlight through aria-activedescendant (virtual focus; the input keeps real
     // focus). The exact id is pinned by the jsdom unit test; in a real browser a single press can
     // still land in a frame that re-renders, so press until the highlight sticks.
-    const sweden = within(document.body).getByRole('option', { name: /Sweden/ });
     await waitFor(
       async () => {
         await userEvent.keyboard('{ArrowDown}');
@@ -54,8 +53,18 @@ export const Default: Story = {
     );
     // Keyboard selection (Enter) is pinned by the jsdom unit test; in a real browser the highlight
     // and the key can land in different frames, so this story selects by pointer.
-    await userEvent.click(sweden);
-    await waitFor(() => expect(args.onChange).toHaveBeenLastCalledWith('se'));
+    // The option is looked up at click time, never before the arrow presses: React Aria re-renders
+    // the options as the highlight moves, and a click on a node that has since been replaced selects
+    // nothing (deploy run 35431216843: onChange was never called, twice in a row). A real pointer
+    // always hits what is under it; a synthetic click hits the node it was handed.
+    await waitFor(
+      async () => {
+        const sweden = within(document.body).queryByRole('option', { name: /Sweden/ });
+        if (sweden) await userEvent.click(sweden);
+        expect(args.onChange).toHaveBeenLastCalledWith('se');
+      },
+      { timeout: 3000 },
+    );
     await expect(input).toHaveValue('Sweden');
   },
 };
