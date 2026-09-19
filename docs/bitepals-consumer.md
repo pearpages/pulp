@@ -32,9 +32,15 @@ Branch `bitepals-consumer`, off `main`. Nothing pushed.
 | `c98e287` | TextField search affordance |
 | `b67331b` | Badge dot and count |
 | `bb65f9b` | Sheet drag to dismiss |
+| `6aa8b0b` | Icons: 40 new glyphs, all drawn for the set; the name mapping is in group 10 |
+| `ea9a090` | `'use client'` per entry, `client` in the manifest, proven under `react-server` |
+| `d746f6c` | Decision record 005, `./theme.css`, `./native` |
+| (next) | `color.surface.overlay`; the quieter border is a consumer snap |
 
 Everything above went through the full `pnpm verify` before its commit, and was looked at in the built
-site (all four brand × scheme pairs). **Left: the icons, then the infrastructure.**
+site (all four brand × scheme pairs). **Group 10 is complete.** What is left is not building: push the branch, run
+`gh workflow run visual-update.yml --ref bitepals-consumer`, review the image diff, open the PR, version.
+Pere confirms record 005. Then this file can be deleted, as its first paragraph says.
 
 ## How to work
 

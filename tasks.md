@@ -14,6 +14,13 @@ this file holds what is left to do, ticked with a date when done. Ordered within
 
 ## Session log
 
+- 2026-09-19: group 10 finished on `bitepals-consumer`: 40 icons drawn for the set (none copied:
+  bitepals' file records no source), `'use client'` decided from source and proven under
+  `--conditions=react-server`, decision record 005 with `theme.css` (`@theme inline reference`:
+  plain `inline` makes Tailwind 4.3 emit a cyclic `:root` variable that outranks `@layer tokens`)
+  and `native`, and `color.surface.overlay`; the quieter border is a consumer snap. Every box in
+  group 10 is ticked. Not pushed: pushing, `visual-update.yml --ref bitepals-consumer` (new matrix
+  stories and changed dark overlays have no baselines), the PR and versioning are Pere's to call.
 - 2026-09-18 (night): group 10 on branch `bitepals-consumer`, one item per commit, `pnpm verify`
   green and the built site looked at before each: Avatar, Chip, SegmentedControl (+ `.Nav`),
   EmptyState, Button/IconButton `tone="danger"` (two new semantic tokens, agreed), `toast.undo`,
