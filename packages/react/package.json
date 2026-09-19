@@ -1,6 +1,6 @@
 {
   "name": "@pearpages/pulp-react",
-  "version": "0.2.2",
+  "version": "0.3.0",
   "description": "pulp React components. Accessible, token-driven, CSS modules, one entry per component.",
   "license": "MIT",
   "author": "Pere Pages <hello@pearpages.com> (https://pearpages.com)",

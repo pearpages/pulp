@@ -14,6 +14,8 @@ this file holds what is left to do, ticked with a date when done. Ordered within
 
 ## Session log
 
+- 2026-09-19 (later): PR #1 merged by Pere after a green CI on the re-rendered baselines (24 new,
+  42 changed, each change measured and accounted for); 0.3.0 versioned.
 - 2026-09-19: group 10 finished on `bitepals-consumer`: 40 icons drawn for the set (none copied:
   bitepals' file records no source), `'use client'` decided from source and proven under
   `--conditions=react-server`, decision record 005 with `theme.css` (`@theme inline reference`:
@@ -110,6 +112,12 @@ Ordered within each group. Groups 1 and 2 are the gate to everything else being 
       the old `latest` for about a minute afterwards: check `registry.npmjs.org` or wait before
       concluding a publish failed. Verified in the published tarballs (`dist/button.css`,
       `src/reset.css`). `v0.2.1` is a lightweight tag where `v0.2.0` is annotated; no effect.
+- [ ] **Release 0.3.0**: group 10, merged as PR #1 (`690ae19`, deploy run 35430572833 green with
+      164 production screenshots). `pnpm version-packages` → react 0.3.0, tokens 0.3.0, icons
+      0.2.0, css 0.1.4 (its tokens dependency). 15 changesets, all `minor`. Then: version commit,
+      push, deploy green, tag `v0.3.0`, `publish.yml`, verify the tarballs (`"use client"` on
+      `dist/tabs.js` and not on `dist/text.js`; `dist/theme.css` and `dist/native.cjs` in tokens;
+      the new glyphs in icons). `docs/bitepals-consumer.md` deleted with this release, as it asked.
 
 **2. Consumer: the CV site (`~/Projects/cv`)**
 Done 2026-09-16, committed in that repo (`7b2ac44`). The CV is pulp's reference consumer; its own
@@ -461,7 +469,6 @@ Promoted from "Later". bitepals (`~/Projects/bitepals`, Next.js 16 App Router + 
 NativeWind mobile) drops its own `packages/tokens` and hand-rolled design system for pulp, then takes
 Tailwind out of the web app. Its side of the plan, with the token and component reconciliation
 tables, is `~/Projects/bitepals/tasks.md`. What it needs from pulp, in the order it unblocks it:
-How to run this group, and where to look in bitepals for each item: [`docs/bitepals-consumer.md`](docs/bitepals-consumer.md).
 
 Infrastructure (unblocks the token swap; nothing in bitepals can start before the first two)
 - [x] `'use client'` (2026-09-18). `scripts/client-entries.mjs` decides per entry from source
