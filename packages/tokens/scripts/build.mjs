@@ -1,5 +1,6 @@
 /**
- * Builds dist/tokens.css and dist/tokens.json from tokens/**.json.
+ * Builds dist/tokens.css and dist/tokens.json from tokens/**.json, and the two
+ * views of the semantic tier for Tailwind and React Native (scripts/outputs.mjs).
  *
  *   node scripts/build.mjs          write the files
  *   node scripts/build.mjs --check  fail if the committed files are stale
@@ -13,6 +14,7 @@ import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import StyleDictionary from 'style-dictionary';
 import { cssBrand, jsonBrand } from './format.mjs';
+import { nativeModule, themeCss } from './outputs.mjs';
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const DIST = resolve(ROOT, 'dist');
@@ -71,8 +73,9 @@ export async function render() {
     '',
   ].join('\n');
 
-  const json = `${JSON.stringify(Object.fromEntries(brands.map((b) => [b.name, b.json])), null, 2)}\n`;
-  return { css, json };
+  const manifest = Object.fromEntries(brands.map((b) => [b.name, b.json]));
+  const json = `${JSON.stringify(manifest, null, 2)}\n`;
+  return { css, json, theme: themeCss(manifest), native: nativeModule(manifest) };
 }
 
 function indent(block) {
@@ -81,10 +84,14 @@ function indent(block) {
 
 const isMain = process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.url);
 if (isMain) {
-  const { css, json } = await render();
+  const { css, json, theme, native } = await render();
   const targets = [
     [resolve(DIST, 'tokens.css'), css],
     [resolve(DIST, 'tokens.json'), json],
+    [resolve(DIST, 'theme.css'), theme],
+    [resolve(DIST, 'native.js'), native.esm],
+    [resolve(DIST, 'native.cjs'), native.cjs],
+    [resolve(DIST, 'native.d.ts'), native.dts],
   ];
   if (process.argv.includes('--check')) {
     const stale = targets.filter(([file, content]) => !existsSync(file) || readFileSync(file, 'utf8') !== content);
@@ -96,6 +103,6 @@ if (isMain) {
   } else {
     mkdirSync(DIST, { recursive: true });
     for (const [file, content] of targets) writeFileSync(file, content);
-    console.log(`Wrote ${targets.map(([f]) => f.replace(ROOT + '/', '')).join(' and ')}`);
+    console.log(`Wrote ${targets.map(([f]) => f.replace(ROOT + '/', '')).join(', ')}`);
   }
 }

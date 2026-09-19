@@ -1,0 +1,21 @@
+[22:42:20.734] [INFO] storybook v10.6.0
+[22:42:21.182] [DEBUG] Getting package.json info for /Users/pearpages/Projects/pulp/apps/storybook/package.json...
+[22:42:21.261] [DEBUG] Could not determine @babel/preset-env version in use. In case of runtime errors with @babel/preset-env, you may need to set the babelRemoveBugfixes feature flag in your `main.ts` file.
+[22:42:21.558] [DEBUG] Serving static files from [36mapps/storybook/public[39m at [36m/[39m
+[22:42:21.558] [INFO] Starting...
+[22:42:21.561] [DEBUG] readDependencyManifest: could not resolve "@pearpages/modals"
+[22:42:21.605] [ERROR] [38;2;241;97;97mError: Build failed with 1 error:
+.storybook/manager.ts:3:21: ERROR: Could not resolve "../../../packages/react/dist/component-manifest.json"[39m
+    at failureErrorWithLog (/Users/pearpages/Projects/pulp/node_modules/.pnpm/esbuild@0.28.2/node_modules/esbuild/lib/main.js:1752:15)
+    at /Users/pearpages/Projects/pulp/node_modules/.pnpm/esbuild@0.28.2/node_modules/esbuild/lib/main.js:1211:25
+    at runOnEndCallbacks (/Users/pearpages/Projects/pulp/node_modules/.pnpm/esbuild@0.28.2/node_modules/esbuild/lib/main.js:1592:45)
+    at buildResponseToResult (/Users/pearpages/Projects/pulp/node_modules/.pnpm/esbuild@0.28.2/node_modules/esbuild/lib/main.js:1209:7)
+    at /Users/pearpages/Projects/pulp/node_modules/.pnpm/esbuild@0.28.2/node_modules/esbuild/lib/main.js:1236:16
+    at responseCallbacks.<computed> (/Users/pearpages/Projects/pulp/node_modules/.pnpm/esbuild@0.28.2/node_modules/esbuild/lib/main.js:886:9)
+    at handleIncomingPacket (/Users/pearpages/Projects/pulp/node_modules/.pnpm/esbuild@0.28.2/node_modules/esbuild/lib/main.js:941:12)
+    at Socket.readFromStdout (/Users/pearpages/Projects/pulp/node_modules/.pnpm/esbuild@0.28.2/node_modules/esbuild/lib/main.js:864:7)
+    at Socket.emit (node:events:519:28)
+    at addChunk (node:internal/streams/readable:561:12)
+[22:42:21.607] [WARN] Broken build, fix the error above.
+You may need to refresh the browser.
+[22:42:26.960] [PROMPT] Would you like to send anonymous crash reports to improve Storybook and fix bugs faster? {"choice":false}

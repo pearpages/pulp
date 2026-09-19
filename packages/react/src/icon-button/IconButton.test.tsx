@@ -41,6 +41,13 @@ describe('IconButton', () => {
     expect(screen.getByRole('link', { name: 'Docs' })).toHaveAttribute('data-icon-only');
   });
 
+  it('takes the danger tone from Button', () => {
+    render(<IconButton label="Delete place" icon={<svg />} variant="ghost" tone="danger" />);
+    const button = screen.getByRole('button', { name: 'Delete place' });
+    expect(button).toHaveAttribute('data-tone', 'danger');
+    expect(button).toHaveAttribute('data-variant', 'ghost');
+  });
+
   it('has no accessibility violations', async () => {
     const { container } = render(
       <div>

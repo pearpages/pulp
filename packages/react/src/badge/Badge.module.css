@@ -75,4 +75,32 @@
       --_fg: var(--badge-error-subtle-fg);
     }
   }
+
+  /* A presence mark: the tone's solid fill, no text, no padding. After the tone rules so --_bg is set. */
+  .badge[data-variant="dot"] {
+    inline-size: var(--badge-dot-size);
+    block-size: var(--badge-dot-size);
+    padding: 0;
+    vertical-align: middle;
+  }
+
+  .badge[data-tone="neutral"][data-variant="dot"] {
+    --_bg: var(--badge-neutral-solid-bg);
+  }
+
+  .badge[data-tone="info"][data-variant="dot"] {
+    --_bg: var(--badge-info-solid-bg);
+  }
+
+  .badge[data-tone="success"][data-variant="dot"] {
+    --_bg: var(--badge-success-solid-bg);
+  }
+
+  .badge[data-tone="warning"][data-variant="dot"] {
+    --_bg: var(--badge-warning-solid-bg);
+  }
+
+  .badge[data-tone="error"][data-variant="dot"] {
+    --_bg: var(--badge-error-solid-bg);
+  }
 }

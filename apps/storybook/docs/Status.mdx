@@ -14,6 +14,8 @@ so this table can never be out of date with the code.
   consumers use it. Today that is the tier built on React Aria Components (decision record 001).
 - **deprecated**: kept for one major with a note in the changelog and, where mechanical, a codemod.
 
+**Renders in** says where a component can be imported on the App Router or any React Server Components setup: a `client` entry ships with `'use client'` (it uses state, effects, context or a headless library), the rest render in a Server Component as they are. Interactive props on a server-safe component (a Button's `onClick`) still need a client file around them: functions do not cross the boundary.
+
 <StatusTable />
 
 <Credit />

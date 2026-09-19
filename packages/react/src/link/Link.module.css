@@ -1,0 +1,35 @@
+/* Every value is a token: --link-* in packages/tokens/tokens/component/link.json */
+
+@layer reset, tokens, vendor, base, components, utilities;
+
+@layer components {
+  .link {
+    border-radius: var(--link-radius);
+    color: var(--link-tone-action);
+    font-weight: var(--link-weight);
+    text-decoration-line: underline;
+    text-decoration-thickness: from-font;
+    text-underline-offset: 0.2em;
+    cursor: pointer;
+    transition: color var(--link-duration) var(--motion-easing-standard);
+
+    &[data-tone="default"] { color: var(--link-tone-default); }
+    &[data-tone="muted"] { color: var(--link-tone-muted); }
+
+    &[data-underline="hover"] { text-decoration-line: none; }
+
+    &:hover {
+      color: var(--link-hover);
+      text-decoration-line: underline;
+    }
+
+    &:focus-visible {
+      outline: var(--link-focus-ring-width) solid var(--link-focus-ring-color);
+      outline-offset: var(--link-focus-ring-offset);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      transition: none;
+    }
+  }
+}

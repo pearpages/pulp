@@ -61,4 +61,84 @@
   .field[data-invalid] .input {
     border-color: var(--text-field-border-invalid);
   }
+
+  .hiddenLabel {
+    position: absolute;
+    inline-size: var(--size-hairline);
+    block-size: var(--size-hairline);
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+
+  /* Only when there is an icon or a clear button: the input keeps its own box, they sit over its padding. */
+  .control {
+    --_slot: var(--text-field-height-md);
+
+    display: grid;
+    position: relative;
+    align-items: center;
+
+    .field[data-size="sm"] & {
+      --_slot: var(--text-field-height-sm);
+    }
+
+    .field[data-size="lg"] & {
+      --_slot: var(--text-field-height-lg);
+    }
+
+  }
+
+  /* The input inside .control: a class of its own, so these rules do not race the .input states above. */
+  .inControl {
+    grid-area: 1 / 1;
+    inline-size: 100%;
+
+    /* The browser's own clear control would be a second, unnamed one. */
+    &::-webkit-search-cancel-button {
+      display: none;
+    }
+  }
+
+  .control[data-icon] .inControl {
+    padding-inline-start: calc(var(--text-field-padding-inline) + 1em + var(--text-field-icon-gap));
+  }
+
+  .control[data-clearable] .inControl {
+    padding-inline-end: var(--_slot);
+  }
+
+  .icon {
+    display: inline-flex;
+    grid-area: 1 / 1;
+    justify-self: start;
+    margin-inline-start: var(--text-field-padding-inline);
+    color: var(--text-field-icon-fg);
+    pointer-events: none;
+  }
+
+  .clear {
+    display: inline-flex;
+    grid-area: 1 / 1;
+    align-items: center;
+    justify-content: center;
+    justify-self: end;
+    inline-size: var(--_slot);
+    block-size: var(--_slot);
+    padding: 0;
+    border: 0;
+    border-radius: var(--text-field-radius);
+    background: transparent;
+    color: var(--text-field-icon-fg);
+    cursor: pointer;
+
+    &:hover {
+      color: var(--text-field-icon-fg-hover);
+    }
+
+    &:focus-visible {
+      outline: var(--text-field-focus-ring-width) solid var(--text-field-focus-ring);
+      outline-offset: calc(-1 * var(--text-field-focus-ring-width));
+    }
+  }
 }

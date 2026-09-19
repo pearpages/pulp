@@ -1,0 +1,117 @@
+/* Every value is a token: --chip-* in packages/tokens/tokens/component/chip.json */
+
+@layer reset, tokens, vendor, base, components, utilities;
+
+@layer components {
+  .root {
+    --_bg: var(--chip-neutral-bg);
+    --_bg-hover: var(--chip-neutral-bg-hover);
+    --_fg: var(--chip-neutral-fg);
+    --_border: var(--chip-neutral-border);
+    --_selected-bg: var(--chip-neutral-selected-bg);
+    --_selected-fg: var(--chip-neutral-selected-fg);
+    --_height: var(--chip-height-md);
+    --_padding: var(--chip-padding-x-md);
+
+    display: inline-flex;
+    align-items: stretch;
+    box-sizing: border-box;
+    min-block-size: var(--_height);
+    max-inline-size: 100%;
+    border: var(--chip-border-width) solid var(--_border);
+    border-radius: var(--chip-radius);
+    background: var(--_bg);
+    color: var(--_fg);
+    font-family: var(--font-family-body);
+    font-size: var(--chip-font-size-md);
+    font-weight: var(--chip-weight);
+    line-height: 1;
+    white-space: nowrap;
+    vertical-align: middle;
+
+    &[data-tone='action'] {
+      --_bg: var(--chip-action-bg);
+      --_bg-hover: var(--chip-action-bg-hover);
+      --_fg: var(--chip-action-fg);
+      --_border: var(--chip-action-border);
+      --_selected-bg: var(--chip-action-selected-bg);
+      --_selected-fg: var(--chip-action-selected-fg);
+    }
+
+    &[data-size='sm'] {
+      --_height: var(--chip-height-sm);
+      --_padding: var(--chip-padding-x-sm);
+
+      font-size: var(--chip-font-size-sm);
+    }
+
+    &[data-size='lg'] {
+      --_height: var(--chip-height-lg);
+      --_padding: var(--chip-padding-x-lg);
+
+      font-size: var(--chip-font-size-lg);
+    }
+
+    &[data-selected] {
+      border-color: var(--_selected-bg);
+      background: var(--_selected-bg);
+      color: var(--_selected-fg);
+    }
+
+    &[data-disabled] {
+      opacity: 0.55;
+    }
+  }
+
+  /* The two controls are transparent: the pill is painted once, on the root. */
+  .label,
+  .remove {
+    display: inline-flex;
+    align-items: center;
+    border: 0;
+    border-radius: var(--chip-radius);
+    background: transparent;
+    color: inherit;
+    font: inherit;
+
+    &:is(button) {
+      cursor: pointer;
+    }
+
+    &:is(button):disabled {
+      cursor: not-allowed;
+    }
+
+    &:focus-visible {
+      outline: var(--chip-focus-ring-width) solid var(--chip-focus-ring);
+      outline-offset: var(--chip-focus-ring-offset);
+    }
+  }
+
+  .label {
+    min-inline-size: 0;
+    padding-block: 0;
+    padding-inline: var(--_padding);
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    /* With a remove button the label gives up its end padding to it. */
+    &:not(:last-child) {
+      padding-inline-end: var(--chip-gap);
+    }
+  }
+
+  /* On the label, not `.root:has(.label:hover)`: Firefox 120, the support floor, has no :has(). */
+  .root:not([data-selected], [data-disabled]) button.label:hover {
+    background: var(--_bg-hover);
+  }
+
+  .remove {
+    flex: none;
+    justify-content: center;
+
+    /* A square as tall as the chip, so the target is never smaller than the chip itself. */
+    inline-size: var(--_height);
+    padding: 0;
+  }
+}

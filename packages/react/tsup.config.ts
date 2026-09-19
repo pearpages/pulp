@@ -12,6 +12,12 @@ import { defineConfig } from 'tsup';
 export default defineConfig({
   entry: {
     index: 'src/index.ts',
+    'empty-state': 'src/empty-state/index.ts',
+    'segmented-control': 'src/segmented-control/index.ts',
+    'chip': 'src/chip/index.ts',
+    'avatar': 'src/avatar/index.ts',
+    'link': 'src/link/index.ts',
+    'divider': 'src/divider/index.ts',
     'sheet': 'src/sheet/index.ts',
     'pagination': 'src/pagination/index.ts',
     'table': 'src/table/index.ts',

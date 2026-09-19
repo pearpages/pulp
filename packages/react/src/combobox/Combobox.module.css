@@ -107,6 +107,11 @@
     box-shadow: var(--combobox-popover-shadow);
   }
 
+  /* The shared list styles paint an inline Listbox's surface; here the list floats. Two classes, so it wins whatever the stylesheet order. */
+  .popover .list {
+    background-color: var(--combobox-popover-bg);
+  }
+
   @keyframes fade {
     from {
       opacity: 0;

@@ -87,6 +87,11 @@
       "duration": {
         "$type": "duration",
         "$value": "{motion.duration.fast}"
+      },
+      "bg": {
+        "$type": "color",
+        "$description": "The list floats: the overlay surface, not the inline Listbox's.",
+        "$value": "{color.surface.overlay}"
       }
     },
     "focus": {

@@ -25,12 +25,22 @@ Alert (stable)
   ref?: Ref<HTMLDivElement>
   title?: ReactNode
   tone?: "info" | "success" | "warning" | "error" = info
+Avatar (experimental)
+  alt?: string
+  children?: ReactElement<unknown, string | JSXElementConstructor<any>>
+  name?: string
+  ref?: Ref<HTMLSpanElement>
+  size?: "sm" | "md" | "lg" | "xl" = md
+  src?: string
 Badge (stable)
+  count?: number
   icon?: ReactNode
+  label?: string
+  max?: number = 99
   ref?: Ref<HTMLSpanElement>
   size?: "sm" | "md" = md
   tone?: "neutral" | "info" | "success" | "warning" | "error" = neutral
-  variant?: "solid" | "subtle" = subtle
+  variant?: "solid" | "subtle" | "dot" = subtle
 Button (stable)
   asChild?: boolean = false
   iconEnd?: ReactNode
@@ -38,6 +48,7 @@ Button (stable)
   loading?: boolean = false
   ref?: Ref<E>
   size?: "sm" | "md" | "lg" = md
+  tone?: "default" | "danger" = default
   variant?: "primary" | "secondary" | "ghost" = primary
 Calendar (experimental)
   aria-label?: string = Calendar
@@ -73,6 +84,15 @@ Checkbox (stable)
   label: ReactNode
   ref?: Ref<HTMLInputElement>
   size?: "sm" | "md" | "lg" = md
+Chip (experimental)
+  defaultSelected?: boolean
+  onRemove?: (() => void)
+  onSelectedChange?: ((selected: boolean) => void)
+  ref?: Ref<HTMLButtonElement>
+  removeLabel?: string = Remove
+  selected?: boolean
+  size?: "sm" | "md" | "lg" = md
+  tone?: "neutral" | "action" = neutral
 Combobox (experimental)
   allowsCustomValue?: boolean = false
   autoFocus?: boolean
@@ -126,6 +146,19 @@ Dialog (stable)
 DialogSystem (stable)
   baseZIndex?: number
   children: ReactNode
+Divider (experimental)
+  decorative?: boolean = true
+  orientation?: "horizontal" | "vertical" = horizontal
+  ref?: Ref<HTMLDivElement>
+  spacing?: "none" | "sm" | "md" | "lg" = none
+EmptyState (experimental)
+  action?: ReactNode
+  description?: ReactNode
+  headingLevel?: 1 | 2 | 3 | 4 | 5 | 6 = 3
+  icon?: ReactNode
+  ref?: Ref<HTMLDivElement>
+  title: ReactNode
+  tone?: "neutral" | "error" = neutral
 Field (stable)
   disabled?: boolean = false
   id?: string
@@ -160,6 +193,7 @@ IconButton (stable)
   loading?: boolean = false
   ref?: Ref<E>
   size?: "sm" | "md" | "lg" = 'md'
+  tone?: "default" | "danger" = 'default'
   variant?: "primary" | "secondary" | "ghost" = 'primary'
 Inline (stable)
   align?: "start" | "center" | "end" | "stretch"
@@ -168,6 +202,11 @@ Inline (stable)
   justify?: "start" | "center" | "end" | "between"
   ref?: Ref<HTMLElement>
   wrap?: boolean = true
+Link (experimental)
+  asChild?: boolean = false
+  ref?: Ref<E>
+  tone?: "action" | "default" | "muted" = action
+  underline?: "always" | "hover" = always
 Listbox (experimental)
   aria-label?: string
   aria-labelledby?: string
@@ -267,6 +306,29 @@ RadioGroup (stable)
   required?: boolean = false
   size?: "sm" | "md" | "lg" = md
   value?: string
+SegmentedControl (experimental)
+  defaultValue?: string
+  disabled?: boolean = false
+  fullWidth?: boolean = false
+  label?: string
+  look?: "segmented" | "chips" = segmented
+  name?: string
+  onValueChange?: ((value: T) => void)
+  options: readonly SegmentedControlOption<T>[]
+  ref?: Ref<HTMLDivElement>
+  size?: "sm" | "md" = md
+  value?: string
+  SegmentedControl.Nav
+    children: ReactNode
+    fullWidth?: boolean = false
+    label: string
+    look?: "segmented" | "chips" = segmented
+    ref?: Ref<HTMLElement>
+    size?: "sm" | "md" = md
+  SegmentedControl.NavItem
+    asChild?: boolean = false
+    current?: boolean = false
+    ref?: Ref<E>
 Select (stable)
   children: ReactNode
   className?: string
@@ -287,6 +349,7 @@ Sheet (experimental)
     children: ReactNode
     closeOnBackdrop?: boolean
     closeOnEscape?: boolean
+    dragToDismiss?: boolean = true
     onInteractOutside?: ((e: { target: EventTarget; preventDefault(): void; }) => void)
     placement?: "start" | "end" | "top" | "bottom" = end
     size?: "auto" | "md" | "full"
@@ -397,9 +460,13 @@ Text (stable)
   weight?: "regular" | "medium" | "semibold" = regular
 TextField (stable)
   className?: string
+  clearLabel?: string = Clear
   description?: ReactNode
   error?: ReactNode
+  hideLabel?: boolean = false
+  iconStart?: ReactNode
   label: ReactNode
+  onClear?: (() => void)
   ref?: Ref<HTMLInputElement>
   size?: "sm" | "md" | "lg" = md
 Textarea (stable)

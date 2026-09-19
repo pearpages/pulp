@@ -1,0 +1,49 @@
+{
+  "$description": "SegmentedControl component tokens. Reference the semantic layer only.",
+  "segmented-control": {
+    "height": {
+      "$type": "dimension",
+      "sm": { "$value": "{size.control.sm}" },
+      "md": { "$value": "{size.control.md}" }
+    },
+    "padding-x": {
+      "$type": "dimension",
+      "sm": { "$value": "{space.3}" },
+      "md": { "$value": "{space.4}" }
+    },
+    "font-size": {
+      "$type": "dimension",
+      "sm": { "$value": "{font.size.sm}" },
+      "md": { "$value": "{font.size.md}" }
+    },
+    "gap": { "$type": "dimension", "$value": "{space.2}" },
+    "inset": { "$type": "dimension", "$description": "The track's padding around the segments.", "$value": "{space.1}" },
+    "weight": { "$type": "fontWeight", "$value": "{font.weight.medium}" },
+    "fg": { "$type": "color", "$value": "{color.text.muted}" },
+    "fg-hover": { "$type": "color", "$value": "{color.text.default}" },
+    "border-width": { "$type": "dimension", "$value": "{size.hairline}" },
+    "track": {
+      "bg": { "$type": "color", "$value": "{color.surface.sunken}" },
+      "border": { "$type": "color", "$value": "{color.border.default}" },
+      "radius": { "$type": "dimension", "$value": "{radius.control}" }
+    },
+    "segment": {
+      "radius": { "$type": "dimension", "$value": "{radius.control}" },
+      "selected-bg": { "$type": "color", "$value": "{color.surface.raised}" },
+      "selected-fg": { "$type": "color", "$value": "{color.text.default}" },
+      "selected-border": { "$type": "color", "$description": "Raised on sunken is a faint step in dark schemes; the edge is what marks the thumb.", "$value": "{color.border.strong}" },
+      "selected-shadow": { "$type": "shadow", "$value": "{shadow.raised}" }
+    },
+    "chip": {
+      "radius": { "$type": "dimension", "$value": "{radius.full}" },
+      "bg": { "$type": "color", "$value": "{color.surface.raised}" },
+      "border": { "$type": "color", "$value": "{color.border.default}" },
+      "selected-bg": { "$type": "color", "$value": "{color.action.primary-quiet}" },
+      "selected-fg": { "$type": "color", "$value": "{color.action.text}" },
+      "selected-border": { "$type": "color", "$value": "{color.action.text}" }
+    },
+    "focus-ring": { "$type": "color", "$value": "{color.border.focus}" },
+    "focus-ring-width": { "$type": "dimension", "$value": "{focus.ring.width}" },
+    "focus-ring-offset": { "$type": "dimension", "$value": "{focus.ring.offset}" }
+  }
+}

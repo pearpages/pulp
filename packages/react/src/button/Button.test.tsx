@@ -36,6 +36,30 @@ describe('Button', () => {
     expect(onClick).toHaveBeenCalledTimes(1);
   });
 
+  it('tone is orthogonal to variant: danger is data on any variant, default leaves no attribute', () => {
+    render(
+      <>
+        <Button>Save</Button>
+        <Button tone="danger">Delete</Button>
+        <Button variant="ghost" tone="danger">Remove</Button>
+      </>,
+    );
+    expect(screen.getByRole('button', { name: 'Save' })).not.toHaveAttribute('data-tone');
+    expect(screen.getByRole('button', { name: 'Delete' })).toHaveAttribute('data-tone', 'danger');
+    expect(screen.getByRole('button', { name: 'Delete' })).toHaveAttribute('data-variant', 'primary');
+    expect(screen.getByRole('button', { name: 'Remove' })).toHaveAttribute('data-tone', 'danger');
+    expect(screen.getByRole('button', { name: 'Remove' })).toHaveAttribute('data-variant', 'ghost');
+  });
+
+  it('carries the danger tone onto an asChild link', () => {
+    render(
+      <Button asChild tone="danger" variant="secondary">
+        <a href="/leave">Leave group</a>
+      </Button>,
+    );
+    expect(screen.getByRole('link', { name: 'Leave group' })).toHaveAttribute('data-tone', 'danger');
+  });
+
   it('is busy and inert while loading, but stays focusable and keeps its label', async () => {
     const onClick = vi.fn();
     render(
@@ -172,6 +196,8 @@ describe('Button', () => {
         <Button loading>Loading</Button>
         <Button disabled>Disabled</Button>
         <Button iconStart={<svg />}>Icon</Button>
+        <Button tone="danger">Delete</Button>
+        <Button variant="ghost" tone="danger">Remove</Button>
         <Button asChild>
           <a href="/x">Link</a>
         </Button>

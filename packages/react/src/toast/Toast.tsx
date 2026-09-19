@@ -3,7 +3,10 @@ import { createPortal } from 'react-dom';
 import { Alert } from '../alert';
 import { Button } from '../button';
 import { classes } from '../internal/classes';
-import { ToastContext, type ToastItem, type ToastOptions } from './context';
+import { ToastContext, type ToastFunction, type ToastItem, type ToastOptions, type ToastUndoOptions } from './context';
+
+/** An undo toast asks for a decision and a reach, so it outlasts the default. */
+const UNDO_DURATION = 8000;
 import styles from './Toast.module.css';
 
 export type ToastPlacement = 'bottom-end' | 'top-end' | 'top-center';
@@ -31,6 +34,7 @@ interface Timer {
  * region; `useToast()` adds notifications to it. Timers pause while the
  * region is hovered or holds focus, Escape dismisses the focused toast, and
  * error toasts stay until dismissed. Each toast is an Alert.
+ * `toast.undo(message, onUndo)` is the shorthand for a reversible action.
  *
  * @status stable
  * @category Feedback
@@ -129,7 +133,15 @@ export function ToastProvider({ placement = 'bottom-end', max = 5, duration = 60
     };
   }, []);
 
-  const value = useMemo(() => ({ toast, dismiss, dismissAll }), [toast, dismiss, dismissAll]);
+  const value = useMemo(() => {
+    const undo = (message: ReactNode, onUndo: () => void, { label = 'Undo', duration: ttl = UNDO_DURATION, ...options }: ToastUndoOptions = {}) =>
+      toast({ ...options, title: message, duration: ttl, action: { label, onClick: onUndo } });
+    // `toast(options)` and `toast.undo(…)`: a function with a property. The rule sees callbacks that
+    // touch refs being handed to a function; Object.assign only copies them, nothing runs during render.
+    // eslint-disable-next-line react-hooks/refs -- composed, not called
+    const api: ToastFunction = Object.assign((options: ToastOptions) => toast(options), { undo });
+    return { toast: api, dismiss, dismissAll };
+  }, [toast, dismiss, dismissAll]);
 
   const onKeyDown = (event: KeyboardEvent<HTMLElement>) => {
     if (event.key !== 'Escape') return;

@@ -1,0 +1,136 @@
+/* Every value is a token: --segmented-control-* in packages/tokens/tokens/component/segmented-control.json */
+
+@layer reset, tokens, vendor, base, components, utilities;
+
+@layer components {
+  .root {
+    --_height: var(--segmented-control-height-md);
+    --_padding: var(--segmented-control-padding-x-md);
+
+    display: inline-flex;
+    box-sizing: border-box;
+    max-inline-size: 100%;
+    color: var(--segmented-control-fg);
+    font-family: var(--font-family-body);
+    font-size: var(--segmented-control-font-size-md);
+    font-weight: var(--segmented-control-weight);
+    line-height: 1;
+
+    &[data-size='sm'] {
+      --_height: var(--segmented-control-height-sm);
+      --_padding: var(--segmented-control-padding-x-sm);
+
+      font-size: var(--segmented-control-font-size-sm);
+    }
+
+    &[data-look='segmented'] {
+      padding: var(--segmented-control-inset);
+      border: var(--segmented-control-border-width) solid var(--segmented-control-track-border);
+      border-radius: var(--segmented-control-track-radius);
+      background: var(--segmented-control-track-bg);
+    }
+
+    &[data-look='chips'] {
+      flex-wrap: wrap;
+      gap: var(--segmented-control-gap);
+    }
+
+    &[data-full-width][data-look='segmented'] {
+      display: flex;
+    }
+
+    &[aria-disabled='true'] {
+      opacity: 0.55;
+    }
+  }
+
+  /* The Nav flavour: the list is the flex row the root is for the radios. */
+  .list {
+    display: contents;
+  }
+
+  .option {
+    display: inline-flex;
+    position: relative;
+    min-inline-size: 0;
+
+    .root[data-full-width] & {
+      flex: 1;
+    }
+  }
+
+  /* Visually hidden, still focusable and still in the form: the segment draws its state. */
+  .input {
+    position: absolute;
+    inset: 0;
+    inline-size: 100%;
+    block-size: 100%;
+    margin: 0;
+    opacity: 0;
+    cursor: pointer;
+
+    &:disabled {
+      cursor: not-allowed;
+    }
+  }
+
+  .segment {
+    display: inline-flex;
+    flex: 1;
+    align-items: center;
+    justify-content: center;
+    gap: var(--segmented-control-gap);
+    box-sizing: border-box;
+    min-block-size: calc(var(--_height) - 2 * var(--segmented-control-inset) - 2 * var(--segmented-control-border-width));
+    padding-block: 0;
+    padding-inline: var(--_padding);
+    border: var(--segmented-control-border-width) solid transparent;
+    border-radius: var(--segmented-control-segment-radius);
+    color: inherit;
+    text-decoration: none;
+    white-space: nowrap;
+    transition:
+      background-color var(--motion-duration-fast) var(--motion-easing-standard),
+      color var(--motion-duration-fast) var(--motion-easing-standard);
+
+    .root[data-look='chips'] & {
+      min-block-size: var(--_height);
+      border-color: var(--segmented-control-chip-border);
+      border-radius: var(--segmented-control-chip-radius);
+      background: var(--segmented-control-chip-bg);
+    }
+  }
+
+  .option:hover .segment,
+  a.segment:hover {
+    color: var(--segmented-control-fg-hover);
+  }
+
+  .option[data-selected] .segment {
+    border-color: var(--segmented-control-segment-selected-border);
+    background: var(--segmented-control-segment-selected-bg);
+    box-shadow: var(--segmented-control-segment-selected-shadow);
+    color: var(--segmented-control-segment-selected-fg);
+
+    .root[data-look='chips'] & {
+      border-color: var(--segmented-control-chip-selected-border);
+      background: var(--segmented-control-chip-selected-bg);
+      box-shadow: none;
+      color: var(--segmented-control-chip-selected-fg);
+    }
+  }
+
+  .input:focus-visible + .segment,
+  a.segment:focus-visible {
+    outline: var(--segmented-control-focus-ring-width) solid var(--segmented-control-focus-ring);
+    outline-offset: var(--segmented-control-focus-ring-offset);
+  }
+
+  .input:disabled + .segment {
+    opacity: 0.55;
+  }
+
+  .icon {
+    display: inline-flex;
+  }
+}

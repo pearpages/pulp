@@ -1,6 +1,7 @@
 // What an npm consumer gets: the built ESM entries and their CSS, not src/.
 // Driven by the component manifest so every component is covered without
 // editing this file. Run with `pnpm test:dist` after `pnpm build`.
+import { execFileSync } from 'node:child_process';
 import { existsSync, readdirSync, readFileSync } from 'node:fs';
 import { basename, resolve } from 'node:path';
 import { render, screen } from '@testing-library/react';
@@ -17,6 +18,7 @@ const manifest = JSON.parse(readFileSync(resolve(DIST, 'component-manifest.json'
     name: string;
     import: string;
     css: string;
+    client: boolean;
     status: string;
     accessibility: string;
     do: string[];
@@ -159,6 +161,30 @@ describe('dist', () => {
       }
     }
     await expect(`${lines.join('\n')}\n`).toMatchFileSnapshot('../../api.snapshot.txt');
+  });
+
+  // Server Components. A consumer on the App Router imports an entry from a server file: a client
+  // entry has to say so, and a server-safe one has to load where React has no hooks at all.
+  it.each(manifest.components)("$name: carries 'use client' exactly when it needs a client", (component) => {
+    const code = readFileSync(resolve(DIST, `${entryOf(component)}.js`), 'utf8');
+    expect(code.startsWith('"use client";')).toBe(component.client);
+  });
+
+  it('the barrel is a client module, and the known leaves stay server-safe', () => {
+    expect(readFileSync(resolve(DIST, 'index.js'), 'utf8').startsWith('"use client";')).toBe(true);
+    const serverSafe = manifest.components.filter((component) => !component.client).map((component) => component.name);
+    // Losing one of these to a stray hook is a regression for every App Router consumer: make it a decision.
+    expect(serverSafe).toEqual(expect.arrayContaining(['Text', 'Heading', 'Stack', 'Inline', 'Card', 'Badge', 'Skeleton', 'Spinner', 'Icon', 'VisuallyHidden', 'Button', 'Link']));
+  });
+
+  it("server-safe entries import under React's react-server condition; a client entry does not", () => {
+    const load = (entry: string) =>
+      execFileSync(process.execPath, ['--conditions=react-server', '--input-type=module', '-e', `await import(${JSON.stringify(resolve(DIST, `${entry}.js`))})`], { stdio: 'pipe' });
+    for (const component of manifest.components.filter((candidate) => !candidate.client)) {
+      expect(() => load(entryOf(component)), `${component.name} should load without client React APIs`).not.toThrow();
+    }
+    // The control: without hooks in React's server build, a client entry cannot even be linked.
+    expect(() => load('tabs')).toThrow();
   });
 
   it('the combined stylesheet contains every component', () => {

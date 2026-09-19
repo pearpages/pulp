@@ -1,0 +1,33 @@
+/* Every value is a token: --empty-state-* in packages/tokens/tokens/component/empty-state.json */
+
+@layer reset, tokens, vendor, base, components, utilities;
+
+@layer components {
+  .root {
+    box-sizing: border-box;
+    padding: var(--empty-state-padding);
+  }
+
+  .text {
+    text-align: center;
+    text-wrap: balance;
+  }
+
+  .icon {
+    display: inline-flex;
+    flex: none;
+    align-items: center;
+    justify-content: center;
+    inline-size: var(--empty-state-icon-size);
+    block-size: var(--empty-state-icon-size);
+    border-radius: var(--empty-state-icon-radius);
+    background: var(--empty-state-icon-neutral-bg);
+    color: var(--empty-state-icon-neutral-fg);
+    font-size: var(--empty-state-icon-glyph-size);
+
+    .root[data-tone='error'] & {
+      background: var(--empty-state-icon-error-bg);
+      color: var(--empty-state-icon-error-fg);
+    }
+  }
+}

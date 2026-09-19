@@ -91,6 +91,54 @@ describe('Toast', () => {
     expect(screen.queryAllByRole('listitem')).toHaveLength(0);
   });
 
+  it('toast.undo: the message, an Undo button that runs onUndo and dismisses, and a longer life', () => {
+    const onUndo = vi.fn();
+    function Remove() {
+      const { toast } = useToast();
+      return <button type="button" onClick={() => toast.undo('Place removed', onUndo)}>remove</button>;
+    }
+    render(<ToastProvider duration={3000}><Remove /></ToastProvider>);
+    const trigger = screen.getByRole('button', { name: 'remove' });
+    trigger.focus();
+    fireEvent.click(trigger);
+
+    expect(screen.getByText('Place removed')).toBeInTheDocument();
+    // The action is a real button in the live region, and the toast did not take focus to show it.
+    expect(screen.getByRole('button', { name: 'Undo' })).toBeInTheDocument();
+    expect(trigger).toHaveFocus();
+
+    // It outlives the provider's 3 s default…
+    tick(7000);
+    expect(screen.getByText('Place removed')).toBeInTheDocument();
+    fireEvent.click(screen.getByRole('button', { name: 'Undo' }));
+    expect(onUndo).toHaveBeenCalledOnce();
+    expect(screen.queryByText('Place removed')).toBeNull();
+  });
+
+  it('toast.undo: times out at 8 s without calling onUndo; label, duration and tone can be set', () => {
+    const onUndo = vi.fn();
+    function Remove() {
+      const { toast } = useToast();
+      return (
+        <>
+          <button type="button" onClick={() => toast.undo('Place removed', onUndo)}>remove</button>
+          <button type="button" onClick={() => toast.undo('Lugar eliminado', onUndo, { label: 'Deshacer', duration: 1000, tone: 'success' })}>quitar</button>
+        </>
+      );
+    }
+    render(<ToastProvider><Remove /></ToastProvider>);
+    fireEvent.click(screen.getByRole('button', { name: 'remove' }));
+    tick(8000);
+    expect(screen.queryByText('Place removed')).toBeNull();
+    expect(onUndo).not.toHaveBeenCalled();
+
+    fireEvent.click(screen.getByRole('button', { name: 'quitar' }));
+    expect(screen.getByRole('button', { name: 'Deshacer' })).toBeInTheDocument();
+    expect(screen.getByText('Lugar eliminado').closest('[data-tone]')).toHaveAttribute('data-tone', 'success');
+    tick(1000);
+    expect(screen.queryByText('Lugar eliminado')).toBeNull();
+  });
+
   it('runs the action and dismisses; Escape dismisses the focused toast', () => {
     const onClick = vi.fn();
     setup({ title: 'Undo?', duration: Infinity, action: { label: 'Undo', onClick } });

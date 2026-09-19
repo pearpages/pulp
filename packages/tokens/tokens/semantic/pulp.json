@@ -19,6 +19,15 @@
           }
         }
       },
+      "overlay": {
+        "$value": "{color.neutral.0}",
+        "$extensions": {
+          "com.pearpages.pulp": {
+            "dark": "{color.neutral.875}"
+          }
+        },
+        "$description": "What floats above the page: dialogs, sheets, popovers, menus. One step lighter than raised in dark schemes, where a shadow alone does not separate a menu from a card; in light it may equal raised."
+      },
       "sunken": {
         "$value": "{color.neutral.200}",
         "$extensions": {
@@ -190,6 +199,24 @@
             "dark": "{color.red.300}"
           }
         }
+      },
+      "error-hover": {
+        "$value": "{color.red.700}",
+        "$extensions": {
+          "com.pearpages.pulp": {
+            "dark": "{color.red.200}"
+          }
+        },
+        "$description": "A filled error surface under the pointer (a danger Button). Darkens in light, lightens in dark: away from its on-error text."
+      },
+      "error-active": {
+        "$value": "{color.red.800}",
+        "$extensions": {
+          "com.pearpages.pulp": {
+            "dark": "{color.red.400}"
+          }
+        },
+        "$description": "A filled error surface while pressed."
       },
       "info": {
         "$value": "{color.ultramarine.500}",

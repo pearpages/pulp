@@ -3,6 +3,8 @@ import { expect, userEvent, waitFor, within } from 'storybook/test';
 import { Button } from '../button';
 import { Inline } from '../inline';
 import { ToastProvider, type ToastPlacement } from './Toast';
+import { useState } from 'react';
+import { Text } from '../text';
 import { useToast } from './context';
 
 function Demo() {
@@ -55,6 +57,45 @@ export const Default: Story = {
     await waitFor(() => expect(within(region).queryByText('Publish failed')).toBeNull());
   },
 };
+function UndoDemo() {
+  const { toast } = useToast();
+  const [saved, setSaved] = useState(true);
+  return (
+    <Inline gap={2} align="center">
+      <Button
+        variant="secondary"
+        tone="danger"
+        disabled={!saved}
+        onClick={() => {
+          // Do the work first; the toast only offers to reverse it.
+          setSaved(false);
+          toast.undo('Casa Leopoldo removed', () => setSaved(true));
+        }}
+      >
+        Remove place
+      </Button>
+      <Text>{saved ? 'Saved: Casa Leopoldo' : 'Nothing saved'}</Text>
+    </Inline>
+  );
+}
+
+export const Undo: Story = {
+  args: { children: <UndoDemo /> },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const remove = canvas.getByRole('button', { name: 'Remove place' });
+    await userEvent.click(remove);
+    await expect(canvas.getByText('Nothing saved')).toBeInTheDocument();
+    const region = within(document.body).getByRole('region', { name: 'Notifications' });
+    await waitFor(() => expect(within(region).getByText('Casa Leopoldo removed')).toBeVisible());
+    // The toast offers the way back without taking focus; the keyboard reaches it by Tab.
+    await expect(region.contains(document.activeElement)).toBe(false);
+    await userEvent.click(within(region).getByRole('button', { name: 'Undo' }));
+    await expect(canvas.getByText('Saved: Casa Leopoldo')).toBeInTheDocument();
+    await waitFor(() => expect(within(region).queryByText('Casa Leopoldo removed')).toBeNull());
+  },
+};
+
 export const TopCenter: Story = { args: { placement: 'top-center' } };
 
 const show = async (canvasElement: HTMLElement) => {

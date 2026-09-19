@@ -9,14 +9,14 @@ to humans and coding agents alike.
 
 | Path | What |
 | --- | --- |
-| `packages/tokens` | W3C DTCG JSON in `tokens/{primitives,semantic,component}`; `scripts/build.mjs` → `dist/tokens.css` + `dist/tokens.json` (**committed**, CI checks drift) |
+| `packages/tokens` | W3C DTCG JSON in `tokens/{primitives,semantic,component}`; `scripts/build.mjs` → `dist/tokens.css` + `dist/tokens.json`, and two views of the semantic tier, `dist/theme.css` (Tailwind v4) + `dist/native.{js,cjs,d.ts}` (React Native), record 005 (all **committed**, CI checks drift) |
 | `packages/css` | `layers.css`, `reset.css`, `base.css`, `index.css`. No build. Framework-agnostic |
 | `packages/react` | components in `src/<name>/` (five files each), tsup build, one entry per component |
 | `packages/icons` | `svg/` sources → generated `src/icons/*.tsx` (committed; `check` on drift); one barrel, tree-shakeable |
 | `apps/storybook` | docs + stories-as-tests (package `pulp-docs`); deploys to pulp.pearpages.com. `.storybook/theme.ts` derives the site theme from `tokens.json`; `scripts/fonts.mjs` copies the brand typefaces for the manager; `public/` holds the mark and wordmarks |
 | `.claude/skills/add-component` | the scaffold procedure for a new component |
 | `PRINCIPLES.md` | the ten design principles; rendered as the Storybook introduction |
-| `docs/decisions` | decision records (headless layer, positioning, Sheet, Menu); rendered as the Storybook "Decisions" page |
+| `docs/decisions` | decision records (headless layer, positioning, Sheet, Menu, token outputs); rendered as the Storybook "Decisions" page |
 
 ## Commands (run from the repo root)
 
@@ -106,6 +106,17 @@ copy of the working tree, two-minute loops. Colima only, never Docker Desktop; f
   a page, every literal `?path=` resolves, and every `docs/decisions/NNN-*.md` is both imported and
   rendered by `Decisions.mdx` and listed in the folder's README. It imports `docs/paths.ts` directly
   (Node strips the types), so that file must stay type-only syntax.
+- **`'use client'` is decided from source and proven on dist.** `packages/react/scripts/client-entries.mjs`
+  walks each entry's relative imports for client-only React APIs (state, effects, refs, context,
+  `createPortal`; not `useId`, which the server build has) or a client package (React Aria, modals,
+  floating-ui), and `pnpm build` stamps `"use client";` onto those `dist/<entry>.js` (on the first
+  line, no line break, so source maps hold). Chunks need none: esbuild puts a shared module in the
+  chunk of exactly the entries that reach it. The manifest carries `client` per component (Status
+  page column "Renders in"). `test:dist` asserts the directive per entry, that a named list of
+  leaves stays server-safe, and imports every server-safe entry under `node --conditions=react-server`
+  (a client entry fails there with "Named export 'createContext' not found", which is what an App
+  Router consumer saw before). Adding a hook to a leaf moves it to the client: that test makes it
+  a decision.
 - **Adding a semantic token means adding it to every brand file.** The token tests diff the
   brands and fail otherwise.
 - **`ref` is a normal prop** (React 19). The compiler lint rule (`react-hooks/refs`) rejects

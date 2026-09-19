@@ -11,3 +11,4 @@ option was defensible. Newest last. The Storybook renders this folder under "Dec
 | [002](002-floating-positioning.md) | Anchored overlays position with `@floating-ui/react-dom` behind one hook |
 | [003](003-sheet-waits-for-modals.md) | Sheet waits for a `placement` feature in `@pearpages/modals` |
 | [004](004-menu-stays-hand-rolled.md) | Menu keeps its own interaction model, reviewed against React Aria |
+| [005](005-token-outputs.md) | One `tokens.css`, plus `theme.css` for Tailwind v4 and `native` for React Native |

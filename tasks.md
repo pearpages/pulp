@@ -6,12 +6,28 @@ this file holds what is left to do, ticked with a date when done. Ordered within
 ## Recommended order (2026-09-18)
 
 0. Group 9 (confidence): the consumer fixture, then the component review by eye.
-1. Decision record 005 on the shape of the token output (group 4).
+1. ~~Decision record 005~~ done in group 10 and confirmed (2026-09-19).
 2. Docs (group 5): README badges now that npm is live, brand walkthrough, tokens diagram.
 3. The testing gaps and housekeeping (the guardrails are done except record 005).
+4. Group 10 (bitepals as the second consumer): `'use client'` and the token outputs first, then
+   Divider as the pattern for the new components.
 
 ## Session log
 
+- 2026-09-19: group 10 finished on `bitepals-consumer`: 40 icons drawn for the set (none copied:
+  bitepals' file records no source), `'use client'` decided from source and proven under
+  `--conditions=react-server`, decision record 005 with `theme.css` (`@theme inline reference`:
+  plain `inline` makes Tailwind 4.3 emit a cyclic `:root` variable that outranks `@layer tokens`)
+  and `native`, and `color.surface.overlay`; the quieter border is a consumer snap. Every box in
+  group 10 is ticked. Not pushed: pushing, `visual-update.yml --ref bitepals-consumer` (new matrix
+  stories and changed dark overlays have no baselines), the PR and versioning are Pere's to call.
+- 2026-09-18 (night): group 10 on branch `bitepals-consumer`, one item per commit, `pnpm verify`
+  green and the built site looked at before each: Avatar, Chip, SegmentedControl (+ `.Nav`),
+  EmptyState, Button/IconButton `tone="danger"` (two new semantic tokens, agreed), `toast.undo`,
+  TextField search, Badge dot and count, Sheet drag to dismiss. Looking caught what no check did:
+  Avatar's fallback invisible on the light surface, SegmentedControl's thumb lost in bitepals dark,
+  TextField's search glyph painted under its own input, and `:has()` below the Firefox floor (Chip
+  fixed; Select recorded in group 9). Left: the icons and the infrastructure. Nothing pushed.
 - 2026-09-18 (evening): Pere: "even buttons don't seem correct". They were not: the deployed site
   linked a split `Icon-*.css` before the entry CSS, `components` became the weakest cascade layer
   and the reset beat every component; all tests were green because all of them render through the
@@ -289,7 +305,8 @@ copy, not to re-derive.
       changesets: Button's `user-select: none` did nothing in Safari (no unprefixed support), and the
       reset's `text-size-adjust` nothing on iOS. Limit: unknown properties pass (`field-sizing`,
       `@property`).
-- [ ] Decision record 005, the shape of the token output. Measured 2026-09-16 on `tokens.css`
+- [x] Decision record 005 (2026-09-19, see group 10): written; the per-component split it
+      describes stays deferred. Original note: the shape of the token output. Measured 2026-09-16 on `tokens.css`
       (46.4 kB raw): **component tokens are 66% of it** (30.8 kB), the bitepals block only 7.8 kB.
       Splitting per brand is the wrong cut: it saves at most 1.4 kB brotli for a one-brand consumer,
       costs ~760 B for anyone loading both, and breaks brand nesting and the Storybook brand toolbar
@@ -425,13 +442,166 @@ copy, not to re-derive.
       pixel diff across the two sets is therefore meaningless; sampled by eye (Button, Alert,
       Table, Menu): same design, nothing lost. Noted for the component review: in bitepals the
       Table's selection checkboxes render as circles (pill radius) and read as radios.
+- [ ] `:has()` below the floor: `select/Select.module.css` colours the placeholder with
+      `&:has(option[value=""]:checked)`, and Firefox 120 (the declared floor) has no `:has()` (121
+      does). `check:floor` cannot see it: lightningcss does not lower `:has()`. Found 2026-09-18
+      while building Chip, whose own `:has()` hover was replaced before it shipped. Either set a
+      `data-placeholder` from React, or raise the Firefox floor to 121; and teach `check:floor` a
+      small deny-list of selectors and properties lightningcss passes through (`:has(`,
+      `field-sizing`, `@property`) with the documented exceptions named.
 - [ ] Consumer fixture: a Vite app built from `pnpm pack` tarballs, imports in the README order and
       in the wrong order, same painted-value checks (replaces the by-hand check of 2026-09-16).
 - [ ] Component review by eye on the deployed site, tier order, four brand × scheme pairs each;
       findings get a failing test at the level that would have caught them, then the fix. Start:
       Button, IconButton, TextField, Checkbox, Dialog, Menu, Combobox. Pere: Safari + VoiceOver.
 
+**10. bitepals as the second consumer (2026-09-18, branch `bitepals-consumer`)**
+
+Promoted from "Later". bitepals (`~/Projects/bitepals`, Next.js 16 App Router + Tailwind v4 web, Expo +
+NativeWind mobile) drops its own `packages/tokens` and hand-rolled design system for pulp, then takes
+Tailwind out of the web app. Its side of the plan, with the token and component reconciliation
+tables, is `~/Projects/bitepals/tasks.md`. What it needs from pulp, in the order it unblocks it:
+How to run this group, and where to look in bitepals for each item: [`docs/bitepals-consumer.md`](docs/bitepals-consumer.md).
+
+Infrastructure (unblocks the token swap; nothing in bitepals can start before the first two)
+- [x] `'use client'` (2026-09-18). `scripts/client-entries.mjs` decides per entry from source
+      (client-only React APIs or a client package anywhere in its relative imports), `pnpm build`
+      stamps `"use client";` on those built entries (26 of 44, the barrel included), the manifest
+      gains `client`, the Status page a "Renders in" column, the react README a section. Chunks
+      need no directive: esbuild's splitting puts a shared module in the chunk of exactly the
+      entries that reach it, so a server-safe entry never imports client code; proven rather than
+      assumed, by importing all 18 server-safe entries under `node --conditions=react-server` in
+      `test:dist` (where Tabs fails with "Named export 'createContext' not found": the error an
+      App Router consumer got). Server-safe: Text, Heading, Stack, Inline, Card, Divider, Badge,
+      Skeleton, Spinner, Progress, Icon, VisuallyHidden, Link, Button, IconButton, Alert,
+      Pagination, EmptyState. Still to do with group 9's consumer fixture: an RSC import there.
+- [x] Decision record 005 and its two outputs (2026-09-19): `docs/decisions/005-token-outputs.md`
+      (one `tokens.css`; per-brand split rejected, per-component split deferred with its trigger;
+      confirmed by Pere 2026-09-19). `./theme.css` is `@theme inline reference` over semantic colour,
+      radius, shadow and font family. `reference` is load-bearing: compiled with tailwindcss 4.3.0,
+      plain `@theme inline` still writes `:root { --x: var(--x) }` into Tailwind's `theme` layer,
+      which outranks `@layer tokens`, and the cycle invalidates the token (bitepals got away with
+      it because its own variables were unlayered). `./native` is per brand
+      `{ colors, radius, space, themeVars: { light, dark } }`, names as `var()` references and
+      `themeVars` as hex and px resolved through the brand's `space.unit`, ESM + `require`.
+      `tokens.json` already had both schemes' values, so no `valueDark`. Generated by
+      `scripts/outputs.mjs`, committed, inside the same drift check; 4 new tests.
+- [x] The two semantic gaps (2026-09-19, decided by Pere). **Added:** `color.surface.overlay`, what
+      floats above the page. pulp `neutral.0` / new `neutral.875` (#1a1e29); bitepals `cream.100`
+      / `ink.600` (#fcf3df / #202938, bitepals' own `bg-elevated`). In light it may equal
+      `raised`; in dark it is one step lighter, because a shadow alone does not separate a menu
+      from a card there. Dialog (and Sheet through it), Menu, Popover and the DatePicker popover
+      read it; Combobox and Picker gained `--<name>-popover-bg`, since their list shares the inline
+      Listbox's styles. Pinned in `public-tokens.mjs`; the contrast test covers default, muted,
+      action and error text on it (lowest 5.27:1). Dark overlay baselines move. **Not added:** a
+      quieter border. pulp's `border.default` is already quiet and nothing here needs a fainter
+      line, so **consumers snap**: bitepals maps its `border-subtle` to `border.default`.
+
+Extensions to existing components
+- [x] Button and IconButton `tone: 'default' | 'danger'` (2026-09-18), orthogonal to `variant`:
+      filled for `primary` (`status.error` / `error-hover` / `error-active`, `on-error` text), and
+      the error text colour with an `error-subtle` hover for `secondary` and `ghost`. `data-tone`
+      only when it is `danger`. **Two new semantic tokens, agreed with Pere:**
+      `color.status.error-hover` and `color.status.error-active` in both brands (pulp and bitepals
+      `red.700` / `red.800` in light, `red.200` / `red.400` in dark: away from the on-error text,
+      so bitepals darkens here although its action colours brighten), with three new red
+      primitives per brand, pinned in `public-tokens.mjs`, and in the contrast test (lowest pair:
+      bitepals dark active, above 4.5 only after moving `red.400` from #eb5858 to #ee6060).
+- [x] Toast `toast.undo(message, onUndo, options?)` (2026-09-18). The `action` half was already
+      there and tested (`action: { label, onClick }`, runs then dismisses; shipped in 0.1.0), so
+      the sketch's `onAction` name was **not** adopted: renaming a published prop is a breaking
+      change for nothing. `toast` is now a function with an `undo` property: message as the title,
+      an "Undo" button (`label` for other languages), 8 s by default because there is something
+      to read, decide and reach; `description`, `tone`, `duration` can be set. Tested: the toast
+      does not take focus, outlives the provider's default, and timing out never calls `onUndo`.
+      bitepals' per-variant durations (4 / 6 / 5 s, errors included) do not carry over: pulp keeps
+      error toasts until dismissed.
+- [x] TextField search affordance (2026-09-18): `iconStart` (decorative; `type="search"` defaults
+      to the Search glyph, `null` opts out), `onClear` + `clearLabel` (a real button after the
+      input, present only with a value and never while disabled or read-only; it empties an
+      uncontrolled input itself and returns focus to the input), Escape clears and stops there, so
+      a dialog around the field does not also close, and `hideLabel` (Slider's precedent), because
+      bitepals' search boxes have a placeholder and no label. The wrapper exists only when there is
+      an icon or `onClear`: a plain TextField renders the same DOM as before. bitepals'
+      `variant="filter"` is `iconStart` with a Filter glyph (comes with the icons). The browser's own
+      search cancel button is hidden. Seen while here: `TextField.stories.tsx` also carries a
+      `parameters.docs.description`, like Dialog's (group 5).
+- [x] Badge `variant="dot"`, `count`, `max`, `label` (2026-09-18): the dot is the tone's solid fill
+      with no text, and its `label` is rendered visually hidden (a dev warning without one; flat
+      props rather than bitepals' discriminated union, so the manifest stays readable). `count`
+      clamps to `max` (default 99 → "99+") and renders nothing at zero or below; with a `label` it
+      reads "3 unread". No `role="status"`: bitepals' NavBadge made every badge a live region,
+      which announces a count that was there when the page loaded. Covers NavBadge (6 uses).
+- [x] Sheet drag to dismiss (2026-09-18): `Sheet.Content` renders a grab handle when
+      `placement="bottom"` (`dragToDismiss`, default true). Pointer events with pointer capture,
+      the offset delivered as `--_drag` and applied with `translate` (the vendor animates
+      `transform`), closing through the vendor's `useModalStack().close(id)` so `onOpenChange`
+      and the focus return are the usual ones. `sheet/drag.ts` holds bitepals' `shouldDismiss()`
+      with its thresholds and test cases, and `releaseVelocity()` over the last 100 ms. The handle
+      is `aria-hidden` and not focusable (Escape and `Sheet.Close` remain the keyboard's way out)
+      and is not rendered under `prefers-reduced-motion`. No animation library. Decision record
+      003 has the paragraph.
+
+New components (scaffold + the add-component skill; `@status experimental`; one changeset each)
+- [x] Divider (Layout, 2026-09-18): `orientation: 'horizontal' | 'vertical'`, `spacing: 'none' | 'sm' | 'md' | 'lg'`
+      (space 2 / 4 / 6), `decorative` (default true → `role="none"`; false → `role="separator"` with
+      `aria-orientation`). Tokens: `divider.color` → `color.border.default`, `divider.thickness` →
+      `size.hairline`.
+- [x] Link (Typography, 2026-09-18): `tone: 'action' | 'default' | 'muted'`, `underline: 'always' | 'hover'`, `asChild` so a router's link slots
+      in (next-intl's `Link` in bitepals), underline rules, the focus ring from the semantic tier.
+      Replaces bitepals' TextLink and, with Button `asChild`, its ButtonLink.
+- [x] Avatar (Utilities, 2026-09-18): `name` → initials (first and last word, by code point) when
+      there is no image or it fails (keyed on the failed source, so a new `src` retries without an
+      effect), `src`, `alt` (defaults to `name`; `""` → decorative), `size: 'sm' | 'md' | 'lg' | 'xl'`
+      (control sm / md, then md × 1.4 and lg × 2, so density follows the brand), an image element as
+      the child so `next/image` takes the styles and the error handling. With initials the root is
+      `role="img"` and the letters are `aria-hidden`. Background: `color.status.neutral-subtle`,
+      one token for everyone; bitepals' `color` prop and `stringToColor` do not carry over.
+- [x] Chip (Actions, 2026-09-18): a toggle when it has `selected` / `defaultSelected` /
+      `onSelectedChange` (native button, `aria-pressed`; an `onClick` that prevents default cancels
+      the toggle), `onRemove` → a second button *beside* the label named "Remove <label>" through
+      `aria-labelledby` (`removeLabel` for other languages), the pair in a `role="group"` only when
+      there are two controls; label-only when it neither toggles nor has `onClick`. `size`
+      (24 / 32 / 40 px: `sm` is the WCAG 2.2 minimum target), `tone: 'neutral' | 'action'`,
+      `disabled`. The pill is painted once on the root; both buttons are transparent. bitepals
+      nested the remove button inside the chip's button, and passed a literal `color`: neither
+      carries over. A static chip is a Badge: said in `@dont`.
+- [x] SegmentedControl (Forms, 2026-09-18): generic `<T extends string>`, `options`
+      (`value`, `label`, decorative `icon`, `disabled`), `value` / `defaultValue` / `onValueChange`,
+      `name`, `look: 'segmented' | 'chips'`, `size: 'sm' | 'md'`, `fullWidth`, `disabled`. Built on
+      **native radio inputs**, visually hidden over each segment: RadioGroup has no keyboard hook
+      to share, its model is the browser's, so sharing it means using the same element; arrows,
+      the single tab stop and form submission come with it (bitepals' `role="radio"` buttons had
+      no arrow keys at all). Selection is a `data-selected` from state and the focus ring is drawn
+      by `input:focus-visible + .segment`, so nothing needs `:has()` (Firefox 120 has none).
+      The link flavour is **`SegmentedControl.Nav` + `SegmentedControl.NavItem`** (`current`,
+      `asChild`): a labelled `nav` with a list of links and `aria-current="page"`, same tokens and
+      stylesheet. Decided: navigation is neither a radiogroup nor Tabs; bitepals' `PairedViewToggle`
+      marked links as `role="tab"`.
+- [x] EmptyState (Feedback, 2026-09-18): `title` (a real heading at `headingLevel`, default 3),
+      `description`, decorative `icon` in a tinted disc, one `action`, `tone: 'neutral' | 'error'`.
+      Composes Heading, Text and Stack; its only tokens are the padding and the icon disc. Covers
+      bitepals' EmptyState and ErrorState (39 uses): the retry is just the `action`. bitepals'
+      ErrorState was always `role="alert"`, which shouts an empty region that renders with the
+      page; here nothing is announced unless the caller passes `role="status"` / `"alert"`, and the
+      JSDoc says when. Its glow and dot decorations are bitepals' own and stay there.
+- [x] Icons (2026-09-18): 40 new glyphs, 52 in the set. **All drawn for pulp**, none copied:
+      bitepals' file records no source and several glyphs look like a published set's, which is
+      not something to paste into a package pulp publishes under its own licence. Of bitepals' 64:
+      8 are its domain and stay (five Hub glyphs, Following, Followers, Requests); 9 already
+      existed here (Search, X→Close, two chevrons, Plus, Check, AlertTriangle→Warning,
+      InfoCircle→Info, Calendar); duplicates collapsed (Person→User, Circles/Follow/ShareNodes→
+      Share, Share/PaperAirplane→Send, People/Friends→Users); the two filled variants are
+      `fill: currentColor` on the outline glyph, said in the README. Mapping for bitepals:
+      Feed→Page, Document→Note, Map→MapFolded, Favorites→Heart, Edit→Pencil, Delete→Trash,
+      Pin→MapPin, Shield→ShieldCheck, Photo→Picture, Discover→ZoomIn, Grip→GripVertical,
+      QuestionMark→HelpCircle, Comment→Message, ShareOut→Export, Link→Chain, Settings (sliders,
+      not a gear); the rest keep their names. `MapFolded`, `Picture` and `Chain` are named so
+      because `Map` and `Image` shadow globals and `Link` is pulp's own component. No size budget
+      moved: there is none for the icons barrel, and the react entries only bundle the glyphs
+      they import.
+- Not in this pass: ChipInput (wants React Aria's TagGroup), ImageGrid, a full-screen push sheet.
+
 ## Later (not scheduled)
 Deprecation codemods, Tailwind preset emitted from tokens, Figma sync (Tokens Studio reads the
-DTCG files; dark values live in pulp's extension), a second consumer (bitepals web) to prove the
-bitepals brand in production, a third brand to prove "one JSON file, zero component changes".
+DTCG files; dark values live in pulp's extension), a third brand to prove "one JSON file, zero component changes".

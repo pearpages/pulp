@@ -1,5 +1,5 @@
 {
-  "$description": "Badge component tokens: tone \u00d7 variant onto the status layer.",
+  "$description": "Badge component tokens: tone × variant onto the status layer.",
   "badge": {
     "radius": {
       "$type": "dimension",
@@ -148,6 +148,11 @@
           "$value": "{color.status.error-text}"
         }
       }
+    },
+    "dot-size": {
+      "$type": "dimension",
+      "$description": "variant=\"dot\": a presence mark with no text.",
+      "$value": "{space.2}"
     }
   }
 }

@@ -81,6 +81,27 @@ export const Start: Story = docked('start');
 export const Top: Story = docked('top');
 export const Bottom: Story = docked('bottom');
 
+export const DragToDismiss: Story = {
+  render: () => filters('drag', 'bottom'),
+  play: async ({ canvasElement }) => {
+    const sheet = await open(canvasElement);
+    const handle = sheet.querySelector<HTMLElement>('[class*="handle"]')!;
+    // A pointer-only shortcut: nothing for assistive technology or the keyboard to find.
+    await expect(handle).toHaveAttribute('aria-hidden', 'true');
+    const { x, y, width } = handle.getBoundingClientRect();
+    const at = (dy: number) => ({ clientX: x + width / 2, clientY: y + 4 + dy });
+    await userEvent.pointer([
+      { keys: '[MouseLeft>]', target: handle, coords: at(0) },
+      { target: handle, coords: at(40) },
+      { target: handle, coords: at(sheet.offsetHeight / 2) },
+      { keys: '[/MouseLeft]', target: handle, coords: at(sheet.offsetHeight / 2) },
+    ]);
+    // Past a quarter of its height (and fast): it closes through the dialog's own path, so focus returns.
+    await waitFor(() => expect(within(document.body).queryByRole('dialog')).toBeNull());
+    await waitFor(() => expect(within(canvasElement).getAllByRole('button')[0]).toHaveFocus());
+  },
+};
+
 export const Matrix: Story = {
   name: 'Matrix: pulp, light',
   parameters: { controls: { disable: true } },

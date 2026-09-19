@@ -14,4 +14,44 @@
     --modal-height-sheet: var(--sheet-height);
     --modal-animation-translate-sheet: var(--sheet-motion-translate);
   }
+
+  /*
+   * Drag to dismiss (bottom sheets). The vendor moves the sheet with `transform`; the drag uses
+   * the separate `translate` property, so the two never fight. --_drag is set by the handle while
+   * the pointer is down: the one per-instance value, like Progress's --_value.
+   */
+  .content[data-draggable] {
+    translate: 0 var(--_drag, 0);
+    transition: translate var(--sheet-handle-snap-duration) var(--motion-easing-standard);
+
+    &[data-dragging] {
+      transition: none;
+    }
+  }
+
+  .handle {
+    display: grid;
+    flex: none;
+    place-items: center;
+    block-size: var(--sheet-handle-hit-height);
+    cursor: grab;
+    touch-action: none;
+
+    &::before {
+      inline-size: var(--sheet-handle-width);
+      block-size: var(--sheet-handle-height);
+      border-radius: var(--sheet-handle-radius);
+      background: var(--sheet-handle-bg);
+      content: "";
+    }
+
+    [data-dragging] > & {
+      cursor: grabbing;
+    }
+
+    /* Following the finger is motion: without it there is no handle to offer. */
+    @media (prefers-reduced-motion: reduce) {
+      display: none;
+    }
+  }
 }
