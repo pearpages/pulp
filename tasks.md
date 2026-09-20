@@ -657,7 +657,12 @@ here. The full write-up, with the bitepals source to read and the order, is
       Field, behind `Field.Label visuallyHidden` (not `hidden`: that is the HTML attribute). Slider and
       Progress keep their own: they do not render a `Field.Label`.
 - [ ] A static, server-safe Table next to the interactive one
-- [ ] SegmentedControl: labels overlap when the segments do not fit
+- [x] SegmentedControl: labels overlap when the segments do not fit (2026-09-20). The segment had no
+      `min-inline-size: 0`, so it stayed as wide as its words inside a 62 px slot; the label is now a
+      span that ellipses and the icon is `flex: none` (it had been squeezed to zero width). `Narrow`
+      story (four icon options in 24rem) with a play that compares each segment with its slot, and
+      the same case in the matrix. Full-width segments stay equal, so "Liked" shortens next to
+      "Recommended": four long labels belong in a Picker.
 - [ ] `@pearpages/modals/styles.css`: drop `@charset`
 
 ## Later (not scheduled)

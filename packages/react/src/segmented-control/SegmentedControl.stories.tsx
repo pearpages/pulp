@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { Search } from '@pearpages/pulp-icons';
+import { Bookmark, HelpCircle, Meh, Search, Star } from '@pearpages/pulp-icons';
 import { expect, fn, userEvent, within } from 'storybook/test';
 import { Stack } from '../stack';
 import { SegmentedControl } from './SegmentedControl';
@@ -70,6 +70,32 @@ export const Nav: Story = {
   },
 };
 
+const verdicts = [
+  { value: 'want', label: 'Want to go', icon: <Bookmark /> },
+  { value: 'liked', label: 'Liked', icon: <Star /> },
+  { value: 'recommended', label: 'Recommended', icon: <HelpCircle /> },
+  { value: 'meh', label: 'Meh', icon: <Meh /> },
+];
+const narrow = (
+  <div className="sb-wide">
+    <SegmentedControl label="narrow" fullWidth options={verdicts} defaultValue="liked" />
+  </div>
+);
+
+/** Four options with icons in 24rem: the labels give way with an ellipsis, the icons never do, and nothing is drawn over its neighbour. */
+export const Narrow: Story = {
+  parameters: { controls: { disable: true } },
+  render: () => narrow,
+  play: async ({ canvasElement }) => {
+    // Each segment stays inside its own share of the track: before the fix it was as wide as its words.
+    for (const radio of within(canvasElement).getAllByRole('radio')) {
+      const slot = radio.parentElement!.getBoundingClientRect();
+      const segment = radio.nextElementSibling!.getBoundingClientRect();
+      await expect(segment.right).toBeLessThanOrEqual(slot.right + 0.5);
+    }
+  },
+};
+
 const matrix = (
   <div className="sb-grid">
     <Stack gap={3} align="start">
@@ -87,6 +113,7 @@ const matrix = (
       </SegmentedControl.Nav>
     </Stack>
     <SegmentedControl label="full width" fullWidth options={views} defaultValue="map" />
+    {narrow}
   </div>
 );
 

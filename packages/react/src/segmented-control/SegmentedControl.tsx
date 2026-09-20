@@ -100,7 +100,7 @@ export function SegmentedControl<T extends string = string>({
                 {option.icon}
               </span>
             )}
-            {option.label}
+            <span className={styles.label}>{option.label}</span>
           </span>
         </label>
       ))}
@@ -158,7 +158,7 @@ function SegmentedControlNavItem<E extends HTMLElement = HTMLAnchorElement>({ cu
         renderAsChild('SegmentedControl.NavItem', children, { ...rest, ref, className: segment, 'aria-current': ariaCurrent })
       ) : (
         <a {...rest} ref={ref as Ref<HTMLAnchorElement>} className={segment} aria-current={ariaCurrent}>
-          {children}
+          <span className={styles.label}>{children}</span>
         </a>
       )}
     </li>
