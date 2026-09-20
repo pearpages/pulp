@@ -186,6 +186,7 @@ buttons are pills), and the tests hold it to the semantic layer and to names tha
 - pnpm 11 via `mise.toml`; Node from `.nvmrc`. `allowBuilds.esbuild` is required or tsup/Vite break.
   pnpm 11 also refuses packages published less than 24 hours ago; `pnpm-workspace.yaml` exempts
   `@pearpages/*`, this repo's own scope, so a same-day `@pearpages/modals` release installs.
+- **The declaration build needs a bigger heap than Node's default.** `packages/react` builds 45 entries' types in one tsup dts worker; the 45th (Table) tipped it over and the build died with `ERR_WORKER_OUT_OF_MEMORY` after a green esbuild pass. The `build` script sets `NODE_OPTIONS=--max-old-space-size=8192`. It is a count-of-entries ceiling, not a bad type: raise it again rather than hunting the component.
 - tsup's own CSS handling uses the plain `css` loader, which turns a CSS-module import into `{}`.
   `tsup.config.ts` sets `loader: { '.css': 'local-css' }` (every stylesheet in the package is a
   module). The dist smoke test catches a regression.

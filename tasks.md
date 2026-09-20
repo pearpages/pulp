@@ -685,7 +685,15 @@ here. The full write-up, with the bitepals source to read and the order, is
 - [x] Textarea `hideLabel` (2026-09-20). The hidden-label rule moved from TextField's stylesheet into
       Field, behind `Field.Label visuallyHidden` (not `hidden`: that is the HTML attribute). Slider and
       Progress keep their own: they do not render a `Field.Label`.
-- [ ] A static, server-safe Table next to the interactive one
+- [x] A static, server-safe Table next to the interactive one (2026-09-20, decision record 008). The
+      React Aria grid became `DataGrid` and the name `Table` went to a plain `<table>`: the entry is
+      594 B against the grid's 52 kB, it calls no hook so it is on the server-safe list, and it is
+      compound in the same shape so moving between the two is mechanical. `caption` is required
+      (`captionHidden` keeps the name without showing it), `rowHeader` makes a cell the row's
+      `th scope="row"`, `align="end"` uses tabular numerals. Its own `table.json`, parallel to
+      `data-grid.json`. Two budgets moved: the barrel 16.5 → 17 kB, and the build now sets
+      `--max-old-space-size=8192` because the 45th entry tipped the single tsup dts worker over Node's
+      default and died with `ERR_WORKER_OUT_OF_MEMORY` after a green esbuild pass.
 - [x] SegmentedControl: labels overlap when the segments do not fit (2026-09-20). The segment had no
       `min-inline-size: 0`, so it stayed as wide as its words inside a 62 px slot; the label is now a
       span that ellipses and the icon is `flex: none` (it had been squeezed to zero width). `Narrow`

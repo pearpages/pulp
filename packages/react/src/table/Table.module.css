@@ -1,0 +1,92 @@
+/*
+ * Every value is a token (--table-*). Density resolves the row padding into a
+ * private custom property on the table. Nothing here is interactive: a plain
+ * table has no hover, selection or focus state of its own.
+ */
+
+@layer reset, tokens, vendor, base, components, utilities;
+
+@layer components {
+  .container {
+    overflow: auto;
+    border: var(--size-hairline) solid var(--table-border);
+    border-radius: var(--table-radius);
+    background-color: var(--table-bg);
+    color: var(--table-fg);
+    font-family: var(--table-font-family);
+    font-size: var(--table-font-size);
+  }
+
+  .table {
+    --_padding-block: var(--table-cell-padding-block-default);
+
+    inline-size: 100%;
+    border-collapse: collapse;
+    border-spacing: 0;
+
+    &[data-density="compact"] {
+      --_padding-block: var(--table-cell-padding-block-compact);
+    }
+  }
+
+  .caption {
+    padding: var(--table-caption-padding);
+    color: var(--table-caption-fg);
+    font-size: var(--table-caption-font-size);
+    text-align: start;
+  }
+
+  /* Kept for assistive technology: the table is still named by it. */
+  .captionHidden {
+    position: absolute;
+    inline-size: var(--size-hairline);
+    block-size: var(--size-hairline);
+    padding: 0;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+
+  .header {
+    background-color: var(--table-header-bg);
+  }
+
+  .column {
+    padding-block: var(--_padding-block);
+    padding-inline: var(--table-cell-padding-inline);
+    border-block-end: var(--size-hairline) solid var(--table-border);
+    color: var(--table-header-fg);
+    font-size: var(--table-header-font-size);
+    font-weight: var(--table-header-font-weight);
+    text-align: start;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+
+    &[data-align="end"] {
+      text-align: end;
+    }
+  }
+
+  .cell {
+    padding-block: var(--_padding-block);
+    padding-inline: var(--table-cell-padding-inline);
+    font-weight: inherit;
+    text-align: start;
+
+    &[data-align="end"] {
+      text-align: end;
+      font-variant-numeric: tabular-nums;
+    }
+  }
+
+  /* A rule between rows, but not under the last one: the container draws that edge. */
+  .row:not(:last-child) .cell {
+    border-block-end: var(--size-hairline) solid var(--table-border);
+  }
+
+  .empty {
+    padding: var(--table-empty-padding);
+    color: var(--table-empty-fg);
+    text-align: center;
+  }
+}

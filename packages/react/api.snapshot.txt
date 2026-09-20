@@ -437,6 +437,29 @@ Switch (stable)
   label: ReactNode
   ref?: Ref<HTMLInputElement>
   size?: "sm" | "md" | "lg" = md
+Table (experimental)
+  caption: ReactNode
+  captionHidden?: boolean = false
+  children: ReactNode
+  className?: string
+  density?: "default" | "compact" = default
+  ref?: Ref<HTMLTableElement>
+  Table.Body
+    columnCount?: number
+    emptyMessage?: ReactNode
+    ref?: Ref<HTMLTableSectionElement>
+  Table.Cell
+    align?: "start" | "end" = start
+    ref?: Ref<HTMLTableCellElement>
+    rowHeader?: boolean = false
+  Table.Column
+    align?: "start" | "end" = start
+    ref?: Ref<HTMLTableCellElement>
+  Table.Header
+    children: ReactNode
+    ref?: Ref<HTMLTableSectionElement>
+  Table.Row
+    ref?: Ref<HTMLTableRowElement>
 Tabs (stable)
   activation?: "automatic" | "manual" = automatic
   defaultValue?: string

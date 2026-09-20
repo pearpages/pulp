@@ -1,0 +1,36 @@
+{
+  "$description": "Table component tokens: a plain <table> with pulp's density. Parallel to data-grid.json, its own file so the two can diverge. Reference the semantic layer only.",
+  "table": {
+    "bg": { "$type": "color", "$value": "{color.surface.raised}" },
+    "fg": { "$type": "color", "$value": "{color.text.default}" },
+    "border": { "$type": "color", "$value": "{color.border.default}" },
+    "radius": { "$type": "dimension", "$value": "{radius.surface}" },
+    "font": {
+      "family": { "$type": "fontFamily", "$value": "{font.family.body}" },
+      "size": { "$type": "dimension", "$value": "{font.size.sm}" }
+    },
+    "cell": {
+      "padding-inline": { "$type": "dimension", "$value": "{space.3}" },
+      "padding-block": {
+        "$type": "dimension",
+        "default": { "$value": "{space.3}" },
+        "compact": { "$value": "{space.2}" }
+      }
+    },
+    "header": {
+      "bg": { "$type": "color", "$value": "{color.surface.base}" },
+      "fg": { "$type": "color", "$value": "{color.text.muted}" },
+      "font-size": { "$type": "dimension", "$value": "{font.size.xs}" },
+      "font-weight": { "$type": "fontWeight", "$value": "{font.weight.semibold}" }
+    },
+    "caption": {
+      "fg": { "$type": "color", "$value": "{color.text.muted}" },
+      "font-size": { "$type": "dimension", "$value": "{font.size.xs}" },
+      "padding": { "$type": "dimension", "$value": "{space.3}" }
+    },
+    "empty": {
+      "fg": { "$type": "color", "$value": "{color.text.muted}" },
+      "padding": { "$type": "dimension", "$value": "{space.6}" }
+    }
+  }
+}

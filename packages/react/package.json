@@ -23,6 +23,10 @@
       "types": "./dist/index.d.ts",
       "import": "./dist/index.js"
     },
+    "./table": {
+      "types": "./dist/table.d.ts",
+      "import": "./dist/table.js"
+    },
     "./empty-state": {
       "types": "./dist/empty-state.d.ts",
       "import": "./dist/empty-state.js"
@@ -196,6 +200,7 @@
       "import": "./dist/button.js"
     },
     "./styles.css": "./dist/index.css",
+    "./table.css": "./dist/table.css",
     "./empty-state.css": "./dist/empty-state.css",
     "./segmented-control.css": "./dist/segmented-control.css",
     "./chip.css": "./dist/chip.css",
@@ -243,7 +248,7 @@
     "./package.json": "./package.json"
   },
   "scripts": {
-    "build": "tsup && node scripts/client-entries.mjs && node scripts/manifest.mjs",
+    "build": "NODE_OPTIONS=--max-old-space-size=8192 tsup && node scripts/client-entries.mjs && node scripts/manifest.mjs",
     "dev": "tsup --watch",
     "typecheck": "tsc --noEmit",
     "test": "vitest",
@@ -251,7 +256,7 @@
     "test:dist": "vitest run --config vitest.dist.config.ts",
     "manifest": "node scripts/manifest.mjs",
     "scaffold": "node scripts/scaffold-component.mjs",
-    "check:package": "publint && attw --pack . --profile esm-only --exclude-entrypoints styles.css button.css text-field.css card.css tabs.css dialog.css text.css heading.css icon.css visually-hidden.css stack.css inline.css field.css icon-button.css checkbox.css switch.css radio.css textarea.css select.css spinner.css badge.css alert.css toast.css progress.css skeleton.css tooltip.css popover.css accordion.css menu.css combobox.css listbox.css picker.css calendar.css date-picker.css slider.css data-grid.css pagination.css sheet.css divider.css link.css avatar.css chip.css segmented-control.css empty-state.css component-manifest.json",
+    "check:package": "publint && attw --pack . --profile esm-only --exclude-entrypoints styles.css button.css text-field.css card.css tabs.css dialog.css text.css heading.css icon.css visually-hidden.css stack.css inline.css field.css icon-button.css checkbox.css switch.css radio.css textarea.css select.css spinner.css badge.css alert.css toast.css progress.css skeleton.css tooltip.css popover.css accordion.css menu.css combobox.css listbox.css picker.css calendar.css date-picker.css slider.css data-grid.css pagination.css sheet.css divider.css link.css avatar.css chip.css segmented-control.css empty-state.css table.css component-manifest.json",
     "prepublishOnly": "pnpm run build && pnpm run test:run && pnpm run check:package",
     "check:size": "size-limit"
   },

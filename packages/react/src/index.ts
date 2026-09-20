@@ -41,3 +41,4 @@ export * from './avatar';
 export * from './chip';
 export * from './segmented-control';
 export * from './empty-state';
+export * from './table';

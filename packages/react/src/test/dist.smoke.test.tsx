@@ -174,7 +174,7 @@ describe('dist', () => {
     expect(readFileSync(resolve(DIST, 'index.js'), 'utf8').startsWith('"use client";')).toBe(true);
     const serverSafe = manifest.components.filter((component) => !component.client).map((component) => component.name);
     // Losing one of these to a stray hook is a regression for every App Router consumer: make it a decision.
-    expect(serverSafe).toEqual(expect.arrayContaining(['Text', 'Heading', 'Stack', 'Inline', 'Card', 'Badge', 'Skeleton', 'Spinner', 'Icon', 'VisuallyHidden', 'Button', 'Link']));
+    expect(serverSafe).toEqual(expect.arrayContaining(['Text', 'Heading', 'Stack', 'Inline', 'Card', 'Badge', 'Skeleton', 'Spinner', 'Icon', 'VisuallyHidden', 'Button', 'Link', 'Table']));
   });
 
   it("server-safe entries import under React's react-server condition; a client entry does not", () => {
