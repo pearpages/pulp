@@ -32,7 +32,7 @@ export * from './picker';
 export * from './calendar';
 export * from './date-picker';
 export * from './slider';
-export * from './table';
+export * from './data-grid';
 export * from './pagination';
 export * from './sheet';
 export * from './divider';

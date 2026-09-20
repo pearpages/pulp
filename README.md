@@ -26,7 +26,7 @@ Reference consumer: [perepages.com](https://perepages.com) takes its colour from
 | --- | --- |
 | `@pearpages/pulp-tokens` | `tokens.css`, `tokens.json` |
 | `@pearpages/pulp-css` | `index.css` (layers + tokens + reset + base) |
-| `@pearpages/pulp-react` | `Text`, `Heading`, `Icon`, `VisuallyHidden`, `Stack`, `Inline`, `Field`, `Button`, `IconButton`, `TextField`, `Textarea`, `Select`, `Checkbox`, `Switch`, `RadioGroup`, `Card`, `Tabs`, `Dialog`, `Sheet`, `Spinner`, `Badge`, `Alert`, `Toast`, `Progress`, `Skeleton`, `Tooltip`, `Popover`, `Menu`, `Accordion`, `Combobox`, `Listbox`, `Picker`, `Calendar`, `DatePicker`, `Slider`, `Table`, `Pagination` |
+| `@pearpages/pulp-react` | `Text`, `Heading`, `Icon`, `VisuallyHidden`, `Stack`, `Inline`, `Field`, `Button`, `IconButton`, `TextField`, `Textarea`, `Select`, `Checkbox`, `Switch`, `RadioGroup`, `Card`, `Tabs`, `Dialog`, `Sheet`, `Spinner`, `Badge`, `Alert`, `Toast`, `Progress`, `Skeleton`, `Tooltip`, `Popover`, `Menu`, `Accordion`, `Combobox`, `Listbox`, `Picker`, `Calendar`, `DatePicker`, `Slider`, `Table`, `DataGrid`, `Pagination` |
 | `@pearpages/pulp-icons` | stroke icons as React components, tree-shakeable |
 
 ## Use
@@ -52,7 +52,7 @@ Nunito, Inter), for example from `@fontsource-variable/*`. The tokens name the f
 with system fallbacks but ship no font files. Shipped CSS uses native nesting and
 `light-dark()`: Chrome/Edge 123, Firefox 120, Safari 17.5 or later.
 
-The complex widgets (Combobox, Listbox, Picker, Calendar, DatePicker, Slider, Table) build
+The complex widgets (Combobox, Listbox, Picker, Calendar, DatePicker, Slider, DataGrid) build
 on React Aria Components, installed with the package and tree-shaken per entry. Their
 props are pulp's; dates cross the API as `YYYY-MM-DD` strings.
 

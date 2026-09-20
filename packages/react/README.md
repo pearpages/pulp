@@ -58,10 +58,10 @@ theme everything inside the element they're on.
 - **Navigation**: `Tabs`, `Accordion`, `Pagination`
 - **Overlays**: `Dialog`, `DialogSystem`, `Sheet`, `Menu`, `Popover`, `Tooltip`
 - **Feedback**: `Alert`, `Badge`, `ToastProvider` and `useToast`, `Progress`, `Skeleton`, `Spinner`
-- **Data**: `Table`
+- **Data**: `Table` (a plain `<table>`, server-safe), `DataGrid` (sortable and selectable)
 - **Utilities**: `Icon`, `VisuallyHidden`
 
-`Combobox`, `Listbox`, `Picker`, `Calendar`, `DatePicker`, `Slider`, `Table`, `Pagination` and
+`Combobox`, `Listbox`, `Picker`, `Calendar`, `DatePicker`, `Slider`, `DataGrid`, `Pagination` and
 `Sheet` are **experimental**: their API may still change in a minor release. All but `Pagination` build on
 React Aria Components, installed with this package and tree-shaken per entry. Their props are
 pulp's, and dates cross the API as `YYYY-MM-DD` strings.

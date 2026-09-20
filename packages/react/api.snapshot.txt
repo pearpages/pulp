@@ -121,6 +121,44 @@ Combobox (experimental)
   required?: boolean = false
   size?: "sm" | "md" | "lg" = md
   value?: string | null
+DataGrid (experimental)
+  aria-label?: string
+  aria-labelledby?: string
+  children: ReactNode
+  className?: string
+  defaultSelected?: readonly string[] = []
+  defaultSort?: DataGridSort
+  density?: "default" | "compact" = default
+  disabledIds?: readonly string[]
+  onRowAction?: ((id: string) => void)
+  onSelectedChange?: ((ids: string[]) => void)
+  onSortChange?: ((sort: DataGridSort) => void)
+  ref?: Ref<HTMLTableElement>
+  selected?: readonly string[]
+  selectionMode?: "none" | "single" | "multiple" = none
+  sort?: DataGridSort | null
+  stickyHeader?: boolean = false
+  DataGrid.Body
+    children: ReactNode | ((item: T) => ReactElement<unknown, string | JSXElementConstructor<any>>)
+    className?: string
+    emptyMessage?: ReactNode = No rows
+    items?: Iterable<T>
+  DataGrid.Cell
+    align?: "start" | "end" = start
+    className?: string
+  DataGrid.Column
+    align?: "start" | "end" = start
+    allowsSorting?: boolean = false
+    className?: string
+    id?: string
+    isRowHeader?: boolean = false
+  DataGrid.Header
+    children: ReactNode
+    className?: string
+  DataGrid.Row
+    children: ReactNode
+    className?: string
+    id?: string
 DatePicker (experimental)
   autoFocus?: boolean
   className?: string
@@ -399,44 +437,6 @@ Switch (stable)
   label: ReactNode
   ref?: Ref<HTMLInputElement>
   size?: "sm" | "md" | "lg" = md
-Table (experimental)
-  aria-label?: string
-  aria-labelledby?: string
-  children: ReactNode
-  className?: string
-  defaultSelected?: readonly string[] = []
-  defaultSort?: TableSort
-  density?: "default" | "compact" = default
-  disabledIds?: readonly string[]
-  onRowAction?: ((id: string) => void)
-  onSelectedChange?: ((ids: string[]) => void)
-  onSortChange?: ((sort: TableSort) => void)
-  ref?: Ref<HTMLTableElement>
-  selected?: readonly string[]
-  selectionMode?: "none" | "single" | "multiple" = none
-  sort?: TableSort | null
-  stickyHeader?: boolean = false
-  Table.Body
-    children: ReactNode | ((item: T) => ReactElement<unknown, string | JSXElementConstructor<any>>)
-    className?: string
-    emptyMessage?: ReactNode = No rows
-    items?: Iterable<T>
-  Table.Cell
-    align?: "start" | "end" = start
-    className?: string
-  Table.Column
-    align?: "start" | "end" = start
-    allowsSorting?: boolean = false
-    className?: string
-    id?: string
-    isRowHeader?: boolean = false
-  Table.Header
-    children: ReactNode
-    className?: string
-  Table.Row
-    children: ReactNode
-    className?: string
-    id?: string
 Tabs (stable)
   activation?: "automatic" | "manual" = automatic
   defaultValue?: string

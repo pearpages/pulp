@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { useMemo, useState } from 'react';
 import { expect, fn, userEvent, within } from 'storybook/test';
 import { Badge } from '../badge';
-import { Table, type TableSort } from './Table';
+import { DataGrid, type DataGridSort } from './DataGrid';
 
 const people = [
   { id: 'p1', name: 'Alice Martin', role: 'Engineer', team: 'Platform', age: 34, status: 'active' },
@@ -13,45 +13,45 @@ const people = [
 ];
 type Person = (typeof people)[number];
 
-function Example(props: Partial<React.ComponentProps<typeof Table>> & { rows?: Person[] }) {
+function Example(props: Partial<React.ComponentProps<typeof DataGrid>> & { rows?: Person[] }) {
   const { rows = people, ...rest } = props;
   return (
-    <Table aria-label="People" {...rest}>
-      <Table.Header>
-        <Table.Column id="name" isRowHeader allowsSorting>
+    <DataGrid aria-label="People" {...rest}>
+      <DataGrid.Header>
+        <DataGrid.Column id="name" isRowHeader allowsSorting>
           Name
-        </Table.Column>
-        <Table.Column id="role" allowsSorting>
+        </DataGrid.Column>
+        <DataGrid.Column id="role" allowsSorting>
           Role
-        </Table.Column>
-        <Table.Column id="team">Team</Table.Column>
-        <Table.Column id="age" align="end" allowsSorting>
+        </DataGrid.Column>
+        <DataGrid.Column id="team">Team</DataGrid.Column>
+        <DataGrid.Column id="age" align="end" allowsSorting>
           Age
-        </Table.Column>
-        <Table.Column id="status">Status</Table.Column>
-      </Table.Header>
-      <Table.Body items={rows} emptyMessage="No people match">
+        </DataGrid.Column>
+        <DataGrid.Column id="status">Status</DataGrid.Column>
+      </DataGrid.Header>
+      <DataGrid.Body items={rows} emptyMessage="No people match">
         {(person) => (
-          <Table.Row>
-            <Table.Cell>{person.name}</Table.Cell>
-            <Table.Cell>{person.role}</Table.Cell>
-            <Table.Cell>{person.team}</Table.Cell>
-            <Table.Cell align="end">{person.age}</Table.Cell>
-            <Table.Cell>
+          <DataGrid.Row>
+            <DataGrid.Cell>{person.name}</DataGrid.Cell>
+            <DataGrid.Cell>{person.role}</DataGrid.Cell>
+            <DataGrid.Cell>{person.team}</DataGrid.Cell>
+            <DataGrid.Cell align="end">{person.age}</DataGrid.Cell>
+            <DataGrid.Cell>
               <Badge tone={person.status === 'active' ? 'success' : person.status === 'away' ? 'warning' : 'neutral'} variant="subtle">
                 {person.status}
               </Badge>
-            </Table.Cell>
-          </Table.Row>
+            </DataGrid.Cell>
+          </DataGrid.Row>
         )}
-      </Table.Body>
-    </Table>
+      </DataGrid.Body>
+    </DataGrid>
   );
 }
 
 const meta = {
-  title: 'Components/Data/Table',
-  component: Table,
+  title: 'Components/Data/DataGrid',
+  component: DataGrid,
   args: { 'aria-label': 'People', selectionMode: 'none', density: 'default', children: null, onSelectedChange: fn(), onSortChange: fn(), onRowAction: fn() },
   argTypes: {
     children: { control: false },
@@ -62,7 +62,7 @@ const meta = {
     layout: 'padded',
   },
   render: (args) => <Example {...args} />,
-} satisfies Meta<typeof Table>;
+} satisfies Meta<typeof DataGrid>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
@@ -77,7 +77,7 @@ export const Default: Story = {
 };
 
 function SortedExample(props: React.ComponentProps<typeof Example>) {
-  const [sort, setSort] = useState<TableSort>({ column: 'age', direction: 'descending' });
+  const [sort, setSort] = useState<DataGridSort>({ column: 'age', direction: 'descending' });
   const rows = useMemo(() => {
     const key = sort.column as keyof Person;
     return [...people].sort((a, b) => {

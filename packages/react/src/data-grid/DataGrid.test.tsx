@@ -1,7 +1,7 @@
 import { render, screen, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { axe } from 'vitest-axe';
-import { Table, type TableSort } from './Table';
+import { DataGrid, type DataGridSort } from './DataGrid';
 
 const rows = [
   { id: 'r1', name: 'Alice', role: 'Engineer', age: 34 },
@@ -9,32 +9,32 @@ const rows = [
   { id: 'r3', name: 'Chen', role: 'Manager', age: 41 },
 ];
 
-function Example(props: Partial<React.ComponentProps<typeof Table>>) {
+function Example(props: Partial<React.ComponentProps<typeof DataGrid>>) {
   return (
-    <Table aria-label="People" {...props}>
-      <Table.Header>
-        <Table.Column id="name" isRowHeader allowsSorting>
+    <DataGrid aria-label="People" {...props}>
+      <DataGrid.Header>
+        <DataGrid.Column id="name" isRowHeader allowsSorting>
           Name
-        </Table.Column>
-        <Table.Column id="role">Role</Table.Column>
-        <Table.Column id="age" align="end" allowsSorting>
+        </DataGrid.Column>
+        <DataGrid.Column id="role">Role</DataGrid.Column>
+        <DataGrid.Column id="age" align="end" allowsSorting>
           Age
-        </Table.Column>
-      </Table.Header>
-      <Table.Body items={rows}>
+        </DataGrid.Column>
+      </DataGrid.Header>
+      <DataGrid.Body items={rows}>
         {(row) => (
-          <Table.Row>
-            <Table.Cell>{row.name}</Table.Cell>
-            <Table.Cell>{row.role}</Table.Cell>
-            <Table.Cell align="end">{row.age}</Table.Cell>
-          </Table.Row>
+          <DataGrid.Row>
+            <DataGrid.Cell>{row.name}</DataGrid.Cell>
+            <DataGrid.Cell>{row.role}</DataGrid.Cell>
+            <DataGrid.Cell align="end">{row.age}</DataGrid.Cell>
+          </DataGrid.Row>
         )}
-      </Table.Body>
-    </Table>
+      </DataGrid.Body>
+    </DataGrid>
   );
 }
 
-describe('Table', () => {
+describe('DataGrid', () => {
   it('is a grid with column headers, row headers, and density on the DOM', () => {
     render(<Example density="compact" />);
     const table = screen.getByRole('grid', { name: 'People' });
@@ -61,7 +61,7 @@ describe('Table', () => {
   });
 
   it('sorting is controlled by `sort`', () => {
-    const sort: TableSort = { column: 'age', direction: 'descending' };
+    const sort: DataGridSort = { column: 'age', direction: 'descending' };
     render(<Example sort={sort} />);
     expect(screen.getByRole('columnheader', { name: 'Age' })).toHaveAttribute('aria-sort', 'descending');
   });
@@ -106,12 +106,12 @@ describe('Table', () => {
 
   it('shows the empty message and puts the sticky header on the DOM', () => {
     render(
-      <Table aria-label="Empty" stickyHeader>
-        <Table.Header>
-          <Table.Column isRowHeader>Name</Table.Column>
-        </Table.Header>
-        <Table.Body emptyMessage="Nothing yet">{[]}</Table.Body>
-      </Table>,
+      <DataGrid aria-label="Empty" stickyHeader>
+        <DataGrid.Header>
+          <DataGrid.Column isRowHeader>Name</DataGrid.Column>
+        </DataGrid.Header>
+        <DataGrid.Body emptyMessage="Nothing yet">{[]}</DataGrid.Body>
+      </DataGrid>,
     );
     expect(screen.getByText('Nothing yet')).toBeInTheDocument();
     expect(screen.getByRole('grid').parentElement).toHaveAttribute('data-sticky-header');

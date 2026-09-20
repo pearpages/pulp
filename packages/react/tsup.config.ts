@@ -20,7 +20,7 @@ export default defineConfig({
     'divider': 'src/divider/index.ts',
     'sheet': 'src/sheet/index.ts',
     'pagination': 'src/pagination/index.ts',
-    'table': 'src/table/index.ts',
+    'data-grid': 'src/data-grid/index.ts',
     'slider': 'src/slider/index.ts',
     'date-picker': 'src/date-picker/index.ts',
     'calendar': 'src/calendar/index.ts',

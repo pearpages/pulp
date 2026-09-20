@@ -30,7 +30,7 @@
   inline-size: 24rem;
 }
 
-/* A bounded scroll container for the sticky-header Table story. */
+/* A bounded scroll container for the sticky-header DataGrid story. */
 .sb-table-sticky {
   max-block-size: 16rem;
 }
