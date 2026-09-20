@@ -1134,6 +1134,7 @@
     --layer-toast: 1100;
     --layer-popover: 1200;
     --layer-tooltip: 1300;
+    --button-radius: var(--radius-full);
   }
 
 }

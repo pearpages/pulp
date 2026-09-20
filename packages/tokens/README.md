@@ -47,6 +47,11 @@ Primitives (raw palette and scales) → semantic tokens (what a value means: sur
 action) → component tokens (one component's knobs, always pointing at semantic ones). A brand
 only remaps primitives onto semantic names, so switching brand never touches a component.
 
+Where a component value is itself brand — bitepals' buttons are pills, and no semantic name tells a
+button's radius from an input's — a brand may restate that one token in
+`tokens/component/<brand>/<component>.json`. It still has to reference the semantic layer, and it
+still has to be a name the component already reads. Decision record 007.
+
 ## Files
 
 | Export | |

@@ -59,9 +59,11 @@ test('both brands render, with light-dark() and calc() from $extensions', async 
   assert.match(css, /--color-surface-base: light-dark\(var\(--color-neutral-50\), var\(--color-neutral-975\)\);/);
   assert.match(css, /--space-4: calc\(var\(--space-unit\) \* 4\);/);
   assert.match(css, /--button-primary-bg: var\(--color-action-primary\);/);
-  // Component tokens live on :root only: a brand block must not restate them.
+  // A brand restates a component token only to override it, and the override must
+  // come after the :root declaration to win at equal specificity. Record 007.
   const bitepalsBlock = css.slice(css.indexOf('[data-brand="bitepals"]'));
-  assert.doesNotMatch(bitepalsBlock, /--button-/);
+  assert.match(bitepalsBlock, /--button-radius: var\(--radius-full\);/);
+  assert.ok(css.indexOf('--button-radius', css.indexOf('[data-brand="bitepals"]')) > css.indexOf('--button-radius'));
 
   const manifest = JSON.parse(json);
   const surface = manifest.pulp.find((t) => t.name === '--color-surface-base');
@@ -100,15 +102,31 @@ test('every semantic token exists in both brands', async () => {
 test('component tokens reference the semantic layer only, never a primitive or a literal', async () => {
   const { json } = await render();
   const manifest = JSON.parse(json);
-  const semantic = new Set(manifest.pulp.filter((t) => t.tier === 'semantic').map((t) => t.name));
-  const offenders = manifest.pulp
-    .filter((t) => t.tier === 'component')
-    .filter((t) => {
-      const refs = [...t.css.matchAll(/var\((--[a-z0-9-]+)\)/g)].map((m) => m[1]);
-      return refs.length === 0 || refs.some((ref) => !semantic.has(ref));
-    })
-    .map((t) => `${t.name}: ${t.css}`);
+  const offenders = [];
+  // Every brand, not only pulp: a brand's overrides (tokens/component/<brand>/) are
+  // held to the same rule, or a brand could smuggle a literal into a component.
+  for (const [brand, tokens] of Object.entries(manifest)) {
+    const semantic = new Set(tokens.filter((t) => t.tier === 'semantic').map((t) => t.name));
+    for (const token of tokens.filter((t) => t.tier === 'component')) {
+      const refs = [...token.css.matchAll(/var\((--[a-z0-9-]+)\)/g)].map((m) => m[1]);
+      if (refs.length === 0 || refs.some((ref) => !semantic.has(ref))) offenders.push(`${brand}/${token.name}: ${token.css}`);
+    }
+  }
   assert.deepEqual(offenders, []);
+});
+
+test('a brand only overrides component tokens that already exist, never invents one', async () => {
+  const { json } = await render();
+  const manifest = JSON.parse(json);
+  const base = new Set(manifest.pulp.filter((t) => t.tier === 'component').map((t) => t.name));
+  const invented = [];
+  for (const [brand, tokens] of Object.entries(manifest)) {
+    if (brand === 'pulp') continue;
+    for (const token of tokens.filter((t) => t.tier === 'component')) {
+      if (!base.has(token.name)) invented.push(`${brand}: ${token.name}`);
+    }
+  }
+  assert.deepEqual(invented, []);
 });
 
 test("a subtle badge's edge is the colour of its label, in every tone", async () => {

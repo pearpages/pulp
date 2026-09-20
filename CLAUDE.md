@@ -174,7 +174,10 @@ Two axes on `<html>` (or any element; brands nest):
 - `data-scheme="light" | "dark"`, or none to follow the OS. Colours are `light-dark()` pairs.
 
 Tiers: primitive → semantic → component. A brand file maps primitives onto the semantic
-names. `$extensions["com.pearpages.pulp"].dark` holds a dark counterpart;
+names. The component tier is declared once, on `:root`; a brand may restate a single component
+token in `tokens/component/<brand>/<component>.json` when the value is itself brand (bitepals'
+buttons are pills), and the tests hold it to the semantic layer and to names that already exist
+(record 007). `$extensions["com.pearpages.pulp"].dark` holds a dark counterpart;
 `.multiply` builds the spacing scale from `space.unit`. Shadows split into
 `--shadow-x-color` (light-dark) + geometry, because `light-dark()` only takes colours.
 

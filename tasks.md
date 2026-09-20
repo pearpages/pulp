@@ -656,7 +656,14 @@ here. The full write-up, with the bitepals source to read and the order, is
       vertically through `--toast-offset` now sets both: said in the changeset.
 - [x] bitepals brand weights: medium 500 / semibold 600 (2026-09-20). The bitepals matrix baselines
       move with it: `visual-update.yml` after the push.
-- [ ] Per-brand component tokens (decision record); bitepals gets a pill `button.radius`
+- [x] Per-brand component tokens (2026-09-20, decision record 007). `tokens/component/<brand>/<name>.json`,
+      sourced after that brand's own semantics and emitted inside its block, which already came after
+      pulp's, so it wins at equal specificity (both are 0,1,0). The base tier is untouched: still one
+      declaration on `:root`, still `tokens/component/*.json` with a single `*`. Two tests guard it —
+      an override references the semantic layer (the component→semantic test now runs over every brand,
+      not just pulp), and it names a token that already exists. bitepals gets `button.radius` →
+      `{radius.full}`; verified on the built site (pulp 3px, bitepals 9999px) and it reaches IconButton
+      too, as bitepals' own override did.
 - [x] Primitive names collide with Tailwind's default theme (2026-09-20, decision record 006). Measured:
       48 names against tailwindcss 4.3.0, six of them added today by the accent ramps. The layer order
       is now documented next to `theme.css` (`@layer reset, theme, tokens, …`); prefixing the primitive

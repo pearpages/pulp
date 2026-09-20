@@ -23,23 +23,28 @@ const DIST = resolve(ROOT, 'dist');
 export const LAYERS = ['reset', 'tokens', 'vendor', 'base', 'components', 'utilities'];
 
 export const BRANDS = [
-  { name: 'pulp', selector: ':root, [data-brand="pulp"]', component: true },
-  { name: 'bitepals', selector: '[data-brand="bitepals"]', component: false },
+  // `base` carries the component tier for everyone; see the source list below.
+  { name: 'pulp', selector: ':root, [data-brand="pulp"]', base: true },
+  { name: 'bitepals', selector: '[data-brand="bitepals"]' },
 ];
 
 StyleDictionary.registerFormat(cssBrand);
 StyleDictionary.registerFormat(jsonBrand);
 
-async function buildBrand({ name, selector, component }) {
+async function buildBrand({ name, selector, base }) {
   const sd = new StyleDictionary({
     usesDtcg: true,
     log: { verbosity: 'silent' },
     source: [
       resolve(ROOT, `tokens/primitives/${name}.json`),
       resolve(ROOT, `tokens/semantic/${name}.json`),
-      // Component tokens are var() references into the semantic layer, so they
-      // only need to exist once, on :root. Brand blocks restate nothing.
-      ...(component ? [resolve(ROOT, 'tokens/component/*.json')] : []),
+      // The component tier is declared once, on :root, because every value is a
+      // var() reference into the semantic layer: a brand swap moves it already.
+      // What a brand cannot express that way is a component value that is itself
+      // brand (bitepals' buttons are pills), so a brand may restate single
+      // component tokens in tokens/component/<brand>/. Decision record 007.
+      ...(base ? [resolve(ROOT, 'tokens/component/*.json')] : []),
+      ...(existsSync(resolve(ROOT, `tokens/component/${name}`)) ? [resolve(ROOT, `tokens/component/${name}/*.json`)] : []),
     ],
     platforms: {
       css: { transforms: [], files: [{ destination: `${name}.css`, format: 'pulp/css', options: { selector } }] },
