@@ -5,6 +5,11 @@
       "$type": "color",
       "$value": "{color.surface.overlay}"
     },
+    "width": {
+      "$type": "dimension",
+      "$description": "A centred dialog's width. Override it on one dialog with a class on Dialog.Content; the vendor's --modal-width-md is set from it, so the vendor variable stays pulp's business.",
+      "$value": "{size.dialog-width}"
+    },
     "surface-subtle": {
       "$type": "color",
       "$value": "{color.surface.sunken}"

@@ -106,6 +106,7 @@ export const PUBLIC_SEMANTIC_TOKENS = [
   '--size-control-lg',
   '--size-control-md',
   '--size-control-sm',
+  '--size-dialog-width',
   '--size-hairline',
   '--size-listbox-height',
   '--size-menu-width',

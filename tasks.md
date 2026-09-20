@@ -649,7 +649,13 @@ here. The full write-up, with the bitepals source to read and the order, is
       is open stays pressable; document per-dialog widths. Checked 2026-09-20 in the built site: with
       a dialog open the vendor sets `inert` and `aria-hidden` on `[data-pulp-toasts]`, so the toast is
       neither pressable nor announced. The fix is an opt-out in the vendor; the brief for a modals
-      session is in `docs/bitepals-feedback.md`. Per-dialog widths: still to document.
+      session is in `docs/bitepals-feedback.md`. Per-dialog widths: done 2026-09-20. `--dialog-width`
+      is a pulp token now (semantic `size.dialog-width`, 32.5rem = the 520px the vendor already used,
+      so nothing moved), mapped onto the vendor's `--modal-width-md` **on the panel**, not on the
+      portal root: the root is shared by every dialog, so a `var()` resolved there cannot be
+      retargeted per dialog, which is why the first attempt measured 511px. A class on
+      `Dialog.Content` now works, as `--sheet-width` already did for Sheet; both are in the JSDoc,
+      with a `Width` story that measures it in Chromium.
 - [x] Toast: `bottom-center`, a separate block offset, `env(safe-area-inset-bottom)` (2026-09-20).
       `--toast-offset-block` is a new component token (same default as `--toast-offset`); both safe-area
       insets are added to it, so the top placements clear a notch too. A consumer that moved the stack

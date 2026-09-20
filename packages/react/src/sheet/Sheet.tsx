@@ -42,6 +42,7 @@ export interface SheetContentProps extends Omit<ComponentProps<typeof Dialog.Con
  * @category Overlays
  * @accessibility The drag handle of a bottom sheet is a pointer and touch shortcut, hidden from assistive technology and not focusable: it adds no keyboard stop, and closing by keyboard stays Escape or `Sheet.Close`, so always render a `Sheet.Close` in a sheet that can be dragged. Otherwise Dialog's: `role="dialog"` with `aria-modal`, named by `Sheet.Title` and described by `Sheet.Description`; focus moves in on open, is trapped, and returns to the trigger on close; Escape and the backdrop dismiss it; the page behind is inert. Docking changes the layout only, never the semantics.
  * @do Always render a `Sheet.Title`.
+ * Size one sheet by setting `--sheet-width` (or `--sheet-height` when it is docked to an edge on the block axis) in a class on `Sheet.Content`.
  * @do Dock to `end` for detail and settings beside the page, and to `bottom` for choices on a narrow screen.
  * @dont Use it for a short confirmation; a centred Dialog reads as more urgent and takes less room.
  * @dont Put the page's primary content in a sheet: it is modal, so everything behind it is out of reach.

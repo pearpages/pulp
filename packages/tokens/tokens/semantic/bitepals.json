@@ -849,6 +849,13 @@
       },
       "$description": "Maximum height of an option list before it scrolls (Combobox, Picker, Listbox)."
     },
+    "dialog-width": {
+      "$value": {
+        "value": 32.5,
+        "unit": "rem"
+      },
+      "$description": "Width of a centred dialog: 520px, the vendor's own default, so Dialog owns the number instead of inheriting it."
+    },
     "sheet-width": {
       "$value": {
         "value": 24,
