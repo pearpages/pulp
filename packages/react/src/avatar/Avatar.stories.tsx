@@ -15,6 +15,7 @@ const meta = {
   args: { name: 'Ana Ruiz', size: 'md' },
   argTypes: {
     size: { control: 'select', options: ['sm', 'md', 'lg', 'xl'] },
+    accent: { control: 'select', options: [undefined, 1, 2, 3, 4, 5, 6, 7, 8] },
     children: { control: false },
     ref: { control: false, table: { disable: true } },
   },
@@ -49,6 +50,22 @@ export const BesideTheName: Story = {
   },
 };
 
+const accents = [1, 2, 3, 4, 5, 6, 7, 8] as const;
+const people = ['Ana Ruiz', 'Wei Chen', 'Élodie Martin', 'Omar Haddad', 'Kofi Mensah', 'Ingrid Berg', 'Pau Soler', 'Mei Tanaka'];
+const accentRow = (
+  <Inline gap={3} align="center">
+    {accents.map((accent, index) => (
+      <Avatar key={accent} accent={accent} name={people[index]} />
+    ))}
+  </Inline>
+);
+
+/** Eight categorical pairs that follow the brand and the scheme. The consumer hashes a person's id to the index. */
+export const Accents: Story = {
+  parameters: { controls: { disable: true } },
+  render: () => accentRow,
+};
+
 const sizes = ['sm', 'md', 'lg', 'xl'] as const;
 const matrix = (
   <div className="sb-grid">
@@ -67,6 +84,7 @@ const matrix = (
       <Avatar name="Wei Chen" />
       <Avatar />
     </Inline>
+    {accentRow}
   </div>
 );
 

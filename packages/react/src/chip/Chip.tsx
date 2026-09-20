@@ -5,6 +5,7 @@ import styles from './Chip.module.css';
 
 export type ChipSize = 'sm' | 'md' | 'lg';
 export type ChipTone = 'neutral' | 'action';
+export type ChipAccent = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8;
 
 export interface ChipProps extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'value'> {
   /** Controlled pressed state. Passing it (or `defaultSelected`, or `onSelectedChange`) makes the chip a toggle. */
@@ -21,6 +22,8 @@ export interface ChipProps extends Omit<ButtonHTMLAttributes<HTMLButtonElement>,
   size?: ChipSize;
   /** `action` takes the brand's colour; a selected chip is filled in either tone. @default 'neutral' */
   tone?: ChipTone;
+  /** One of eight categorical colours, for a chip that stands for a person or a category: hash its id to an index. Fills the chip; a toggle shows it as the border until it is selected. */
+  accent?: ChipAccent;
 
   /** The `button` that carries the label, or the `span` when the chip neither toggles nor has an `onClick`. */
   ref?: Ref<HTMLButtonElement>;
@@ -48,6 +51,7 @@ export function Chip({
   removeLabel = 'Remove',
   size = 'md',
   tone = 'neutral',
+  accent,
   disabled,
   className,
   onClick,
@@ -90,6 +94,8 @@ export function Chip({
       className={classes(styles.root, className)}
       data-size={size}
       data-tone={tone}
+      data-accent={accent}
+      data-toggle={toggles ? '' : undefined}
       data-selected={toggles && pressed ? '' : undefined}
       data-interactive={interactive ? '' : undefined}
       data-disabled={disabled ? '' : undefined}

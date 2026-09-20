@@ -42,6 +42,18 @@
       "selected-bg": { "$value": "{color.action.primary}" },
       "selected-fg": { "$value": "{color.text.on-action}" }
     },
+    "accent": {
+      "$type": "color",
+      "$description": "A chip that stands for a person or a category. Filled when it is static or selected; an unselected toggle keeps the tone background and takes the accent as its border.",
+      "1": { "bg": { "$value": "{color.accent.1}" }, "fg": { "$value": "{color.accent.on-1}" } },
+      "2": { "bg": { "$value": "{color.accent.2}" }, "fg": { "$value": "{color.accent.on-2}" } },
+      "3": { "bg": { "$value": "{color.accent.3}" }, "fg": { "$value": "{color.accent.on-3}" } },
+      "4": { "bg": { "$value": "{color.accent.4}" }, "fg": { "$value": "{color.accent.on-4}" } },
+      "5": { "bg": { "$value": "{color.accent.5}" }, "fg": { "$value": "{color.accent.on-5}" } },
+      "6": { "bg": { "$value": "{color.accent.6}" }, "fg": { "$value": "{color.accent.on-6}" } },
+      "7": { "bg": { "$value": "{color.accent.7}" }, "fg": { "$value": "{color.accent.on-7}" } },
+      "8": { "bg": { "$value": "{color.accent.8}" }, "fg": { "$value": "{color.accent.on-8}" } }
+    },
     "focus-ring": { "$type": "color", "$value": "{color.border.focus}" },
     "focus-ring-width": { "$type": "dimension", "$value": "{focus.ring.width}" },
     "focus-ring-offset": { "$type": "dimension", "$value": "{focus.ring.offset}" }

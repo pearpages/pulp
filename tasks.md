@@ -630,7 +630,13 @@ bitepals moved its tokens and ten primitives onto 0.3.0 and kept five things loc
 here. The full write-up, with the bitepals source to read and the order, is
 [`docs/bitepals-feedback.md`](docs/bitepals-feedback.md).
 
-- [ ] Accent palette (`color.accent.1…8`) and `accent` on Avatar and Chip
+- [x] Accent palette (`color.accent.1…8`) and `accent` on Avatar and Chip (2026-09-20). Semantic
+      `color.accent.N` + `color.accent.on-N` in both brands, hues in one order (blue, orange, green,
+      violet, red, teal, amber, pink), `on-N` on `N` in the contrast tests. New primitive ramps (300 /
+      700): orange, teal, violet, pink in pulp; teal, violet, pink in bitepals. Avatar: the colour
+      behind the initials. Chip: filled when static or selected, the border of an unselected toggle
+      (`data-toggle`). No hover step for a filled accent chip: that would be eight more semantic
+      names. The stylesheet budget went from 9 to 10 kB (it measured 9.01).
 - [ ] Overlays on a phone: visual-viewport handling in `@pearpages/modals`; a toast fired while a dialog
       is open stays pressable; document per-dialog widths
 - [ ] Toast: `bottom-center`, a separate block offset, `env(safe-area-inset-bottom)`

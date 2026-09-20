@@ -16,6 +16,22 @@
  * and travel with it.
  */
 export const PUBLIC_SEMANTIC_TOKENS = [
+  '--color-accent-1',
+  '--color-accent-2',
+  '--color-accent-3',
+  '--color-accent-4',
+  '--color-accent-5',
+  '--color-accent-6',
+  '--color-accent-7',
+  '--color-accent-8',
+  '--color-accent-on-1',
+  '--color-accent-on-2',
+  '--color-accent-on-3',
+  '--color-accent-on-4',
+  '--color-accent-on-5',
+  '--color-accent-on-6',
+  '--color-accent-on-7',
+  '--color-accent-on-8',
   '--color-action-primary',
   '--color-action-primary-active',
   '--color-action-primary-hover',

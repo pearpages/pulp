@@ -20,6 +20,18 @@
     "border": { "$type": "color", "$description": "Fallback only: the subtle fill barely separates from the base surface in light schemes.", "$value": "{color.border.default}" },
     "border-width": { "$type": "dimension", "$value": "{size.hairline}" },
     "fg": { "$type": "color", "$value": "{color.status.neutral-text}" },
+    "accent": {
+      "$type": "color",
+      "$description": "The initials background when `accent` is set: one of eight categorical pairs, so people in a list can be told apart.",
+      "1": { "bg": { "$value": "{color.accent.1}" }, "fg": { "$value": "{color.accent.on-1}" } },
+      "2": { "bg": { "$value": "{color.accent.2}" }, "fg": { "$value": "{color.accent.on-2}" } },
+      "3": { "bg": { "$value": "{color.accent.3}" }, "fg": { "$value": "{color.accent.on-3}" } },
+      "4": { "bg": { "$value": "{color.accent.4}" }, "fg": { "$value": "{color.accent.on-4}" } },
+      "5": { "bg": { "$value": "{color.accent.5}" }, "fg": { "$value": "{color.accent.on-5}" } },
+      "6": { "bg": { "$value": "{color.accent.6}" }, "fg": { "$value": "{color.accent.on-6}" } },
+      "7": { "bg": { "$value": "{color.accent.7}" }, "fg": { "$value": "{color.accent.on-7}" } },
+      "8": { "bg": { "$value": "{color.accent.8}" }, "fg": { "$value": "{color.accent.on-8}" } }
+    },
     "weight": { "$type": "fontWeight", "$value": "{font.weight.semibold}" },
     "radius": { "$type": "dimension", "$value": "{radius.full}" }
   }

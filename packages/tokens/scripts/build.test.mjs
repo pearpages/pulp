@@ -151,6 +151,8 @@ const PAIRS = [
     [`--color-status-${tone}-text`, ['--color-surface-base', '--color-surface-raised', '--color-surface-sunken', `--color-status-${tone}-subtle`]],
     [`--color-status-on-${tone}`, [`--color-status-${tone}`]],
   ]),
+  // The eight categorical fills: an Avatar's initials, a Chip's label.
+  ...[1, 2, 3, 4, 5, 6, 7, 8].map((n) => [`--color-accent-on-${n}`, [`--color-accent-${n}`]]),
 ];
 
 test('text pairs meet WCAG AA (4.5:1) in every brand and scheme', async () => {

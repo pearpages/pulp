@@ -70,6 +70,11 @@ describe('Avatar', () => {
     expect(screen.getByRole('img')).toBe(avatar);
   });
 
+  it('exposes accent as data: the colour behind the initials', () => {
+    render(<Avatar name="Ana Ruiz" accent={3} />);
+    expect(screen.getByRole('img', { name: 'Ana Ruiz' })).toHaveAttribute('data-accent', '3');
+  });
+
   it('defaults to md', () => {
     render(<Avatar name="Ana Ruiz" />);
     expect(screen.getByRole('img')).toHaveAttribute('data-size', 'md');
@@ -84,6 +89,7 @@ describe('Avatar', () => {
         <Avatar />
         <Avatar name="Ana Ruiz" size="sm" />
         <Avatar name="Ana Ruiz" size="xl" />
+        <Avatar name="Ana Ruiz" accent={1} />
       </div>,
     );
     expect(await axe(container)).toHaveNoViolations();
