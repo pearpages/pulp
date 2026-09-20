@@ -634,7 +634,8 @@ here. The full write-up, with the bitepals source to read and the order, is
 - [ ] Overlays on a phone: visual-viewport handling in `@pearpages/modals`; a toast fired while a dialog
       is open stays pressable; document per-dialog widths
 - [ ] Toast: `bottom-center`, a separate block offset, `env(safe-area-inset-bottom)`
-- [ ] bitepals brand weights: medium 500 / semibold 600
+- [x] bitepals brand weights: medium 500 / semibold 600 (2026-09-20). The bitepals matrix baselines
+      move with it: `visual-update.yml` after the push.
 - [ ] Per-brand component tokens (decision record); bitepals gets a pill `button.radius`
 - [ ] Primitive names collide with Tailwind's default theme: prefix the tier, or document the layer
       order next to `theme.css` (decision record)

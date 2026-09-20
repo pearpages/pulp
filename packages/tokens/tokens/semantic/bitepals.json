@@ -437,10 +437,10 @@
         "$value": 400
       },
       "medium": {
-        "$value": 600
+        "$value": 500
       },
       "semibold": {
-        "$value": 700
+        "$value": 600
       }
     },
     "line-height": {

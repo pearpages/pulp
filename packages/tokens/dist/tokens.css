@@ -1015,8 +1015,8 @@
     --font-size-2xl: 1.75rem;
     --font-size-3xl: 2.25rem;
     --font-weight-regular: 400;
-    --font-weight-medium: 600;
-    --font-weight-semibold: 700;
+    --font-weight-medium: 500;
+    --font-weight-semibold: 600;
     --font-line-height-tight: 1.25;
     --font-line-height-normal: 1.55;
     --motion-duration-fast: var(--duration-fast);
