@@ -679,7 +679,12 @@ here. The full write-up, with the bitepals source to read and the order, is
       story (four icon options in 24rem) with a play that compares each segment with its slot, and
       the same case in the matrix. Full-width segments stay equal, so "Liked" shortens next to
       "Recommended": four long labels belong in a Picker.
-- [ ] `@pearpages/modals/styles.css`: drop `@charset`
+- [x] A third surface step: nothing to do (2026-09-20). Verified against the built tokens: bitepals'
+      `action-secondary-hover` resolves to cream-500 `#e0cba6` / ink-500 `#273040`, which is exactly
+      the step bitepals kept for hover and selected fills on a sunken surface. The mapping is right
+      and is recorded here so nobody looks for a fourth surface.
+- [ ] `@pearpages/modals/styles.css`: drop `@charset` (not this repo: the brief for a modals session
+      is in `docs/bitepals-feedback.md`)
 
 ## Later (not scheduled)
 Deprecation codemods, Tailwind preset emitted from tokens, Figma sync (Tokens Studio reads the
