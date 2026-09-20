@@ -650,7 +650,9 @@ here. The full write-up, with the bitepals source to read and the order, is
       order next to `theme.css` (decision record)
 - [ ] Subtle status badges vanish on bitepals' tinted surfaces; add the fill-on-surface pair to the
       contrast tests
-- [ ] Badge `tone="action"`
+- [x] Badge `tone="action"` (2026-09-20): solid on `color.action.primary` / `text.on-action`, subtle on
+      `action.primary-quiet` / `action.text`, both pairs already in the contrast tests. In pulp it is
+      the same hue as `info` (the brand is ultramarine); the meaning differs, the colour need not.
 - [x] Textarea `hideLabel` (2026-09-20). The hidden-label rule moved from TextField's stylesheet into
       Field, behind `Field.Label visuallyHidden` (not `hidden`: that is the HTML attribute). Slider and
       Progress keep their own: they do not render a `Field.Label`.

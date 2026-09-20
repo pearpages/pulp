@@ -149,6 +149,29 @@
         }
       }
     },
+    "action": {
+      "$description": "The brand's colour, for a marker that is not a status: a navigation's unread dot or count.",
+      "solid": {
+        "bg": {
+          "$type": "color",
+          "$value": "{color.action.primary}"
+        },
+        "fg": {
+          "$type": "color",
+          "$value": "{color.text.on-action}"
+        }
+      },
+      "subtle": {
+        "bg": {
+          "$type": "color",
+          "$value": "{color.action.primary-quiet}"
+        },
+        "fg": {
+          "$type": "color",
+          "$value": "{color.action.text}"
+        }
+      }
+    },
     "dot-size": {
       "$type": "dimension",
       "$description": "variant=\"dot\": a presence mark with no text.",

@@ -74,6 +74,16 @@
       --_bg: var(--badge-error-subtle-bg);
       --_fg: var(--badge-error-subtle-fg);
     }
+
+    &[data-tone="action"][data-variant="solid"] {
+      --_bg: var(--badge-action-solid-bg);
+      --_fg: var(--badge-action-solid-fg);
+    }
+
+    &[data-tone="action"][data-variant="subtle"] {
+      --_bg: var(--badge-action-subtle-bg);
+      --_fg: var(--badge-action-subtle-fg);
+    }
   }
 
   /* A presence mark: the tone's solid fill, no text, no padding. After the tone rules so --_bg is set. */
@@ -102,5 +112,9 @@
 
   .badge[data-tone="error"][data-variant="dot"] {
     --_bg: var(--badge-error-solid-bg);
+  }
+
+  .badge[data-tone="action"][data-variant="dot"] {
+    --_bg: var(--badge-action-solid-bg);
   }
 }

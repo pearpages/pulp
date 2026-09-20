@@ -4,12 +4,12 @@ import { classes } from '../internal/classes';
 import { VisuallyHidden } from '../visually-hidden';
 import styles from './Badge.module.css';
 
-export type BadgeTone = 'neutral' | 'info' | 'success' | 'warning' | 'error';
+export type BadgeTone = 'neutral' | 'info' | 'success' | 'warning' | 'error' | 'action';
 export type BadgeVariant = 'solid' | 'subtle' | 'dot';
 export type BadgeSize = 'sm' | 'md';
 
 export interface BadgeProps extends HTMLAttributes<HTMLSpanElement> {
-  /** Meaning, not colour: `neutral` for counts and tags. @default 'neutral' */
+  /** Meaning, not colour: `neutral` for counts and tags; `action` is the brand's colour, for a marker that is not a status (a navigation's unread count). @default 'neutral' */
   tone?: BadgeTone;
   /**
    * `solid` fills with the tone; `subtle` tints and uses the tone as text; `dot` is a

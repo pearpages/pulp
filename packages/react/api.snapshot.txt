@@ -40,7 +40,7 @@ Badge (stable)
   max?: number = 99
   ref?: Ref<HTMLSpanElement>
   size?: "sm" | "md" = md
-  tone?: "neutral" | "info" | "success" | "warning" | "error" = neutral
+  tone?: "neutral" | "info" | "success" | "warning" | "error" | "action" = neutral
   variant?: "solid" | "subtle" | "dot" = subtle
 Button (stable)
   asChild?: boolean = false
