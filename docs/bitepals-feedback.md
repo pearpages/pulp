@@ -80,6 +80,27 @@ public API that is already `stable`.
     README says, the at-rule lands inside the layer and Next's CSS optimiser warns on every build. Fix
     in the vendor.
 
+## Brief for a session in `~/Projects/modals` (items 13 and 2)
+
+Found from pulp on 2026-09-20; none of it can be fixed from this repo.
+
+- **`@charset`** (item 13): `dist/index.css` starts with `@charset "UTF-8";`, which Sass writes when the
+  source has a non-ASCII character. Imported into `layer(vendor)` it lands inside the layer and Next's
+  optimiser warns on every build. Fix: `charset: false` in the Sass options of the build, or remove the
+  non-ASCII character; assert in a test that the file does not start with `@`charset.
+- **Toasts under an open dialog** (item 2), confirmed in the built Storybook: `useInertOutside` walks
+  up from the modal root and sets `inert` and `aria-hidden="true"` on every sibling, so pulp's
+  `[data-pulp-toasts]` container (a child of `<body>`, like `[data-pulp-dialogs]`) is unreachable and
+  silent while a dialog is open: "Place removed · Undo" cannot be pressed and is not announced. Ask: a
+  documented opt-out, for instance skipping any sibling that carries `data-modals-keep-active` (SKIP
+  already skips by tag name). pulp then puts the attribute on its toast container and adds a story
+  with both open. Do not solve it from pulp by portalling toasts into the dialog root: a toast must
+  outlive the dialog that fired it.
+- **The visual viewport** (item 2): follow `window.visualViewport` so a focused input stays above the
+  iOS keyboard. bitepals' working version is `apps/web/design-system/hooks/use-visual-viewport-height.ts`
+  (`--vvh`, `--vv-offset-top` on `<html>`, `resize` and `scroll` listeners, removed on close) and the
+  overlay reads `top: var(--vv-offset-top, 0px); height: var(--vvh, 100dvh)`. Needs Pere and an iPhone.
+
 ## Order
 
 4 and 13 are one-liners: do them first and release, bitepals drops an override the same day. Then 1

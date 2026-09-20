@@ -117,6 +117,11 @@ copy of the working tree, two-minute loops. Colima only, never Docker Desktop; f
   (a client entry fails there with "Named export 'createContext' not found", which is what an App
   Router consumer saw before). Adding a hook to a leaf moves it to the client: that test makes it
   a decision.
+- **Per-person colour is an index, never a literal.** `color.accent.1…8` with `color.accent.on-1…8`
+  (semantic, both brands, same hue order, each pair in the contrast tests); Avatar and Chip take
+  `accent?: 1…8` and the consumer hashes an id to it. A new categorical use reads these tokens.
+- **A hidden label goes through `Field.Label visuallyHidden`** (TextField and Textarea `hideLabel`),
+  not a copy of the clip rule per component.
 - **Adding a semantic token means adding it to every brand file.** The token tests diff the
   brands and fail otherwise.
 - **`ref` is a normal prop** (React 19). The compiler lint rule (`react-hooks/refs`) rejects

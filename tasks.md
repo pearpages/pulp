@@ -15,6 +15,14 @@ this file holds what is left to do, ticked with a date when done. Ordered within
 
 ## Session log
 
+- 2026-09-20: group 11 on `bitepals-feedback`, one item per commit, `pnpm verify` green and the built
+  site looked at before each: bitepals weights, the accent palette with `accent` on Avatar and Chip,
+  Toast `bottom-center` with `--toast-offset-block`, Textarea `hideLabel` through
+  `Field.Label visuallyHidden`, Badge `tone="action"`, SegmentedControl ellipsis. Found on the way:
+  the vendor makes the toast container inert under a dialog (brief written for a modals session),
+  and no subtle fill reaches 3:1 on any surface, so item 7 waits for a decision. Left: 7, the two
+  decision records (5, 6), the static Table, the vendor items. Nothing pushed; the bitepals and
+  accent matrix baselines need `visual-update.yml --ref bitepals-feedback` after the push.
 - 2026-09-19 (later): PR #1 merged by Pere after a green CI on the re-rendered baselines (24 new,
   42 changed, each change measured and accounted for); 0.3.0 versioned, a Combobox story flaw
   found and fixed on the way (the click went to a replaced node), published and verified from
@@ -638,7 +646,10 @@ here. The full write-up, with the bitepals source to read and the order, is
       (`data-toggle`). No hover step for a filled accent chip: that would be eight more semantic
       names. The stylesheet budget went from 9 to 10 kB (it measured 9.01).
 - [ ] Overlays on a phone: visual-viewport handling in `@pearpages/modals`; a toast fired while a dialog
-      is open stays pressable; document per-dialog widths
+      is open stays pressable; document per-dialog widths. Checked 2026-09-20 in the built site: with
+      a dialog open the vendor sets `inert` and `aria-hidden` on `[data-pulp-toasts]`, so the toast is
+      neither pressable nor announced. The fix is an opt-out in the vendor; the brief for a modals
+      session is in `docs/bitepals-feedback.md`. Per-dialog widths: still to document.
 - [x] Toast: `bottom-center`, a separate block offset, `env(safe-area-inset-bottom)` (2026-09-20).
       `--toast-offset-block` is a new component token (same default as `--toast-offset`); both safe-area
       insets are added to it, so the top placements clear a notch too. A consumer that moved the stack
@@ -649,7 +660,10 @@ here. The full write-up, with the bitepals source to read and the order, is
 - [ ] Primitive names collide with Tailwind's default theme: prefix the tier, or document the layer
       order next to `theme.css` (decision record)
 - [ ] Subtle status badges vanish on bitepals' tinted surfaces; add the fill-on-surface pair to the
-      contrast tests
+      contrast tests. Measured 2026-09-20: no subtle fill is anywhere near 3:1 on a surface in either
+      brand (1.00 to 1.39; pulp's warning-subtle on base is 1.00), so a 3:1 fill test cannot pass by
+      darkening a step and stay "subtle". Waiting for Pere: a hairline border on `variant="subtle"` in
+      the tone's `-text` colour (already tested at 4.5:1 on every surface, no new semantic token).
 - [x] Badge `tone="action"` (2026-09-20): solid on `color.action.primary` / `text.on-action`, subtle on
       `action.primary-quiet` / `action.text`, both pairs already in the contrast tests. In pulp it is
       the same hue as `info` (the brand is ultramarine); the meaning differs, the colour need not.
