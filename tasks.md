@@ -624,6 +624,28 @@ New components (scaffold + the add-component skill; `@status experimental`; one 
       they import.
 - Not in this pass: ChipInput (wants React Aria's TagGroup), ImageGrid, a full-screen push sheet.
 
+**11. What bitepals found using 0.3.0 (2026-09-20, branch `bitepals-feedback`)**
+
+bitepals moved its tokens and ten primitives onto 0.3.0 and kept five things local because of gaps
+here. The full write-up, with the bitepals source to read and the order, is
+[`docs/bitepals-feedback.md`](docs/bitepals-feedback.md).
+
+- [ ] Accent palette (`color.accent.1…8`) and `accent` on Avatar and Chip
+- [ ] Overlays on a phone: visual-viewport handling in `@pearpages/modals`; a toast fired while a dialog
+      is open stays pressable; document per-dialog widths
+- [ ] Toast: `bottom-center`, a separate block offset, `env(safe-area-inset-bottom)`
+- [ ] bitepals brand weights: medium 500 / semibold 600
+- [ ] Per-brand component tokens (decision record); bitepals gets a pill `button.radius`
+- [ ] Primitive names collide with Tailwind's default theme: prefix the tier, or document the layer
+      order next to `theme.css` (decision record)
+- [ ] Subtle status badges vanish on bitepals' tinted surfaces; add the fill-on-surface pair to the
+      contrast tests
+- [ ] Badge `tone="action"`
+- [ ] Textarea `hideLabel`
+- [ ] A static, server-safe Table next to the interactive one
+- [ ] SegmentedControl: labels overlap when the segments do not fit
+- [ ] `@pearpages/modals/styles.css`: drop `@charset`
+
 ## Later (not scheduled)
 Deprecation codemods, Tailwind preset emitted from tokens, Figma sync (Tokens Studio reads the
 DTCG files; dark values live in pulp's extension), a third brand to prove "one JSON file, zero component changes".
