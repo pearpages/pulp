@@ -657,8 +657,10 @@ here. The full write-up, with the bitepals source to read and the order, is
 - [x] bitepals brand weights: medium 500 / semibold 600 (2026-09-20). The bitepals matrix baselines
       move with it: `visual-update.yml` after the push.
 - [ ] Per-brand component tokens (decision record); bitepals gets a pill `button.radius`
-- [ ] Primitive names collide with Tailwind's default theme: prefix the tier, or document the layer
-      order next to `theme.css` (decision record)
+- [x] Primitive names collide with Tailwind's default theme (2026-09-20, decision record 006). Measured:
+      48 names against tailwindcss 4.3.0, six of them added today by the accent ramps. The layer order
+      is now documented next to `theme.css` (`@layer reset, theme, tokens, …`); prefixing the primitive
+      tier is the real fix and waits for 1.0, where a rename may cost something.
 - [ ] Subtle status badges vanish on bitepals' tinted surfaces; add the fill-on-surface pair to the
       contrast tests. Measured 2026-09-20: no subtle fill is anywhere near 3:1 on a surface in either
       brand (1.00 to 1.39; pulp's warning-subtle on base is 1.00), so a 3:1 fill test cannot pass by

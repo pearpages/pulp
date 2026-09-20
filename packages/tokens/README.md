@@ -57,6 +57,23 @@ only remaps primitives onto semantic names, so switching brand never touches a c
 | `@pearpages/pulp-tokens/native` | React Native / NativeWind and Tailwind v3: per brand `{ colors, radius, space, themeVars: { light, dark } }`. Names are `var(--…)` references for the config; `themeVars` are resolved hex and px for `vars()`. ESM and `require` |
 | `tokens/` | the DTCG source files |
 
+### Tailwind v4: declare the layer order
+
+48 of the primitive names pulp emits are also Tailwind's defaults (`--radius-sm`, `--radius-lg`,
+`--font-weight-medium`, `--font-weight-semibold`, `--color-{neutral,red,green,blue,orange,teal,violet,pink}-N`).
+Layers rank by first appearance, so whoever the bundler loads first wins, and if Tailwind's `theme`
+layer lands after pulp's, `--radius-surface: var(--radius-lg)` resolves to Tailwind's `0.5rem` and
+every surface loses its corners — with nothing failing anywhere. Declare the order yourself, before
+either import:
+
+```css
+@layer reset, theme, tokens, vendor, base, components, utilities;
+```
+
+pulp's primitives then win, and a component always resolves to a value pulp chose. Invert the first
+two if you would rather keep Tailwind's palette; what you must not do is leave the order unsaid.
+Decision record 006 has the reasoning and the plan to prefix the tier at 1.0.
+
 ## License
 
 MIT
