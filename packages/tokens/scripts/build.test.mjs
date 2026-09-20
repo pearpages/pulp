@@ -111,6 +111,22 @@ test('component tokens reference the semantic layer only, never a primitive or a
   assert.deepEqual(offenders, []);
 });
 
+test("a subtle badge's edge is the colour of its label, in every tone", async () => {
+  // Not a contrast test: a subtle fill is 1.0-1.4:1 on a surface in both brands, so the fill can
+  // never be the boundary. The hairline carries the shape, and it is the label's own colour, which
+  // the text pairs above already hold to 4.5:1 on every surface. This keeps the two from drifting.
+  // Component tokens are declared once, on :root, so pulp's block is all of them.
+  const { json } = await render();
+  const byName = Object.fromEntries(JSON.parse(json).pulp.map((t) => [t.name, t]));
+  const drifted = [];
+  for (const tone of ['neutral', 'info', 'success', 'warning', 'error', 'action']) {
+    const border = byName[`--badge-${tone}-subtle-border`];
+    const fg = byName[`--badge-${tone}-subtle-fg`];
+    if (border.css !== fg.css) drifted.push(`${tone}: edge ${border.css}, label ${fg.css}`);
+  }
+  assert.deepEqual(drifted, []);
+});
+
 test('every semantic colour has a dark counterpart', async () => {
   const { json } = await render();
   const manifest = JSON.parse(json);

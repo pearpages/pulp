@@ -661,11 +661,17 @@ here. The full write-up, with the bitepals source to read and the order, is
       48 names against tailwindcss 4.3.0, six of them added today by the accent ramps. The layer order
       is now documented next to `theme.css` (`@layer reset, theme, tokens, …`); prefixing the primitive
       tier is the real fix and waits for 1.0, where a rename may cost something.
-- [ ] Subtle status badges vanish on bitepals' tinted surfaces; add the fill-on-surface pair to the
-      contrast tests. Measured 2026-09-20: no subtle fill is anywhere near 3:1 on a surface in either
-      brand (1.00 to 1.39; pulp's warning-subtle on base is 1.00), so a 3:1 fill test cannot pass by
-      darkening a step and stay "subtle". Waiting for Pere: a hairline border on `variant="subtle"` in
-      the tone's `-text` colour (already tested at 4.5:1 on every surface, no new semantic token).
+- [x] Subtle status badges vanish on bitepals' tinted surfaces (2026-09-20). Measured first: no subtle
+      fill is anywhere near 3:1 on a surface in either brand (1.00 to 1.39; pulp's warning-subtle on
+      base is 1.00), so no step darkening keeps a fill subtle *and* reaches 3:1, and it would fix one
+      brand only. Done instead: a hairline on `variant="subtle"` in the tone's own `-text` colour, the
+      same one as the label, which the text pairs already hold to 4.5:1 everywhere. Every badge carries
+      a transparent border and `box-sizing: border-box` so the three variants stay the same size and
+      the dot keeps its exact diameter; a badge with text grew 2px. The new test is structural (edge
+      === label per tone), not a contrast pair: component tokens carry only a resolved `value` in the
+      manifest, with no light/dark pair to compare. No fill-on-surface 3:1 list: `--color-border-default`
+      is 1.44:1 on raised in pulp and 1.76 in bitepals, so it would fail on day one and force a palette
+      redesign for a decorative hairline. Badge now matches Alert, which always had a border.
 - [x] Badge `tone="action"` (2026-09-20): solid on `color.action.primary` / `text.on-action`, subtle on
       `action.primary-quiet` / `action.text`, both pairs already in the contrast tests. In pulp it is
       the same hue as `info` (the brand is ultramarine); the meaning differs, the colour need not.

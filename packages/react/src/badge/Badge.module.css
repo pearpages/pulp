@@ -6,12 +6,15 @@
   .badge {
     --_bg: var(--badge-neutral-subtle-bg);
     --_fg: var(--badge-neutral-subtle-fg);
+    --_border: var(--badge-neutral-subtle-border);
 
     display: inline-flex;
+    box-sizing: border-box;
     align-items: center;
     gap: var(--badge-gap);
     padding-block: var(--badge-padding-block);
     padding-inline: var(--badge-padding-inline-md);
+    border: var(--badge-border-width) solid var(--_border);
     border-radius: var(--badge-radius);
     background-color: var(--_bg);
     color: var(--_fg);
@@ -28,66 +31,80 @@
     &[data-tone="neutral"][data-variant="solid"] {
       --_bg: var(--badge-neutral-solid-bg);
       --_fg: var(--badge-neutral-solid-fg);
+      --_border: transparent;
     }
 
     &[data-tone="neutral"][data-variant="subtle"] {
       --_bg: var(--badge-neutral-subtle-bg);
       --_fg: var(--badge-neutral-subtle-fg);
+      --_border: var(--badge-neutral-subtle-border);
     }
 
     &[data-tone="info"][data-variant="solid"] {
       --_bg: var(--badge-info-solid-bg);
       --_fg: var(--badge-info-solid-fg);
+      --_border: transparent;
     }
 
     &[data-tone="info"][data-variant="subtle"] {
       --_bg: var(--badge-info-subtle-bg);
       --_fg: var(--badge-info-subtle-fg);
+      --_border: var(--badge-info-subtle-border);
     }
 
     &[data-tone="success"][data-variant="solid"] {
       --_bg: var(--badge-success-solid-bg);
       --_fg: var(--badge-success-solid-fg);
+      --_border: transparent;
     }
 
     &[data-tone="success"][data-variant="subtle"] {
       --_bg: var(--badge-success-subtle-bg);
       --_fg: var(--badge-success-subtle-fg);
+      --_border: var(--badge-success-subtle-border);
     }
 
     &[data-tone="warning"][data-variant="solid"] {
       --_bg: var(--badge-warning-solid-bg);
       --_fg: var(--badge-warning-solid-fg);
+      --_border: transparent;
     }
 
     &[data-tone="warning"][data-variant="subtle"] {
       --_bg: var(--badge-warning-subtle-bg);
       --_fg: var(--badge-warning-subtle-fg);
+      --_border: var(--badge-warning-subtle-border);
     }
 
     &[data-tone="error"][data-variant="solid"] {
       --_bg: var(--badge-error-solid-bg);
       --_fg: var(--badge-error-solid-fg);
+      --_border: transparent;
     }
 
     &[data-tone="error"][data-variant="subtle"] {
       --_bg: var(--badge-error-subtle-bg);
       --_fg: var(--badge-error-subtle-fg);
+      --_border: var(--badge-error-subtle-border);
     }
 
     &[data-tone="action"][data-variant="solid"] {
       --_bg: var(--badge-action-solid-bg);
       --_fg: var(--badge-action-solid-fg);
+      --_border: transparent;
     }
 
     &[data-tone="action"][data-variant="subtle"] {
       --_bg: var(--badge-action-subtle-bg);
       --_fg: var(--badge-action-subtle-fg);
+      --_border: var(--badge-action-subtle-border);
     }
   }
 
   /* A presence mark: the tone's solid fill, no text, no padding. After the tone rules so --_bg is set. */
   .badge[data-variant="dot"] {
+    --_border: transparent;
+
     inline-size: var(--badge-dot-size);
     block-size: var(--badge-dot-size);
     padding: 0;
