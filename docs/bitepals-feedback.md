@@ -80,26 +80,39 @@ public API that is already `stable`.
     README says, the at-rule lands inside the layer and Next's CSS optimiser warns on every build. Fix
     in the vendor.
 
-## Brief for a session in `~/Projects/modals` (items 13 and 2)
+## Built in `~/Projects/modals`, branch `pulp-feedback` (items 13 and 2)
 
-Found from pulp on 2026-09-20; none of it can be fixed from this repo.
+Found from pulp on 2026-09-20 and built the same day, three commits, nothing pushed and no version
+bump: that release is Pere's. **pulp cannot take any of it until `@pearpages/modals` is published**,
+because `dialog/Dialog.vendor.test.ts` reads the installed package. What is waiting on that release:
+the `data-modal-keep-active` attribute on pulp's toast container, a story with a dialog and a toast
+open together, and an `@charset` guard in the vendor test.
 
-- **`@charset`** (item 13): `dist/index.css` starts with `@charset "UTF-8";`, which Sass writes when the
-  source has a non-ASCII character. Imported into `layer(vendor)` it lands inside the layer and Next's
-  optimiser warns on every build. Fix: `charset: false` in the Sass options of the build, or remove the
-  non-ASCII character; assert in a test that the file does not start with `@`charset.
-- **Toasts under an open dialog** (item 2), confirmed in the built Storybook: `useInertOutside` walks
-  up from the modal root and sets `inert` and `aria-hidden="true"` on every sibling, so pulp's
-  `[data-pulp-toasts]` container (a child of `<body>`, like `[data-pulp-dialogs]`) is unreachable and
-  silent while a dialog is open: "Place removed · Undo" cannot be pressed and is not announced. Ask: a
-  documented opt-out, for instance skipping any sibling that carries `data-modals-keep-active` (SKIP
-  already skips by tag name). pulp then puts the attribute on its toast container and adds a story
-  with both open. Do not solve it from pulp by portalling toasts into the dialog root: a toast must
-  outlive the dialog that fired it.
-- **The visual viewport** (item 2): follow `window.visualViewport` so a focused input stays above the
-  iOS keyboard. bitepals' working version is `apps/web/design-system/hooks/use-visual-viewport-height.ts`
-  (`--vvh`, `--vv-offset-top` on `<html>`, `resize` and `scroll` listeners, removed on close) and the
-  overlay reads `top: var(--vv-offset-top, 0px); height: var(--vvh, 100dvh)`. Needs Pere and an iPhone.
+What was done there, and what it was:
+
+- **`@charset`** (item 13): **done.** `dist/index.css` started with `@charset "UTF-8";` because Sass
+  writes one as soon as any non-ASCII character reaches the output, and one loud comment in
+  `components.scss` has a multiplication sign. Imported into `layer(vendor)` the at-rule lands inside
+  the layer, which is invalid, and Next's optimiser warns on every build. Fixed with
+  `sassPlugin({ charset: false })`; the comment stayed where it was, and esbuild strips it from dist
+  anyway. Guarded in the playground suite, which runs against built `dist/`.
+- **Toasts under an open dialog** (item 2): **done in the vendor, waiting on the release.** Confirmed
+  in the built Storybook first: `useInertOutside` walks up from the modal root and sets `inert` and
+  `aria-hidden="true"` on every sibling, so pulp's `[data-pulp-toasts]` container (a child of `<body>`,
+  like `[data-pulp-dialogs]`) is unreachable and silent while a dialog is open — "Place removed · Undo"
+  cannot be pressed and is not announced. The vendor now skips any sibling carrying
+  **`data-modal-keep-active`** (the name follows its existing `data-modal-*` family), tested there.
+  pulp's side is the attribute on the toast container plus a story with both open. Not solved from
+  pulp by portalling toasts into the dialog root: a toast must outlive the dialog that fired it.
+- **The visual viewport** (item 2): **written, and it needs a phone.** `useVisualViewport` sets
+  `--modal-vvh` and `--modal-vv-offset-top` on the portal root while a modal is open, from
+  `visualViewport.height` and `.offsetTop`, listening to `resize` *and* `scroll` — Safari moves the
+  visible box to reveal a focused field without firing a resize. The backdrop reads them with
+  fallbacks of `100dvh` and `0px`, so with the hook inactive, without `visualViewport`, or on the
+  server, the layout is exactly what it was. Scoped to the portal root rather than `<html>`, unlike
+  bitepals' `apps/web/design-system/hooks/use-visual-viewport-height.ts` it was modelled on.
+  Unit-tested against a faked viewport. **The acceptance test is a real iPhone**, and bitepals should
+  not swap its Modal and BottomSheet before that passes.
 
 ## Order
 

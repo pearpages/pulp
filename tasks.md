@@ -15,14 +15,23 @@ this file holds what is left to do, ticked with a date when done. Ordered within
 
 ## Session log
 
-- 2026-09-20: group 11 on `bitepals-feedback`, one item per commit, `pnpm verify` green and the built
-  site looked at before each: bitepals weights, the accent palette with `accent` on Avatar and Chip,
-  Toast `bottom-center` with `--toast-offset-block`, Textarea `hideLabel` through
+- 2026-09-20 (later): the rest of group 11, decisions taken rather than asked, each written down.
+  Badge subtle gets a hairline in its label's colour (measured first: every subtle fill is 1.00-1.40:1
+  on a surface in both brands, so no step darkening could have worked); record 007, a brand may
+  override one component token, and bitepals' buttons are pills; record 008, the React Aria table
+  becomes `DataGrid` and `Table` is now a plain server-safe `<table>` at 594 B; `--dialog-width`, set
+  per dialog on the panel. In `~/Projects/modals`, branch `pulp-feedback`: the `@charset` fix, the
+  `data-modal-keep-active` opt-out, and `useVisualViewport`. Two limits moved on the way: the barrel
+  to 17 kB, and the declaration build needs `--max-old-space-size=8192` at 45 entries. Nothing pushed
+  in either repo. Blocked on Pere: the modals release (then pulp's toast attribute and its proof
+  story), an iPhone for the keyboard behaviour, and `visual-update.yml --ref bitepals-feedback` after
+  the push — Badge, Table, DataGrid and every badge-bearing story move.
+- 2026-09-20: group 11 opens on `bitepals-feedback`, one item per commit, `pnpm verify` green and the
+  built site looked at before each: bitepals weights, the accent palette with `accent` on Avatar and
+  Chip, Toast `bottom-center` with `--toast-offset-block`, Textarea `hideLabel` through
   `Field.Label visuallyHidden`, Badge `tone="action"`, SegmentedControl ellipsis. Found on the way:
-  the vendor makes the toast container inert under a dialog (brief written for a modals session),
-  and no subtle fill reaches 3:1 on any surface, so item 7 waits for a decision. Left: 7, the two
-  decision records (5, 6), the static Table, the vendor items. Nothing pushed; the bitepals and
-  accent matrix baselines need `visual-update.yml --ref bitepals-feedback` after the push.
+  the vendor makes the toast container inert under a dialog, and no subtle fill reaches 3:1 on any
+  surface.
 - 2026-09-19 (later): PR #1 merged by Pere after a green CI on the re-rendered baselines (24 new,
   42 changed, each change measured and accounted for); 0.3.0 versioned, a Combobox story flaw
   found and fixed on the way (the click went to a replaced node), published and verified from
@@ -648,8 +657,13 @@ here. The full write-up, with the bitepals source to read and the order, is
 - [ ] Overlays on a phone: visual-viewport handling in `@pearpages/modals`; a toast fired while a dialog
       is open stays pressable; document per-dialog widths. Checked 2026-09-20 in the built site: with
       a dialog open the vendor sets `inert` and `aria-hidden` on `[data-pulp-toasts]`, so the toast is
-      neither pressable nor announced. The fix is an opt-out in the vendor; the brief for a modals
-      session is in `docs/bitepals-feedback.md`. Per-dialog widths: done 2026-09-20. `--dialog-width`
+      neither pressable nor announced. Built in the vendor the same day (`~/Projects/modals`, branch
+      `pulp-feedback`, not pushed): a sibling carrying `data-modal-keep-active` is left alone, and
+      `useVisualViewport` follows the software keyboard on both `resize` and `scroll`, with fallbacks
+      that keep today's layout exactly. **Both wait on Pere's release**, and the viewport behaviour
+      wants a real iPhone before bitepals swaps its overlays. pulp's remaining side is the attribute
+      on the toast container, a story with a dialog and a toast open together, and an `@charset`
+      assertion in `Dialog.vendor.test.ts`. Per-dialog widths: done 2026-09-20. `--dialog-width`
       is a pulp token now (semantic `size.dialog-width`, 32.5rem = the 520px the vendor already used,
       so nothing moved), mapped onto the vendor's `--modal-width-md` **on the panel**, not on the
       portal root: the root is shared by every dialog, so a `var()` resolved there cannot be
@@ -710,8 +724,11 @@ here. The full write-up, with the bitepals source to read and the order, is
       `action-secondary-hover` resolves to cream-500 `#e0cba6` / ink-500 `#273040`, which is exactly
       the step bitepals kept for hover and selected fills on a sunken surface. The mapping is right
       and is recorded here so nobody looks for a fourth surface.
-- [ ] `@pearpages/modals/styles.css`: drop `@charset` (not this repo: the brief for a modals session
-      is in `docs/bitepals-feedback.md`)
+- [x] `@pearpages/modals/styles.css`: drop `@charset` (2026-09-20, in `~/Projects/modals` on branch
+      `pulp-feedback`, not pushed). Cause: Sass prepends it as soon as a non-ASCII character reaches
+      the output, and one loud comment has a `×`. `sassPlugin({ charset: false })`, guarded by a test
+      in the playground suite, which runs against built `dist/`. **Waiting on Pere's release** before
+      pulp can assert it in `Dialog.vendor.test.ts`.
 
 ## Later (not scheduled)
 Deprecation codemods, Tailwind preset emitted from tokens, Figma sync (Tokens Studio reads the
