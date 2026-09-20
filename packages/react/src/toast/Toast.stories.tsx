@@ -35,7 +35,7 @@ const meta = {
   component: ToastProvider,
   args: { placement: 'bottom-end', max: 5, duration: 6000, children: <Demo /> },
   argTypes: {
-    placement: { control: 'select', options: ['bottom-end', 'top-end', 'top-center'] satisfies ToastPlacement[] },
+    placement: { control: 'select', options: ['bottom-end', 'bottom-center', 'top-end', 'top-center'] satisfies ToastPlacement[] },
     children: { control: false },
   },
   parameters: {
@@ -97,6 +97,21 @@ export const Undo: Story = {
 };
 
 export const TopCenter: Story = { args: { placement: 'top-center' } };
+
+/** For an app with a bottom navigation: raise `--toast-offset-block` by the navigation's height. The safe-area inset is added for you. */
+export const BottomCenter: Story = {
+  args: { placement: 'bottom-center' },
+  play: async ({ canvasElement }) => {
+    await userEvent.click(within(canvasElement).getByRole('button', { name: 'Success toast' }));
+    const region = within(document.body).getByRole('region', { name: 'Notifications' });
+    await waitFor(() => expect(within(region).getByText('Published 0.1.0')).toBeVisible());
+    // Centred, and off the bottom edge by the block offset.
+    const box = region.getBoundingClientRect();
+    await expect(Math.abs(box.left + box.right - window.innerWidth)).toBeLessThanOrEqual(1);
+    await expect(window.innerHeight - box.bottom).toBeGreaterThan(0);
+    await expect(box.top).toBeGreaterThan(window.innerHeight / 2);
+  },
+};
 
 const show = async (canvasElement: HTMLElement) => {
   for (const name of ['Info toast', 'Success toast', 'Error toast']) {

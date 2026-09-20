@@ -9,7 +9,7 @@ import { ToastContext, type ToastFunction, type ToastItem, type ToastOptions, ty
 const UNDO_DURATION = 8000;
 import styles from './Toast.module.css';
 
-export type ToastPlacement = 'bottom-end' | 'top-end' | 'top-center';
+export type ToastPlacement = 'bottom-end' | 'bottom-center' | 'top-end' | 'top-center';
 
 export interface ToastProviderProps {
   /** @default 'bottom-end' */

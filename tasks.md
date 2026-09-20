@@ -639,7 +639,10 @@ here. The full write-up, with the bitepals source to read and the order, is
       names. The stylesheet budget went from 9 to 10 kB (it measured 9.01).
 - [ ] Overlays on a phone: visual-viewport handling in `@pearpages/modals`; a toast fired while a dialog
       is open stays pressable; document per-dialog widths
-- [ ] Toast: `bottom-center`, a separate block offset, `env(safe-area-inset-bottom)`
+- [x] Toast: `bottom-center`, a separate block offset, `env(safe-area-inset-bottom)` (2026-09-20).
+      `--toast-offset-block` is a new component token (same default as `--toast-offset`); both safe-area
+      insets are added to it, so the top placements clear a notch too. A consumer that moved the stack
+      vertically through `--toast-offset` now sets both: said in the changeset.
 - [x] bitepals brand weights: medium 500 / semibold 600 (2026-09-20). The bitepals matrix baselines
       move with it: `visual-update.yml` after the push.
 - [ ] Per-brand component tokens (decision record); bitepals gets a pill `button.radius`

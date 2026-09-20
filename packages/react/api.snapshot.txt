@@ -484,7 +484,7 @@ ToastProvider (stable)
   duration?: number = 6000
   label?: string = Notifications
   max?: number = 5
-  placement?: "bottom-end" | "top-end" | "top-center" = bottom-end
+  placement?: "bottom-end" | "bottom-center" | "top-end" | "top-center" = bottom-end
 Tooltip (stable)
   children: ReactElement<unknown, string | JSXElementConstructor<any>>
   content: ReactNode

@@ -913,6 +913,7 @@
     --textarea-motion-duration: var(--motion-duration-fast);
     --toast-width: var(--size-toast-width);
     --toast-offset: var(--space-5);
+    --toast-offset-block: var(--space-5);
     --toast-gap: var(--space-3);
     --toast-layer: var(--layer-toast);
     --toast-shadow: var(--shadow-overlay);
