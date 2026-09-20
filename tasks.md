@@ -651,7 +651,9 @@ here. The full write-up, with the bitepals source to read and the order, is
 - [ ] Subtle status badges vanish on bitepals' tinted surfaces; add the fill-on-surface pair to the
       contrast tests
 - [ ] Badge `tone="action"`
-- [ ] Textarea `hideLabel`
+- [x] Textarea `hideLabel` (2026-09-20). The hidden-label rule moved from TextField's stylesheet into
+      Field, behind `Field.Label visuallyHidden` (not `hidden`: that is the HTML attribute). Slider and
+      Progress keep their own: they do not render a `Field.Label`.
 - [ ] A static, server-safe Table next to the interactive one
 - [ ] SegmentedControl: labels overlap when the segments do not fit
 - [ ] `@pearpages/modals/styles.css`: drop `@charset`

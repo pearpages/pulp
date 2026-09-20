@@ -62,15 +62,6 @@
     border-color: var(--text-field-border-invalid);
   }
 
-  .hiddenLabel {
-    position: absolute;
-    inline-size: var(--size-hairline);
-    block-size: var(--size-hairline);
-    overflow: hidden;
-    clip-path: inset(50%);
-    white-space: nowrap;
-  }
-
   /* Only when there is an icon or a clear button: the input keeps its own box, they sit over its padding. */
   .control {
     --_slot: var(--text-field-height-md);

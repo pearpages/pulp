@@ -177,6 +177,7 @@ Field (stable)
   Field.Label
     as?: "label" | "span" = label
     ref?: Ref<HTMLLabelElement>
+    visuallyHidden?: boolean = false
 Heading (stable)
   level: 1 | 2 | 3 | 4 | 5 | 6
   ref?: Ref<HTMLHeadingElement>
@@ -476,6 +477,7 @@ Textarea (stable)
   className?: string
   description?: ReactNode
   error?: ReactNode
+  hideLabel?: boolean = false
   label: ReactNode
   ref?: Ref<HTMLTextAreaElement>
   resize?: "vertical" | "none" | "both" = vertical
