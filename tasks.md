@@ -740,6 +740,47 @@ here. The full write-up, with the bitepals source to read and the order, is
       in the playground suite, which runs against built `dist/`. Released in 0.4.0; pulp asserts it
       in `Dialog.vendor.test.ts` too.
 
+**12. Hydration mismatch from ToastProvider (found by bitepals, 2026-09-21, branch `hydration-fix`)**
+
+bitepals mounts `ToastProvider` around its whole app in Next.js 16. **Every page load fails hydration**,
+in production too (dev only shows the overlay): React logs "Hydration failed because the server
+rendered HTML didn't match the client" and re-renders the whole tree on the client, which costs load
+time and can flash. React's diff points at the toast region:
+
+```
+<ToastProvider placement="top-center" max={3}>
+  <ThemeProvider>
++   <section role="region" aria-label="Notifications" … className="Toast_region">
+-   <script>
+```
+
+Cause, `packages/react/src/toast/Toast.tsx`:
+
+```ts
+const [container] = useState(() => { if (typeof document === 'undefined') return undefined; … createElement('div') … });
+…
+{container ? createPortal(region, container) : null}
+```
+
+The server renders `null` (no `document`); the client's **first** render already has the element and
+renders the portal. The first client render must match the server.
+
+- [ ] **ToastProvider**: start with `container` undefined in state, create the element in the effect
+      (`setContainer(element)` after `document.body.append`), remove it on cleanup. First client render
+      = server render (`null`); the region appears one commit later. Nothing is lost: no toast can be
+      fired before the effect runs.
+- [ ] **DialogSystem** (`packages/react/src/dialog/Dialog.tsx`) has the same lazy-`useState` pattern. It
+      does not mismatch today only because the vendor renders nothing into the container while no
+      dialog is open (a dialog open on first render, `defaultOpen`, would). Same fix, for the same reason.
+- [ ] **A test that would have caught it**: render with `react-dom/server` `renderToString`, put the HTML
+      in a container, `hydrateRoot` it with `onRecoverableError` collecting errors, and assert none, for
+      `ToastProvider` and for `DialogSystem` (with and without a dialog open). The existing tests all
+      mount on the client, so they cannot see this. Worth a place in the group 9 consumer fixture too.
+- [ ] Release 0.4.1 (react patch). Then bitepals bumps `@pearpages/pulp-react` and checks the overlay is
+      gone on `localhost:3000/en` (repro: load any page with the dev overlay on).
+
+Found with `pulp-react` 0.4.0; the same code is in 0.3.0.
+
 ## Later (not scheduled)
 Deprecation codemods, Tailwind preset emitted from tokens, Figma sync (Tokens Studio reads the
 DTCG files; dark values live in pulp's extension), a third brand to prove "one JSON file, zero component changes".
