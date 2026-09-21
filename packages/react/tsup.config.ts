@@ -12,6 +12,7 @@ import { defineConfig } from 'tsup';
 export default defineConfig({
   entry: {
     index: 'src/index.ts',
+    'table': 'src/table/index.ts',
     'empty-state': 'src/empty-state/index.ts',
     'segmented-control': 'src/segmented-control/index.ts',
     'chip': 'src/chip/index.ts',
@@ -20,7 +21,7 @@ export default defineConfig({
     'divider': 'src/divider/index.ts',
     'sheet': 'src/sheet/index.ts',
     'pagination': 'src/pagination/index.ts',
-    'table': 'src/table/index.ts',
+    'data-grid': 'src/data-grid/index.ts',
     'slider': 'src/slider/index.ts',
     'date-picker': 'src/date-picker/index.ts',
     'calendar': 'src/calendar/index.ts',

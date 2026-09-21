@@ -70,6 +70,35 @@ export const Basic: Story = {
   },
 };
 
+/** One dialog at a different width: a class on `Dialog.Content` that sets `--dialog-width`. The vendor's own variable stays pulp's business. */
+export const Width: Story = {
+  render: () => (
+    <>
+      <Dialog.Trigger asChild target="wide">
+        <Button variant="secondary">Open settings</Button>
+      </Dialog.Trigger>
+      <Dialog id="wide">
+        <Dialog.Content className="sb-wide-dialog">
+          <Dialog.Header>
+            <Dialog.Title>Settings</Dialog.Title>
+            <Dialog.Description>This one is 44rem wide; every other dialog is unchanged.</Dialog.Description>
+            <Dialog.Close aria-label="Close" />
+          </Dialog.Header>
+          <Dialog.Body>
+            <TextField label="Workspace name" defaultValue="pulp" />
+          </Dialog.Body>
+        </Dialog.Content>
+      </Dialog>
+    </>
+  ),
+  play: async ({ canvasElement }) => {
+    const dialog = await open(canvasElement);
+    const width = dialog.getBoundingClientRect().width;
+    // 44rem, unless the viewport is narrower than that.
+    await expect(width).toBeGreaterThan(600);
+  },
+};
+
 export const Stacked: Story = {
   render: () => (
     <>

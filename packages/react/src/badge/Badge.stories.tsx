@@ -7,7 +7,7 @@ const meta = {
   component: Badge,
   args: { children: 'Beta', tone: 'neutral', variant: 'subtle', size: 'md' },
   argTypes: {
-    tone: { control: 'select', options: ['neutral', 'info', 'success', 'warning', 'error'] },
+    tone: { control: 'select', options: ['neutral', 'info', 'success', 'warning', 'error', 'action'] },
     variant: { control: 'select', options: ['solid', 'subtle'] },
     size: { control: 'select', options: ['sm', 'md'] },
     icon: { control: false },
@@ -21,9 +21,11 @@ type Story = StoryObj<typeof meta>;
 export const Default: Story = {};
 export const WithIcon: Story = { args: { tone: 'success', icon: <Check />, children: 'Published' } };
 
-const tones = ['neutral', 'info', 'success', 'warning', 'error'] as const;
-const icons = { neutral: undefined, info: <Info />, success: <Check />, warning: <Warning />, error: <Warning /> };
+const tones = ['neutral', 'info', 'success', 'warning', 'error', 'action'] as const;
+const icons = { neutral: undefined, info: <Info />, success: <Check />, warning: <Warning />, error: <Warning />, action: undefined };
 export const Dot: Story = { args: { variant: 'dot', tone: 'error', label: 'Unread messages', children: undefined } };
+/** The brand's colour: an unread count on a navigation item is a marker, not a status. */
+export const Action: Story = { args: { count: 4, tone: 'action', variant: 'solid', label: 'unread', children: undefined } };
 export const Count: Story = { args: { count: 120, tone: 'error', variant: 'solid', label: 'unread', children: undefined } };
 
 const matrix = (

@@ -132,7 +132,7 @@ export function TextField({
       data-size={size}
       data-readonly={readOnly ? '' : undefined}
     >
-      <Field.Label className={hideLabel ? styles.hiddenLabel : undefined}>{label}</Field.Label>
+      <Field.Label visuallyHidden={hideLabel}>{label}</Field.Label>
       {decorated ? (
         <span className={styles.control} data-icon={icon != null ? '' : undefined} data-clearable={onClear ? '' : undefined}>
           {input}

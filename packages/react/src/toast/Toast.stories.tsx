@@ -6,6 +6,7 @@ import { ToastProvider, type ToastPlacement } from './Toast';
 import { useState } from 'react';
 import { Text } from '../text';
 import { useToast } from './context';
+import { Dialog, DialogSystem } from '../dialog';
 
 function Demo() {
   const { toast, dismissAll } = useToast();
@@ -35,7 +36,7 @@ const meta = {
   component: ToastProvider,
   args: { placement: 'bottom-end', max: 5, duration: 6000, children: <Demo /> },
   argTypes: {
-    placement: { control: 'select', options: ['bottom-end', 'top-end', 'top-center'] satisfies ToastPlacement[] },
+    placement: { control: 'select', options: ['bottom-end', 'bottom-center', 'top-end', 'top-center'] satisfies ToastPlacement[] },
     children: { control: false },
   },
   parameters: {
@@ -79,6 +80,70 @@ function UndoDemo() {
   );
 }
 
+function FromADialog() {
+  const { toast } = useToast();
+  const [saved, setSaved] = useState(true);
+  return (
+    <>
+      <Dialog.Trigger asChild target="place">
+        <Button variant="secondary">Open place</Button>
+      </Dialog.Trigger>
+      <Text>{saved ? 'Saved: Casa Leopoldo' : 'Nothing saved'}</Text>
+      <Dialog id="place">
+        <Dialog.Content>
+          <Dialog.Header>
+            <Dialog.Title>Casa Leopoldo</Dialog.Title>
+            <Dialog.Close aria-label="Close" />
+          </Dialog.Header>
+          <Dialog.Body>
+            <Button
+              variant="secondary"
+              tone="danger"
+              disabled={!saved}
+              onClick={() => {
+                setSaved(false);
+                toast.undo('Casa Leopoldo removed', () => setSaved(true));
+              }}
+            >
+              Remove place
+            </Button>
+          </Dialog.Body>
+        </Dialog.Content>
+      </Dialog>
+    </>
+  );
+}
+
+/**
+ * A toast fired from inside an open dialog. The dialog makes the rest of the page inert, and
+ * the toast region is part of the rest of the page; the region opts out
+ * (`data-modal-keep-active`, @pearpages/modals 0.4.0), so its Undo stays pressable and announced.
+ */
+export const FromInsideADialog: Story = {
+  args: { children: <FromADialog /> },
+  decorators: [(Story) => <DialogSystem><Story /></DialogSystem>],
+  play: async ({ canvasElement }) => {
+    const body = within(document.body);
+    await userEvent.click(within(canvasElement).getByRole('button', { name: 'Open place' }));
+    const dialog = await body.findByRole('dialog', { name: 'Casa Leopoldo' });
+    await waitFor(() => expect(dialog).toBeVisible());
+    await userEvent.click(within(dialog).getByRole('button', { name: 'Remove place' }));
+
+    // The region is found by role, so it is in the accessibility tree: not aria-hidden.
+    const region = body.getByRole('region', { name: 'Notifications' });
+    const container = region.closest('[data-pulp-toasts]')!;
+    await expect(container.hasAttribute('inert')).toBe(false);
+    await expect(container.hasAttribute('aria-hidden')).toBe(false);
+    // The rest of the page is still inert while the dialog is open.
+    await expect(canvasElement.closest('[inert]')).not.toBeNull();
+
+    await waitFor(() => expect(within(region).getByText('Casa Leopoldo removed')).toBeVisible());
+    await userEvent.click(within(region).getByRole('button', { name: 'Undo' }));
+    await expect(dialog).toBeVisible();
+    await waitFor(() => expect(within(dialog).getByRole('button', { name: 'Remove place' })).toBeEnabled());
+  },
+};
+
 export const Undo: Story = {
   args: { children: <UndoDemo /> },
   play: async ({ canvasElement }) => {
@@ -97,6 +162,21 @@ export const Undo: Story = {
 };
 
 export const TopCenter: Story = { args: { placement: 'top-center' } };
+
+/** For an app with a bottom navigation: raise `--toast-offset-block` by the navigation's height. The safe-area inset is added for you. */
+export const BottomCenter: Story = {
+  args: { placement: 'bottom-center' },
+  play: async ({ canvasElement }) => {
+    await userEvent.click(within(canvasElement).getByRole('button', { name: 'Success toast' }));
+    const region = within(document.body).getByRole('region', { name: 'Notifications' });
+    await waitFor(() => expect(within(region).getByText('Published 0.1.0')).toBeVisible());
+    // Centred, and off the bottom edge by the block offset.
+    const box = region.getBoundingClientRect();
+    await expect(Math.abs(box.left + box.right - window.innerWidth)).toBeLessThanOrEqual(1);
+    await expect(window.innerHeight - box.bottom).toBeGreaterThan(0);
+    await expect(box.top).toBeGreaterThan(window.innerHeight / 2);
+  },
+};
 
 const show = async (canvasElement: HTMLElement) => {
   for (const name of ['Info toast', 'Success toast', 'Error toast']) {

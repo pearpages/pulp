@@ -30,7 +30,12 @@
   inline-size: 24rem;
 }
 
-/* A bounded scroll container for the sticky-header Table story. */
+/* One dialog made wider, for the Dialog width story: a consumer sets the token on Dialog.Content. */
+.sb-wide-dialog {
+  --dialog-width: 44rem;
+}
+
+/* A bounded scroll container for the sticky-header DataGrid story. */
 .sb-table-sticky {
   max-block-size: 16rem;
 }

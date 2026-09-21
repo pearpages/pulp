@@ -39,6 +39,12 @@ describe('vendor variables', () => {
     expect(unknown, `not declared by @pearpages/modals: ${unknown.join(', ')}`).toEqual([]);
   });
 
+  // The README imports the sheet into `layer(vendor)`. An @charset there lands inside the layer,
+  // which is invalid: browsers drop it and Next's optimiser warns on every build. Fixed in 0.4.0.
+  it('has no @charset, which cannot live inside the vendor layer', () => {
+    expect(vendorCss).not.toContain('@charset');
+  });
+
   it.each(stylesheets)('$file keeps mapping the vendor surface it themes today', ({ file, mapped }) => {
     expect(declared.size).toBeGreaterThanOrEqual(mapped.size);
     expect(mapped.size).toBeGreaterThanOrEqual(AT_LEAST[file] ?? Infinity);

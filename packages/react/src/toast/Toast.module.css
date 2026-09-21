@@ -4,9 +4,12 @@
 
 @layer components {
   .region {
+    /* The block offset clears the notch and the home indicator; the safe area is zero elsewhere. */
+    --_block-start: calc(var(--toast-offset-block) + env(safe-area-inset-top, 0px));
+    --_block-end: calc(var(--toast-offset-block) + env(safe-area-inset-bottom, 0px));
     --_top: auto;
     --_end: var(--toast-offset);
-    --_bottom: var(--toast-offset);
+    --_bottom: var(--_block-end);
     --_start: auto;
 
     position: fixed;
@@ -16,14 +19,12 @@
     padding: 0;
     pointer-events: none;
 
-    &[data-placement="top-end"] {
-      --_top: var(--toast-offset);
+    &[data-placement^="top"] {
+      --_top: var(--_block-start);
       --_bottom: auto;
     }
 
-    &[data-placement="top-center"] {
-      --_top: var(--toast-offset);
-      --_bottom: auto;
+    &[data-placement$="center"] {
       --_start: 0;
       --_end: 0;
 

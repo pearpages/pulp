@@ -15,6 +15,15 @@
     color: var(--field-label-fg);
   }
 
+  .hiddenLabel {
+    position: absolute;
+    inline-size: var(--size-hairline);
+    block-size: var(--size-hairline);
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+
   .required {
     margin-inline-start: var(--field-required-gap);
     color: var(--field-required-fg);

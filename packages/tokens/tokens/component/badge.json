@@ -39,6 +39,11 @@
       "$type": "number",
       "$value": "{font.line-height.tight}"
     },
+    "border-width": {
+      "$type": "dimension",
+      "$description": "Every badge carries a border so the three variants are the same size; only subtle gives it a colour.",
+      "$value": "{size.hairline}"
+    },
     "neutral": {
       "solid": {
         "bg": {
@@ -57,6 +62,11 @@
         },
         "fg": {
           "$type": "color",
+          "$value": "{color.status.neutral-text}"
+        },
+        "border": {
+          "$type": "color",
+          "$description": "The pill's edge, the same colour as its label. A subtle fill is 1.0-1.4:1 on a surface in both brands, so it cannot carry the shape on its own.",
           "$value": "{color.status.neutral-text}"
         }
       }
@@ -80,6 +90,11 @@
         "fg": {
           "$type": "color",
           "$value": "{color.status.info-text}"
+        },
+        "border": {
+          "$type": "color",
+          "$description": "The pill's edge, the same colour as its label. A subtle fill is 1.0-1.4:1 on a surface in both brands, so it cannot carry the shape on its own.",
+          "$value": "{color.status.info-text}"
         }
       }
     },
@@ -101,6 +116,11 @@
         },
         "fg": {
           "$type": "color",
+          "$value": "{color.status.success-text}"
+        },
+        "border": {
+          "$type": "color",
+          "$description": "The pill's edge, the same colour as its label. A subtle fill is 1.0-1.4:1 on a surface in both brands, so it cannot carry the shape on its own.",
           "$value": "{color.status.success-text}"
         }
       }
@@ -124,6 +144,11 @@
         "fg": {
           "$type": "color",
           "$value": "{color.status.warning-text}"
+        },
+        "border": {
+          "$type": "color",
+          "$description": "The pill's edge, the same colour as its label. A subtle fill is 1.0-1.4:1 on a surface in both brands, so it cannot carry the shape on its own.",
+          "$value": "{color.status.warning-text}"
         }
       }
     },
@@ -146,6 +171,39 @@
         "fg": {
           "$type": "color",
           "$value": "{color.status.error-text}"
+        },
+        "border": {
+          "$type": "color",
+          "$description": "The pill's edge, the same colour as its label. A subtle fill is 1.0-1.4:1 on a surface in both brands, so it cannot carry the shape on its own.",
+          "$value": "{color.status.error-text}"
+        }
+      }
+    },
+    "action": {
+      "$description": "The brand's colour, for a marker that is not a status: a navigation's unread dot or count.",
+      "solid": {
+        "bg": {
+          "$type": "color",
+          "$value": "{color.action.primary}"
+        },
+        "fg": {
+          "$type": "color",
+          "$value": "{color.text.on-action}"
+        }
+      },
+      "subtle": {
+        "bg": {
+          "$type": "color",
+          "$value": "{color.action.primary-quiet}"
+        },
+        "fg": {
+          "$type": "color",
+          "$value": "{color.action.text}"
+        },
+        "border": {
+          "$type": "color",
+          "$description": "The pill's edge, the same colour as its label. A subtle fill is 1.0-1.4:1 on a surface in both brands, so it cannot carry the shape on its own.",
+          "$value": "{color.action.text}"
         }
       }
     },

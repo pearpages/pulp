@@ -7,8 +7,10 @@ export type TextareaSize = 'sm' | 'md' | 'lg';
 export type TextareaResize = 'vertical' | 'none' | 'both';
 
 export interface TextareaProps extends TextareaHTMLAttributes<HTMLTextAreaElement> {
-  /** Visible label. Always rendered. */
+  /** The label. Always rendered; `hideLabel` keeps it for assistive technology only. */
   label: ReactNode;
+  /** Keeps the label for assistive technology only. For a message box that a heading or its place in the page already names. @default false */
+  hideLabel?: boolean;
   description?: ReactNode;
   /** Presence marks the control invalid and announces the message. */
   error?: ReactNode;
@@ -38,6 +40,7 @@ export interface TextareaProps extends TextareaHTMLAttributes<HTMLTextAreaElemen
  */
 export function Textarea({
   label,
+  hideLabel = false,
   description,
   error,
   size = 'md',
@@ -66,7 +69,7 @@ export function Textarea({
       data-auto-grow={autoGrow ? '' : undefined}
       data-readonly={readOnly ? '' : undefined}
     >
-      <Field.Label>{label}</Field.Label>
+      <Field.Label visuallyHidden={hideLabel}>{label}</Field.Label>
       <Field.Control aria-describedby={describedBy}>
         <textarea {...rest} ref={ref} rows={rows} readOnly={readOnly} className={styles.textarea} />
       </Field.Control>

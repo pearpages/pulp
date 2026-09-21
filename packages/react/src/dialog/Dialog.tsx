@@ -73,6 +73,7 @@ export function DialogSystem({ children, ...rest }: DialogSystemProps) {
  * @category Overlays
  * @accessibility `role="dialog"` with `aria-modal`, named by `Dialog.Title` and described by `Dialog.Description`; focus moves in on open and back to the trigger on close; the page behind is inert; Escape and the backdrop close it. Provided by `@pearpages/modals`.
  * @do Always render a `Dialog.Title`.
+ * Size one dialog by setting `--dialog-width` in a class on `Dialog.Content`; the default is `--size-dialog-width`.
  * Put the destructive action last in `Dialog.Footer` and make the safe one the default focus.
  * @dont Open a dialog from inside a Menu or Popover that stays open.
  * Use it for content that does not need the page blocked; use Popover.

@@ -25,7 +25,7 @@
     "react-dom": "^19.3.0"
   },
   "devDependencies": {
-    "@pearpages/modals": "^0.3.0",
+    "@pearpages/modals": "^0.4.0",
     "@pearpages/pulp-icons": "workspace:*",
     "@playwright/test": "1.63.0",
     "@storybook/addon-a11y": "^10.6.0",

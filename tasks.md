@@ -5,7 +5,8 @@ this file holds what is left to do, ticked with a date when done. Ordered within
 
 ## Recommended order (2026-09-18)
 
-0. Group 9 (confidence): the consumer fixture, then the component review by eye.
+0. Group 9 (confidence): the consumer fixture (now with an RSC import and a Tailwind compile of
+   `theme.css`), then the component review by eye. bitepals' migration runs in its own repo.
 1. ~~Decision record 005~~ done in group 10 and confirmed (2026-09-19).
 2. Docs (group 5): README badges now that npm is live, brand walkthrough, tokens diagram.
 3. The testing gaps and housekeeping (the guardrails are done except record 005).
@@ -14,8 +15,27 @@ this file holds what is left to do, ticked with a date when done. Ordered within
 
 ## Session log
 
+- 2026-09-20 (later): the rest of group 11, decisions taken rather than asked, each written down.
+  Badge subtle gets a hairline in its label's colour (measured first: every subtle fill is 1.00-1.40:1
+  on a surface in both brands, so no step darkening could have worked); record 007, a brand may
+  override one component token, and bitepals' buttons are pills; record 008, the React Aria table
+  becomes `DataGrid` and `Table` is now a plain server-safe `<table>` at 594 B; `--dialog-width`, set
+  per dialog on the panel. In `~/Projects/modals`, branch `pulp-feedback`: the `@charset` fix, the
+  `data-modal-keep-active` opt-out, and `useVisualViewport`. Two limits moved on the way: the barrel
+  to 17 kB, and the declaration build needs `--max-old-space-size=8192` at 45 entries. Nothing pushed
+  in either repo. Blocked on Pere: the modals release (then pulp's toast attribute and its proof
+  story), an iPhone for the keyboard behaviour, and `visual-update.yml --ref bitepals-feedback` after
+  the push — Badge, Table, DataGrid and every badge-bearing story move.
+- 2026-09-20: group 11 opens on `bitepals-feedback`, one item per commit, `pnpm verify` green and the
+  built site looked at before each: bitepals weights, the accent palette with `accent` on Avatar and
+  Chip, Toast `bottom-center` with `--toast-offset-block`, Textarea `hideLabel` through
+  `Field.Label visuallyHidden`, Badge `tone="action"`, SegmentedControl ellipsis. Found on the way:
+  the vendor makes the toast container inert under a dialog, and no subtle fill reaches 3:1 on any
+  surface.
 - 2026-09-19 (later): PR #1 merged by Pere after a green CI on the re-rendered baselines (24 new,
-  42 changed, each change measured and accounted for); 0.3.0 versioned.
+  42 changed, each change measured and accounted for); 0.3.0 versioned, a Combobox story flaw
+  found and fixed on the way (the click went to a replaced node), published and verified from
+  the registry.
 - 2026-09-19: group 10 finished on `bitepals-consumer`: 40 icons drawn for the set (none copied:
   bitepals' file records no source), `'use client'` decided from source and proven under
   `--conditions=react-server`, decision record 005 with `theme.css` (`@theme inline reference`:
@@ -112,12 +132,16 @@ Ordered within each group. Groups 1 and 2 are the gate to everything else being 
       the old `latest` for about a minute afterwards: check `registry.npmjs.org` or wait before
       concluding a publish failed. Verified in the published tarballs (`dist/button.css`,
       `src/reset.css`). `v0.2.1` is a lightweight tag where `v0.2.0` is annotated; no effect.
-- [ ] **Release 0.3.0**: group 10, merged as PR #1 (`690ae19`, deploy run 35430572833 green with
-      164 production screenshots). `pnpm version-packages` → react 0.3.0, tokens 0.3.0, icons
-      0.2.0, css 0.1.4 (its tokens dependency). 15 changesets, all `minor`. Then: version commit,
-      push, deploy green, tag `v0.3.0`, `publish.yml`, verify the tarballs (`"use client"` on
-      `dist/tabs.js` and not on `dist/text.js`; `dist/theme.css` and `dist/native.cjs` in tokens;
-      the new glyphs in icons). `docs/bitepals-consumer.md` deleted with this release, as it asked.
+- [x] **Release 0.3.0** (2026-09-19): group 10, merged as PR #1 (`690ae19`). react 0.3.0, tokens
+      0.3.0, icons 0.2.0, css 0.1.4 (its tokens dependency); 15 changesets. `5cda6f3` "Version
+      packages: 0.3.0": its deploy run (35431216843) went red on the Combobox `Default` story, a
+      flaw in the story fixed in `adaa7d1` (group 6), and green on the re-run; annotated tag
+      `v0.3.0` on the version commit → `publish.yml` 35432436765, first try, with provenance.
+      Verified in the published tarballs: `"use client";` opens `dist/tabs.js` and not
+      `dist/text.js`; the 18 files of the six new entries are there; tokens carries `theme.css`
+      (`@theme inline reference`), `native.{js,cjs,d.ts}` and `--color-surface-overlay`; icons has
+      the new glyphs; react's peer is tokens `^0.3.0` and its icons dependency `^0.2.0`.
+      `docs/bitepals-consumer.md` deleted with this release, as it asked. **bitepals can start.**
 
 **2. Consumer: the CV site (`~/Projects/cv`)**
 Done 2026-09-16, committed in that repo (`7b2ac44`). The CV is pulp's reference consumer; its own
@@ -616,6 +640,98 @@ New components (scaffold + the add-component skill; `@status experimental`; one 
       moved: there is none for the icons barrel, and the react entries only bundle the glyphs
       they import.
 - Not in this pass: ChipInput (wants React Aria's TagGroup), ImageGrid, a full-screen push sheet.
+
+**11. What bitepals found using 0.3.0 (2026-09-20, branch `bitepals-feedback`)**
+
+bitepals moved its tokens and ten primitives onto 0.3.0 and kept five things local because of gaps
+here. The full write-up, with the bitepals source to read and the order, is
+[`docs/bitepals-feedback.md`](docs/bitepals-feedback.md).
+
+- [x] Accent palette (`color.accent.1…8`) and `accent` on Avatar and Chip (2026-09-20). Semantic
+      `color.accent.N` + `color.accent.on-N` in both brands, hues in one order (blue, orange, green,
+      violet, red, teal, amber, pink), `on-N` on `N` in the contrast tests. New primitive ramps (300 /
+      700): orange, teal, violet, pink in pulp; teal, violet, pink in bitepals. Avatar: the colour
+      behind the initials. Chip: filled when static or selected, the border of an unselected toggle
+      (`data-toggle`). No hover step for a filled accent chip: that would be eight more semantic
+      names. The stylesheet budget went from 9 to 10 kB (it measured 9.01).
+- [x] Overlays on a phone: visual-viewport handling in `@pearpages/modals`; a toast fired while a dialog
+      is open stays pressable; document per-dialog widths. Checked 2026-09-20 in the built site: with
+      a dialog open the vendor sets `inert` and `aria-hidden` on `[data-pulp-toasts]`, so the toast is
+      neither pressable nor announced. Built in the vendor the same day (`~/Projects/modals`, branch
+      `pulp-feedback`, not pushed): a sibling carrying `data-modal-keep-active` is left alone, and
+      `useVisualViewport` follows the software keyboard on both `resize` and `scroll`, with fallbacks
+      that keep today's layout exactly. Pere released them as **0.4.0** (2026-09-21), checked in the
+      tarball before bumping. pulp takes `^0.4.0`: the toast container carries
+      `data-modal-keep-active`, the `FromInsideADialog` story opens a dialog, removes a place inside it
+      and presses the toast's Undo (it fails with the attribute removed), and `Dialog.vendor.test.ts`
+      asserts no `@charset`. Looked at on the built site: dialog centred, page inert, toast not, a real
+      click on Undo restores the place with the dialog still open. **Still open: the iPhone check**
+      of the keyboard behaviour, before bitepals swaps its overlays. Per-dialog widths: done 2026-09-20. `--dialog-width`
+      is a pulp token now (semantic `size.dialog-width`, 32.5rem = the 520px the vendor already used,
+      so nothing moved), mapped onto the vendor's `--modal-width-md` **on the panel**, not on the
+      portal root: the root is shared by every dialog, so a `var()` resolved there cannot be
+      retargeted per dialog, which is why the first attempt measured 511px. A class on
+      `Dialog.Content` now works, as `--sheet-width` already did for Sheet; both are in the JSDoc,
+      with a `Width` story that measures it in Chromium.
+- [x] Toast: `bottom-center`, a separate block offset, `env(safe-area-inset-bottom)` (2026-09-20).
+      `--toast-offset-block` is a new component token (same default as `--toast-offset`); both safe-area
+      insets are added to it, so the top placements clear a notch too. A consumer that moved the stack
+      vertically through `--toast-offset` now sets both: said in the changeset.
+- [x] bitepals brand weights: medium 500 / semibold 600 (2026-09-20). The bitepals matrix baselines
+      move with it: `visual-update.yml` after the push.
+- [x] Per-brand component tokens (2026-09-20, decision record 007). `tokens/component/<brand>/<name>.json`,
+      sourced after that brand's own semantics and emitted inside its block, which already came after
+      pulp's, so it wins at equal specificity (both are 0,1,0). The base tier is untouched: still one
+      declaration on `:root`, still `tokens/component/*.json` with a single `*`. Two tests guard it —
+      an override references the semantic layer (the component→semantic test now runs over every brand,
+      not just pulp), and it names a token that already exists. bitepals gets `button.radius` →
+      `{radius.full}`; verified on the built site (pulp 3px, bitepals 9999px) and it reaches IconButton
+      too, as bitepals' own override did.
+- [x] Primitive names collide with Tailwind's default theme (2026-09-20, decision record 006). Measured:
+      48 names against tailwindcss 4.3.0, six of them added today by the accent ramps. The layer order
+      is now documented next to `theme.css` (`@layer reset, theme, tokens, …`); prefixing the primitive
+      tier is the real fix and waits for 1.0, where a rename may cost something.
+- [x] Subtle status badges vanish on bitepals' tinted surfaces (2026-09-20). Measured first: no subtle
+      fill is anywhere near 3:1 on a surface in either brand (1.00 to 1.39; pulp's warning-subtle on
+      base is 1.00), so no step darkening keeps a fill subtle *and* reaches 3:1, and it would fix one
+      brand only. Done instead: a hairline on `variant="subtle"` in the tone's own `-text` colour, the
+      same one as the label, which the text pairs already hold to 4.5:1 everywhere. Every badge carries
+      a transparent border and `box-sizing: border-box` so the three variants stay the same size and
+      the dot keeps its exact diameter; a badge with text grew 2px. The new test is structural (edge
+      === label per tone), not a contrast pair: component tokens carry only a resolved `value` in the
+      manifest, with no light/dark pair to compare. No fill-on-surface 3:1 list: `--color-border-default`
+      is 1.44:1 on raised in pulp and 1.76 in bitepals, so it would fail on day one and force a palette
+      redesign for a decorative hairline. Badge now matches Alert, which always had a border.
+- [x] Badge `tone="action"` (2026-09-20): solid on `color.action.primary` / `text.on-action`, subtle on
+      `action.primary-quiet` / `action.text`, both pairs already in the contrast tests. In pulp it is
+      the same hue as `info` (the brand is ultramarine); the meaning differs, the colour need not.
+- [x] Textarea `hideLabel` (2026-09-20). The hidden-label rule moved from TextField's stylesheet into
+      Field, behind `Field.Label visuallyHidden` (not `hidden`: that is the HTML attribute). Slider and
+      Progress keep their own: they do not render a `Field.Label`.
+- [x] A static, server-safe Table next to the interactive one (2026-09-20, decision record 008). The
+      React Aria grid became `DataGrid` and the name `Table` went to a plain `<table>`: the entry is
+      594 B against the grid's 52 kB, it calls no hook so it is on the server-safe list, and it is
+      compound in the same shape so moving between the two is mechanical. `caption` is required
+      (`captionHidden` keeps the name without showing it), `rowHeader` makes a cell the row's
+      `th scope="row"`, `align="end"` uses tabular numerals. Its own `table.json`, parallel to
+      `data-grid.json`. Two budgets moved: the barrel 16.5 → 17 kB, and the build now sets
+      `--max-old-space-size=8192` because the 45th entry tipped the single tsup dts worker over Node's
+      default and died with `ERR_WORKER_OUT_OF_MEMORY` after a green esbuild pass.
+- [x] SegmentedControl: labels overlap when the segments do not fit (2026-09-20). The segment had no
+      `min-inline-size: 0`, so it stayed as wide as its words inside a 62 px slot; the label is now a
+      span that ellipses and the icon is `flex: none` (it had been squeezed to zero width). `Narrow`
+      story (four icon options in 24rem) with a play that compares each segment with its slot, and
+      the same case in the matrix. Full-width segments stay equal, so "Liked" shortens next to
+      "Recommended": four long labels belong in a Picker.
+- [x] A third surface step: nothing to do (2026-09-20). Verified against the built tokens: bitepals'
+      `action-secondary-hover` resolves to cream-500 `#e0cba6` / ink-500 `#273040`, which is exactly
+      the step bitepals kept for hover and selected fills on a sunken surface. The mapping is right
+      and is recorded here so nobody looks for a fourth surface.
+- [x] `@pearpages/modals/styles.css`: drop `@charset` (2026-09-20, in `~/Projects/modals` on branch
+      `pulp-feedback`, not pushed). Cause: Sass prepends it as soon as a non-ASCII character reaches
+      the output, and one loud comment has a `×`. `sassPlugin({ charset: false })`, guarded by a test
+      in the playground suite, which runs against built `dist/`. Released in 0.4.0; pulp asserts it
+      in `Dialog.vendor.test.ts` too.
 
 ## Later (not scheduled)
 Deprecation codemods, Tailwind preset emitted from tokens, Figma sync (Tokens Studio reads the

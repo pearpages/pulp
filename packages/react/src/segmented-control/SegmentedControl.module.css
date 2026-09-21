@@ -81,6 +81,7 @@
     justify-content: center;
     gap: var(--segmented-control-gap);
     box-sizing: border-box;
+    min-inline-size: 0;
     min-block-size: calc(var(--_height) - 2 * var(--segmented-control-inset) - 2 * var(--segmented-control-border-width));
     padding-block: 0;
     padding-inline: var(--_padding);
@@ -130,7 +131,15 @@
     opacity: 0.55;
   }
 
+  /* When the segments do not fit, the words give way; the icon never does. */
+  .label {
+    min-inline-size: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
   .icon {
     display: inline-flex;
+    flex: none;
   }
 }

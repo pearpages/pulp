@@ -72,7 +72,7 @@ describe('Badge', () => {
   it('has no accessibility violations', async () => {
     const { container } = render(
       <div>
-        {(['neutral', 'info', 'success', 'warning', 'error'] as const).map((tone) => (
+        {(['neutral', 'info', 'success', 'warning', 'error', 'action'] as const).map((tone) => (
           <span key={tone}>
             <Badge tone={tone}>{tone}</Badge>
             <Badge tone={tone} variant="solid">

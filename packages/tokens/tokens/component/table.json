@@ -1,5 +1,5 @@
 {
-  "$description": "Table component tokens. Row padding comes from the spacing scale, so a brand's space.unit sets the density; the compact density steps one token down.",
+  "$description": "Table component tokens: a plain <table> with pulp's density. Parallel to data-grid.json, its own file so the two can diverge. Reference the semantic layer only.",
   "table": {
     "bg": { "$type": "color", "$value": "{color.surface.raised}" },
     "fg": { "$type": "color", "$value": "{color.text.default}" },
@@ -20,38 +20,17 @@
     "header": {
       "bg": { "$type": "color", "$value": "{color.surface.base}" },
       "fg": { "$type": "color", "$value": "{color.text.muted}" },
-      "fg-active": { "$type": "color", "$value": "{color.text.default}" },
       "font-size": { "$type": "dimension", "$value": "{font.size.xs}" },
-      "font-weight": { "$type": "fontWeight", "$value": "{font.weight.semibold}" },
-      "sort-indicator": { "$type": "color", "$value": "{color.action.text}" },
-      "sort-indicator-width": { "$type": "dimension", "$value": "{focus.ring.width}" },
-      "sort-indicator-size": { "$type": "dimension", "$value": "{space.2}" }
+      "font-weight": { "$type": "fontWeight", "$value": "{font.weight.semibold}" }
     },
-    "row": {
-      "bg-hover": { "$type": "color", "$value": "{color.action.secondary}" },
-      "bg-selected": { "$type": "color", "$value": "{color.action.primary-quiet}" },
-      "fg-disabled": { "$type": "color", "$value": "{color.text.faint}" }
-    },
-    "select": {
-      "size": { "$type": "dimension", "$value": "{size.toggle.sm}" },
-      "radius": { "$type": "dimension", "$value": "{radius.control}" },
-      "bg": { "$type": "color", "$value": "{color.surface.raised}" },
-      "bg-checked": { "$type": "color", "$value": "{color.action.primary}" },
-      "border": { "$type": "color", "$value": "{color.border.strong}" },
-      "check": { "$type": "color", "$value": "{color.text.on-action}" },
-      "check-width": { "$type": "dimension", "$value": "{focus.ring.width}" }
+    "caption": {
+      "fg": { "$type": "color", "$value": "{color.text.muted}" },
+      "font-size": { "$type": "dimension", "$value": "{font.size.xs}" },
+      "padding": { "$type": "dimension", "$value": "{space.3}" }
     },
     "empty": {
       "fg": { "$type": "color", "$value": "{color.text.muted}" },
       "padding": { "$type": "dimension", "$value": "{space.6}" }
-    },
-    "focus": {
-      "ring": { "$type": "color", "$value": "{color.border.focus}" },
-      "ring-width": { "$type": "dimension", "$value": "{focus.ring.width}" },
-      "ring-offset": { "$type": "dimension", "$value": "{focus.ring.offset}" }
-    },
-    "motion": {
-      "duration": { "$type": "duration", "$value": "{motion.duration.fast}" }
     }
   }
 }

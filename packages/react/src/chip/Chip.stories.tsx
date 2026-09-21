@@ -11,6 +11,7 @@ const meta = {
   argTypes: {
     size: { control: 'select', options: ['sm', 'md', 'lg'] },
     tone: { control: 'select', options: ['neutral', 'action'] },
+    accent: { control: 'select', options: [undefined, 1, 2, 3, 4, 5, 6, 7, 8] },
     ref: { control: false, table: { disable: true } },
   },
 } satisfies Meta<typeof Chip>;
@@ -92,6 +93,41 @@ export const ToggleAndRemove: Story = {
 
 export const Disabled: Story = { args: { disabled: true, defaultSelected: false, onRemove: fn() } };
 
+const accents = [1, 2, 3, 4, 5, 6, 7, 8] as const;
+const friends = ['Ana', 'Wei', 'Élodie', 'Omar', 'Kofi', 'Ingrid', 'Pau', 'Mei'];
+const accentRows = (
+  <>
+    <Inline gap={2} align="center">
+      {accents.map((accent, index) => (
+        <Chip key={accent} accent={accent} onRemove={() => {}}>
+          {friends[index]}
+        </Chip>
+      ))}
+    </Inline>
+    <Inline gap={2} align="center" role="group" aria-label="Friends">
+      {accents.map((accent, index) => (
+        <Chip key={accent} accent={accent} defaultSelected={index % 2 === 0}>
+          {friends[index]}
+        </Chip>
+      ))}
+    </Inline>
+  </>
+);
+
+/** A chip that stands for a person: filled with their accent, or, as a toggle, outlined with it until selected. */
+export const Accents: Story = {
+  args: { onSelectedChange: undefined },
+  parameters: { controls: { disable: true } },
+  render: () => <div className="sb-grid">{accentRows}</div>,
+  play: async ({ canvasElement }) => {
+    const group = within(within(canvasElement).getByRole('group', { name: 'Friends' }));
+    const wei = group.getByRole('button', { name: 'Wei' });
+    await expect(wei).toHaveAttribute('aria-pressed', 'false');
+    await userEvent.click(wei);
+    await expect(wei).toHaveAttribute('aria-pressed', 'true');
+  },
+};
+
 const sizes = ['sm', 'md', 'lg'] as const;
 const tones = ['neutral', 'action'] as const;
 const matrix = (
@@ -117,6 +153,7 @@ const matrix = (
         </Chip>
       </Inline>
     ))}
+    {accentRows}
   </div>
 );
 

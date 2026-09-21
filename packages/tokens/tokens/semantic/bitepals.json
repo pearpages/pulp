@@ -361,6 +361,137 @@
         }
       }
     },
+    "accent": {
+      "1": {
+        "$value": "{color.blue.700}",
+        "$extensions": {
+          "com.pearpages.pulp": {
+            "dark": "{color.blue.300}"
+          }
+        }
+      },
+      "2": {
+        "$value": "{color.orange.800}",
+        "$extensions": {
+          "com.pearpages.pulp": {
+            "dark": "{color.orange.300}"
+          }
+        }
+      },
+      "3": {
+        "$value": "{color.green.700}",
+        "$extensions": {
+          "com.pearpages.pulp": {
+            "dark": "{color.green.300}"
+          }
+        }
+      },
+      "4": {
+        "$value": "{color.violet.700}",
+        "$extensions": {
+          "com.pearpages.pulp": {
+            "dark": "{color.violet.300}"
+          }
+        }
+      },
+      "5": {
+        "$value": "{color.red.700}",
+        "$extensions": {
+          "com.pearpages.pulp": {
+            "dark": "{color.red.300}"
+          }
+        }
+      },
+      "6": {
+        "$value": "{color.teal.700}",
+        "$extensions": {
+          "com.pearpages.pulp": {
+            "dark": "{color.teal.300}"
+          }
+        }
+      },
+      "7": {
+        "$value": "{color.gold.700}",
+        "$extensions": {
+          "com.pearpages.pulp": {
+            "dark": "{color.gold.300}"
+          }
+        }
+      },
+      "8": {
+        "$value": "{color.pink.700}",
+        "$extensions": {
+          "com.pearpages.pulp": {
+            "dark": "{color.pink.300}"
+          }
+        }
+      },
+      "$description": "Eight categorical fills for telling things of one kind apart (people, mostly): a consumer hashes an id to an index. No meaning is attached to a number; the hues come in the same order in every brand (blue, orange, green, violet, red, teal, amber, pink). Pair accent.N with accent.on-N, never with another text colour.",
+      "on-1": {
+        "$value": "{color.neutral.0}",
+        "$extensions": {
+          "com.pearpages.pulp": {
+            "dark": "{color.neutral.900}"
+          }
+        }
+      },
+      "on-2": {
+        "$value": "{color.neutral.0}",
+        "$extensions": {
+          "com.pearpages.pulp": {
+            "dark": "{color.neutral.900}"
+          }
+        }
+      },
+      "on-3": {
+        "$value": "{color.neutral.0}",
+        "$extensions": {
+          "com.pearpages.pulp": {
+            "dark": "{color.neutral.900}"
+          }
+        }
+      },
+      "on-4": {
+        "$value": "{color.neutral.0}",
+        "$extensions": {
+          "com.pearpages.pulp": {
+            "dark": "{color.neutral.900}"
+          }
+        }
+      },
+      "on-5": {
+        "$value": "{color.neutral.0}",
+        "$extensions": {
+          "com.pearpages.pulp": {
+            "dark": "{color.neutral.900}"
+          }
+        }
+      },
+      "on-6": {
+        "$value": "{color.neutral.0}",
+        "$extensions": {
+          "com.pearpages.pulp": {
+            "dark": "{color.neutral.900}"
+          }
+        }
+      },
+      "on-7": {
+        "$value": "{color.neutral.0}",
+        "$extensions": {
+          "com.pearpages.pulp": {
+            "dark": "{color.neutral.900}"
+          }
+        }
+      },
+      "on-8": {
+        "$value": "{color.neutral.0}",
+        "$extensions": {
+          "com.pearpages.pulp": {
+            "dark": "{color.neutral.900}"
+          }
+        }
+      }
+    },
     "overlay": {
       "backdrop": {
         "$value": "#1f243099",
@@ -437,10 +568,10 @@
         "$value": 400
       },
       "medium": {
-        "$value": 600
+        "$value": 500
       },
       "semibold": {
-        "$value": 700
+        "$value": 600
       }
     },
     "line-height": {
@@ -717,6 +848,13 @@
         "unit": "rem"
       },
       "$description": "Maximum height of an option list before it scrolls (Combobox, Picker, Listbox)."
+    },
+    "dialog-width": {
+      "$value": {
+        "value": 32.5,
+        "unit": "rem"
+      },
+      "$description": "Width of a centred dialog: 520px, the vendor's own default, so Dialog owns the number instead of inheriting it."
     },
     "sheet-width": {
       "$value": {

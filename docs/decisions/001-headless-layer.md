@@ -6,7 +6,7 @@ headless accessibility layer rather than hand-rolled keyboard handling").
 ## Context
 
 Tier 5 adds the widgets whose keyboard and screen-reader model is large and easy to get
-subtly wrong: Combobox, Listbox, a rich Select, Calendar and DatePicker, Slider, Table.
+subtly wrong: Combobox, Listbox, a rich Select, Calendar and DatePicker, Slider, a data grid.
 Each has an ARIA Authoring Practices pattern with dozens of rules (typeahead buffers,
 `aria-activedescendant` versus roving focus, grid navigation, locale-aware date segments,
 drag with keyboard fallbacks). Re-deriving those is where design systems accumulate the
@@ -22,7 +22,7 @@ management and internationalisation. `@internationalized/date` (its date library
 direct dependency because pulp converts dates at the boundary (see below).
 
 Why React Aria over the others: it is the only candidate that ships Combobox, Select,
-Listbox, Calendar, DatePicker, Slider and Table under one interaction model with
+Listbox, Calendar, DatePicker, Slider and DataGrid under one interaction model with
 internationalisation built in (Radix has no combobox, date or table; Base UI is not
 complete; Ark is close but its date and table coverage is thinner). It has the longest
 screen-reader test record of the four and is used by Adobe's own system in production.

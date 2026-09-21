@@ -24,6 +24,14 @@ export const Default: Story = {
   },
 };
 export const AutoGrow: Story = { args: { autoGrow: true, rows: 2, description: 'Grows with the text.' } };
+/** The label is still there for assistive technology: a reply box under a thread needs no visible "Message". */
+export const HiddenLabel: Story = {
+  args: { hideLabel: true, placeholder: 'Write a reply…' },
+  play: async ({ canvasElement }) => {
+    await expect(within(canvasElement).getByRole('textbox', { name: 'Message' })).toBeVisible();
+  },
+};
+
 export const Invalid: Story = { args: { error: 'Say a little more.', defaultValue: 'Hi' } };
 
 const matrix = (

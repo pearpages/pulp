@@ -36,6 +36,12 @@ describe('Textarea', () => {
     expect(screen.getByLabelText('D')).toBeDisabled();
   });
 
+  it('hideLabel keeps the label for assistive technology only', () => {
+    render(<Textarea label="Message" hideLabel />);
+    expect(screen.getByRole('textbox', { name: 'Message' })).toBeInTheDocument();
+    expect(screen.getByText('Message')).toHaveClass('hiddenLabel');
+  });
+
   it('has no accessibility violations', async () => {
     const { container } = render(
       <div>

@@ -118,11 +118,13 @@ interface FieldLabelProps extends LabelHTMLAttributes<HTMLLabelElement> {
    * @default 'label'
    */
   as?: 'label' | 'span';
+  /** Keeps the label for assistive technology only: the control is still named by it. @default false */
+  visuallyHidden?: boolean;
   ref?: Ref<HTMLLabelElement>;
   children: ReactNode;
 }
 
-function FieldLabel({ as = 'label', className, ref, children, ...rest }: FieldLabelProps) {
+function FieldLabel({ as = 'label', visuallyHidden = false, className, ref, children, ...rest }: FieldLabelProps) {
   const field = useField();
   const marker = field.required && (
     <span className={styles.required} aria-hidden="true">
@@ -131,14 +133,14 @@ function FieldLabel({ as = 'label', className, ref, children, ...rest }: FieldLa
   );
   if (as === 'span') {
     return (
-      <span {...rest} id={field.labelId} className={classes(styles.label, className)}>
+      <span {...rest} id={field.labelId} className={classes(styles.label, visuallyHidden && styles.hiddenLabel, className)}>
         {children}
         {marker}
       </span>
     );
   }
   return (
-    <label {...rest} ref={ref} htmlFor={field.id} className={classes(styles.label, className)}>
+    <label {...rest} ref={ref} htmlFor={field.id} className={classes(styles.label, visuallyHidden && styles.hiddenLabel, className)}>
       {children}
       {marker}
     </label>

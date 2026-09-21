@@ -1,248 +1,144 @@
-import { createContext, useCallback, useContext, useEffect, useRef, useState, type ReactElement, type ReactNode, type Ref } from 'react';
-import {
-  Cell as AriaCell,
-  Checkbox as AriaCheckbox,
-  Column as AriaColumn,
-  Row as AriaRow,
-  Table as AriaTable,
-  TableBody as AriaTableBody,
-  TableHeader as AriaTableHeader,
-  useTableOptions,
-  type Key,
-  type SortDescriptor,
-} from 'react-aria-components';
+import type { ReactNode, Ref, TableHTMLAttributes, ThHTMLAttributes, TdHTMLAttributes, HTMLAttributes } from 'react';
 import { classes } from '../internal/classes';
-import { VisuallyHidden } from '../visually-hidden';
-import { selectionToIds } from '../internal/selection';
 import styles from './Table.module.css';
 
-export type TableSelectionMode = 'none' | 'single' | 'multiple';
 export type TableDensity = 'default' | 'compact';
-export type TableSortDirection = 'ascending' | 'descending';
-export interface TableSort {
-  column: string;
-  direction: TableSortDirection;
-}
+export type TableAlign = 'start' | 'end';
 
-/** Rows register their ids so `'all'` (Ctrl/Cmd+A) resolves to an array without a second source of truth. */
-const RowIdsContext = createContext<{ add: (id: Key) => () => void; all: () => Key[] } | null>(null);
-
-export interface TableProps {
-  /** The table's accessible name. Pass `aria-labelledby` instead when a visible heading names it. */
-  'aria-label'?: string;
-  'aria-labelledby'?: string;
-  /** @default 'none' */
-  selectionMode?: TableSelectionMode;
-  /** Selected row ids (controlled). */
-  selected?: readonly string[];
-  /** @default [] */
-  defaultSelected?: readonly string[];
-  onSelectedChange?: (ids: string[]) => void;
-  /** Rows that cannot be selected or activated. */
-  disabledIds?: readonly string[];
-  /** Current sort (controlled). Sorting the data is the caller's job: this is the header state. */
-  sort?: TableSort | null;
-  defaultSort?: TableSort;
-  onSortChange?: (sort: TableSort) => void;
-  /** Row padding steps down one token. The brand's `space.unit` sets the base. @default 'default' */
+export interface TableProps extends Omit<TableHTMLAttributes<HTMLTableElement>, 'children'> {
+  /** Names the table. Rendered as a real `<caption>`; `captionHidden` keeps it for assistive technology only. */
+  caption: ReactNode;
+  /** Keeps the caption off the page. The table is still named by it. @default false */
+  captionHidden?: boolean;
+  /** `compact` tightens the row padding. @default 'default' */
   density?: TableDensity;
-  /** The header stays visible while the container scrolls. Give the container a height through `className`. @default false */
-  stickyHeader?: boolean;
-  /**
-   * Called with the row id on Enter, on click, and on double click. Once
-   * rows are selectable and a selection exists, Enter and click toggle the
-   * selection instead (the vendor's rule, so touch users select without a
-   * modifier key); double click still runs the action.
-   */
-  onRowAction?: (id: string) => void;
-  /** Applied to the scroll container around the table. */
+  /** Applied to the scroll container, not the `table`. */
   className?: string;
   /** The `<table>` element. */
   ref?: Ref<HTMLTableElement>;
-  /** `Table.Header` then `Table.Body`. */
+  /** `Table.Header` and `Table.Body`. */
   children: ReactNode;
 }
 
 /**
- * A data table on React Aria's grid (decision record 001): one Tab stop,
- * arrows move between rows and cells, Space toggles selection, Enter runs
- * the row action (see `onRowAction` for the selection rule), sortable
- * headers carry `aria-sort` and are pressed to change direction. Selection and sort are the caller's state; the table
- * reports changes and renders them. Compose with `Table.Header`,
- * `Table.Column`, `Table.Body`, `Table.Row` and `Table.Cell`; the selection
- * column appears by itself when rows are selectable.
+ * A plain `<table>` with pulp's density and tokens. It holds no state and calls
+ * no hook, so it renders on the server: a page of rows costs no JavaScript and
+ * no client boundary. Compose with `Table.Header`, `Table.Column`, `Table.Body`,
+ * `Table.Row` and `Table.Cell`. For rows the reader sorts or selects, `DataGrid`
+ * is the same shape on React Aria's grid (decision record 008).
  *
  * @status experimental
  * @category Data
- * @accessibility `role="grid"` named by `aria-label` or `aria-labelledby`; one column is the row header (`isRowHeader`), sortable columns carry `aria-sort`, selectable rows `aria-selected`, and the selection column holds real checkboxes ("Select All" in the header). One tab stop: arrows move between rows and cells, Space toggles selection, Enter runs the row action, the header cells are pressed to sort.
- * @do Mark exactly one column `isRowHeader`.
- * Give the table a name that says what the rows are.
- * @dont Sort the data inside the table; sort your data from `onSortChange` and pass it back.
- * Use it for layout.
+ * @accessibility A real `<table>` with `<caption>`, `<thead>` and `<th scope>`, so a screen reader announces the column and row a cell belongs to. Every table is named: `caption` is required, and `captionHidden` keeps the name without showing it. Mark the column that identifies the row with `rowHeader` on its cell. Nothing here is focusable — if a cell needs a control, put a Button or a Link inside it.
+ * @do Use it for data that is only read; it is the cheaper and more robust of the two.
+ * Give every column a `Table.Column`, so each cell has a header to be announced with.
+ * @dont Reach for `DataGrid` unless rows are sortable or selectable; it ships React Aria and renders on the client.
+ * Use a table for layout.
  */
-export function Table({
-  selectionMode = 'none',
-  selected,
-  defaultSelected = [],
-  onSelectedChange,
-  disabledIds,
-  sort,
-  defaultSort,
-  onSortChange,
-  density = 'default',
-  stickyHeader = false,
-  onRowAction,
-  className,
-  ref,
-  children,
-  ...rest
-}: TableProps) {
-  const ids = useRef(new Set<Key>());
-  const add = useCallback((id: Key) => {
-    ids.current.add(id);
-    return () => {
-      ids.current.delete(id);
-    };
-  }, []);
-  const all = useCallback(() => Array.from(ids.current), []);
-  // The vendor has no default for the sort descriptor; hold it here when uncontrolled.
-  const [uncontrolledSort, setUncontrolledSort] = useState<TableSort | undefined>(defaultSort);
-  const currentSort = sort === undefined ? uncontrolledSort : (sort ?? undefined);
-
+export function Table({ caption, captionHidden = false, density = 'default', className, ref, children, ...rest }: TableProps) {
   return (
-    <RowIdsContext.Provider value={{ add, all }}>
-      <div className={classes(styles.container, className)} data-sticky-header={stickyHeader ? '' : undefined}>
-        <AriaTable
-          {...rest}
-          ref={ref as Ref<HTMLDivElement | HTMLTableElement>}
-          className={styles.table}
-          data-density={density}
-          selectionMode={selectionMode}
-          selectedKeys={selected}
-          defaultSelectedKeys={defaultSelected}
-          onSelectionChange={(selection) => onSelectedChange?.(selectionToIds(selection, all))}
-          disabledKeys={disabledIds}
-          sortDescriptor={currentSort as SortDescriptor | undefined}
-          onSortChange={(descriptor) => {
-            const next = { column: String(descriptor.column), direction: descriptor.direction };
-            if (sort === undefined) setUncontrolledSort(next);
-            onSortChange?.(next);
-          }}
-          onRowAction={onRowAction && ((key) => onRowAction(String(key)))}
-        >
-          {children}
-        </AriaTable>
-      </div>
-    </RowIdsContext.Provider>
+    <div className={classes(styles.container, className)}>
+      <table {...rest} ref={ref} className={styles.table} data-density={density}>
+        <caption className={classes(styles.caption, captionHidden && styles.captionHidden)}>{caption}</caption>
+        {children}
+      </table>
+    </div>
   );
 }
 
-interface TableHeaderProps {
-  className?: string;
-  /** `Table.Column` elements. */
+export interface TableHeaderProps extends HTMLAttributes<HTMLTableSectionElement> {
+  ref?: Ref<HTMLTableSectionElement>;
+  /** A single `Table.Row` of `Table.Column`s. */
   children: ReactNode;
 }
 
-function TableHeader({ className, children }: TableHeaderProps) {
-  const { selectionMode, selectionBehavior } = useTableOptions();
+function TableHeader({ className, ref, children, ...rest }: TableHeaderProps) {
   return (
-    <AriaTableHeader className={classes(styles.header, className)}>
-      {selectionMode !== 'none' && selectionBehavior === 'toggle' && (
-        <AriaColumn className={classes(styles.column, styles.selectColumn)}>
-          {selectionMode === 'multiple' ? <SelectionCheckbox /> : <VisuallyHidden>Selection</VisuallyHidden>}
-        </AriaColumn>
-      )}
+    <thead {...rest} ref={ref} className={classes(styles.header, className)}>
       {children}
-    </AriaTableHeader>
+    </thead>
   );
 }
 
-export type TableAlign = 'start' | 'end';
-
-interface TableColumnProps {
-  /** The column id `sort.column` refers to. Defaults to the column's text. */
-  id?: string;
-  /** Pressing the header sorts by it; the table reports the change through `onSortChange`. @default false */
-  allowsSorting?: boolean;
-  /** This column names the row for assistive technology. Exactly one column per table. @default false */
-  isRowHeader?: boolean;
-  /** @default 'start' */
+export interface TableColumnProps extends Omit<ThHTMLAttributes<HTMLTableCellElement>, 'align'> {
+  /** `end` right-aligns the column's header. Set the same `align` on its cells. @default 'start' */
   align?: TableAlign;
-  className?: string;
+  ref?: Ref<HTMLTableCellElement>;
   children: ReactNode;
 }
 
-function TableColumn({ id, allowsSorting = false, isRowHeader = false, align = 'start', className, children }: TableColumnProps) {
+function TableColumn({ align = 'start', className, ref, children, ...rest }: TableColumnProps) {
   return (
-    <AriaColumn id={id} allowsSorting={allowsSorting} isRowHeader={isRowHeader} className={classes(styles.column, className)} data-align={align}>
+    <th {...rest} ref={ref} scope="col" className={classes(styles.column, className)} data-align={align}>
       {children}
-    </AriaColumn>
+    </th>
   );
 }
 
-interface TableBodyProps<T extends { id: string }> {
-  /** Rows from data: each item renders through the `children` function, keyed by `item.id`. */
-  items?: Iterable<T>;
-  /** Shown when there are no rows. @default 'No rows' */
+export interface TableBodyProps extends HTMLAttributes<HTMLTableSectionElement> {
+  /** Shown in place of the rows when there are none. */
   emptyMessage?: ReactNode;
-  className?: string;
-  /** `Table.Row` elements, or a function from an item to one when `items` is given. */
-  children: ReactNode | ((item: T) => ReactElement);
+  /** How many columns the empty message spans. Give it the number of `Table.Column`s. */
+  columnCount?: number;
+  ref?: Ref<HTMLTableSectionElement>;
+  children?: ReactNode;
 }
 
-function TableBody<T extends { id: string }>({ items, emptyMessage = 'No rows', className, children }: TableBodyProps<T>) {
+function TableBody({ emptyMessage, columnCount, className, ref, children, ...rest }: TableBodyProps) {
+  // An empty array, `false` from a guard, or nothing at all all mean "no rows".
+  const empty = children == null || children === false || (Array.isArray(children) && children.flat().filter(Boolean).length === 0);
   return (
-    <AriaTableBody items={items} className={classes(styles.body, className)} renderEmptyState={() => <div className={styles.empty}>{emptyMessage}</div>}>
-      {children}
-    </AriaTableBody>
-  );
-}
-
-interface TableRowProps {
-  /** The row id used for selection, sorting callbacks and `onRowAction`. Required unless the row comes from `items`. */
-  id?: string;
-  className?: string;
-  /** `Table.Cell` elements. */
-  children: ReactNode;
-}
-
-function TableRow({ id, className, children }: TableRowProps) {
-  const { selectionBehavior } = useTableOptions();
-  const registry = useContext(RowIdsContext);
-  useEffect(() => (id !== undefined && registry ? registry.add(id) : undefined), [id, registry]);
-  return (
-    <AriaRow id={id} className={classes(styles.row, className)}>
-      {selectionBehavior === 'toggle' && (
-        <AriaCell className={classes(styles.cell, styles.selectCell)}>
-          <SelectionCheckbox />
-        </AriaCell>
+    <tbody {...rest} ref={ref} className={classes(styles.body, className)}>
+      {empty && emptyMessage != null ? (
+        <tr>
+          <td className={styles.empty} colSpan={columnCount}>
+            {emptyMessage}
+          </td>
+        </tr>
+      ) : (
+        children
       )}
-      {children}
-    </AriaRow>
+    </tbody>
   );
 }
 
-interface TableCellProps {
-  /** @default 'start' */
-  align?: TableAlign;
-  className?: string;
+export interface TableRowProps extends HTMLAttributes<HTMLTableRowElement> {
+  ref?: Ref<HTMLTableRowElement>;
   children: ReactNode;
 }
 
-function TableCell({ align = 'start', className, children }: TableCellProps) {
+function TableRow({ className, ref, children, ...rest }: TableRowProps) {
   return (
-    <AriaCell className={classes(styles.cell, className)} data-align={align}>
+    <tr {...rest} ref={ref} className={classes(styles.row, className)}>
       {children}
-    </AriaCell>
+    </tr>
   );
 }
 
-/** React Aria's checkbox wired to the row (or all rows) through `slot="selection"`; drawn from the table's tokens. */
-function SelectionCheckbox() {
+export interface TableCellProps extends Omit<TdHTMLAttributes<HTMLTableCellElement>, 'align'> {
+  /** `end` right-aligns the cell and uses tabular numerals. @default 'start' */
+  align?: TableAlign;
+  /** Makes this cell the row's header (`th scope="row"`): the column that says which row it is. @default false */
+  rowHeader?: boolean;
+  ref?: Ref<HTMLTableCellElement>;
+  children?: ReactNode;
+}
+
+function TableCell({ align = 'start', rowHeader = false, className, ref, children, ...rest }: TableCellProps) {
+  const shared = { ...rest, className: classes(styles.cell, className), 'data-align': align };
+  // Two returns rather than a dynamic tag: `th | td` as one element type costs
+  // the declaration build more memory than it is worth.
+  if (rowHeader) {
+    return (
+      <th {...shared} ref={ref} scope="row">
+        {children}
+      </th>
+    );
+  }
   return (
-    <AriaCheckbox slot="selection" className={styles.select}>
-      <span className={styles.selectBox} aria-hidden="true" />
-    </AriaCheckbox>
+    <td {...shared} ref={ref}>
+      {children}
+    </td>
   );
 }
 

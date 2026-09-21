@@ -1,0 +1,218 @@
+/*
+ * Every value is a token (--data-grid-*). Density resolves the row padding into a
+ * private custom property on the table. React Aria writes the state:
+ * data-hovered, data-selected, data-disabled, data-focus-visible on rows and
+ * cells; data-allows-sorting and data-sort-direction on columns;
+ * data-selected and data-indeterminate on the selection checkbox.
+ * Rules are ordered from general to specific so no later selector has a lower
+ * specificity than an earlier one for the same element.
+ */
+
+@layer reset, tokens, vendor, base, components, utilities;
+
+@layer components {
+  .container {
+    overflow: auto;
+    border: var(--size-hairline) solid var(--data-grid-border);
+    border-radius: var(--data-grid-radius);
+    background-color: var(--data-grid-bg);
+    color: var(--data-grid-fg);
+    font-family: var(--data-grid-font-family);
+    font-size: var(--data-grid-font-size);
+  }
+
+  .table {
+    --_padding-block: var(--data-grid-cell-padding-block-default);
+
+    inline-size: 100%;
+    border-collapse: collapse;
+    border-spacing: 0;
+    outline: none;
+
+    &[data-density="compact"] {
+      --_padding-block: var(--data-grid-cell-padding-block-compact);
+    }
+
+    &[data-focus-visible] {
+      outline: var(--data-grid-focus-ring-width) solid var(--data-grid-focus-ring);
+      outline-offset: calc(-1 * var(--data-grid-focus-ring-width));
+    }
+  }
+
+  .header {
+    background-color: var(--data-grid-header-bg);
+  }
+
+  .container[data-sticky-header] .header {
+    position: sticky;
+    inset-block-start: 0;
+  }
+
+  .column {
+    padding-block: var(--_padding-block);
+    padding-inline: var(--data-grid-cell-padding-inline);
+    border-block-end: var(--size-hairline) solid var(--data-grid-border);
+    color: var(--data-grid-header-fg);
+    font-size: var(--data-grid-header-font-size);
+    font-weight: var(--data-grid-header-font-weight);
+    text-align: start;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    outline: none;
+
+    &[data-align="end"] {
+      text-align: end;
+    }
+
+    &[data-allows-sorting] {
+      cursor: pointer;
+    }
+
+    &[data-allows-sorting]::after {
+      content: "";
+      display: inline-block;
+      inline-size: var(--data-grid-header-sort-indicator-size);
+      block-size: var(--data-grid-header-sort-indicator-size);
+      margin-inline-start: var(--data-grid-header-sort-indicator-size);
+      border-inline-end: var(--data-grid-header-sort-indicator-width) solid currentcolor;
+      border-block-end: var(--data-grid-header-sort-indicator-width) solid currentcolor;
+      rotate: -135deg;
+      translate: 0 25%;
+      opacity: 0;
+      transition: opacity var(--data-grid-motion-duration) var(--motion-easing-standard);
+    }
+
+    &[data-hovered]::after {
+      opacity: 0.5;
+    }
+
+    &[data-sort-direction] {
+      color: var(--data-grid-header-fg-active);
+    }
+
+    &[data-sort-direction]::after {
+      color: var(--data-grid-header-sort-indicator);
+      opacity: 1;
+    }
+
+    &[data-sort-direction="descending"]::after {
+      rotate: 45deg;
+      translate: 0 -25%;
+    }
+
+    &[data-focus-visible] {
+      outline: var(--data-grid-focus-ring-width) solid var(--data-grid-focus-ring);
+      outline-offset: calc(-1 * var(--data-grid-focus-ring-width));
+    }
+  }
+
+  .row {
+    outline: none;
+    transition: background-color var(--data-grid-motion-duration) var(--motion-easing-standard);
+
+    &[data-hovered] {
+      background-color: var(--data-grid-row-bg-hover);
+    }
+
+    &[data-selected] {
+      background-color: var(--data-grid-row-bg-selected);
+    }
+
+    &[data-disabled] {
+      color: var(--data-grid-row-fg-disabled);
+    }
+
+    &[data-focus-visible] {
+      outline: var(--data-grid-focus-ring-width) solid var(--data-grid-focus-ring);
+      outline-offset: calc(-1 * var(--data-grid-focus-ring-width));
+    }
+  }
+
+  .cell {
+    padding-block: var(--_padding-block);
+    padding-inline: var(--data-grid-cell-padding-inline);
+    outline: none;
+
+    &[data-align="end"] {
+      text-align: end;
+      font-variant-numeric: tabular-nums;
+    }
+
+    &[data-focus-visible] {
+      outline: var(--data-grid-focus-ring-width) solid var(--data-grid-focus-ring);
+      outline-offset: calc(-1 * var(--data-grid-focus-ring-width));
+    }
+  }
+
+  .body .row:not(:last-child) .cell {
+    border-block-end: var(--size-hairline) solid var(--data-grid-border);
+  }
+
+  .selectColumn,
+  .selectCell {
+    inline-size: var(--data-grid-select-size);
+    padding-inline-end: 0;
+  }
+
+  .selectBox {
+    display: grid;
+    place-content: center;
+    inline-size: var(--data-grid-select-size);
+    block-size: var(--data-grid-select-size);
+    border: var(--size-hairline) solid var(--data-grid-select-border);
+    border-radius: var(--data-grid-select-radius);
+    background-color: var(--data-grid-select-bg);
+    transition:
+      background-color var(--data-grid-motion-duration) var(--motion-easing-standard),
+      border-color var(--data-grid-motion-duration) var(--motion-easing-standard);
+
+    &::after {
+      content: "";
+      inline-size: calc(var(--data-grid-select-size) * 0.3);
+      block-size: calc(var(--data-grid-select-size) * 0.55);
+      border-style: solid;
+      border-color: var(--data-grid-select-check);
+      border-width: 0 var(--data-grid-select-check-width) var(--data-grid-select-check-width) 0;
+      rotate: 45deg;
+      translate: 0 -10%;
+      opacity: 0;
+    }
+  }
+
+  .select {
+    display: inline-grid;
+    place-items: center;
+    inline-size: var(--data-grid-select-size);
+    block-size: var(--data-grid-select-size);
+    cursor: pointer;
+
+    &[data-focus-visible] .selectBox {
+      outline: var(--data-grid-focus-ring-width) solid var(--data-grid-focus-ring);
+      outline-offset: var(--data-grid-focus-ring-offset);
+    }
+
+    &[data-selected] .selectBox,
+    &[data-indeterminate] .selectBox {
+      border-color: var(--data-grid-select-bg-checked);
+      background-color: var(--data-grid-select-bg-checked);
+
+      &::after {
+        opacity: 1;
+      }
+    }
+
+    &[data-indeterminate] .selectBox::after {
+      inline-size: calc(var(--data-grid-select-size) * 0.55);
+      block-size: 0;
+      border-width: 0 0 var(--data-grid-select-check-width);
+      rotate: 0deg;
+      translate: 0 0;
+    }
+  }
+
+  .empty {
+    padding: var(--data-grid-empty-padding);
+    color: var(--data-grid-empty-fg);
+    text-align: center;
+  }
+}

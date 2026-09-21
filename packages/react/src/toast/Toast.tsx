@@ -9,7 +9,7 @@ import { ToastContext, type ToastFunction, type ToastItem, type ToastOptions, ty
 const UNDO_DURATION = 8000;
 import styles from './Toast.module.css';
 
-export type ToastPlacement = 'bottom-end' | 'top-end' | 'top-center';
+export type ToastPlacement = 'bottom-end' | 'bottom-center' | 'top-end' | 'top-center';
 
 export interface ToastProviderProps {
   /** @default 'bottom-end' */
@@ -54,6 +54,13 @@ export function ToastProvider({ placement = 'bottom-end', max = 5, duration = 60
     if (typeof document === 'undefined') return undefined;
     const element = document.createElement('div');
     element.dataset.pulpToasts = '';
+    // A dialog makes every sibling of its portal inert and aria-hidden, and this
+    // container is one: a toast fired from inside a dialog ("Removed · Undo")
+    // would be unpressable and unannounced until it closed. @pearpages/modals
+    // 0.4.0 leaves a sibling carrying this attribute alone. The toast region
+    // is a landmark outside the dialog, so it stays reachable (F6 in most
+    // screen readers) without joining the dialog's focus trap.
+    element.setAttribute('data-modal-keep-active', '');
     return element;
   });
 

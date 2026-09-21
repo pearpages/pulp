@@ -1,0 +1,10 @@
+{
+  "$description": "bitepals' overrides of the component tier. Every name here must also exist in tokens/component/, and every value must still reference the semantic layer; the tests check both. Decision record 007.",
+  "button": {
+    "radius": {
+      "$type": "dimension",
+      "$description": "bitepals' buttons are pills. That is the brand, not the component: the shape is as much bitepals as the orange is.",
+      "$value": "{radius.full}"
+    }
+  }
+}

@@ -1,49 +1,42 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { useMemo, useState } from 'react';
-import { expect, fn, userEvent, within } from 'storybook/test';
+import { expect, within } from 'storybook/test';
 import { Badge } from '../badge';
-import { Table, type TableSort } from './Table';
+import { Table } from './Table';
 
 const people = [
   { id: 'p1', name: 'Alice Martin', role: 'Engineer', team: 'Platform', age: 34, status: 'active' },
-  { id: 'p2', name: 'Bob Chen', role: 'Designer', team: 'Product', age: 29, status: 'away' },
+  { id: 'p2', name: 'Noah Chen', role: 'Designer', team: 'Product', age: 29, status: 'away' },
   { id: 'p3', name: 'Carla Ruiz', role: 'Manager', team: 'Platform', age: 41, status: 'active' },
   { id: 'p4', name: 'Dmitri Volkov', role: 'Engineer', team: 'Data', age: 37, status: 'offline' },
   { id: 'p5', name: 'Eva Lindqvist', role: 'Researcher', team: 'Data', age: 45, status: 'active' },
-];
-type Person = (typeof people)[number];
+] as const;
 
-function Example(props: Partial<React.ComponentProps<typeof Table>> & { rows?: Person[] }) {
-  const { rows = people, ...rest } = props;
+const tone = { active: 'success', away: 'warning', offline: 'neutral' } as const;
+
+function Example({ data = people, ...props }: { data?: readonly (typeof people)[number][] } & Partial<Parameters<typeof Table>[0]>) {
   return (
-    <Table aria-label="People" {...rest}>
+    <Table caption="People on the team" {...props}>
       <Table.Header>
-        <Table.Column id="name" isRowHeader allowsSorting>
-          Name
-        </Table.Column>
-        <Table.Column id="role" allowsSorting>
-          Role
-        </Table.Column>
-        <Table.Column id="team">Team</Table.Column>
-        <Table.Column id="age" align="end" allowsSorting>
-          Age
-        </Table.Column>
-        <Table.Column id="status">Status</Table.Column>
+        <Table.Row>
+          <Table.Column>Name</Table.Column>
+          <Table.Column>Role</Table.Column>
+          <Table.Column>Team</Table.Column>
+          <Table.Column align="end">Age</Table.Column>
+          <Table.Column>Status</Table.Column>
+        </Table.Row>
       </Table.Header>
-      <Table.Body items={rows} emptyMessage="No people match">
-        {(person) => (
-          <Table.Row>
-            <Table.Cell>{person.name}</Table.Cell>
+      <Table.Body emptyMessage="No people match" columnCount={5}>
+        {data.map((person) => (
+          <Table.Row key={person.id}>
+            <Table.Cell rowHeader>{person.name}</Table.Cell>
             <Table.Cell>{person.role}</Table.Cell>
             <Table.Cell>{person.team}</Table.Cell>
             <Table.Cell align="end">{person.age}</Table.Cell>
             <Table.Cell>
-              <Badge tone={person.status === 'active' ? 'success' : person.status === 'away' ? 'warning' : 'neutral'} variant="subtle">
-                {person.status}
-              </Badge>
+              <Badge tone={tone[person.status]}>{person.status}</Badge>
             </Table.Cell>
           </Table.Row>
-        )}
+        ))}
       </Table.Body>
     </Table>
   );
@@ -52,15 +45,14 @@ function Example(props: Partial<React.ComponentProps<typeof Table>> & { rows?: P
 const meta = {
   title: 'Components/Data/Table',
   component: Table,
-  args: { 'aria-label': 'People', selectionMode: 'none', density: 'default', children: null, onSelectedChange: fn(), onSortChange: fn(), onRowAction: fn() },
+  // The render builds the rows; children is in args only because the prop is required.
+  args: { caption: 'People on the team', captionHidden: false, density: 'default', children: null },
   argTypes: {
-    children: { control: false },
-    selectionMode: { control: 'inline-radio', options: ['none', 'single', 'multiple'] },
     density: { control: 'inline-radio', options: ['default', 'compact'] },
+    children: { control: false },
+    ref: { control: false, table: { disable: true } },
   },
-  parameters: {
-    layout: 'padded',
-  },
+  parameters: { layout: 'padded' },
   render: (args) => <Example {...args} />,
 } satisfies Meta<typeof Table>;
 
@@ -68,58 +60,44 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
-  play: async ({ canvasElement, args }) => {
-    const canvas = within(canvasElement);
-    await userEvent.click(canvas.getByRole('columnheader', { name: 'Name' }));
-    await expect(args.onSortChange).toHaveBeenLastCalledWith({ column: 'name', direction: 'ascending' });
-    await expect(canvas.getByRole('columnheader', { name: 'Name' })).toHaveAttribute('aria-sort', 'ascending');
-  },
-};
-
-function SortedExample(props: React.ComponentProps<typeof Example>) {
-  const [sort, setSort] = useState<TableSort>({ column: 'age', direction: 'descending' });
-  const rows = useMemo(() => {
-    const key = sort.column as keyof Person;
-    return [...people].sort((a, b) => {
-      const result = a[key] < b[key] ? -1 : a[key] > b[key] ? 1 : 0;
-      return sort.direction === 'ascending' ? result : -result;
-    });
-  }, [sort]);
-  return <Example {...props} rows={rows} sort={sort} onSortChange={setSort} />;
-}
-
-export const SortedData: Story = {
-  render: (args) => <SortedExample {...args} />,
   play: async ({ canvasElement }) => {
-    const canvas = within(canvasElement);
-    await expect(canvas.getAllByRole('rowheader')[0]).toHaveTextContent('Eva Lindqvist');
-    await userEvent.click(canvas.getByRole('columnheader', { name: 'Age' }));
-    await expect(canvas.getAllByRole('rowheader')[0]).toHaveTextContent('Bob Chen');
+    const table = within(canvasElement).getByRole('table', { name: 'People on the team' });
+    // A real table: the caption names it and each row is identified by its own header cell.
+    await expect(within(table).getByRole('rowheader', { name: 'Carla Ruiz' })).toBeVisible();
+    await expect(within(table).getAllByRole('columnheader')).toHaveLength(5);
   },
 };
 
-export const MultipleSelection: Story = {
-  args: { selectionMode: 'multiple', defaultSelected: ['p2'] },
-  play: async ({ canvasElement, args }) => {
-    const canvas = within(canvasElement);
-    await userEvent.click(within(canvas.getByRole('row', { name: 'Carla Ruiz' })).getByRole('checkbox'));
-    await expect(args.onSelectedChange).toHaveBeenLastCalledWith(['p2', 'p3']);
-  },
-};
-
-export const SingleSelection: Story = { args: { selectionMode: 'single', disabledIds: ['p4'] } };
 export const Compact: Story = { args: { density: 'compact' } };
-export const StickyHeader: Story = {
-  args: { stickyHeader: true, className: 'sb-table-sticky' },
-  render: (args) => <Example {...args} rows={[...people, ...people.map((p) => ({ ...p, id: `${p.id}b` })), ...people.map((p) => ({ ...p, id: `${p.id}c` }))]} />,
+
+/** The name is still there for assistive technology when a heading above already says it. */
+export const HiddenCaption: Story = {
+  args: { captionHidden: true },
+  play: async ({ canvasElement }) => {
+    await expect(within(canvasElement).getByRole('table', { name: 'People on the team' })).toBeVisible();
+  },
 };
-export const Empty: Story = { render: (args) => <Example {...args} rows={[]} /> };
+
+export const Empty: Story = {
+  render: (args) => <Example {...args} data={[]} />,
+  play: async ({ canvasElement }) => {
+    await expect(within(canvasElement).getByText('No people match')).toBeVisible();
+  },
+};
+
+const matrix = (
+  <div className="sb-grid">
+    <Example />
+    <Example density="compact" data={people.slice(0, 2)} />
+    <Example data={[]} />
+  </div>
+);
 
 export const Matrix: Story = {
   name: 'Matrix: pulp, light',
-  args: { selectionMode: 'multiple', defaultSelected: ['p2'], defaultSort: { column: 'name', direction: 'ascending' } },
   parameters: { controls: { disable: true } },
   globals: { brand: 'pulp', scheme: 'light' },
+  render: () => matrix,
 };
 export const MatrixPulpDark: Story = { ...Matrix, name: 'Matrix: pulp, dark', globals: { brand: 'pulp', scheme: 'dark' } };
 export const MatrixBitepalsLight: Story = { ...Matrix, name: 'Matrix: bitepals, light', globals: { brand: 'bitepals', scheme: 'light' } };

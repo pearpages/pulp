@@ -117,6 +117,11 @@ copy of the working tree, two-minute loops. Colima only, never Docker Desktop; f
   (a client entry fails there with "Named export 'createContext' not found", which is what an App
   Router consumer saw before). Adding a hook to a leaf moves it to the client: that test makes it
   a decision.
+- **Per-person colour is an index, never a literal.** `color.accent.1…8` with `color.accent.on-1…8`
+  (semantic, both brands, same hue order, each pair in the contrast tests); Avatar and Chip take
+  `accent?: 1…8` and the consumer hashes an id to it. A new categorical use reads these tokens.
+- **A hidden label goes through `Field.Label visuallyHidden`** (TextField and Textarea `hideLabel`),
+  not a copy of the clip rule per component.
 - **Adding a semantic token means adding it to every brand file.** The token tests diff the
   brands and fail otherwise.
 - **`ref` is a normal prop** (React 19). The compiler lint rule (`react-hooks/refs`) rejects
@@ -169,7 +174,10 @@ Two axes on `<html>` (or any element; brands nest):
 - `data-scheme="light" | "dark"`, or none to follow the OS. Colours are `light-dark()` pairs.
 
 Tiers: primitive → semantic → component. A brand file maps primitives onto the semantic
-names. `$extensions["com.pearpages.pulp"].dark` holds a dark counterpart;
+names. The component tier is declared once, on `:root`; a brand may restate a single component
+token in `tokens/component/<brand>/<component>.json` when the value is itself brand (bitepals'
+buttons are pills), and the tests hold it to the semantic layer and to names that already exist
+(record 007). `$extensions["com.pearpages.pulp"].dark` holds a dark counterpart;
 `.multiply` builds the spacing scale from `space.unit`. Shadows split into
 `--shadow-x-color` (light-dark) + geometry, because `light-dark()` only takes colours.
 
@@ -178,6 +186,7 @@ names. `$extensions["com.pearpages.pulp"].dark` holds a dark counterpart;
 - pnpm 11 via `mise.toml`; Node from `.nvmrc`. `allowBuilds.esbuild` is required or tsup/Vite break.
   pnpm 11 also refuses packages published less than 24 hours ago; `pnpm-workspace.yaml` exempts
   `@pearpages/*`, this repo's own scope, so a same-day `@pearpages/modals` release installs.
+- **The declaration build needs a bigger heap than Node's default.** `packages/react` builds 45 entries' types in one tsup dts worker; the 45th (Table) tipped it over and the build died with `ERR_WORKER_OUT_OF_MEMORY` after a green esbuild pass. The `build` script sets `NODE_OPTIONS=--max-old-space-size=8192`. It is a count-of-entries ceiling, not a bad type: raise it again rather than hunting the component.
 - tsup's own CSS handling uses the plain `css` loader, which turns a CSS-module import into `{}`.
   `tsup.config.ts` sets `loader: { '.css': 'local-css' }` (every stylesheet in the package is a
   module). The dist smoke test catches a regression.

@@ -38,6 +38,59 @@
       --_selected-fg: var(--chip-action-selected-fg);
     }
 
+    &[data-accent='1'] {
+      --_accent-bg: var(--chip-accent-1-bg);
+      --_accent-fg: var(--chip-accent-1-fg);
+    }
+
+    &[data-accent='2'] {
+      --_accent-bg: var(--chip-accent-2-bg);
+      --_accent-fg: var(--chip-accent-2-fg);
+    }
+
+    &[data-accent='3'] {
+      --_accent-bg: var(--chip-accent-3-bg);
+      --_accent-fg: var(--chip-accent-3-fg);
+    }
+
+    &[data-accent='4'] {
+      --_accent-bg: var(--chip-accent-4-bg);
+      --_accent-fg: var(--chip-accent-4-fg);
+    }
+
+    &[data-accent='5'] {
+      --_accent-bg: var(--chip-accent-5-bg);
+      --_accent-fg: var(--chip-accent-5-fg);
+    }
+
+    &[data-accent='6'] {
+      --_accent-bg: var(--chip-accent-6-bg);
+      --_accent-fg: var(--chip-accent-6-fg);
+    }
+
+    &[data-accent='7'] {
+      --_accent-bg: var(--chip-accent-7-bg);
+      --_accent-fg: var(--chip-accent-7-fg);
+    }
+
+    &[data-accent='8'] {
+      --_accent-bg: var(--chip-accent-8-bg);
+      --_accent-fg: var(--chip-accent-8-fg);
+    }
+
+    /* An accent is the chip's border and its selected fill; a chip that does not toggle is always filled. */
+    &[data-accent] {
+      --_border: var(--_accent-bg);
+      --_selected-bg: var(--_accent-bg);
+      --_selected-fg: var(--_accent-fg);
+    }
+
+    &[data-accent]:not([data-toggle]) {
+      --_bg: var(--_accent-bg);
+      --_bg-hover: var(--_accent-bg);
+      --_fg: var(--_accent-fg);
+    }
+
     &[data-size='sm'] {
       --_height: var(--chip-height-sm);
       --_padding: var(--chip-padding-x-sm);

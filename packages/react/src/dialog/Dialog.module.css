@@ -65,4 +65,14 @@
     --modal-button-secondary-active-bg: var(--color-action-secondary-hover);
     --modal-button-secondary-active-border: var(--color-border-strong);
   }
+
+  /*
+   * The width is mapped on the panel, not up here: the root is shared by every
+   * dialog, so a var() resolved on it cannot be retargeted per dialog. On the
+   * panel, a consumer class setting --dialog-width lands on the same element
+   * and this declaration reads it.
+   */
+  .root [role="dialog"] {
+    --modal-width-md: var(--dialog-width);
+  }
 }

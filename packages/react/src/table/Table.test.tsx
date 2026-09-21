@@ -1,124 +1,79 @@
+import { createRef } from 'react';
 import { render, screen, within } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
 import { axe } from 'vitest-axe';
-import { Table, type TableSort } from './Table';
+import { Table } from './Table';
 
 const rows = [
-  { id: 'r1', name: 'Alice', role: 'Engineer', age: 34 },
-  { id: 'r2', name: 'Bob', role: 'Designer', age: 29 },
-  { id: 'r3', name: 'Chen', role: 'Manager', age: 41 },
+  { id: 'p1', name: 'Alice Martin', team: 'Platform', age: 34 },
+  { id: 'p2', name: 'Noah Chen', team: 'Product', age: 29 },
 ];
 
-function Example(props: Partial<React.ComponentProps<typeof Table>>) {
+function Example({ data = rows, ...props }: { data?: typeof rows } & Partial<Parameters<typeof Table>[0]>) {
   return (
-    <Table aria-label="People" {...props}>
+    <Table caption="People" {...props}>
       <Table.Header>
-        <Table.Column id="name" isRowHeader allowsSorting>
-          Name
-        </Table.Column>
-        <Table.Column id="role">Role</Table.Column>
-        <Table.Column id="age" align="end" allowsSorting>
-          Age
-        </Table.Column>
+        <Table.Row>
+          <Table.Column>Name</Table.Column>
+          <Table.Column>Team</Table.Column>
+          <Table.Column align="end">Age</Table.Column>
+        </Table.Row>
       </Table.Header>
-      <Table.Body items={rows}>
-        {(row) => (
-          <Table.Row>
-            <Table.Cell>{row.name}</Table.Cell>
-            <Table.Cell>{row.role}</Table.Cell>
+      <Table.Body emptyMessage="No people match" columnCount={3}>
+        {data.map((row) => (
+          <Table.Row key={row.id}>
+            <Table.Cell rowHeader>{row.name}</Table.Cell>
+            <Table.Cell>{row.team}</Table.Cell>
             <Table.Cell align="end">{row.age}</Table.Cell>
           </Table.Row>
-        )}
+        ))}
       </Table.Body>
     </Table>
   );
 }
 
 describe('Table', () => {
-  it('is a grid with column headers, row headers, and density on the DOM', () => {
-    render(<Example density="compact" />);
-    const table = screen.getByRole('grid', { name: 'People' });
+  it('is a real table: a caption names it, columns and row headers are th with a scope', () => {
+    render(<Example />);
+    const table = screen.getByRole('table', { name: 'People' });
+    expect(within(table).getAllByRole('columnheader').map((cell) => cell.textContent)).toEqual(['Name', 'Team', 'Age']);
+    expect(within(table).getAllByRole('columnheader')[0]).toHaveAttribute('scope', 'col');
+    const rowHeader = within(table).getByRole('rowheader', { name: 'Alice Martin' });
+    expect(rowHeader).toHaveAttribute('scope', 'row');
+    expect(within(table).getAllByRole('row')).toHaveLength(3);
+  });
+
+  it('keeps the caption for assistive technology when it is hidden', () => {
+    render(<Example captionHidden />);
+    expect(screen.getByRole('table', { name: 'People' })).toBeInTheDocument();
+    expect(screen.getByText('People')).toHaveClass('captionHidden');
+  });
+
+  it('shows the empty message in place of the rows, spanning the columns', () => {
+    render(<Example data={[]} />);
+    const cell = screen.getByRole('cell', { name: 'No people match' });
+    expect(cell).toHaveAttribute('colspan', '3');
+    expect(screen.queryByRole('rowheader')).toBeNull();
+  });
+
+  it('exposes density and alignment as data; className on the container, ref and the rest on the table', () => {
+    const ref = createRef<HTMLTableElement>();
+    render(<Example density="compact" className="mine" id="people" ref={ref} />);
+    const table = screen.getByRole('table', { name: 'People' });
+    expect(ref.current).toBe(table);
+    expect(table).toHaveAttribute('id', 'people');
     expect(table).toHaveAttribute('data-density', 'compact');
-    expect(screen.getAllByRole('columnheader').map((c) => c.textContent)).toEqual(['Name', 'Role', 'Age']);
-    expect(screen.getAllByRole('rowheader').map((c) => c.textContent)).toEqual(['Alice', 'Bob', 'Chen']);
-    expect(screen.getByRole('columnheader', { name: 'Age' })).toHaveAttribute('data-align', 'end');
+    expect(table.parentElement).toHaveClass('container', 'mine');
+    expect(screen.getAllByRole('columnheader')[2]).toHaveAttribute('data-align', 'end');
+    expect(screen.getAllByRole('cell')[1]).toHaveAttribute('data-align', 'end');
   });
 
-  it('sorting: pressing a sortable header reports the sort and sets aria-sort; uncontrolled toggles direction', async () => {
-    const user = userEvent.setup();
-    const onSortChange = vi.fn();
-    render(<Example onSortChange={onSortChange} />);
-    const name = screen.getByRole('columnheader', { name: 'Name' });
-    expect(name).toHaveAttribute('aria-sort', 'none');
-    expect(screen.getByRole('columnheader', { name: 'Role' })).not.toHaveAttribute('aria-sort');
-    await user.click(name);
-    expect(onSortChange).toHaveBeenLastCalledWith({ column: 'name', direction: 'ascending' });
-    expect(name).toHaveAttribute('aria-sort', 'ascending');
-    expect(name).toHaveAttribute('data-sort-direction', 'ascending');
-    await user.click(name);
-    expect(onSortChange).toHaveBeenLastCalledWith({ column: 'name', direction: 'descending' });
-    expect(name).toHaveAttribute('aria-sort', 'descending');
-  });
-
-  it('sorting is controlled by `sort`', () => {
-    const sort: TableSort = { column: 'age', direction: 'descending' };
-    render(<Example sort={sort} />);
-    expect(screen.getByRole('columnheader', { name: 'Age' })).toHaveAttribute('aria-sort', 'descending');
-  });
-
-  it('multiple selection: a checkbox column appears, rows toggle, select all resolves to ids', async () => {
-    const user = userEvent.setup();
-    const onSelectedChange = vi.fn();
-    render(<Example selectionMode="multiple" defaultSelected={['r1']} onSelectedChange={onSelectedChange} />);
-    expect(screen.getByRole('grid')).toHaveAttribute('aria-multiselectable', 'true');
-    const checkboxes = screen.getAllByRole('checkbox');
-    expect(checkboxes).toHaveLength(4);
-    expect(checkboxes[0]).toHaveAccessibleName('Select All');
-    expect(screen.getByRole('row', { name: 'Alice' })).toHaveAttribute('aria-selected', 'true');
-    await user.click(within(screen.getByRole('row', { name: 'Bob' })).getByRole('checkbox'));
-    expect(onSelectedChange).toHaveBeenLastCalledWith(['r1', 'r2']);
-    await user.click(checkboxes[0]!);
-    expect(onSelectedChange).toHaveBeenLastCalledWith(['r1', 'r2', 'r3']);
-  });
-
-  it('single selection: arrows move rows, Enter runs the action while nothing is selected, checkboxes choose, disabled rows are skipped', async () => {
-    const user = userEvent.setup();
-    const onSelectedChange = vi.fn();
-    const onRowAction = vi.fn();
-    render(<Example selectionMode="single" disabledIds={['r3']} onSelectedChange={onSelectedChange} onRowAction={onRowAction} />);
-    await user.tab();
-    expect(screen.getByRole('row', { name: 'Alice' })).toHaveFocus();
-    await user.keyboard('{ArrowDown}');
-    expect(screen.getByRole('row', { name: 'Bob' })).toHaveFocus();
-    await user.keyboard('{Enter}');
-    expect(onRowAction).toHaveBeenLastCalledWith('r2');
-    await user.click(within(screen.getByRole('row', { name: 'Chen' })).getByRole('checkbox'));
-    expect(onSelectedChange).not.toHaveBeenCalled();
-    expect(screen.getByRole('row', { name: 'Chen' })).toHaveAttribute('data-disabled');
-    await user.click(within(screen.getByRole('row', { name: 'Bob' })).getByRole('checkbox'));
-    expect(onSelectedChange).toHaveBeenLastCalledWith(['r2']);
-    // With a selection in place, Enter toggles selection instead of running the action.
-    onRowAction.mockClear();
-    screen.getByRole('row', { name: 'Alice' }).focus();
-    await user.keyboard('{Enter}');
-    expect(onRowAction).not.toHaveBeenCalled();
-  });
-
-  it('shows the empty message and puts the sticky header on the DOM', () => {
-    render(
-      <Table aria-label="Empty" stickyHeader>
-        <Table.Header>
-          <Table.Column isRowHeader>Name</Table.Column>
-        </Table.Header>
-        <Table.Body emptyMessage="Nothing yet">{[]}</Table.Body>
-      </Table>,
+  it('has no accessibility violations, with rows and empty', async () => {
+    const { container } = render(
+      <div>
+        <Example />
+        <Example data={[]} captionHidden />
+      </div>,
     );
-    expect(screen.getByText('Nothing yet')).toBeInTheDocument();
-    expect(screen.getByRole('grid').parentElement).toHaveAttribute('data-sticky-header');
-  });
-
-  it('has no accessibility violations with selection and sorting', async () => {
-    const { container } = render(<Example selectionMode="multiple" defaultSelected={['r2']} defaultSort={{ column: 'name', direction: 'ascending' }} />);
     expect(await axe(container)).toHaveNoViolations();
   });
 });

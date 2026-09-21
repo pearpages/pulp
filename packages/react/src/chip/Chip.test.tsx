@@ -109,6 +109,21 @@ describe('Chip', () => {
     expect(root).toHaveAttribute('data-interactive');
   });
 
+  it('exposes accent as data, and says whether it toggles: a static accent chip is filled, a toggle is outlined until selected', () => {
+    render(
+      <>
+        <Chip accent={4} onRemove={() => {}}>Ana</Chip>
+        <Chip accent={5} selected={false}>Wei</Chip>
+      </>,
+    );
+    const still = screen.getByText('Ana').parentElement!;
+    expect(still).toHaveAttribute('data-accent', '4');
+    expect(still).not.toHaveAttribute('data-toggle');
+    const toggle = screen.getByRole('button', { name: 'Wei' }).parentElement!;
+    expect(toggle).toHaveAttribute('data-accent', '5');
+    expect(toggle).toHaveAttribute('data-toggle');
+  });
+
   it('a removed chip leaves the list when the caller drops it', async () => {
     const user = userEvent.setup();
     function Tags() {
@@ -131,6 +146,8 @@ describe('Chip', () => {
         <Chip onRemove={() => {}}>Removable</Chip>
         <Chip selected onRemove={() => {}}>Both</Chip>
         <Chip disabled selected={false} onRemove={() => {}}>Disabled</Chip>
+        <Chip accent={2} onRemove={() => {}}>Accent</Chip>
+        <Chip accent={7} selected>Accent on</Chip>
       </div>,
     );
     expect(await axe(container)).toHaveNoViolations();
