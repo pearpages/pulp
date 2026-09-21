@@ -83,10 +83,9 @@ public API that is already `stable`.
 ## Built in `~/Projects/modals`, branch `pulp-feedback` (items 13 and 2)
 
 Found from pulp on 2026-09-20 and built the same day, three commits, nothing pushed and no version
-bump: that release is Pere's. **pulp cannot take any of it until `@pearpages/modals` is published**,
-because `dialog/Dialog.vendor.test.ts` reads the installed package. What is waiting on that release:
-the `data-modal-keep-active` attribute on pulp's toast container, a story with a dialog and a toast
-open together, and an `@charset` guard in the vendor test.
+bump. Pere released it as **0.4.0** on 2026-09-21 and pulp now depends on `^0.4.0`, with the
+`data-modal-keep-active` attribute on its toast container, a story with a dialog and a toast open
+together, and an `@charset` guard in the vendor test. What remains is the iPhone check below.
 
 What was done there, and what it was:
 

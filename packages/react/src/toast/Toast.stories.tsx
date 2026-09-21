@@ -6,6 +6,7 @@ import { ToastProvider, type ToastPlacement } from './Toast';
 import { useState } from 'react';
 import { Text } from '../text';
 import { useToast } from './context';
+import { Dialog, DialogSystem } from '../dialog';
 
 function Demo() {
   const { toast, dismissAll } = useToast();
@@ -78,6 +79,70 @@ function UndoDemo() {
     </Inline>
   );
 }
+
+function FromADialog() {
+  const { toast } = useToast();
+  const [saved, setSaved] = useState(true);
+  return (
+    <>
+      <Dialog.Trigger asChild target="place">
+        <Button variant="secondary">Open place</Button>
+      </Dialog.Trigger>
+      <Text>{saved ? 'Saved: Casa Leopoldo' : 'Nothing saved'}</Text>
+      <Dialog id="place">
+        <Dialog.Content>
+          <Dialog.Header>
+            <Dialog.Title>Casa Leopoldo</Dialog.Title>
+            <Dialog.Close aria-label="Close" />
+          </Dialog.Header>
+          <Dialog.Body>
+            <Button
+              variant="secondary"
+              tone="danger"
+              disabled={!saved}
+              onClick={() => {
+                setSaved(false);
+                toast.undo('Casa Leopoldo removed', () => setSaved(true));
+              }}
+            >
+              Remove place
+            </Button>
+          </Dialog.Body>
+        </Dialog.Content>
+      </Dialog>
+    </>
+  );
+}
+
+/**
+ * A toast fired from inside an open dialog. The dialog makes the rest of the page inert, and
+ * the toast region is part of the rest of the page; the region opts out
+ * (`data-modal-keep-active`, @pearpages/modals 0.4.0), so its Undo stays pressable and announced.
+ */
+export const FromInsideADialog: Story = {
+  args: { children: <FromADialog /> },
+  decorators: [(Story) => <DialogSystem><Story /></DialogSystem>],
+  play: async ({ canvasElement }) => {
+    const body = within(document.body);
+    await userEvent.click(within(canvasElement).getByRole('button', { name: 'Open place' }));
+    const dialog = await body.findByRole('dialog', { name: 'Casa Leopoldo' });
+    await waitFor(() => expect(dialog).toBeVisible());
+    await userEvent.click(within(dialog).getByRole('button', { name: 'Remove place' }));
+
+    // The region is found by role, so it is in the accessibility tree: not aria-hidden.
+    const region = body.getByRole('region', { name: 'Notifications' });
+    const container = region.closest('[data-pulp-toasts]')!;
+    await expect(container.hasAttribute('inert')).toBe(false);
+    await expect(container.hasAttribute('aria-hidden')).toBe(false);
+    // The rest of the page is still inert while the dialog is open.
+    await expect(canvasElement.closest('[inert]')).not.toBeNull();
+
+    await waitFor(() => expect(within(region).getByText('Casa Leopoldo removed')).toBeVisible());
+    await userEvent.click(within(region).getByRole('button', { name: 'Undo' }));
+    await expect(dialog).toBeVisible();
+    await waitFor(() => expect(within(dialog).getByRole('button', { name: 'Remove place' })).toBeEnabled());
+  },
+};
 
 export const Undo: Story = {
   args: { children: <UndoDemo /> },

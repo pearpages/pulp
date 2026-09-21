@@ -654,16 +654,19 @@ here. The full write-up, with the bitepals source to read and the order, is
       behind the initials. Chip: filled when static or selected, the border of an unselected toggle
       (`data-toggle`). No hover step for a filled accent chip: that would be eight more semantic
       names. The stylesheet budget went from 9 to 10 kB (it measured 9.01).
-- [ ] Overlays on a phone: visual-viewport handling in `@pearpages/modals`; a toast fired while a dialog
+- [x] Overlays on a phone: visual-viewport handling in `@pearpages/modals`; a toast fired while a dialog
       is open stays pressable; document per-dialog widths. Checked 2026-09-20 in the built site: with
       a dialog open the vendor sets `inert` and `aria-hidden` on `[data-pulp-toasts]`, so the toast is
       neither pressable nor announced. Built in the vendor the same day (`~/Projects/modals`, branch
       `pulp-feedback`, not pushed): a sibling carrying `data-modal-keep-active` is left alone, and
       `useVisualViewport` follows the software keyboard on both `resize` and `scroll`, with fallbacks
-      that keep today's layout exactly. **Both wait on Pere's release**, and the viewport behaviour
-      wants a real iPhone before bitepals swaps its overlays. pulp's remaining side is the attribute
-      on the toast container, a story with a dialog and a toast open together, and an `@charset`
-      assertion in `Dialog.vendor.test.ts`. Per-dialog widths: done 2026-09-20. `--dialog-width`
+      that keep today's layout exactly. Pere released them as **0.4.0** (2026-09-21), checked in the
+      tarball before bumping. pulp takes `^0.4.0`: the toast container carries
+      `data-modal-keep-active`, the `FromInsideADialog` story opens a dialog, removes a place inside it
+      and presses the toast's Undo (it fails with the attribute removed), and `Dialog.vendor.test.ts`
+      asserts no `@charset`. Looked at on the built site: dialog centred, page inert, toast not, a real
+      click on Undo restores the place with the dialog still open. **Still open: the iPhone check**
+      of the keyboard behaviour, before bitepals swaps its overlays. Per-dialog widths: done 2026-09-20. `--dialog-width`
       is a pulp token now (semantic `size.dialog-width`, 32.5rem = the 520px the vendor already used,
       so nothing moved), mapped onto the vendor's `--modal-width-md` **on the panel**, not on the
       portal root: the root is shared by every dialog, so a `var()` resolved there cannot be
@@ -727,8 +730,8 @@ here. The full write-up, with the bitepals source to read and the order, is
 - [x] `@pearpages/modals/styles.css`: drop `@charset` (2026-09-20, in `~/Projects/modals` on branch
       `pulp-feedback`, not pushed). Cause: Sass prepends it as soon as a non-ASCII character reaches
       the output, and one loud comment has a `×`. `sassPlugin({ charset: false })`, guarded by a test
-      in the playground suite, which runs against built `dist/`. **Waiting on Pere's release** before
-      pulp can assert it in `Dialog.vendor.test.ts`.
+      in the playground suite, which runs against built `dist/`. Released in 0.4.0; pulp asserts it
+      in `Dialog.vendor.test.ts` too.
 
 ## Later (not scheduled)
 Deprecation codemods, Tailwind preset emitted from tokens, Figma sync (Tokens Studio reads the

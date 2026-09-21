@@ -295,7 +295,7 @@
   "dependencies": {
     "@floating-ui/react-dom": "^2.1.9",
     "@internationalized/date": "^3.12.4",
-    "@pearpages/modals": "^0.3.0",
+    "@pearpages/modals": "^0.4.0",
     "@pearpages/pulp-icons": "workspace:^",
     "react-aria-components": "^1.21.1"
   }
