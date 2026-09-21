@@ -1,5 +1,43 @@
 # @pearpages/pulp-react
 
+## 0.4.0
+
+### Minor Changes
+
+- d5e1098: Eight categorical accents at the semantic tier, in both brands: `--color-accent-1` … `--color-accent-8`, each with its text colour `--color-accent-on-1` … `on-8`. They follow the scheme (`light-dark()`), every pair is in the contrast tests at 4.5:1, and the hues come in the same order in every brand (blue, orange, green, violet, red, teal, amber, pink). They are for telling things of one kind apart, people mostly; a number carries no meaning. They are in `theme.css` and the native output too.
+  
+  Avatar and Chip take `accent?: 1 | … | 8`. On an Avatar it is the colour behind the initials (a picture ignores it). A Chip with an accent is filled with it; a toggle chip shows it as the border until it is selected. The consumer hashes an id to the index, so a colour is never passed as a style.
+- e5d2bd6: Badge: `tone="action"`, the brand's colour, in the three variants. For a marker that is not a status, such as the unread dot or count on a navigation item; it reads `--badge-action-*`, which point at the action tokens whose contrast is already tested.
+- bc49901: A subtle Badge now draws a hairline edge in the tone's own colour, the same one as its label. On a tinted surface the subtle fill alone was not a pill: measured across both brands, every `*-subtle` fill sits between 1.00 and 1.40:1 against the surfaces it lands on, so "Pending" read as coloured text with no shape. The edge is the label's colour, which the contrast tests already hold to 4.5:1 on every surface, and a token test keeps the two from drifting apart.
+  
+  Every badge now carries a border, transparent unless the variant is `subtle`, so solid, subtle and dot stay the same size as each other; `box-sizing: border-box` keeps the dot at exactly `--badge-dot-size`. A badge with text is 2px wider and taller than before. New tokens: `--badge-border-width` and `--badge-<tone>-subtle-border`.
+- 3743f63: **Breaking (experimental component).** The React Aria table is renamed `DataGrid`, and the name `Table` is freed for the plain `<table>` that ships alongside it. What it is called should say what it is: React Aria's is a `role="grid"` widget with roving focus, selection and sorting, and it costs ~52 kB and a client boundary; an HTML `<table>` is what most tables are.
+  
+  Rename map: `Table` → `DataGrid`, the five parts (`Table.Header` → `DataGrid.Header`, and `.Column`, `.Body`, `.Row`, `.Cell`), the types (`TableProps` → `DataGridProps`, and `TableSelectionMode`, `TableDensity`, `TableSort`, `TableSortDirection`, `TableAlign`), the entry point `@pearpages/pulp-react/table` → `/data-grid`, its stylesheet `/table.css` → `/data-grid.css`, and the tokens `--table-*` → `--data-grid-*`. Nothing about the behaviour or the props changed. Decision record 008.
+- 5cd58f1: Dialog's width is a pulp token now, `--dialog-width`, from the new semantic `--size-dialog-width` (32.5rem, the same 520px the vendor was already using, so nothing moves). Set it in a class on `Dialog.Content` to size one dialog without touching the rest, the way `--sheet-width` already works for Sheet; `@pearpages/modals`' own `--modal-width-md` is set from it and stays pulp's business. Both are now said in the components' docs, with a story.
+- 2c5bb3f: New `Table`: a plain `<table>` with pulp's density and tokens. It holds no state and calls no hook, so it is a **server entry** — a page of rows costs no JavaScript and no client boundary, which is what the React Aria grid could never be. Compound in the same shape as `DataGrid` (`Table.Header`, `Table.Column`, `Table.Body`, `Table.Row`, `Table.Cell`), so moving between the two is mechanical.
+  
+  `caption` is required, because a table nobody named is a table a screen reader cannot introduce; `captionHidden` keeps the name without showing it. `rowHeader` on a cell makes it the row's `th scope="row"`, `align="end"` right-aligns with tabular numerals, `density="compact"` tightens the rows, and `Table.Body` takes an `emptyMessage`. For rows the reader sorts or selects, reach for `DataGrid`. Decision record 008.
+- 4bf9d88: Textarea takes `hideLabel`, as TextField does: the label stays for assistive technology and leaves the page. Both now go through `Field.Label`'s new `visuallyHidden` prop, so a control you build on Field gets it too.
+- 5096f3b: Toast: `placement="bottom-center"`, for an app with a bottom navigation. The distance from the top or the bottom edge is now its own token, `--toast-offset-block`, separate from the inline `--toast-offset`, and the safe-area inset (`env(safe-area-inset-top)` / `-bottom`) is added to it, so a toast clears the notch and the home indicator; raise `--toast-offset-block` by the height of your navigation. If you had overridden `--toast-offset` to move the stack vertically, override `--toast-offset-block` too: both default to the same value.
+
+### Patch Changes
+
+- 2c5bb3f: The build raises Node's heap for the declaration step. With 45 entries the single tsup dts worker exceeded the default limit and the build failed with `ERR_WORKER_OUT_OF_MEMORY` right after a successful esbuild pass, which reads like a broken type but is a count-of-entries ceiling.
+- 11cf243: SegmentedControl: when the segments do not fit their container, the labels shorten with an ellipsis instead of drawing over the next segment, and an icon keeps its size (it used to be squeezed to nothing). The full label is still the radio's accessible name. Applies to `SegmentedControl.NavItem` too, except with `asChild`, where the child is yours.
+- cc6d08e: A toast fired while a dialog is open is now pressable and announced. A dialog makes every sibling of its portal `inert` and `aria-hidden`, and the toast region is one, so "Removed · Undo" from inside a dialog could not be pressed or heard until the dialog closed. The region now carries `data-modal-keep-active`, which `@pearpages/modals` 0.4.0 leaves alone; the dependency is `^0.4.0`, which also drops the `@charset` rule that landed inside the `vendor` layer, and follows the software keyboard on iOS while a dialog is open.
+- Updated dependencies [d5e1098]
+- Updated dependencies [e5d2bd6]
+- Updated dependencies [bc49901]
+- Updated dependencies [6681389]
+- Updated dependencies [3743f63]
+- Updated dependencies [5cd58f1]
+- Updated dependencies [8822ba9]
+- Updated dependencies [2c5bb3f]
+- Updated dependencies [b424c8d]
+- Updated dependencies [5096f3b]
+  - @pearpages/pulp-tokens@0.4.0
+
 ## 0.3.0
 
 ### Minor Changes
