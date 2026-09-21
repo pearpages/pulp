@@ -15,6 +15,13 @@ this file holds what is left to do, ticked with a date when done. Ordered within
 
 ## Session log
 
+- 2026-09-21: group 11 shipped. `@pearpages/modals` 0.4.0 (Pere) taken as `^0.4.0`; PR #2 pushed,
+  screenshots re-rendered by `visual-update.yml` (86 PNGs: every pulp shot that moved belongs to a
+  component that was changed, every other bitepals shot moved for the weights, five components did
+  not move at all), CI green, merged, deployed; `v0.4.0` published react 0.4.0 / tokens 0.4.0 /
+  css 0.1.5 with provenance (npm took a few minutes to serve it after the 202). Checked from the
+  registry: `table` is a server entry, `data-grid` a client one. Next: bitepals' own session, from
+  `docs/bitepals-feedback.md`, once its three branches are merged (they were not on GitHub yet).
 - 2026-09-20 (later): the rest of group 11, decisions taken rather than asked, each written down.
   Badge subtle gets a hairline in its label's colour (measured first: every subtle fill is 1.00-1.40:1
   on a surface in both brands, so no step darkening could have worked); record 007, a brand may
