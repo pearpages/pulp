@@ -16,6 +16,7 @@ import { renderAsChild } from '../internal/asChild';
 import { classes } from '../internal/classes';
 import { useFloatingPosition, type FloatingPlacement } from '../internal/floating';
 import { useDismiss } from '../internal/useDismiss';
+import { useHydrated } from '../internal/useHydrated';
 import styles from './Popover.module.css';
 
 export type PopoverPlacement = FloatingPlacement;
@@ -134,16 +135,20 @@ function PopoverContent({ title, className, ref, children, ...rest }: PopoverCon
   const popover = usePopover('Popover.Content');
   const { refs, positionStyle, placement } = popover.floating;
   const contentRef = useRef<HTMLDivElement | null>(null);
+  // Open on the first render (`defaultOpen`) renders nothing on the server,
+  // so it waits for hydration here too; see internal/useHydrated.
+  const hydrated = useHydrated();
+  const shown = popover.open && hydrated;
 
   useDismiss({
-    open: popover.open,
+    open: shown,
     onDismiss: () => popover.setOpen(false),
     inside: () => [refs.reference.current as Element | null, refs.floating.current],
   });
 
   // Move focus in on open; give it back to the trigger on close.
   useEffect(() => {
-    if (popover.open) {
+    if (shown) {
       const content = contentRef.current;
       if (!content) return;
       const first = content.querySelector<HTMLElement>('input, select, textarea, button, a[href], [tabindex]:not([tabindex="-1"])');
@@ -153,9 +158,9 @@ function PopoverContent({ title, className, ref, children, ...rest }: PopoverCon
         if (content.contains(document.activeElement) || document.activeElement === document.body) reference?.focus();
       };
     }
-  }, [popover.open, refs.reference]);
+  }, [shown, refs.reference]);
 
-  if (!popover.open) return null;
+  if (!shown) return null;
   return createPortal(
     <div
       {...rest}

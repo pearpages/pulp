@@ -19,6 +19,7 @@ import { renderAsChild } from '../internal/asChild';
 import { classes } from '../internal/classes';
 import { useFloatingPosition, type FloatingPlacement } from '../internal/floating';
 import { useDismiss } from '../internal/useDismiss';
+import { useHydrated } from '../internal/useHydrated';
 import { useRovingFocus } from '../internal/useRovingFocus';
 import styles from './Menu.module.css';
 
@@ -145,15 +146,19 @@ function MenuContent({ className, onKeyDown, ref, children, ...rest }: MenuConte
   const { refs, positionStyle, placement } = menu.floating;
   const contentRef = useRef<HTMLDivElement | null>(null);
   const rove = useRovingFocus({ orientation: 'vertical', selector: '[role="menuitem"]' });
+  // Open on the first render (`defaultOpen`) renders nothing on the server,
+  // so it waits for hydration here too; see internal/useHydrated.
+  const hydrated = useHydrated();
+  const shown = menu.open && hydrated;
 
   useDismiss({
-    open: menu.open,
+    open: shown,
     onDismiss: () => menu.setOpen(false),
     inside: () => [refs.reference.current as Element | null, refs.floating.current],
   });
 
   useEffect(() => {
-    if (!menu.open) return;
+    if (!shown) return;
     const content = contentRef.current;
     if (!content) return;
     const items = Array.from(content.querySelectorAll<HTMLElement>('[role="menuitem"]:not([aria-disabled="true"])'));
@@ -163,7 +168,7 @@ function MenuContent({ className, onKeyDown, ref, children, ...rest }: MenuConte
       const reference = refs.reference.current as HTMLElement | null;
       if (content.contains(document.activeElement) || document.activeElement === document.body) reference?.focus();
     };
-  }, [menu.open, menu.focusTarget, refs.reference]);
+  }, [shown, menu.focusTarget, refs.reference]);
 
   const typeahead = (event: KeyboardEvent<HTMLDivElement>) => {
     if (event.key.length !== 1 || event.altKey || event.ctrlKey || event.metaKey) return false;
@@ -177,7 +182,7 @@ function MenuContent({ className, onKeyDown, ref, children, ...rest }: MenuConte
     return true;
   };
 
-  if (!menu.open) return null;
+  if (!shown) return null;
   return createPortal(
     <div
       {...rest}

@@ -3,6 +3,7 @@ import { createPortal } from 'react-dom';
 import { Alert } from '../alert';
 import { Button } from '../button';
 import { classes } from '../internal/classes';
+import { useHydrated } from '../internal/useHydrated';
 import { ToastContext, type ToastFunction, type ToastItem, type ToastOptions, type ToastUndoOptions } from './context';
 
 /** An undo toast asks for a decision and a reach, so it outlasts the default. */
@@ -63,6 +64,8 @@ export function ToastProvider({ placement = 'bottom-end', max = 5, duration = 60
     element.setAttribute('data-modal-keep-active', '');
     return element;
   });
+
+  const hydrated = useHydrated();
 
   useEffect(() => {
     if (!container) return;
@@ -209,7 +212,10 @@ export function ToastProvider({ placement = 'bottom-end', max = 5, duration = 60
   return (
     <ToastContext.Provider value={value}>
       {children}
-      {container ? createPortal(region, container) : null}
+      {/* The server renders no region (no document), so the first client
+          render must not either: React would discard the server HTML. It
+          appears one commit later, before any toast can be fired. */}
+      {container && hydrated ? createPortal(region, container) : null}
     </ToastContext.Provider>
   );
 }
