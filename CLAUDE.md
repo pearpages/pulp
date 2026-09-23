@@ -159,10 +159,12 @@ copy of the working tree, two-minute loops. Colima only, never Docker Desktop; f
   0.02, not the default, which let a border go from `#d5d7de` to `#c0c3cc` unnoticed. Until
   2026-09-18 the shots were taken by the Vitest run, through the dev transform: all green while
   the deployed Button was bare text. Never move them back to a dev render.
-- **Vendor variables are checked against the installed vendor.** `dialog/Dialog.vendor.test.ts`
-  discovers every component stylesheet that sets a `--modal-*` name (Dialog, Sheet) and fails when
-  one maps a name `@pearpages/modals` no longer declares, or drops below its lower bound. A new
-  stylesheet that maps vendor variables must be given a bound there.
+- **Vendor variables are checked against the installed vendor.** `internal/vendors.test.ts` has
+  one entry per vendor, keyed by the prefix it owns (`--modal-*` for `@pearpages/modals`,
+  `--contribution-heatmap-*` for `@pearpages/heatmap`). It discovers every component stylesheet
+  that sets one of those names (Dialog, Sheet, Heatmap) and fails when one maps a name the vendor
+  no longer declares, or drops below its lower bound. A new stylesheet that maps vendor variables
+  must be given a bound there; a new vendor gets an entry.
 - **Complex widgets build on `react-aria-components`** (decision record 001), never on a
   hand-rolled keyboard model. The vendor's props never reach the public API (`disabled`, not
   `isDisabled`; `value`/`onChange`, not `selectedKey`/`onSelectionChange`); class names are plain

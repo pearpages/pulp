@@ -93,6 +93,9 @@ importers:
         specifier: ^19.3.0
         version: 19.3.0(react@19.3.0)
     devDependencies:
+      '@pearpages/heatmap':
+        specifier: ^0.4.1
+        version: 0.4.1(react-dom@19.3.0(react@19.3.0))(react@19.3.0)
       '@pearpages/modals':
         specifier: ^0.4.0
         version: 0.4.0(react-dom@19.3.0(react@19.3.0))(react@19.3.0)
@@ -205,6 +208,9 @@ importers:
       '@internationalized/date':
         specifier: ^3.12.4
         version: 3.12.4
+      '@pearpages/heatmap':
+        specifier: ^0.4.1
+        version: 0.4.1(react-dom@19.3.0(react@19.3.0))(react@19.3.0)
       '@pearpages/modals':
         specifier: ^0.4.0
         version: 0.4.0(react-dom@19.3.0(react@19.3.0))(react@19.3.0)
@@ -1406,6 +1412,12 @@ packages:
     resolution: {integrity: sha512-VPoCAhKvCQTlG7vxqaBXcmuvbh77BfnGXj8g0pbvVXpm1F/R8rDVwqIWcEbMzrI1JvJlm8v7T9uMVQb6UctMRg==}
     cpu: [x64]
     os: [win32]
+
+  '@pearpages/heatmap@0.4.1':
+    resolution: {integrity: sha512-tW9DR7t2jaaEyLP+Gl6HSYo5CXb2PuiePB/L0w/sEqPx3qld15RsC4LjggNhZ6fRQrgGdhPjdUOE2sZHXQZ75Q==}
+    peerDependencies:
+      react: ^19.1.1
+      react-dom: ^19.1.1
 
   '@pearpages/modals@0.4.0':
     resolution: {integrity: sha512-TVLn52dcIZ74HsKI60q+iAa6fPqcriPMf6x8XqeXTDienyZpvC77Y1H5BMeLXrFfkwTTDkw59FbEF3/JQ5w0kQ==}
@@ -5307,6 +5319,11 @@ snapshots:
 
   '@oxc-resolver/binding-win32-x64-msvc@11.21.2':
     optional: true
+
+  '@pearpages/heatmap@0.4.1(react-dom@19.3.0(react@19.3.0))(react@19.3.0)':
+    dependencies:
+      react: 19.3.0
+      react-dom: 19.3.0(react@19.3.0)
 
   '@pearpages/modals@0.4.0(react-dom@19.3.0(react@19.3.0))(react@19.3.0)':
     dependencies:

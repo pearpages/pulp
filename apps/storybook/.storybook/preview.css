@@ -1,5 +1,6 @@
-/* Vendor stylesheet below pulp's components; the Modal mapping sets its variables. */
+/* Vendor stylesheets below pulp's components; the Dialog and Heatmap mappings set their variables. */
 @import "@pearpages/modals/styles.css" layer(vendor);
+@import "@pearpages/heatmap/styles.css" layer(vendor);
 
 /* Layout helpers for stories only. Never shipped. */
 .sb-row {

@@ -1,0 +1,33 @@
+{
+  "$description": "Heatmap component tokens: the pulp side of the mapping onto @pearpages/heatmap. The vendor reads --contribution-heatmap-*; Heatmap.module.css sets those from these --heatmap-* tokens on the component's root.",
+  "heatmap": {
+    "bg": { "$type": "color", "$value": "{color.surface.raised}" },
+    "border": { "$type": "color", "$value": "{color.border.default}" },
+    "fg": { "$type": "color", "$value": "{color.text.default}" },
+    "fg-muted": { "$type": "color", "$value": "{color.text.muted}" },
+    "level": {
+      "$type": "color",
+      "$description": "The five cell fills, none to most. The caller decides which level a count is.",
+      "0": { "$value": "{color.data.sequential.0}" },
+      "1": { "$value": "{color.data.sequential.1}" },
+      "2": { "$value": "{color.data.sequential.2}" },
+      "3": { "$value": "{color.data.sequential.3}" },
+      "4": { "$value": "{color.data.sequential.4}" }
+    },
+    "radius": { "$type": "dimension", "$value": "{radius.surface}" },
+    "padding": { "$type": "dimension", "$value": "{space.4}" },
+    "font-family": { "$type": "fontFamily", "$value": "{font.family.body}" },
+    "day-header-font-family": {
+      "$type": "fontFamily",
+      "$description": "The reversed layout's day names. Monospace on purpose: it renders every three-letter name at one width, so the seven columns stay even.",
+      "$value": "{font.family.mono}"
+    },
+    "label-size": { "$type": "dimension", "$value": "{font.size.xs}" },
+    "focus-ring": { "$type": "color", "$value": "{color.border.focus}" },
+    "tooltip-shadow": { "$type": "shadow", "$value": "{shadow.raised}" },
+    "motion": {
+      "duration": { "$type": "duration", "$value": "{motion.duration.fast}" },
+      "easing": { "$type": "cubicBezier", "$value": "{motion.easing.standard}" }
+    }
+  }
+}

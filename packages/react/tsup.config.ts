@@ -12,6 +12,7 @@ import { defineConfig } from 'tsup';
 export default defineConfig({
   entry: {
     index: 'src/index.ts',
+    'heatmap': 'src/heatmap/index.ts',
     'table': 'src/table/index.ts',
     'empty-state': 'src/empty-state/index.ts',
     'segmented-control': 'src/segmented-control/index.ts',

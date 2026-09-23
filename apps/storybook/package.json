@@ -25,6 +25,7 @@
     "react-dom": "^19.3.0"
   },
   "devDependencies": {
+    "@pearpages/heatmap": "^0.4.1",
     "@pearpages/modals": "^0.4.0",
     "@pearpages/pulp-icons": "workspace:*",
     "@playwright/test": "1.63.0",

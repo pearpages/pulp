@@ -26,7 +26,7 @@ Reference consumer: [perepages.com](https://perepages.com) takes its colour from
 | --- | --- |
 | `@pearpages/pulp-tokens` | `tokens.css`, `tokens.json` |
 | `@pearpages/pulp-css` | `index.css` (layers + tokens + reset + base) |
-| `@pearpages/pulp-react` | `Text`, `Heading`, `Icon`, `VisuallyHidden`, `Stack`, `Inline`, `Field`, `Button`, `IconButton`, `TextField`, `Textarea`, `Select`, `Checkbox`, `Switch`, `RadioGroup`, `Card`, `Tabs`, `Dialog`, `Sheet`, `Spinner`, `Badge`, `Alert`, `Toast`, `Progress`, `Skeleton`, `Tooltip`, `Popover`, `Menu`, `Accordion`, `Combobox`, `Listbox`, `Picker`, `Calendar`, `DatePicker`, `Slider`, `Table`, `DataGrid`, `Pagination` |
+| `@pearpages/pulp-react` | `Text`, `Heading`, `Icon`, `VisuallyHidden`, `Stack`, `Inline`, `Field`, `Button`, `IconButton`, `TextField`, `Textarea`, `Select`, `Checkbox`, `Switch`, `RadioGroup`, `Card`, `Tabs`, `Dialog`, `Sheet`, `Spinner`, `Badge`, `Alert`, `Toast`, `Progress`, `Skeleton`, `Tooltip`, `Popover`, `Menu`, `Accordion`, `Combobox`, `Listbox`, `Picker`, `Calendar`, `DatePicker`, `Slider`, `Table`, `DataGrid`, `Pagination`, `Heatmap` |
 | `@pearpages/pulp-icons` | stroke icons as React components, tree-shakeable |
 
 ## Use
@@ -59,14 +59,19 @@ props are pulp's; dates cross the API as `YYYY-MM-DD` strings.
 `Dialog`, `DialogSystem` and `Sheet` build on [`@pearpages/modals`](https://www.npmjs.com/package/@pearpages/modals)
 (focus trap, inert page, stacking, Escape and backdrop dismissal), also installed with the
 package. pulp themes it by mapping its tokens onto the vendor's `--modal-*` variables, so dialogs
-follow brand and scheme. It is the one vendor whose stylesheet you import yourself, into the
-`vendor` layer so pulp's styles win:
+follow brand and scheme. `Heatmap` does the same over
+[`@pearpages/heatmap`](https://www.npmjs.com/package/@pearpages/heatmap), mapping onto its
+`--contribution-heatmap-*` variables, with the cells on the brand's sequential data scale
+(`--color-data-sequential-*`). These are the two vendors whose stylesheets you import yourself,
+into the `vendor` layer so pulp's styles win:
 
 ```css
 @import "@pearpages/modals/styles.css" layer(vendor);
+@import "@pearpages/heatmap/styles.css" layer(vendor);
 ```
 
-Skip it if you never render a `Dialog`.
+Skip the first if you never render a `Dialog` or `Sheet`, and the second if you never render a
+`Heatmap`.
 
 ```tsx
 import { Button } from '@pearpages/pulp-react/button';

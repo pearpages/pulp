@@ -72,6 +72,15 @@ const brands = {
         "on-7": "var(--color-accent-on-7)",
         "on-8": "var(--color-accent-on-8)"
       },
+      "data": {
+        "sequential": {
+          "0": "var(--color-data-sequential-0)",
+          "1": "var(--color-data-sequential-1)",
+          "2": "var(--color-data-sequential-2)",
+          "3": "var(--color-data-sequential-3)",
+          "4": "var(--color-data-sequential-4)"
+        }
+      },
       "overlay": {
         "backdrop": "var(--color-overlay-backdrop)"
       }
@@ -151,6 +160,11 @@ const brands = {
         "--color-accent-on-6": "#ffffff",
         "--color-accent-on-7": "#ffffff",
         "--color-accent-on-8": "#ffffff",
+        "--color-data-sequential-0": "#ededf2",
+        "--color-data-sequential-1": "#a5aeff",
+        "--color-data-sequential-2": "#6b7aff",
+        "--color-data-sequential-3": "#1e2ed6",
+        "--color-data-sequential-4": "#101a80",
         "--color-overlay-backdrop": "#0c0e1499",
         "--radius-control": "3px",
         "--radius-surface": "10px",
@@ -223,6 +237,11 @@ const brands = {
         "--color-accent-on-6": "#0c0e14",
         "--color-accent-on-7": "#0c0e14",
         "--color-accent-on-8": "#0c0e14",
+        "--color-data-sequential-0": "#262a35",
+        "--color-data-sequential-1": "#101a80",
+        "--color-data-sequential-2": "#1e2ed6",
+        "--color-data-sequential-3": "#6b7aff",
+        "--color-data-sequential-4": "#a5aeff",
         "--color-overlay-backdrop": "#000000b3",
         "--radius-control": "3px",
         "--radius-surface": "10px",
@@ -310,6 +329,15 @@ const brands = {
         "on-7": "var(--color-accent-on-7)",
         "on-8": "var(--color-accent-on-8)"
       },
+      "data": {
+        "sequential": {
+          "0": "var(--color-data-sequential-0)",
+          "1": "var(--color-data-sequential-1)",
+          "2": "var(--color-data-sequential-2)",
+          "3": "var(--color-data-sequential-3)",
+          "4": "var(--color-data-sequential-4)"
+        }
+      },
       "overlay": {
         "backdrop": "var(--color-overlay-backdrop)"
       }
@@ -389,6 +417,11 @@ const brands = {
         "--color-accent-on-6": "#ffffff",
         "--color-accent-on-7": "#ffffff",
         "--color-accent-on-8": "#ffffff",
+        "--color-data-sequential-0": "#f0e4cf",
+        "--color-data-sequential-1": "#ffb08a",
+        "--color-data-sequential-2": "#ff7a52",
+        "--color-data-sequential-3": "#f45a2a",
+        "--color-data-sequential-4": "#9f3a14",
         "--color-overlay-backdrop": "#1f243099",
         "--radius-control": "10px",
         "--radius-surface": "18px",
@@ -461,6 +494,11 @@ const brands = {
         "--color-accent-on-6": "#1f2430",
         "--color-accent-on-7": "#1f2430",
         "--color-accent-on-8": "#1f2430",
+        "--color-data-sequential-0": "#1d2430",
+        "--color-data-sequential-1": "#4a1d0e",
+        "--color-data-sequential-2": "#e24e21",
+        "--color-data-sequential-3": "#ff6b3d",
+        "--color-data-sequential-4": "#ff8b66",
         "--color-overlay-backdrop": "#000000b3",
         "--radius-control": "10px",
         "--radius-surface": "18px",

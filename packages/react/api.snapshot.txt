@@ -221,6 +221,12 @@ Heading (stable)
   ref?: Ref<HTMLHeadingElement>
   size?: "sm" | "md" | "lg" | "xl" | "2xl"
   tone?: "default" | "muted" = default
+Heatmap (experimental)
+  className?: string
+  data: { contribution: ContributionData[]; period: Period; weeks: Week[]; }
+  isReverse?: boolean
+  labels?: HeatmapLabels
+  locale?: string
 Icon (stable)
   children: ReactNode
   label?: string

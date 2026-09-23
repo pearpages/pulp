@@ -15,3 +15,4 @@ option was defensible. Newest last. The Storybook renders this folder under "Dec
 | [006](006-primitives-and-tailwind.md) | Primitive names collide with Tailwind's default theme: declare the layer order, prefix at 1.0 |
 | [007](007-per-brand-component-tokens.md) | A brand may override a single component token |
 | [008](008-table-and-datagrid.md) | `Table` is a `<table>`; the React Aria one becomes `DataGrid` |
+| [009](009-heatmap-and-a-data-scale.md) | `Heatmap` builds on `@pearpages/heatmap`, and pulp gains a sequential data scale |
