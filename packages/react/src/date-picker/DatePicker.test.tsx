@@ -31,7 +31,8 @@ describe('DatePicker', () => {
     const dialog = await screen.findByRole('dialog');
     expect(dialog).toBeInTheDocument();
     expect(screen.getByRole('heading')).toHaveTextContent('September 2026');
-    await user.click(screen.getByRole('button', { name: /^Wednesday, September 23, 2026/ }));
+    // Unanchored: on the day itself React Aria prefixes the name with "Today, ".
+    await user.click(screen.getByRole('button', { name: /Wednesday, September 23, 2026/ }));
     expect(onChange).toHaveBeenLastCalledWith('2026-09-23');
     await waitFor(() => expect(screen.queryByRole('dialog')).toBeNull());
     expect(screen.getByRole('spinbutton', { name: /^day/ })).toHaveAttribute('aria-valuenow', '23');
