@@ -492,6 +492,52 @@
         }
       }
     },
+    "data": {
+      "$description": "Fills for data, not for UI. sequential.0 is \"none\" and 1-4 rise in intensity, on the brand's own hue: a heatmap's cells, a density scale. In dark schemes the ramp inverts, so more is always brighter against the surface. Never carries text.",
+      "sequential": {
+        "0": {
+          "$value": "{color.cream.300}",
+          "$extensions": {
+            "com.pearpages.pulp": {
+              "dark": "{color.ink.700}"
+            }
+          },
+          "$description": "Zero: one step off the raised surface, so an empty cell still reads as a slot."
+        },
+        "1": {
+          "$value": "{color.orange.200}",
+          "$extensions": {
+            "com.pearpages.pulp": {
+              "dark": "{color.orange.900}"
+            }
+          }
+        },
+        "2": {
+          "$value": "{color.orange.400}",
+          "$extensions": {
+            "com.pearpages.pulp": {
+              "dark": "{color.orange.700}"
+            }
+          }
+        },
+        "3": {
+          "$value": "{color.orange.600}",
+          "$extensions": {
+            "com.pearpages.pulp": {
+              "dark": "{color.orange.500}"
+            }
+          }
+        },
+        "4": {
+          "$value": "{color.orange.800}",
+          "$extensions": {
+            "com.pearpages.pulp": {
+              "dark": "{color.orange.300}"
+            }
+          }
+        }
+      }
+    },
     "overlay": {
       "backdrop": {
         "$value": "#1f243099",

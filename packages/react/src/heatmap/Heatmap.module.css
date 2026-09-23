@@ -1,0 +1,43 @@
+/*
+ * The vendor (@pearpages/heatmap) reads --contribution-heatmap-* custom
+ * properties and declares its defaults for them on its own root element. This
+ * class goes on that same element, from the components layer, so it beats the
+ * vendor's declarations whatever their specificity or load order, and every
+ * value comes from pulp's --heatmap-* tokens.
+ */
+
+@layer reset, tokens, vendor, base, components, utilities;
+
+@layer components {
+  .root {
+    --contribution-heatmap-bg: var(--heatmap-bg);
+    --contribution-heatmap-border: var(--heatmap-border);
+    --contribution-heatmap-fg: var(--heatmap-fg);
+    --contribution-heatmap-fg-muted: var(--heatmap-fg-muted);
+    --contribution-heatmap-level-0: var(--heatmap-level-0);
+    --contribution-heatmap-level-1: var(--heatmap-level-1);
+    --contribution-heatmap-level-2: var(--heatmap-level-2);
+    --contribution-heatmap-level-3: var(--heatmap-level-3);
+    --contribution-heatmap-level-4: var(--heatmap-level-4);
+    --contribution-heatmap-radius: var(--heatmap-radius);
+    --contribution-heatmap-padding: var(--heatmap-padding);
+    --contribution-heatmap-font-family: var(--heatmap-font-family);
+    --contribution-heatmap-day-header-font-family: var(--heatmap-day-header-font-family);
+    --contribution-heatmap-label-size: var(--heatmap-label-size);
+    --contribution-heatmap-focus-ring: var(--heatmap-focus-ring);
+    --contribution-heatmap-tooltip-shadow: var(--heatmap-tooltip-shadow);
+
+    /* The vendor composes its card shadow as `0 2px 8px <colour>`, so it takes pulp's raised-shadow colour, not the whole shadow. */
+    --contribution-heatmap-shadow-color: var(--shadow-raised-color);
+    --contribution-heatmap-transition: all var(--heatmap-motion-duration) var(--heatmap-motion-easing);
+
+    /*
+     * The vendor sets `color-scheme: light dark` on this element so it follows
+     * the OS. What the element paints itself follows that, notably the grid's
+     * native horizontal scrollbar, so a light page on a dark OS would get a dark
+     * scrollbar. Take the page's data-scheme instead. (pulp's colour tokens
+     * resolved correctly in Chromium even without this, checked 2026-09-23.)
+     */
+    color-scheme: inherit;
+  }
+}

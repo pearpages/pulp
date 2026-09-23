@@ -132,6 +132,8 @@ describe('dist', () => {
       .join('\n');
     expect(js).toMatch(/from ['"]@pearpages\/modals['"]/);
     expect(js).not.toMatch(/modalBackdrop/);
+    expect(js).toMatch(/from ['"]@pearpages\/heatmap['"]/);
+    expect(js).not.toMatch(/getMonthsForHeader/);
     expect(js).toMatch(/from ['"]@pearpages\/pulp-icons['"]/);
     expect(js).not.toMatch(/M5 12h14/);
     expect(js).toMatch(/from ['"]@floating-ui\/react-dom['"]/);

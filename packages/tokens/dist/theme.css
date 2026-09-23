@@ -61,6 +61,11 @@
   --color-accent-on-6: var(--color-accent-on-6);
   --color-accent-on-7: var(--color-accent-on-7);
   --color-accent-on-8: var(--color-accent-on-8);
+  --color-data-sequential-0: var(--color-data-sequential-0);
+  --color-data-sequential-1: var(--color-data-sequential-1);
+  --color-data-sequential-2: var(--color-data-sequential-2);
+  --color-data-sequential-3: var(--color-data-sequential-3);
+  --color-data-sequential-4: var(--color-data-sequential-4);
   --color-overlay-backdrop: var(--color-overlay-backdrop);
   --radius-control: var(--radius-control);
   --radius-surface: var(--radius-surface);

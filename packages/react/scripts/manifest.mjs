@@ -103,6 +103,7 @@ writeFileSync(
         base: '@pearpages/pulp-css (optional: layer order, reset, body defaults, vendor layer)',
         icons: '@pearpages/pulp-icons (optional: stroke glyphs; wrap them in Icon or pass them to Button slots)',
         dialogs: '@pearpages/modals/styles.css (only when using Dialog or Sheet, which needs 0.3.0 or later; import it into the vendor layer)',
+        heatmap: '@pearpages/heatmap/styles.css (only when using Heatmap, which needs 0.4.1 or later; import it into the vendor layer)',
         headless: 'react-aria-components (installed automatically; Combobox, Listbox, Picker, Calendar, DatePicker, Slider and DataGrid build on it, see docs/decisions/001)',
         fonts: 'consumers load the brand typefaces themselves (pulp: Archivo, Instrument Sans, Geist Mono; bitepals: Nunito, Inter)',
       },

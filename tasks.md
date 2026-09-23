@@ -15,6 +15,21 @@ this file holds what is left to do, ticked with a date when done. Ordered within
 
 ## Session log
 
+- 2026-09-23: `Heatmap` (Data, experimental) on branch `heatmap`, cut from `hydration-fix` (so it
+  merges after it). Built on `@pearpages/heatmap` ^0.4.1 the way Dialog is on modals; decision
+  record 009. The vendor learned what pulp needed first: 0.4.0 namespaced its variables as
+  `--contribution-heatmap-*` (old names aliased for one release, checked identical to 0.3.1 in
+  Chromium) and 0.4.1 turned an empty corner `<th>`, found by our axe gate, into a `<td>`. New public
+  semantic tokens `--color-data-sequential-0…4` in both brands; pulp's dark ramp retuned by eye
+  (800/500/400/200) because 900 vanished against level 0. `Dialog.vendor.test.ts` became
+  `internal/vendors.test.ts`, one entry per vendor. `color-scheme: inherit` on the root is for the
+  scrollbar, not the tokens: with the vendor's `light dark` forced back on, the tokens still followed
+  `data-scheme` in Chromium. Verified: lint, typecheck, build, check:package, check:size (1.8 kB
+  with the vendor, budget 2.2), check:floor, test:dist (API snapshot updated), test:storybook
+  (345), storybook:build, test:site. Not green: `pnpm test` fails one DatePicker test that looks
+  for today's date by name ("Wednesday, September 23, 2026"); it fails identically with the
+  Heatmap work stashed, so it predates this branch. The four Heatmap matrix stories have no
+  screenshot baselines yet: run `visual-update.yml` on the PR.
 - 2026-09-22: group 12 fixed on `hydration-fix`. ToastProvider gates its portal on a new internal
   `useHydrated()` (`useSyncExternalStore`, not `setState` in an effect, which `react-hooks` 7 rejects).
   `src/test/hydration.test.tsx` server-renders with `document` hidden and hydrates; it failed on the
@@ -806,6 +821,14 @@ renders the portal. The first client render must match the server.
       `localhost:3000/en` (repro: load any page with the dev overlay on).
 
 Found with `pulp-react` 0.4.0; the same code is in 0.3.0.
+
+**Found 2026-09-23**
+- [ ] `DatePicker.test.tsx` "the button opens a dialog with the calendar; choosing a day sets the
+      value and closes" fails on 2026-09-23 (on `hydration-fix`, without the Heatmap work): it
+      looks up today's day button by its full name. Pin the date (`vi.setSystemTime`) or find the
+      day relative to the grid.
+- [ ] Heatmap matrix baselines: run `visual-update.yml` on the `heatmap` PR, then review the four
+      PNGs.
 
 ## Later (not scheduled)
 Deprecation codemods, Tailwind preset emitted from tokens, Figma sync (Tokens Studio reads the
