@@ -117,6 +117,10 @@ copy of the working tree, two-minute loops. Colima only, never Docker Desktop; f
   (a client entry fails there with "Named export 'createContext' not found", which is what an App
   Router consumer saw before). Adding a hook to a leaf moves it to the client: that test makes it
   a decision.
+- **Every compound part is exported flat as well** (`MenuTrigger` beside `Menu.Trigger`): export the
+  part function from its file and re-export it from the entry's `index.ts`. A Server Component reaches
+  a client entry as a client reference, which has no static properties, so only the flat name works
+  there. The manifest records `flat` per part; `test:dist` fails when one is missing.
 - **The first client render matches the server's.** Output that exists only in the browser (a portal
   into an element the component creates) is gated on `useHydrated()` (`src/internal/useHydrated.ts`,
   `useSyncExternalStore`), never on `typeof document`, which differs between the two renders, and

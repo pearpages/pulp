@@ -52,7 +52,7 @@ export interface TableHeaderProps extends HTMLAttributes<HTMLTableSectionElement
   children: ReactNode;
 }
 
-function TableHeader({ className, ref, children, ...rest }: TableHeaderProps) {
+export function TableHeader({ className, ref, children, ...rest }: TableHeaderProps) {
   return (
     <thead {...rest} ref={ref} className={classes(styles.header, className)}>
       {children}
@@ -67,7 +67,7 @@ export interface TableColumnProps extends Omit<ThHTMLAttributes<HTMLTableCellEle
   children: ReactNode;
 }
 
-function TableColumn({ align = 'start', className, ref, children, ...rest }: TableColumnProps) {
+export function TableColumn({ align = 'start', className, ref, children, ...rest }: TableColumnProps) {
   return (
     <th {...rest} ref={ref} scope="col" className={classes(styles.column, className)} data-align={align}>
       {children}
@@ -84,7 +84,7 @@ export interface TableBodyProps extends HTMLAttributes<HTMLTableSectionElement> 
   children?: ReactNode;
 }
 
-function TableBody({ emptyMessage, columnCount, className, ref, children, ...rest }: TableBodyProps) {
+export function TableBody({ emptyMessage, columnCount, className, ref, children, ...rest }: TableBodyProps) {
   // An empty array, `false` from a guard, or nothing at all all mean "no rows".
   const empty = children == null || children === false || (Array.isArray(children) && children.flat().filter(Boolean).length === 0);
   return (
@@ -107,7 +107,7 @@ export interface TableRowProps extends HTMLAttributes<HTMLTableRowElement> {
   children: ReactNode;
 }
 
-function TableRow({ className, ref, children, ...rest }: TableRowProps) {
+export function TableRow({ className, ref, children, ...rest }: TableRowProps) {
   return (
     <tr {...rest} ref={ref} className={classes(styles.row, className)}>
       {children}
@@ -124,7 +124,7 @@ export interface TableCellProps extends Omit<TdHTMLAttributes<HTMLTableCellEleme
   children?: ReactNode;
 }
 
-function TableCell({ align = 'start', rowHeader = false, className, ref, children, ...rest }: TableCellProps) {
+export function TableCell({ align = 'start', rowHeader = false, className, ref, children, ...rest }: TableCellProps) {
   const shared = { ...rest, className: classes(styles.cell, className), 'data-align': align };
   // Two returns rather than a dynamic tag: `th | td` as one element type costs
   // the declaration build more memory than it is worth.

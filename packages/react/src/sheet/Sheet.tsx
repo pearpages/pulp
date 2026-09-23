@@ -55,7 +55,7 @@ export function Sheet(props: SheetProps) {
  * The docked dialog element. Dialog's `Content`, with `placement` and the class that maps pulp's
  * `--sheet-*` tokens onto the vendor's sheet variables.
  */
-function SheetContent({ placement = 'end', dragToDismiss = true, className, children, ...rest }: SheetContentProps) {
+export function SheetContent({ placement = 'end', dragToDismiss = true, className, children, ...rest }: SheetContentProps) {
   const draggable = placement === 'bottom' && dragToDismiss;
   return (
     <Dialog.Content {...rest} placement={placement} className={classes(styles.content, className)} data-draggable={draggable ? '' : undefined}>

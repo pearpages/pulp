@@ -66,15 +66,20 @@ const props = (doc) =>
       description: prop.description,
     }));
 
-// Sub-components (`Card.Header`) nest under their parent as `parts`: they are
-// reached through the parent, not imported on their own.
+// Sub-components (`Card.Header`) nest under their parent as `parts`. Each is also exported flat
+// (`CardHeader`, the `flat` field), which is the only form a Server Component can use from a
+// client entry.
 // Server-safe or client, from the same analysis that stamps 'use client' on the built entries.
 const client = clientEntries(Object.fromEntries(componentFiles.map(({ dir }) => [dir, `src/${dir}/index.ts`])));
 
 const components = componentFiles.flatMap(({ dir, file }) => {
   const docs = parser.parse(file);
   // Hooks (useField), helpers (lower-case names) and sub-components (Card.Header) are not root components.
-  const roots = docs.filter((doc) => /^[A-Z]/.test(doc.displayName) && !doc.displayName.includes('.') && !/^use[A-Z]/.test(doc.displayName));
+  // A part is also exported flat (`CardHeader`), so its flat name is not a root either.
+  const flatParts = new Set(docs.filter((doc) => doc.displayName.includes('.')).map((doc) => doc.displayName.replace('.', '')));
+  const roots = docs.filter(
+    (doc) => /^[A-Z]/.test(doc.displayName) && !doc.displayName.includes('.') && !/^use[A-Z]/.test(doc.displayName) && !flatParts.has(doc.displayName),
+  );
   return roots.map((doc) => ({
     name: doc.displayName,
     description: doc.description,
@@ -87,7 +92,7 @@ const components = componentFiles.flatMap(({ dir, file }) => {
     props: props(doc),
     parts: docs
       .filter((part) => part.displayName.startsWith(`${doc.displayName}.`))
-      .map((part) => ({ name: part.displayName, description: part.description, props: props(part) })),
+      .map((part) => ({ name: part.displayName, flat: part.displayName.replace('.', ''), description: part.description, props: props(part) })),
   }));
 });
 

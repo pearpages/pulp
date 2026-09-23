@@ -73,6 +73,10 @@ into the `vendor` layer so pulp's styles win:
 Skip the first if you never render a `Dialog` or `Sheet`, and the second if you never render a
 `Heatmap`.
 
+Compound components have dotted parts (`Menu.Trigger`), each also exported flat from the same
+entry (`MenuTrigger`). In a React Server Component use the flat names: a client entry reaches it as
+a client reference, which has no static properties.
+
 ```tsx
 import { Button } from '@pearpages/pulp-react/button';
 

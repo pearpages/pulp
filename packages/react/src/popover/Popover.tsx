@@ -92,7 +92,7 @@ interface PopoverTriggerProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   children: ReactNode;
 }
 
-function PopoverTrigger({ asChild = false, onClick, ref, children, ...rest }: PopoverTriggerProps) {
+export function PopoverTrigger({ asChild = false, onClick, ref, children, ...rest }: PopoverTriggerProps) {
   const popover = usePopover('Popover.Trigger');
   const props = {
     ...rest,
@@ -131,7 +131,7 @@ interface PopoverContentProps extends Omit<HTMLAttributes<HTMLDivElement>, 'titl
   children: ReactNode;
 }
 
-function PopoverContent({ title, className, ref, children, ...rest }: PopoverContentProps) {
+export function PopoverContent({ title, className, ref, children, ...rest }: PopoverContentProps) {
   const popover = usePopover('Popover.Content');
   const { refs, positionStyle, placement } = popover.floating;
   const contentRef = useRef<HTMLDivElement | null>(null);
@@ -193,7 +193,7 @@ interface PopoverCloseProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   children: ReactNode;
 }
 
-function PopoverClose({ asChild = false, onClick, children, ...rest }: PopoverCloseProps) {
+export function PopoverClose({ asChild = false, onClick, children, ...rest }: PopoverCloseProps) {
   const popover = usePopover('Popover.Close');
   const props = {
     ...rest,

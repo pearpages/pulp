@@ -146,7 +146,7 @@ interface DataGridHeaderProps {
   children: ReactNode;
 }
 
-function DataGridHeader({ className, children }: DataGridHeaderProps) {
+export function DataGridHeader({ className, children }: DataGridHeaderProps) {
   const { selectionMode, selectionBehavior } = useTableOptions();
   return (
     <AriaTableHeader className={classes(styles.header, className)}>
@@ -175,7 +175,7 @@ interface DataGridColumnProps {
   children: ReactNode;
 }
 
-function DataGridColumn({ id, allowsSorting = false, isRowHeader = false, align = 'start', className, children }: DataGridColumnProps) {
+export function DataGridColumn({ id, allowsSorting = false, isRowHeader = false, align = 'start', className, children }: DataGridColumnProps) {
   return (
     <AriaColumn id={id} allowsSorting={allowsSorting} isRowHeader={isRowHeader} className={classes(styles.column, className)} data-align={align}>
       {children}
@@ -193,7 +193,7 @@ interface DataGridBodyProps<T extends { id: string }> {
   children: ReactNode | ((item: T) => ReactElement);
 }
 
-function DataGridBody<T extends { id: string }>({ items, emptyMessage = 'No rows', className, children }: DataGridBodyProps<T>) {
+export function DataGridBody<T extends { id: string }>({ items, emptyMessage = 'No rows', className, children }: DataGridBodyProps<T>) {
   return (
     <AriaTableBody items={items} className={classes(styles.body, className)} renderEmptyState={() => <div className={styles.empty}>{emptyMessage}</div>}>
       {children}
@@ -209,7 +209,7 @@ interface DataGridRowProps {
   children: ReactNode;
 }
 
-function DataGridRow({ id, className, children }: DataGridRowProps) {
+export function DataGridRow({ id, className, children }: DataGridRowProps) {
   const { selectionBehavior } = useTableOptions();
   const registry = useContext(RowIdsContext);
   useEffect(() => (id !== undefined && registry ? registry.add(id) : undefined), [id, registry]);
@@ -232,7 +232,7 @@ interface DataGridCellProps {
   children: ReactNode;
 }
 
-function DataGridCell({ align = 'start', className, children }: DataGridCellProps) {
+export function DataGridCell({ align = 'start', className, children }: DataGridCellProps) {
   return (
     <AriaCell className={classes(styles.cell, className)} data-align={align}>
       {children}

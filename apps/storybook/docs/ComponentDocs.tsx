@@ -100,11 +100,14 @@ export function ComponentDocs() {
       {entry.parts.length > 0 && (
         <>
           <Subheading>Parts</Subheading>
+          <Markdown>
+            {`Every part is also exported under a flat name from the same entry. In a React Server Component use the flat name: a client entry reaches it as a client reference, which has no static properties, so the dotted form is \`undefined\` there.`}
+          </Markdown>
           <Unstyled>
             <ul className={styles.parts}>
               {entry.parts.map((part) => (
                 <li key={part.name}>
-                  <code>{part.name}</code>
+                  <code>{part.name}</code> (or <code>{part.flat}</code>)
                   {part.props.length > 0 && <> · {part.props.map((prop) => prop.name).join(', ')}</>}
                   {part.description && <Markdown>{part.description}</Markdown>}
                 </li>

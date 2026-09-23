@@ -15,6 +15,18 @@ this file holds what is left to do, ticked with a date when done. Ordered within
 
 ## Session log
 
+- 2026-09-23 (evening): 0.5.0 published (react, tokens; css 0.1.6) and bitepals confirmed the
+  hydration overlay gone. `flat-parts`: every compound part is exported flat as well (`MenuTrigger`
+  beside `Menu.Trigger`, 43 names over 11 components), from its entry and the barrel; the part
+  functions are exported from their files so the declarations can name them, and the manifest skips
+  those names as roots and records each part's `flat`. `test:dist` checks each flat name is the same
+  function as the dotted one (manifest-driven, plus Dialog and Sheet's modals-backed parts by name),
+  and failed with one export removed. Proven in a scratch Next.js 16.3 app from the packed tarball:
+  a Server Component page with `<Menu.Trigger>` fails `next build` ("Element type is invalid …
+  got: undefined"), the same page with `MenuTrigger`, `TabsList` and `DialogTrigger` prerenders.
+  Barrel 16.89 → 17.17 kB, budget 17 → 17.5 kB.
+- 2026-09-23: Maturity assessment — verdict **Not ready** (A2 and A8 missing), 11 gaps added as
+  group 13; README badges were already open in group 5.
 - 2026-09-23 (later): both branches pushed. PR #3 (`hydration-fix`) is green after 1c2aef3 unanchored
   the DatePicker day query (React Aria names today's cell "Today, Wednesday, …"). Pere merges it,
   since the tool may not. PR #4 (`heatmap`, rebased onto that fix) got its four baselines from
@@ -814,7 +826,7 @@ renders the portal. The first client render must match the server.
       properties of undefined (reading 'body')". The content now shows on `open && useHydrated()`, and
       the focus effect keys on that too (keyed on `open` alone, a `defaultOpen` would open unfocused).
       Hydrate cases in `hydration.test.tsx` (defaultOpen and controlled); they failed on the old code.
-- [ ] **Compound parts are `undefined` in a Server Component** (found 2026-09-22 in the Next.js probe):
+- [x] **Compound parts are `undefined` in a Server Component** (found 2026-09-22 in the Next.js probe; fixed 2026-09-23 on `flat-parts`, see the session log):
       `<Menu.Trigger>` written in an App Router page (no `'use client'`) fails the prerender with
       "Element type is invalid … got: undefined". A client entry reaches a Server Component as a client
       reference, which has no static properties, so every `X.Part` of a client entry (Menu, Popover,
@@ -824,9 +836,9 @@ renders the portal. The first client render must match the server.
       document "from a Server Component, use the flat names", and add an RSC page that uses them to
       the group 9 consumer fixture. The `test:dist` react-server import cannot see this (it never
       renders through a client reference).
-- [ ] Release 0.5.0 (was 0.4.1; Heatmap's `minor` changeset makes it 0.5.0 for react and tokens;
+- [x] Release 0.5.0 (published 2026-09-23: react and tokens 0.5.0, css 0.1.6; was 0.4.1; Heatmap's `minor` changeset makes it 0.5.0 for react and tokens;
       `toast-hydration` and `overlay-ssr-open` ride along). Then bitepals bumps `@pearpages/pulp-react` and checks the overlay is gone on
-      `localhost:3000/en` (repro: load any page with the dev overlay on).
+      `localhost:3000/en` (repro: load any page with the dev overlay on); bitepals confirmed 2026-09-23).
 
 Found with `pulp-react` 0.4.0; the same code is in 0.3.0.
 
@@ -841,6 +853,46 @@ Found with `pulp-react` 0.4.0; the same code is in 0.3.0.
       `#e24e21`/`#ff6b3d`/`#ff8b66`, light `#ff7a52`/`#f45a2a`), where pulp's ramp is even. Retune
       `color.data.sequential.*` in `semantic/bitepals.json` for even lightness steps, then
       `visual-update.yml`.
+
+**13. Advertising readiness (maturity assessment, 2026-09-23)**
+- [ ] **A8 Open Graph image and Twitter card.** A link to pulp.pearpages.com previews with no
+      image on LinkedIn or X: the live page has `og:title/description/url` only. Add `og:image`
+      (1200×630, absolute URL), `og:image:alt`, `og:type`, `twitter:card=summary_large_image` to
+      `apps/storybook/.storybook/manager-head.html`, and the card in `apps/storybook/public/`
+      (og-card skill).
+- [ ] **A2 `architecture.md`.** No single page shows how the pieces fit (tokens → dist outputs →
+      css → react entries → manifest → Storybook → deploy/publish); it is spread over `CLAUDE.md`
+      "Layout" and "Theming model". Write it with one or two diagrams (diagram skill); the tokens
+      tier diagram in group 5 can come from it.
+- [ ] **C17 README says things the code no longer does.** The Develop block's
+      `pnpm --filter storybook exec playwright install chromium` names a package that does not
+      exist (it is `pulp-docs`), and the component table lists 39 of the 47 in the manifest
+      (missing Avatar, Chip, Divider, EmptyState, Link, SegmentedControl, Radio, DialogSystem;
+      "Toast" is `ToastProvider`). Fix both in `README.md`, or generate the list from the manifest.
+- [ ] **A6 README first screen.** No install line (`npm i @pearpages/pulp-react
+      @pearpages/pulp-tokens @pearpages/pulp-css`) before the CSS imports, and no image: add the
+      OG card (or a brand × scheme screenshot) under the title.
+- [ ] **A1 `CLAUDE.md` is a manual, not a pointer page.** 273 lines / 22 kB, and it ends in a
+      "Status / Done (2026-09-14)" diary that `tasks.md` already owns. Move the diary out and
+      consider moving the long rule explanations into `PRINCIPLES.md`/`architecture.md` with
+      one-line pointers.
+- [ ] **D22 Bundle size in the README.** Every entry has a budget (2.1 kB brotli for a leaf,
+      `packages/react/.size-limit.js`) and CI enforces it, but the README never says so; one line
+      with the number is a selling point.
+- [ ] **B10 package metadata.** None of the four packages has `keywords` or `bugs`; only
+      `pulp-react` has `homepage`. Add all three to `packages/{tokens,css,react,icons}/package.json`
+      so npm search and the npm page link back to the docs.
+- [ ] **B11 GitHub topics.** The repo has a description and website but no topics (e.g.
+      `design-system`, `design-tokens`, `react`, `css`, `storybook`, `accessibility`). Set with
+      `gh repo edit --add-topic`.
+- [ ] **B12 Site basics.** No `apple-touch-icon` in `manager-head.html`; the tab title stays
+      "storybook - Storybook" (vendor, not configurable, see CLAUDE.md), so the OG title carries
+      the name in previews.
+- [ ] **C16 GitHub Releases.** Tags exist (v0.2.2…v0.4.0) but no GitHub Releases; the per-package
+      CHANGELOGs are good. Create a release per tag from the CHANGELOG entry (or have
+      `publish.yml` do it) so the repo page shows "Latest".
+- [ ] **E23 Contributor files (nice-to-have).** No `CONTRIBUTING.md` (the Storybook Contributing
+      page exists; a root file can point to it), `SECURITY.md`, or issue/PR templates.
 
 ## Later (not scheduled)
 Deprecation codemods, Tailwind preset emitted from tokens, Figma sync (Tokens Studio reads the
