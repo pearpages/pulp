@@ -1,5 +1,20 @@
 # @pearpages/pulp-react
 
+## 0.5.0
+
+### Minor Changes
+
+- 0bc8c65: New `Heatmap` (`@pearpages/pulp-react/heatmap`, Data): a GitHub-style contribution calendar built on `@pearpages/heatmap`, themed by pulp's tokens and following brand and `data-scheme`. Import `@pearpages/heatmap/styles.css` into the vendor layer when you use it. The entry re-exports the data helpers (`groupByWeeks`, `createDateString`, `parseDateString`, `getLastYearPeriod`, `getLastMonthPeriod`) and their types.
+  
+  New semantic tokens `--color-data-sequential-0` … `-4` in both brands: a sequential scale on the brand's own hue for density data, inverted in dark so more is always brighter (decision record 009).
+
+### Patch Changes
+
+- dd04d87: `Menu` and `Popover` can be server-rendered open. With `defaultOpen` (or a controlled `open` that starts true) their content read `document.body` during the render, so a server render threw. The content now renders closed on the server and opens one commit after hydration, moving focus in as it does after a click.
+- dd04d87: `ToastProvider` no longer breaks hydration. Under server rendering (Next.js), the first client render portalled the notifications region while the server had rendered nothing there, so React discarded the server HTML and re-rendered the whole app on every page load. The region now mounts one commit after hydration; no toast can be fired before then, so nothing is lost. `DialogSystem` was checked the same way and was already safe. Both are covered by a server-render-then-hydrate test.
+- Updated dependencies [0bc8c65]
+  - @pearpages/pulp-tokens@0.5.0
+
 ## 0.4.0
 
 ### Minor Changes
