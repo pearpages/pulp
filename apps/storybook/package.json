@@ -9,6 +9,7 @@
     "test": "vitest",
     "test:site": "node scripts/check-built-site.mjs && playwright test",
     "test:visual:update": "PULP_VISUAL=1 playwright test --update-snapshots",
+    "og-card": "node scripts/og-card.mjs",
     "test:run": "pnpm --filter @pearpages/pulp-react manifest && vitest run",
     "typecheck": "pnpm --filter @pearpages/pulp-react manifest && tsc --noEmit"
   },

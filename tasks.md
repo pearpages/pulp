@@ -15,6 +15,12 @@ this file holds what is left to do, ticked with a date when done. Ordered within
 
 ## Session log
 
+- 2026-09-23 (night): group 13 closed on `advertising` except README's "why native CSS" and the
+  bitepals scale retune. Share card rendered from the tokens (`og-card` script, PNG because LinkedIn
+  does not reliably take WebP), OG/Twitter tags and a build check for them; `architecture.md`;
+  README first screen, measured sizes, component list guarded by `test:dist`; package metadata;
+  CONTRIBUTING, SECURITY, templates; GitHub topics; Releases v0.1.0…v0.5.0 created, and
+  `publish.yml` makes one per tag from now on.
 - 2026-09-23 (evening): 0.5.0 published (react, tokens; css 0.1.6) and bitepals confirmed the
   hydration overlay gone. `flat-parts`: every compound part is exported flat as well (`MenuTrigger`
   beside `Menu.Trigger`, 43 names over 11 components), from its entry and the barrel; the part
@@ -409,7 +415,7 @@ copy, not to re-derive.
       references, done) with a screenshot of both brands.
 - [ ] Tokens page: explain the tiers with a diagram; show the `space.unit` density knob live.
 - [x] Per-component docs page pattern (2026-09-15, see cross-cutting).
-- [ ] README: badges (CI, npm), a short "why native CSS, why no Tailwind in a library" section.
+- [ ] README: badges (CI, npm) (done 2026-09-23), a short "why native CSS, why no Tailwind in a library" section.
 - [ ] `Dialog.stories.tsx` still carries a `parameters.docs.description` although the rule is that
       stories carry none (the docs page reads the JSDoc). Either a one-line "known exception" note in
       the file saying why, or remove it and put the vendor-stylesheet sentence in Dialog's JSDoc.
@@ -855,43 +861,43 @@ Found with `pulp-react` 0.4.0; the same code is in 0.3.0.
       `visual-update.yml`.
 
 **13. Advertising readiness (maturity assessment, 2026-09-23)**
-- [ ] **A8 Open Graph image and Twitter card.** A link to pulp.pearpages.com previews with no
+- [x] **A8 Open Graph image and Twitter card.** (2026-09-23: `og/card.html` → `public/og.png` by `pnpm --filter pulp-docs og-card`; tags in `manager-head.html`; `check-links.mjs` fails the build when a tag or file is missing.) A link to pulp.pearpages.com previews with no
       image on LinkedIn or X: the live page has `og:title/description/url` only. Add `og:image`
       (1200×630, absolute URL), `og:image:alt`, `og:type`, `twitter:card=summary_large_image` to
       `apps/storybook/.storybook/manager-head.html`, and the card in `apps/storybook/public/`
       (og-card skill).
-- [ ] **A2 `architecture.md`.** No single page shows how the pieces fit (tokens → dist outputs →
+- [x] **A2 `architecture.md`.** (2026-09-23: three diagrams, checked to render with Mermaid 11; it took CLAUDE.md's Layout and Theming.) No single page shows how the pieces fit (tokens → dist outputs →
       css → react entries → manifest → Storybook → deploy/publish); it is spread over `CLAUDE.md`
       "Layout" and "Theming model". Write it with one or two diagrams (diagram skill); the tokens
       tier diagram in group 5 can come from it.
-- [ ] **C17 README says things the code no longer does.** The Develop block's
+- [x] **C17 README says things the code no longer does.** (2026-09-23: fixed; `test:dist` now compares the README's list and count with the manifest.) The Develop block's
       `pnpm --filter storybook exec playwright install chromium` names a package that does not
       exist (it is `pulp-docs`), and the component table lists 39 of the 47 in the manifest
       (missing Avatar, Chip, Divider, EmptyState, Link, SegmentedControl, Radio, DialogSystem;
       "Toast" is `ToastProvider`). Fix both in `README.md`, or generate the list from the manifest.
-- [ ] **A6 README first screen.** No install line (`npm i @pearpages/pulp-react
+- [x] **A6 README first screen.** (2026-09-23: badges, the card, an install line.) No install line (`npm i @pearpages/pulp-react
       @pearpages/pulp-tokens @pearpages/pulp-css`) before the CSS imports, and no image: add the
       OG card (or a brand × scheme screenshot) under the title.
-- [ ] **A1 `CLAUDE.md` is a manual, not a pointer page.** 273 lines / 22 kB, and it ends in a
+- [x] **A1 `CLAUDE.md` is a manual, not a pointer page.** (2026-09-23: diary, Layout and Theming moved out, 273 → 239 lines; the CI rules stay, they are what it is for.) 273 lines / 22 kB, and it ends in a
       "Status / Done (2026-09-14)" diary that `tasks.md` already owns. Move the diary out and
       consider moving the long rule explanations into `PRINCIPLES.md`/`architecture.md` with
       one-line pointers.
-- [ ] **D22 Bundle size in the README.** Every entry has a budget (2.1 kB brotli for a leaf,
+- [x] **D22 Bundle size in the README.** (2026-09-23: measured, half the entries under 1 kB, Toast 3.1 kB.) Every entry has a budget (2.1 kB brotli for a leaf,
       `packages/react/.size-limit.js`) and CI enforces it, but the README never says so; one line
       with the number is a selling point.
-- [ ] **B10 package metadata.** None of the four packages has `keywords` or `bugs`; only
+- [x] **B10 package metadata.** (2026-09-23, with a patch changeset so the npm pages pick it up.) None of the four packages has `keywords` or `bugs`; only
       `pulp-react` has `homepage`. Add all three to `packages/{tokens,css,react,icons}/package.json`
       so npm search and the npm page link back to the docs.
-- [ ] **B11 GitHub topics.** The repo has a description and website but no topics (e.g.
+- [x] **B11 GitHub topics.** (2026-09-23: ten topics.) The repo has a description and website but no topics (e.g.
       `design-system`, `design-tokens`, `react`, `css`, `storybook`, `accessibility`). Set with
       `gh repo edit --add-topic`.
-- [ ] **B12 Site basics.** No `apple-touch-icon` in `manager-head.html`; the tab title stays
+- [x] **B12 Site basics.** (2026-09-23: `apple-touch-icon.png`, rendered by the same script.) No `apple-touch-icon` in `manager-head.html`; the tab title stays
       "storybook - Storybook" (vendor, not configurable, see CLAUDE.md), so the OG title carries
       the name in previews.
-- [ ] **C16 GitHub Releases.** Tags exist (v0.2.2…v0.4.0) but no GitHub Releases; the per-package
+- [x] **C16 GitHub Releases.** (2026-09-23: v0.1.0…v0.5.0 created from the CHANGELOGs by `scripts/release-notes.mjs`; `publish.yml` now creates one per tag.) Tags exist (v0.2.2…v0.4.0) but no GitHub Releases; the per-package
       CHANGELOGs are good. Create a release per tag from the CHANGELOG entry (or have
       `publish.yml` do it) so the repo page shows "Latest".
-- [ ] **E23 Contributor files (nice-to-have).** No `CONTRIBUTING.md` (the Storybook Contributing
+- [x] **E23 Contributor files (nice-to-have).** (2026-09-23: CONTRIBUTING, SECURITY via private vulnerability reporting, bug template, PR template.) No `CONTRIBUTING.md` (the Storybook Contributing
       page exists; a root file can point to it), `SECURITY.md`, or issue/PR templates.
 
 ## Later (not scheduled)

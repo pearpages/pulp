@@ -1,5 +1,11 @@
 # pulp
 
+[![npm](https://img.shields.io/npm/v/@pearpages/pulp-react?label=%40pearpages%2Fpulp-react)](https://www.npmjs.com/package/@pearpages/pulp-react)
+[![deploy](https://github.com/pearpages/pulp/actions/workflows/deploy.yml/badge.svg)](https://github.com/pearpages/pulp/actions/workflows/deploy.yml)
+[![license: MIT](https://img.shields.io/badge/license-MIT-blue)](LICENSE)
+
+[![pulp: the same button, data scale and accent colours in two brands, light and dark](apps/storybook/public/og.png)](https://pulp.pearpages.com)
+
 A design system built to outlive its frameworks. By [Pere Pages](https://pearpages.com)
 ([@pearpages](https://github.com/pearpages)). Tokens are the product; CSS and React
 components are renderers of them.
@@ -12,11 +18,14 @@ components are renderers of them.
 - **Docs = tests**: every Storybook story runs in a browser with accessibility checks. Each
   component's docs page (usage, accessibility, do/don't, status) is rendered from its JSDoc
   through the component manifest, so humans and coding agents read one source.
+- **Small**: one entry per component, so importing `@pearpages/pulp-react/button` ships the button.
+  Half the entries are under 1 kB brotli and the largest (Toast) is 3.1 kB, React Aria and the
+  modal and heatmap vendors aside; every entry has a budget CI enforces (2.1 kB for a leaf).
 - **Guardrails**: inline styles and literal colours fail lint; stale token output fails CI; every
   entry has a bundle-size budget; a vendor renaming a variable fails a test; a generated
   component manifest tells coding agents what exists.
 
-Docs: https://pulp.pearpages.com
+**Docs and live examples: [pulp.pearpages.com](https://pulp.pearpages.com)**
 
 Reference consumer: [perepages.com](https://perepages.com) takes its colour from
 `@pearpages/pulp-tokens` (semantic names only, both schemes) and its theme toggle from
@@ -26,10 +35,29 @@ Reference consumer: [perepages.com](https://perepages.com) takes its colour from
 | --- | --- |
 | `@pearpages/pulp-tokens` | `tokens.css`, `tokens.json` |
 | `@pearpages/pulp-css` | `index.css` (layers + tokens + reset + base) |
-| `@pearpages/pulp-react` | `Text`, `Heading`, `Icon`, `VisuallyHidden`, `Stack`, `Inline`, `Field`, `Button`, `IconButton`, `TextField`, `Textarea`, `Select`, `Checkbox`, `Switch`, `RadioGroup`, `Card`, `Tabs`, `Dialog`, `Sheet`, `Spinner`, `Badge`, `Alert`, `Toast`, `Progress`, `Skeleton`, `Tooltip`, `Popover`, `Menu`, `Accordion`, `Combobox`, `Listbox`, `Picker`, `Calendar`, `DatePicker`, `Slider`, `Table`, `DataGrid`, `Pagination`, `Heatmap` |
+| `@pearpages/pulp-react` | 47 components, one entry each (below) |
 | `@pearpages/pulp-icons` | stroke icons as React components, tree-shakeable |
 
+## Components
+
+- **Typography**: `Heading`, `Link`, `Text`
+- **Layout**: `Card`, `Divider`, `Inline`, `Stack`
+- **Actions**: `Button`, `Chip`, `IconButton`
+- **Forms**: `Calendar`, `Checkbox`, `Combobox`, `DatePicker`, `Field`, `Listbox`, `Picker`, `RadioGroup`,
+  `Radio`, `SegmentedControl`, `Select`, `Slider`, `Switch`, `TextField`, `Textarea`
+- **Navigation**: `Accordion`, `Pagination`, `Tabs`
+- **Overlays**: `DialogSystem`, `Dialog`, `Menu`, `Popover`, `Sheet`, `Tooltip`
+- **Feedback**: `Alert`, `Badge`, `EmptyState`, `Progress`, `Skeleton`, `Spinner`, `ToastProvider`
+- **Data**: `DataGrid`, `Heatmap`, `Table`
+- **Utilities**: `Avatar`, `Icon`, `VisuallyHidden`
+
 ## Use
+
+```sh
+npm install @pearpages/pulp-react @pearpages/pulp-tokens @pearpages/pulp-css
+```
+
+React 19 is a peer dependency. Then, in your stylesheet:
 
 ```css
 @import "@pearpages/pulp-css";
@@ -91,14 +119,15 @@ import { Button } from '@pearpages/pulp-react/button';
 pnpm install
 pnpm storybook          # docs and stories on :6006
 pnpm test               # unit tests
-pnpm test:storybook     # stories as browser tests (once: pnpm --filter storybook exec playwright install chromium)
+pnpm test:storybook     # stories as browser tests (once: pnpm --filter pulp-docs exec playwright install chromium)
 pnpm build && pnpm test:dist && pnpm check:package && pnpm check:size && pnpm check:floor
 pnpm verify             # everything CI runs, in the same order; run it before pushing to main
 ```
 
-See `PRINCIPLES.md` for why the system is shaped this way, `docs/decisions/` for the
+See `PRINCIPLES.md` for why the system is shaped this way, `architecture.md` for how the pieces
+fit together, `CONTRIBUTING.md` to send a change, `docs/decisions/` for the
 decisions that applied them (the headless layer, positioning, the vendor dialog), and
-`CLAUDE.md` for the rules CI enforces and the current status.
+`CLAUDE.md` for the rules CI enforces. What is pending is in `tasks.md`.
 
 ## License
 

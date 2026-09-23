@@ -2,12 +2,26 @@
   "name": "@pearpages/pulp-tokens",
   "version": "0.5.0",
   "description": "pulp design tokens. W3C Design Tokens (DTCG) JSON in, CSS custom properties and a resolved JSON manifest out. Two brands, light and dark via light-dark().",
+  "keywords": [
+    "design-tokens",
+    "dtcg",
+    "design-system",
+    "css-custom-properties",
+    "theming",
+    "dark-mode",
+    "tailwind",
+    "react-native"
+  ],
   "license": "MIT",
   "author": "Pere Pages <hello@pearpages.com> (https://pearpages.com)",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/pearpages/pulp.git",
     "directory": "packages/tokens"
+  },
+  "homepage": "https://pulp.pearpages.com",
+  "bugs": {
+    "url": "https://github.com/pearpages/pulp/issues"
   },
   "type": "module",
   "sideEffects": false,

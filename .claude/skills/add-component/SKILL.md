@@ -38,6 +38,9 @@ CI checks what the pattern promises.
    bullets, one per line. The story title the scaffold wrote (`Components/<Category>/<Name>`)
    must match the tag; the dist smoke test checks. `pnpm build` fails without status and accessibility; that
    block is the Docs page and the Status page, and agents read it from the manifest.
+   A compound component (`Name.Part`) also exports each part flat: `export function NamePart` in
+   the file, `export { NamePart } from './Name'` in `index.ts`. A Server Component can only use
+   the flat name; `test:dist` fails when one is missing.
 
 4. **Tests.** Behaviour with Testing Library and an `axe` check for every state. Run:
    ```
@@ -54,7 +57,9 @@ CI checks what the pattern promises.
 6. **Finish.** `pnpm lint && pnpm typecheck && pnpm build && pnpm test:dist && pnpm check:package && pnpm check:size`
    (the bundle budget: a leaf entry is allowed 2.1 kB brotli; add an override in
    `packages/react/.size-limit.js` only with a reason), then `pnpm changeset` (minor for a
-   new component). Tick the item in `tasks.md`.
+   new component). Add the name to its category in the README's "Components" list and bump the
+   count in the package table (`test:dist` compares both with the manifest). Tick the item in
+   `tasks.md`.
 
 ## Reference
 

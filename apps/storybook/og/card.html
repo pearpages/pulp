@@ -1,0 +1,96 @@
+<!doctype html>
+<!-- The Open Graph card (1200×630). Rendered to public/og.png by scripts/og-card.mjs, which inlines
+     tokens.css, the brand typefaces and the wordmark at the three markers below. Every colour,
+     radius and family is a token: the four tiles are one sample under each brand × scheme. -->
+<html lang="en" data-brand="pulp" data-scheme="dark">
+  <head>
+    <meta charset="utf-8" />
+    <style>
+      /*FONTS*/
+      /*TOKENS*/
+
+      * { box-sizing: border-box; margin: 0; }
+      html, body { inline-size: 1200px; block-size: 630px; }
+      body {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        gap: calc(var(--space-unit) * 12);
+        align-items: center;
+        padding: calc(var(--space-unit) * 16);
+        background: var(--color-surface-base);
+        color: var(--color-text-default);
+        font-family: var(--font-family-body);
+      }
+      .intro { display: grid; gap: calc(var(--space-unit) * 7); }
+      .intro__mark { display: block; block-size: 64px; inline-size: auto; }
+      .intro__title {
+        font-family: var(--font-family-display);
+        font-size: 60px;
+        line-height: 1.05;
+        letter-spacing: -0.02em;
+        font-weight: 700;
+      }
+      .intro__line {
+        font-family: var(--font-family-mono);
+        font-size: 20px;
+        color: var(--color-text-muted);
+      }
+      .intro__url {
+        font-family: var(--font-family-mono);
+        font-size: 20px;
+        color: var(--color-action-text);
+      }
+
+      .matrix { display: grid; grid-template-columns: repeat(2, 232px); gap: calc(var(--space-unit) * 4); }
+      .tile {
+        display: grid;
+        gap: calc(var(--space-unit) * 4);
+        padding: calc(var(--space-unit) * 5);
+        border-radius: var(--radius-surface);
+        border: 1px solid var(--color-border-default);
+        background: var(--color-surface-raised);
+        color: var(--color-text-default);
+        font-family: var(--font-family-body);
+      }
+      .tile__label { font-family: var(--font-family-mono); font-size: 14px; color: var(--color-text-muted); }
+      .tile__button {
+        justify-self: start;
+        padding: calc(var(--space-unit) * 2) calc(var(--space-unit) * 5);
+        border-radius: var(--button-radius, var(--radius-control));
+        background: var(--color-action-primary);
+        color: var(--color-text-on-action);
+        font-family: var(--font-family-body);
+        font-size: 17px;
+        font-weight: 600;
+      }
+      .tile__scale { display: flex; gap: 4px; }
+      .tile__cell { inline-size: 26px; block-size: 26px; border-radius: 5px; }
+      .tile__cell:nth-child(1) { background: var(--color-data-sequential-0); }
+      .tile__cell:nth-child(2) { background: var(--color-data-sequential-1); }
+      .tile__cell:nth-child(3) { background: var(--color-data-sequential-2); }
+      .tile__cell:nth-child(4) { background: var(--color-data-sequential-3); }
+      .tile__cell:nth-child(5) { background: var(--color-data-sequential-4); }
+      .tile__accents { display: flex; gap: 6px; }
+      .tile__dot { inline-size: 18px; block-size: 18px; border-radius: var(--radius-full); }
+      .tile__dot:nth-child(1) { background: var(--color-accent-1); }
+      .tile__dot:nth-child(2) { background: var(--color-accent-2); }
+      .tile__dot:nth-child(3) { background: var(--color-accent-3); }
+      .tile__dot:nth-child(4) { background: var(--color-accent-4); }
+      .tile__dot:nth-child(5) { background: var(--color-accent-5); }
+      .tile__dot:nth-child(6) { background: var(--color-accent-6); }
+      .tile__dot:nth-child(7) { background: var(--color-accent-7); }
+      .tile__dot:nth-child(8) { background: var(--color-accent-8); }
+    </style>
+  </head>
+  <body>
+    <main class="intro">
+      <!--WORDMARK-->
+      <h1 class="intro__title">A design system built to outlive its frameworks.</h1>
+      <p class="intro__line">W3C tokens → CSS → React<br />two brands · light and dark · CI guardrails</p>
+      <p class="intro__url">pulp.pearpages.com</p>
+    </main>
+    <div class="matrix">
+      <!--TILES-->
+    </div>
+  </body>
+</html>

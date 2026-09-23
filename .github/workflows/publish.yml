@@ -8,7 +8,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write # the GitHub Release at the end
   id-token: write # npm trusted publishing (OIDC) + provenance
 
 jobs:
@@ -68,3 +68,17 @@ jobs:
             tarball=$(cd "$dir" && pnpm pack --pack-destination "$RUNNER_TEMP" | tail -n1)
             npm publish "$tarball" --access public --provenance --loglevel verbose
           done
+
+      # The GitHub Release, with the notes of the packages whose version this tag changed, from their
+      # CHANGELOGs. Skipped when it exists, so re-running a failed publish does not fail here.
+      - name: GitHub Release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          if gh release view "$GITHUB_REF_NAME" >/dev/null 2>&1; then
+            echo "Release $GITHUB_REF_NAME exists, skipping"
+          else
+            node scripts/release-notes.mjs "$GITHUB_REF_NAME" > "$RUNNER_TEMP/notes.md"
+            gh release create "$GITHUB_REF_NAME" --verify-tag --title "$GITHUB_REF_NAME" --notes-file "$RUNNER_TEMP/notes.md"
+          fi
