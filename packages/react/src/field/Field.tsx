@@ -124,7 +124,7 @@ interface FieldLabelProps extends LabelHTMLAttributes<HTMLLabelElement> {
   children: ReactNode;
 }
 
-function FieldLabel({ as = 'label', visuallyHidden = false, className, ref, children, ...rest }: FieldLabelProps) {
+export function FieldLabel({ as = 'label', visuallyHidden = false, className, ref, children, ...rest }: FieldLabelProps) {
   const field = useField();
   const marker = field.required && (
     <span className={styles.required} aria-hidden="true">
@@ -154,7 +154,7 @@ interface FieldControlProps {
   children: ReactNode;
 }
 
-function FieldControl({ 'aria-describedby': extra, children }: FieldControlProps) {
+export function FieldControl({ 'aria-describedby': extra, children }: FieldControlProps) {
   const field = useField();
   return renderAsChild('Field.Control', children, {
     id: field.id,
@@ -170,7 +170,7 @@ interface FieldTextProps extends HTMLAttributes<HTMLParagraphElement> {
   children?: ReactNode;
 }
 
-function FieldDescription({ className, ref, children, ...rest }: FieldTextProps) {
+export function FieldDescription({ className, ref, children, ...rest }: FieldTextProps) {
   const field = useField();
   const { register } = field;
   useLayoutEffect(() => register('description'), [register]);
@@ -181,7 +181,7 @@ function FieldDescription({ className, ref, children, ...rest }: FieldTextProps)
   );
 }
 
-function FieldError({ className, ref, children, ...rest }: FieldTextProps) {
+export function FieldError({ className, ref, children, ...rest }: FieldTextProps) {
   const field = useField();
   const { register } = field;
   useLayoutEffect(() => register('error'), [register]);

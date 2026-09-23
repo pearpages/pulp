@@ -141,7 +141,7 @@ interface AccordionItemProps extends HTMLAttributes<HTMLDivElement> {
   children: ReactNode;
 }
 
-function AccordionItem({ value, disabled = false, className, ref, children, ...rest }: AccordionItemProps) {
+export function AccordionItem({ value, disabled = false, className, ref, children, ...rest }: AccordionItemProps) {
   const accordion = useAccordion('Accordion.Item');
   const open = accordion.openValues.has(value);
   return (
@@ -164,7 +164,7 @@ interface AccordionTriggerProps extends ButtonHTMLAttributes<HTMLButtonElement> 
   children: ReactNode;
 }
 
-function AccordionTrigger({ className, onClick, ref, children, ...rest }: AccordionTriggerProps) {
+export function AccordionTrigger({ className, onClick, ref, children, ...rest }: AccordionTriggerProps) {
   const accordion = useAccordion('Accordion.Trigger');
   const item = useItem('Accordion.Trigger');
   const triggerId = `${accordion.baseId}-${item.value}-trigger`;
@@ -201,7 +201,7 @@ interface AccordionPanelProps extends HTMLAttributes<HTMLDivElement> {
   children: ReactNode;
 }
 
-function AccordionPanel({ className, ref, children, ...rest }: AccordionPanelProps) {
+export function AccordionPanel({ className, ref, children, ...rest }: AccordionPanelProps) {
   const accordion = useAccordion('Accordion.Panel');
   const item = useItem('Accordion.Panel');
   return (

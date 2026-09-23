@@ -105,7 +105,7 @@ interface MenuTriggerProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   children: ReactNode;
 }
 
-function MenuTrigger({ asChild = false, onClick, onKeyDown, ref, children, ...rest }: MenuTriggerProps) {
+export function MenuTrigger({ asChild = false, onClick, onKeyDown, ref, children, ...rest }: MenuTriggerProps) {
   const menu = useMenu('Menu.Trigger');
   const props = {
     ...rest,
@@ -141,7 +141,7 @@ interface MenuContentProps extends HTMLAttributes<HTMLDivElement> {
   children: ReactNode;
 }
 
-function MenuContent({ className, onKeyDown, ref, children, ...rest }: MenuContentProps) {
+export function MenuContent({ className, onKeyDown, ref, children, ...rest }: MenuContentProps) {
   const menu = useMenu('Menu.Content');
   const { refs, positionStyle, placement } = menu.floating;
   const contentRef = useRef<HTMLDivElement | null>(null);
@@ -228,7 +228,7 @@ interface MenuItemProps extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'o
   children: ReactNode;
 }
 
-function MenuItem({ onSelect, tone = 'default', icon, disabled, className, onClick, ref, children, ...rest }: MenuItemProps) {
+export function MenuItem({ onSelect, tone = 'default', icon, disabled, className, onClick, ref, children, ...rest }: MenuItemProps) {
   const menu = useMenu('Menu.Item');
   return (
     <button
@@ -254,7 +254,7 @@ function MenuItem({ onSelect, tone = 'default', icon, disabled, className, onCli
   );
 }
 
-function MenuSeparator({ className, ...rest }: HTMLAttributes<HTMLDivElement>) {
+export function MenuSeparator({ className, ...rest }: HTMLAttributes<HTMLDivElement>) {
   return <div {...rest} role="separator" className={classes(styles.separator, className)} />;
 }
 

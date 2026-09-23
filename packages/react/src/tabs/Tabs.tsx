@@ -102,7 +102,7 @@ interface TabsListProps extends HTMLAttributes<HTMLDivElement> {
   children: ReactNode;
 }
 
-function TabsList({ className, ref, onKeyDown, children, ...rest }: TabsListProps) {
+export function TabsList({ className, ref, onKeyDown, children, ...rest }: TabsListProps) {
   const { orientation, activation, setValue } = useTabs('Tabs.List');
   const rove = useRovingFocus({
     orientation,
@@ -136,7 +136,7 @@ interface TabsTabProps extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'va
   children: ReactNode;
 }
 
-function TabsTab({ value, disabled, className, onClick, ref, children, ...rest }: TabsTabProps) {
+export function TabsTab({ value, disabled, className, onClick, ref, children, ...rest }: TabsTabProps) {
   const tabs = useTabs('Tabs.Tab');
   const selected = tabs.value === value;
   return (
@@ -170,7 +170,7 @@ interface TabsPanelProps extends HTMLAttributes<HTMLDivElement> {
   children?: ReactNode;
 }
 
-function TabsPanel({ value, className, ref, children, ...rest }: TabsPanelProps) {
+export function TabsPanel({ value, className, ref, children, ...rest }: TabsPanelProps) {
   const tabs = useTabs('Tabs.Panel');
   const selected = tabs.value === value;
   return (

@@ -82,15 +82,15 @@ export function Card<E extends HTMLElement = HTMLElement>({
   return <section {...(props as HTMLAttributes<HTMLElement>)}>{children}</section>;
 }
 
-function CardHeader({ className, ref, ...rest }: SlotProps) {
+export function CardHeader({ className, ref, ...rest }: SlotProps) {
   return <div {...rest} ref={ref} className={classes(styles.header, className)} />;
 }
 
-function CardBody({ className, ref, ...rest }: SlotProps) {
+export function CardBody({ className, ref, ...rest }: SlotProps) {
   return <div {...rest} ref={ref} className={classes(styles.body, className)} />;
 }
 
-function CardFooter({ className, ref, ...rest }: SlotProps) {
+export function CardFooter({ className, ref, ...rest }: SlotProps) {
   return <div {...rest} ref={ref} className={classes(styles.footer, className)} />;
 }
 

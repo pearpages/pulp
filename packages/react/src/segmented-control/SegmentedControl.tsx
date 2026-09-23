@@ -128,7 +128,7 @@ export interface SegmentedControlNavProps extends HTMLAttributes<HTMLElement> {
  * not tabs: following a link loads another page, and a screen reader user
  * should be told so.
  */
-function SegmentedControlNav({ label, look = 'segmented', size = 'md', fullWidth = false, className, ref, children, ...rest }: SegmentedControlNavProps) {
+export function SegmentedControlNav({ label, look = 'segmented', size = 'md', fullWidth = false, className, ref, children, ...rest }: SegmentedControlNavProps) {
   return (
     <nav {...rest} ref={ref} aria-label={label} className={classes(styles.root, className)} data-look={look} data-size={size} data-full-width={fullWidth ? '' : undefined}>
       <ul role="list" className={styles.list}>
@@ -148,7 +148,7 @@ export interface SegmentedControlNavItemProps<E extends HTMLElement = HTMLAnchor
 }
 
 /** One link of a `SegmentedControl.Nav`. With `asChild`, the router's own link takes the styles. */
-function SegmentedControlNavItem<E extends HTMLElement = HTMLAnchorElement>({ current = false, asChild = false, className, ref, children, ...rest }: SegmentedControlNavItemProps<E>) {
+export function SegmentedControlNavItem<E extends HTMLElement = HTMLAnchorElement>({ current = false, asChild = false, className, ref, children, ...rest }: SegmentedControlNavItemProps<E>) {
   const segment = classes(styles.segment, className);
   const ariaCurrent = current ? ('page' as const) : undefined;
   return (

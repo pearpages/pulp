@@ -24,7 +24,7 @@ const manifest = JSON.parse(readFileSync(resolve(DIST, 'component-manifest.json'
     do: string[];
     dont: string[];
     props: Prop[];
-    parts: Array<{ name: string; props: Prop[] }>;
+    parts: Array<{ name: string; flat: string; props: Prop[] }>;
   }>;
 };
 const entryOf = (component: { import: string }) => component.import.match(/pulp-react\/([a-z-]+)'/)?.[1] ?? '';
@@ -50,6 +50,31 @@ describe('dist', () => {
     const entry = await import(resolve(DIST, `${entryOf(component)}.js`));
     expect(typeof barrel[component.name]).toBe('function');
     expect(entry[component.name]).toBe(barrel[component.name]);
+  });
+
+  // A Server Component reaches a client entry as a client reference: only its named exports
+  // survive, never `Menu.Trigger`. Every part therefore has a flat export, the same function.
+  it.each(manifest.components.filter((component) => component.parts.length > 0))('$name: every part is exported flat as well', async (component) => {
+    const entry = await import(resolve(DIST, `${entryOf(component)}.js`));
+    const barrel = await import(resolve(DIST, 'index.js'));
+    for (const part of component.parts) {
+      const key = part.name.split('.')[1] ?? '';
+      expect(entry[part.flat], `${part.flat} from '@pearpages/pulp-react/${entryOf(component)}'`).toBe(entry[component.name][key]);
+      expect(barrel[part.flat], `${part.flat} from the barrel`).toBe(entry[part.flat]);
+    }
+  });
+
+  // Dialog's parts, and most of Sheet's, are @pearpages/modals components, which docgen does not
+  // see, so the manifest lists none of them. Named here instead.
+  it.each([
+    ['dialog', 'Dialog', ['Trigger', 'Content', 'Header', 'Title', 'Description', 'Close', 'Body', 'Footer']],
+    ['sheet', 'Sheet', ['Trigger', 'Content', 'Header', 'Title', 'Description', 'Close', 'Body', 'Footer']],
+  ] as const)('%s: the vendor-backed parts are exported flat as well', async (file, root, keys) => {
+    const entry = await import(resolve(DIST, `${file}.js`));
+    for (const key of keys) {
+      expect(typeof entry[`${root}${key}`], `${root}${key}`).toBe('function');
+      expect(entry[`${root}${key}`]).toBe(entry[root][key]);
+    }
   });
 
   it.each(manifest.components)('$name: ships layered, token-only CSS and types', (component) => {
