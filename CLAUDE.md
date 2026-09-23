@@ -5,18 +5,11 @@ Read this before touching anything. `PRINCIPLES.md` is the source of truth for *
 system is shaped this way; the rules below are the subset that lint and CI check. They apply
 to humans and coding agents alike.
 
-## Layout
+## Where things are
 
-| Path | What |
-| --- | --- |
-| `packages/tokens` | W3C DTCG JSON in `tokens/{primitives,semantic,component}`; `scripts/build.mjs` → `dist/tokens.css` + `dist/tokens.json`, and two views of the semantic tier, `dist/theme.css` (Tailwind v4) + `dist/native.{js,cjs,d.ts}` (React Native), record 005 (all **committed**, CI checks drift) |
-| `packages/css` | `layers.css`, `reset.css`, `base.css`, `index.css`. No build. Framework-agnostic |
-| `packages/react` | components in `src/<name>/` (five files each), tsup build, one entry per component |
-| `packages/icons` | `svg/` sources → generated `src/icons/*.tsx` (committed; `check` on drift); one barrel, tree-shakeable |
-| `apps/storybook` | docs + stories-as-tests (package `pulp-docs`); deploys to pulp.pearpages.com. `.storybook/theme.ts` derives the site theme from `tokens.json`; `scripts/fonts.mjs` copies the brand typefaces for the manager; `public/` holds the mark and wordmarks |
-| `.claude/skills/add-component` | the scaffold procedure for a new component |
-| `PRINCIPLES.md` | the ten design principles; rendered as the Storybook introduction |
-| `docs/decisions` | decision records (headless layer, positioning, Sheet, Menu, token outputs); rendered as the Storybook "Decisions" page |
+`architecture.md` maps the packages, the token tiers and theming axes, and the workflows (with
+diagrams). `PRINCIPLES.md` is the why, `docs/decisions/` the records, `tasks.md` the pending work and
+session log, `.claude/skills/add-component` the procedure for a new component.
 
 ## Commands (run from the repo root)
 
@@ -180,18 +173,8 @@ copy of the working tree, two-minute loops. Colima only, never Docker Desktop; f
 
 ## Theming model
 
-Two axes on `<html>` (or any element; brands nest):
-
-- `data-brand="pulp" | "bitepals"`: palette, radius, type families, `--space-unit` (density).
-- `data-scheme="light" | "dark"`, or none to follow the OS. Colours are `light-dark()` pairs.
-
-Tiers: primitive → semantic → component. A brand file maps primitives onto the semantic
-names. The component tier is declared once, on `:root`; a brand may restate a single component
-token in `tokens/component/<brand>/<component>.json` when the value is itself brand (bitepals'
-buttons are pills), and the tests hold it to the semantic layer and to names that already exist
-(record 007). `$extensions["com.pearpages.pulp"].dark` holds a dark counterpart;
-`.multiply` builds the spacing scale from `space.unit`. Shadows split into
-`--shadow-x-color` (light-dark) + geometry, because `light-dark()` only takes colours.
+`data-brand` and `data-scheme` on any element; primitive → semantic → component tiers. The full
+model is in `architecture.md` ("How a token reaches the screen").
 
 ## Toolchain facts worth knowing
 
@@ -246,31 +229,10 @@ trusted publishing: each package name must be registered on npmjs.com as a Trust
 be exactly `publish.yml` (not `deploy.yml`, which is the one with an environment): npm reports an
 entry that does not match the token as `OIDC token exchange error - package not found` →
 `ENEEDAUTH`, which is what blocked 0.1.0. After fixing the entry, `gh run rerun <id> --failed`
-resumes the tag's run; versions already on the registry are skipped.
+resumes the tag's run; versions already on the registry are skipped. The run ends by creating the GitHub Release
+from the CHANGELOG sections of the packages whose version the tag changed (`scripts/release-notes.mjs`).
 
 ## Status
 
-### Done (2026-09-14)
-- Workspace, tokens (two brands, light/dark, tests, drift check), CSS package, Button end to end,
-  Storybook with brand × scheme toolbar, tokens page, contributing docs, guardrails, CI/deploy/publish
-  workflows, component manifest, scaffold script + skill, `PRINCIPLES.md`.
-- Review pass (same day) against the principles, all fixed and verified:
-  Button `asChild` no longer runs the child handler when inert; `loading` uses `aria-disabled`
-  and keeps focus; icon-only buttons warn in dev without an accessible name; `ref` is generic
-  (`Button<HTMLAnchorElement>` with `asChild`); component CSS is in `@layer components` (asserted
-  in the dist smoke test); brand × scheme matrix stories run axe on all four combinations;
-  Stylelint rejects primitive tokens and spacing literals in components; `check:guardrails` probe in
-  `pnpm lint`; token tests enforce component→semantic references, dark counterparts, and WCAG AA
-  contrast for the pairs components produce; control sizes and focus ring moved to the semantic
-  tier; `workspace:^` internally and tokens as a peer dependency of react; browserslist and a
-  support policy; PRINCIPLES §1/§4 say what is portable and supported.
-- Contrast findings the matrix surfaced (design decisions, not bugs): on-action text is ink in pulp
-  dark and in bitepals both schemes (white on the brand orange is 2.8:1); `color.action.text` is a
-  separate accent for text on surfaces (ghost buttons, links) because the bitepals fill orange is
-  2.3:1 on cream; bitepals interaction states brighten instead of darken; faint text is promised
-  on base and raised surfaces only.
-
-### Pending
-
-The pending work, the tiered roadmap and the recommended order live in [`tasks.md`](tasks.md).
-Tick items there and add a one-line session summary above the list when a session ends.
+Pending work, the recommended order and the session log live in [`tasks.md`](tasks.md). Tick items
+there and add a one-line session summary at the top of its log when a session ends.

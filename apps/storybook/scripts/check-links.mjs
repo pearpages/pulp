@@ -62,8 +62,24 @@ for (const record of records) {
   if (!decisionsIndex.includes(`(${record})`)) problems.push(`docs/decisions/${record} is not listed in docs/decisions/README.md`);
 }
 
+// 5. The link preview: the built page names its share image and touch icon, and both files shipped.
+// A crawler never runs the manager's JavaScript, so the tags have to be in the static HTML.
+const head = read(resolve(STATIC, 'index.html'));
+const meta = (key) => head.match(new RegExp(`<meta (?:property|name)="${key}" content="([^"]*)"`))?.[1];
+for (const key of ['og:title', 'og:description', 'og:url', 'og:image', 'og:image:alt', 'twitter:card']) {
+  if (!meta(key)) problems.push(`index.html has no ${key} (apps/storybook/.storybook/manager-head.html)`);
+}
+const ORIGIN = 'https://pulp.pearpages.com/';
+for (const key of ['og:image', 'twitter:image']) {
+  const url = meta(key);
+  if (url && !url.startsWith(ORIGIN)) problems.push(`${key} must be an absolute ${ORIGIN} URL (got ${url})`);
+  else if (url && !existsSync(resolve(STATIC, url.slice(ORIGIN.length)))) problems.push(`${key} points at ${url}, which is not in storybook-static`);
+}
+const touchIcon = head.match(/<link rel="apple-touch-icon" href="\.\/([^"]+)"/)?.[1];
+if (!touchIcon || !existsSync(resolve(STATIC, touchIcon))) problems.push('the apple-touch-icon is not linked from index.html or not in storybook-static');
+
 if (problems.length) {
   console.error(`check-links: ${problems.length} problem(s)\n${problems.map((line) => `  ${line}`).join('\n')}`);
   process.exit(1);
 }
-console.log(`check-links: ${pages.length} pages, ${components.length} component links, ${literals} literal links, ${records.length} decision records.`);
+console.log(`check-links: ${pages.length} pages, ${components.length} component links, ${literals} literal links, ${records.length} decision records, link preview.`);

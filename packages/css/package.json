@@ -2,12 +2,23 @@
   "name": "@pearpages/pulp-css",
   "version": "0.1.6",
   "description": "pulp base styles: cascade layers, a reset, and body defaults on top of the tokens. Framework-agnostic; import once per app.",
+  "keywords": [
+    "design-system",
+    "css",
+    "cascade-layers",
+    "reset",
+    "design-tokens"
+  ],
   "license": "MIT",
   "author": "Pere Pages <hello@pearpages.com> (https://pearpages.com)",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/pearpages/pulp.git",
     "directory": "packages/css"
+  },
+  "homepage": "https://pulp.pearpages.com",
+  "bugs": {
+    "url": "https://github.com/pearpages/pulp/issues"
   },
   "type": "module",
   "sideEffects": true,

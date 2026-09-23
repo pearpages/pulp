@@ -52,6 +52,15 @@ describe('dist', () => {
     expect(entry[component.name]).toBe(barrel[component.name]);
   });
 
+  // The README's component list is the first thing a visitor reads: it drifted to 39 of 47 once.
+  it('the README lists every component, and the count is right', () => {
+    const readme = readFileSync(resolve(import.meta.dirname, '../../../../README.md'), 'utf8');
+    const section = readme.split('## Components')[1]?.split('\n## ')[0] ?? '';
+    const listed = [...section.matchAll(/`([A-Z][A-Za-z]+)`/g)].map(([, name]) => name);
+    expect([...listed].sort()).toEqual(manifest.components.map((c) => c.name).sort());
+    expect(readme).toContain(`${manifest.components.length} components, one entry each`);
+  });
+
   // A Server Component reaches a client entry as a client reference: only its named exports
   // survive, never `Menu.Trigger`. Every part therefore has a flat export, the same function.
   it.each(manifest.components.filter((component) => component.parts.length > 0))('$name: every part is exported flat as well', async (component) => {

@@ -2,6 +2,17 @@
   "name": "@pearpages/pulp-react",
   "version": "0.5.0",
   "description": "pulp React components. Accessible, token-driven, CSS modules, one entry per component.",
+  "keywords": [
+    "react",
+    "react-components",
+    "design-system",
+    "accessibility",
+    "a11y",
+    "design-tokens",
+    "react-aria",
+    "css-modules",
+    "server-components"
+  ],
   "license": "MIT",
   "author": "Pere Pages <hello@pearpages.com> (https://pearpages.com)",
   "repository": {
@@ -10,6 +21,9 @@
     "directory": "packages/react"
   },
   "homepage": "https://pulp.pearpages.com",
+  "bugs": {
+    "url": "https://github.com/pearpages/pulp/issues"
+  },
   "type": "module",
   "sideEffects": [
     "**/*.css"

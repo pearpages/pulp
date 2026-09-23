@@ -2,12 +2,23 @@
   "name": "@pearpages/pulp-icons",
   "version": "0.2.0",
   "description": "pulp icons: a curated set of stroke icons as React components, generated from SVG. Tree-shakeable, sized by font-size, coloured by currentColor.",
+  "keywords": [
+    "react",
+    "icons",
+    "svg",
+    "design-system",
+    "tree-shakeable"
+  ],
   "license": "MIT",
   "author": "Pere Pages <hello@pearpages.com> (https://pearpages.com)",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/pearpages/pulp.git",
     "directory": "packages/icons"
+  },
+  "homepage": "https://pulp.pearpages.com",
+  "bugs": {
+    "url": "https://github.com/pearpages/pulp/issues"
   },
   "type": "module",
   "sideEffects": false,
