@@ -15,6 +15,14 @@ this file holds what is left to do, ticked with a date when done. Ordered within
 
 ## Session log
 
+- 2026-09-23 (later): both branches pushed. PR #3 (`hydration-fix`) is green after 1c2aef3 unanchored
+  the DatePicker day query (React Aria names today's cell "Today, Wednesday, …"). Pere merges it,
+  since the tool may not. PR #4 (`heatmap`, rebased onto that fix) got its four baselines from
+  `visual-update.yml`. Reviewed: the scale reads less→more in all four, and dark inverts to
+  bright-is-more. bitepals' steps 2–4 are close (`#e24e21`/`#ff6b3d`/`#ff8b66` dark,
+  `#ff7a52`/`#f45a2a` light) next to pulp's even ramp: worth a retune pass. The same run shifted
+  Picker dark by 1/255 on 33 and 7 pixels, which is rasterisation noise. CI on #4 is green,
+  visual step included.
 - 2026-09-23: `Heatmap` (Data, experimental) on branch `heatmap`, cut from `hydration-fix` (so it
   merges after it). Built on `@pearpages/heatmap` ^0.4.1 the way Dialog is on modals; decision
   record 009. The vendor learned what pulp needed first: 0.4.0 namespaced its variables as
@@ -816,19 +824,23 @@ renders the portal. The first client render must match the server.
       document "from a Server Component, use the flat names", and add an RSC page that uses them to
       the group 9 consumer fixture. The `test:dist` react-server import cannot see this (it never
       renders through a client reference).
-- [ ] Release 0.4.1 (react patch; the `toast-hydration` and `overlay-ssr-open` changesets are
-      written). Then bitepals bumps `@pearpages/pulp-react` and checks the overlay is gone on
+- [ ] Release 0.5.0 (was 0.4.1; Heatmap's `minor` changeset makes it 0.5.0 for react and tokens;
+      `toast-hydration` and `overlay-ssr-open` ride along). Then bitepals bumps `@pearpages/pulp-react` and checks the overlay is gone on
       `localhost:3000/en` (repro: load any page with the dev overlay on).
 
 Found with `pulp-react` 0.4.0; the same code is in 0.3.0.
 
 **Found 2026-09-23**
-- [ ] `DatePicker.test.tsx` "the button opens a dialog with the calendar; choosing a day sets the
+- [x] `DatePicker.test.tsx` "the button opens a dialog with the calendar; choosing a day sets the
       value and closes" fails on 2026-09-23 (on `hydration-fix`, without the Heatmap work): it
-      looks up today's day button by its full name. Pin the date (`vi.setSystemTime`) or find the
-      day relative to the grid.
-- [ ] Heatmap matrix baselines: run `visual-update.yml` on the `heatmap` PR, then review the four
-      PNGs.
+      looks up today's day button by its full name. Fixed 2026-09-23 (1c2aef3): the regex lost its
+      `^`, since on the day itself React Aria prefixes the name with "Today, ".
+- [x] Heatmap matrix baselines: run `visual-update.yml` on the `heatmap` PR, then review the four
+      PNGs. Done 2026-09-23 (0992470), reviewed in the session log.
+- [ ] bitepals' data scale is uneven: a big jump at step 1, then steps 2–4 close together (dark
+      `#e24e21`/`#ff6b3d`/`#ff8b66`, light `#ff7a52`/`#f45a2a`), where pulp's ramp is even. Retune
+      `color.data.sequential.*` in `semantic/bitepals.json` for even lightness steps, then
+      `visual-update.yml`.
 
 ## Later (not scheduled)
 Deprecation codemods, Tailwind preset emitted from tokens, Figma sync (Tokens Studio reads the
