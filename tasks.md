@@ -15,6 +15,14 @@ this file holds what is left to do, ticked with a date when done. Ordered within
 
 ## Session log
 
+- 2026-09-22: group 12 fixed on `hydration-fix`. ToastProvider gates its portal on a new internal
+  `useHydrated()` (`useSyncExternalStore`, not `setState` in an effect, which `react-hooks` 7 rejects).
+  `src/test/hydration.test.tsx` server-renders with `document` hidden and hydrates; it failed on the
+  old code. DialogSystem proved already safe (the vendor's `useIsClient`). Checked in a scratch
+  Next.js 16 app from the packed tarball, `next dev` and `next start`: no console errors; the same
+  probe on published 0.4.0 shows "Hydration failed". Then Menu and Popover, which crashed a server
+  render when open on the first render, got the same gate. Two changesets; 0.4.1 not released yet.
+  The probe also found compound parts (`Menu.Trigger`) undefined in a Server Component: recorded.
 - 2026-09-21: group 11 shipped. `@pearpages/modals` 0.4.0 (Pere) taken as `^0.4.0`; PR #2 pushed,
   screenshots re-rendered by `visual-update.yml` (86 PNGs: every pulp shot that moved belongs to a
   component that was changed, every other bitepals shot moved for the weights, five components did
@@ -739,6 +747,65 @@ here. The full write-up, with the bitepals source to read and the order, is
       the output, and one loud comment has a `×`. `sassPlugin({ charset: false })`, guarded by a test
       in the playground suite, which runs against built `dist/`. Released in 0.4.0; pulp asserts it
       in `Dialog.vendor.test.ts` too.
+
+**12. Hydration mismatch from ToastProvider (found by bitepals, 2026-09-21, branch `hydration-fix`)**
+
+bitepals mounts `ToastProvider` around its whole app in Next.js 16. **Every page load fails hydration**,
+in production too (dev only shows the overlay): React logs "Hydration failed because the server
+rendered HTML didn't match the client" and re-renders the whole tree on the client, which costs load
+time and can flash. React's diff points at the toast region:
+
+```
+<ToastProvider placement="top-center" max={3}>
+  <ThemeProvider>
++   <section role="region" aria-label="Notifications" … className="Toast_region">
+-   <script>
+```
+
+Cause, `packages/react/src/toast/Toast.tsx`:
+
+```ts
+const [container] = useState(() => { if (typeof document === 'undefined') return undefined; … createElement('div') … });
+…
+{container ? createPortal(region, container) : null}
+```
+
+The server renders `null` (no `document`); the client's **first** render already has the element and
+renders the portal. The first client render must match the server.
+
+- [x] **ToastProvider** (2026-09-22): the portal renders only once `useHydrated()`
+      (`src/internal/useHydrated.ts`, `useSyncExternalStore`) is true, so the first client render is the
+      server's `null`; the region appears one commit later. Not `setContainer` in the effect as first
+      written: `react-hooks/set-state-in-effect` rejects it.
+- [x] **DialogSystem** (2026-09-22): no change needed. `@pearpages/modals`' `ModalRoot` returns `null`
+      until its own `useIsClient()` mounts, and the dialog portals into `#modal-root` inside it, so
+      nothing renders on the server or the first client render, open or not. The test pins it down,
+      including that an open dialog lands in `[data-pulp-dialogs]`.
+- [x] **A test that would have caught it** (2026-09-22, `src/test/hydration.test.tsx`): server-render
+      with `document` hidden, put the HTML in a container, `hydrateRoot` it with `onRecoverableError`
+      collecting errors, and assert none, for `ToastProvider` and for `DialogSystem` (with and without a
+      dialog open). The existing tests all mount on the client, so they cannot see this. Worth a place
+      in the group 9 consumer fixture too.
+- [x] **Menu and Popover crash a server render with `defaultOpen`** (found and fixed 2026-09-22): both
+      called `createPortal(…, document.body)` during the render, so `renderToString` threw "Cannot read
+      properties of undefined (reading 'body')". The content now shows on `open && useHydrated()`, and
+      the focus effect keys on that too (keyed on `open` alone, a `defaultOpen` would open unfocused).
+      Hydrate cases in `hydration.test.tsx` (defaultOpen and controlled); they failed on the old code.
+- [ ] **Compound parts are `undefined` in a Server Component** (found 2026-09-22 in the Next.js probe):
+      `<Menu.Trigger>` written in an App Router page (no `'use client'`) fails the prerender with
+      "Element type is invalid … got: undefined". A client entry reaches a Server Component as a client
+      reference, which has no static properties, so every `X.Part` of a client entry (Menu, Popover,
+      Dialog, Tabs, Accordion, …) is unusable there; only the root works. Works from any `'use client'`
+      file, which is where interactive code usually is, so not a 0.4.1 blocker. Recommended: also
+      export each part flat from its entry (`MenuTrigger`, `MenuContent`, …; `Menu.Trigger` stays),
+      document "from a Server Component, use the flat names", and add an RSC page that uses them to
+      the group 9 consumer fixture. The `test:dist` react-server import cannot see this (it never
+      renders through a client reference).
+- [ ] Release 0.4.1 (react patch; the `toast-hydration` and `overlay-ssr-open` changesets are
+      written). Then bitepals bumps `@pearpages/pulp-react` and checks the overlay is gone on
+      `localhost:3000/en` (repro: load any page with the dev overlay on).
+
+Found with `pulp-react` 0.4.0; the same code is in 0.3.0.
 
 ## Later (not scheduled)
 Deprecation codemods, Tailwind preset emitted from tokens, Figma sync (Tokens Studio reads the

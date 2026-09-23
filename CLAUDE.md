@@ -117,6 +117,12 @@ copy of the working tree, two-minute loops. Colima only, never Docker Desktop; f
   (a client entry fails there with "Named export 'createContext' not found", which is what an App
   Router consumer saw before). Adding a hook to a leaf moves it to the client: that test makes it
   a decision.
+- **The first client render matches the server's.** Output that exists only in the browser (a portal
+  into an element the component creates) is gated on `useHydrated()` (`src/internal/useHydrated.ts`,
+  `useSyncExternalStore`), never on `typeof document`, which differs between the two renders, and
+  never on `setState` in an effect (`react-hooks/set-state-in-effect`). ToastProvider broke hydration
+  on every bitepals page that way (0.3.0–0.4.0). `src/test/hydration.test.tsx` server-renders with
+  `document` hidden and hydrates; a new provider or always-mounted portal gets a case there.
 - **Per-person colour is an index, never a literal.** `color.accent.1…8` with `color.accent.on-1…8`
   (semantic, both brands, same hue order, each pair in the contrast tests); Avatar and Chip take
   `accent?: 1…8` and the consumer hashes an id to it. A new categorical use reads these tokens.
