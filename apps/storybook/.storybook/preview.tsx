@@ -8,7 +8,7 @@ import '@fontsource-variable/nunito';
 import '@pearpages/pulp-css';
 import './preview.css';
 import { ComponentDocs } from '../docs/ComponentDocs';
-import { makeTheme } from './theme';
+import { DocsContainer } from './DocsContainer';
 
 const BRANDS = ['pulp', 'bitepals'] as const;
 const SCHEMES = ['light', 'dark', 'system'] as const;
@@ -34,21 +34,31 @@ const preview: Preview = {
       },
     },
   },
-  initialGlobals: { brand: 'pulp', scheme: 'light' },
+  // "system" first, so the canvas and the docs pages open in the scheme the manager already follows.
+  initialGlobals: { brand: 'pulp', scheme: 'system' },
   // Every stories file gets a Docs page, rendered from the component manifest (one source: the JSDoc).
   tags: ['autodocs'],
   decorators: [
     (Story, context) => {
       const brand = String(context.globals.brand ?? 'pulp');
-      const scheme = String(context.globals.scheme ?? 'light');
-      // On <html>, so the docs pages and the canvas background follow too.
+      const scheme = String(context.globals.scheme ?? 'system');
+      const inDocs = context.viewMode === 'docs';
+      // A story on its own owns the page: brand and scheme go on <html>, so the canvas background
+      // follows. On a docs page <html> belongs to DocsContainer, and a story with its own globals
+      // (the matrix ones) is scoped to a wrapper instead: brands and schemes nest.
       useEffect(() => {
+        if (inDocs) return;
         const root = document.documentElement;
         root.dataset.brand = brand;
         if (scheme === 'system') delete root.dataset.scheme;
         else root.dataset.scheme = scheme;
-      }, [brand, scheme]);
-      return <Story />;
+      }, [inDocs, brand, scheme]);
+      if (!inDocs) return <Story />;
+      return (
+        <div className="docs-story-scope" data-brand={brand} data-scheme={scheme === 'system' ? undefined : scheme}>
+          <Story />
+        </div>
+      );
     },
   ],
   parameters: {
@@ -58,8 +68,8 @@ const preview: Preview = {
       // Violations fail the story in the Vitest run, not just warn in the panel.
       test: 'error',
     },
-    // Docs pages take the same token-derived theme as the manager (typography, link colour).
-    docs: { page: ComponentDocs, theme: makeTheme('light') },
+    // Docs pages take a token-derived theme in the toolbar's brand and scheme (DocsContainer.tsx).
+    docs: { page: ComponentDocs, container: DocsContainer },
     controls: { expanded: true },
     options: {
       // Storybook evaluates storySort statically, so the categories are a literal here; the dist

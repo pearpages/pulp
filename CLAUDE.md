@@ -204,9 +204,18 @@ model is in `architecture.md` ("How a token reaches the screen").
 - The Storybook manager is its own iframe: it loads none of the preview's CSS, so
   `manager-head.html` declares the brand `@font-face`s (files copied from fontsource by
   `scripts/fonts.mjs` into the gitignored `public/fonts`) and the favicon; the theme is built from
-  `tokens.json` (`theme.ts`) and follows the OS scheme, while docs pages take the light one. The
-  page title is the vendor's at both stages ("storybook - Storybook" before hydration, then
-  "<page> ⋅ Storybook"); neither is configurable without patching the manager.
+  `tokens.json` (`theme.ts`) and follows the OS scheme. The page title is the vendor's at both
+  stages ("storybook - Storybook" before hydration, then "<page> ⋅ Storybook"); neither is
+  configurable without patching the manager. Its toolbar shows the react package's version,
+  linking to that GitHub Release.
+- **Docs pages follow one scheme**: the toolbar's Scheme axis, `system` (the OS) by default.
+  `.storybook/DocsContainer.tsx` reads the toolbar globals, sets `data-brand`/`data-scheme` on
+  `<html>` for every docs page (MDX pages run no story decorator) and gives the docs chrome the
+  theme of that brand and scheme. On a docs page the story decorator leaves `<html>` alone and
+  scopes each story to a `.docs-story-scope` wrapper, so a matrix story shows its own brand and
+  scheme. Until 2026-09-24 the chrome was pinned light while the tokens followed the OS: on a dark
+  OS the Tokens and Status tables were `#ededf2` on white. `check-built-site.mjs` runs axe's
+  color-contrast on every MDX page and the Button docs page in OS light, OS dark and toolbar dark.
 - Storybook 10 has no native tag badges: `.storybook/manager.ts` appends "· experimental" to a
   component's sidebar label through `renderLabel`, reading the manifest. `storySort.order` nests
   (`['Components', [...categories], 'Patterns']`) and the category list comes from the manifest too.

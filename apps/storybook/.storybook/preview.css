@@ -40,3 +40,12 @@
 .sb-table-sticky {
   max-block-size: 16rem;
 }
+
+/* A story rendered on a docs page, in its own brand and scheme (preview.tsx): it paints its own
+   surface so a dark matrix story reads as dark inside a light page, and the other way round. */
+.docs-story-scope {
+  padding: var(--space-4);
+  border-radius: var(--radius-surface);
+  background: var(--color-surface-base);
+  color: var(--color-text-default);
+}

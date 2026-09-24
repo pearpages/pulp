@@ -17,10 +17,16 @@
  *      won the cascade. Checked by forcing each candidate rule inline and
  *      comparing computed values, so no selector specificity is re-implemented.
  *
- *   node scripts/check-built-site.mjs              every story
+ * Per docs page (the MDX pages and one component page), under the OS in light, the OS in dark,
+ * and the toolbar's Scheme set to dark: axe's color-contrast rule. The docs chrome, the token
+ * tables and the page's data-scheme have to agree on one scheme; on 2026-09-24 they did not, and
+ * the Tokens and Status tables were #ededf2 on white for every visitor with a dark OS.
+ *
+ *   node scripts/check-built-site.mjs              every story and docs page
  *   node scripts/check-built-site.mjs button menu  only ids containing a word
  */
 import { existsSync, readFileSync } from 'node:fs';
+import { createRequire } from 'node:module';
 import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { chromium } from 'playwright';
@@ -126,9 +132,17 @@ function inspect() {
 }
 
 const filters = process.argv.slice(2);
-const stories = Object.values(JSON.parse(readFileSync(resolve(STATIC, 'index.json'), 'utf8')).entries)
-  .filter((entry) => entry.type === 'story')
+const entries = Object.values(JSON.parse(readFileSync(resolve(STATIC, 'index.json'), 'utf8')).entries)
   .filter((entry) => !filters.length || filters.some((word) => entry.id.includes(word)));
+const stories = entries.filter((entry) => entry.type === 'story');
+// The MDX pages, and one component page to stand for the rest (they share ComponentDocs).
+const docsPages = entries.filter((entry) => entry.type === 'docs' && (!entry.id.startsWith('components-') || entry.id === 'components-actions-button--docs'));
+const DOCS_VIEWS = [
+  { label: 'OS light', colorScheme: 'light', globals: '' },
+  { label: 'OS dark', colorScheme: 'dark', globals: '' },
+  { label: 'toolbar dark', colorScheme: 'light', globals: '&globals=scheme:dark' },
+];
+const AXE = readFileSync(createRequire(import.meta.url).resolve('axe-core/axe.min.js'), 'utf8');
 
 const browser = await chromium.launch();
 const context = await browser.newContext({ viewport: { width: 1280, height: 900 }, reducedMotion: 'reduce' });
@@ -160,12 +174,34 @@ async function worker() {
 }
 
 await Promise.all(Array.from({ length: CONCURRENCY }, worker));
+
+for (const view of DOCS_VIEWS) {
+  const docsContext = await browser.newContext({ viewport: { width: 1280, height: 900 }, reducedMotion: 'reduce', colorScheme: view.colorScheme });
+  const page = await docsContext.newPage();
+  for (const entry of docsPages) {
+    const where = `${entry.id} (${view.label})`;
+    try {
+      await page.goto(`${origin}/iframe.html?viewMode=docs&id=${entry.id}${view.globals}`, { waitUntil: 'networkidle' });
+      await page.waitForSelector('.sbdocs-content', { timeout: 15000 });
+      await page.waitForTimeout(500);
+      await page.addScriptTag({ content: AXE });
+      const violations = await page.evaluate(async () => {
+        const result = await window.axe.run(document.querySelector('.sbdocs-content'), { runOnly: ['color-contrast'] });
+        return result.violations.flatMap((violation) => violation.nodes.map((node) => `${node.target.join(' ')}: ${node.any[0]?.message ?? violation.help}`));
+      });
+      if (violations.length) problems.push(`${where}: ${violations.length} contrast failure(s), e.g. ${violations[0]}`);
+    } catch (error) {
+      problems.push(`${where}: ${error.message.split('\n')[0]}`);
+    }
+  }
+  await docsContext.close();
+}
 await browser.close();
 server.close();
 
 if (problems.length) {
   const byStory = new Set(problems.map((line) => line.split(':')[0]));
-  console.error(`check-built-site: ${problems.length} problem(s) in ${byStory.size} of ${stories.length} stories\n${problems.slice(0, 80).map((line) => `  ${line}`).join('\n')}${problems.length > 80 ? `\n  … and ${problems.length - 80} more` : ''}`);
+  console.error(`check-built-site: ${problems.length} problem(s) in ${byStory.size} of ${stories.length} stories and ${docsPages.length * DOCS_VIEWS.length} docs views\n${problems.slice(0, 80).map((line) => `  ${line}`).join('\n')}${problems.length > 80 ? `\n  … and ${problems.length - 80} more` : ''}`);
   process.exit(1);
 }
-console.log(`check-built-site: ${stories.length} stories painted as their components asked, layers in order (${LAYERS.join(', ')}).`);
+console.log(`check-built-site: ${stories.length} stories painted as their components asked, layers in order (${LAYERS.join(', ')}); ${docsPages.length} docs pages readable in ${DOCS_VIEWS.map((view) => view.label).join(', ')}.`);
