@@ -1,6 +1,6 @@
 {
   "name": "@pearpages/pulp-css",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "description": "pulp base styles: cascade layers, a reset, and body defaults on top of the tokens. Framework-agnostic; import once per app.",
   "keywords": [
     "design-system",

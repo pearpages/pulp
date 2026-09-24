@@ -1,5 +1,11 @@
 # @pearpages/pulp-icons
 
+## 0.2.1
+
+### Patch Changes
+
+- 190eb4a: Package metadata: `keywords`, `homepage` (the docs site) and `bugs` (GitHub issues) on every package, so npm search finds them and each npm page links back to the docs.
+
 ## 0.2.0
 
 ### Minor Changes

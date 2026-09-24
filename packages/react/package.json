@@ -1,6 +1,6 @@
 {
   "name": "@pearpages/pulp-react",
-  "version": "0.5.0",
+  "version": "0.6.0",
   "description": "pulp React components. Accessible, token-driven, CSS modules, one entry per component.",
   "keywords": [
     "react",

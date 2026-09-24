@@ -1,6 +1,6 @@
 {
   "name": "@pearpages/pulp-icons",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "pulp icons: a curated set of stroke icons as React components, generated from SVG. Tree-shakeable, sized by font-size, coloured by currentColor.",
   "keywords": [
     "react",

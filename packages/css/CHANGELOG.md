@@ -1,5 +1,13 @@
 # @pearpages/pulp-css
 
+## 0.1.7
+
+### Patch Changes
+
+- 190eb4a: Package metadata: `keywords`, `homepage` (the docs site) and `bugs` (GitHub issues) on every package, so npm search finds them and each npm page links back to the docs.
+- Updated dependencies [190eb4a]
+  - @pearpages/pulp-tokens@0.5.1
+
 ## 0.1.6
 
 ### Patch Changes
