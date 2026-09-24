@@ -52,13 +52,23 @@ describe('dist', () => {
     expect(entry[component.name]).toBe(barrel[component.name]);
   });
 
-  // The README's component list is the first thing a visitor reads: it drifted to 39 of 47 once.
-  it('the README lists every component, and the count is right', () => {
-    const readme = readFileSync(resolve(import.meta.dirname, '../../../../README.md'), 'utf8');
+  // The component lists in the READMEs are the first thing a visitor reads, on GitHub and on the npm
+  // page: the root one drifted to 39 of 47 once, the package one to 40.
+  const componentsListed = (file: string) => {
+    const readme = readFileSync(resolve(import.meta.dirname, file), 'utf8');
     const section = readme.split('## Components')[1]?.split('\n## ')[0] ?? '';
-    const listed = [...section.matchAll(/`([A-Z][A-Za-z]+)`/g)].map(([, name]) => name);
-    expect([...listed].sort()).toEqual(manifest.components.map((c) => c.name).sort());
-    expect(readme).toContain(`${manifest.components.length} components, one entry each`);
+    return { readme, names: [...new Set([...section.matchAll(/`([A-Z][A-Za-z]+)`/g)].map(([, name]) => name))].sort() };
+  };
+  it.each(['../../../../README.md', '../../README.md'])('%s lists every component', (file) => {
+    expect(componentsListed(file).names).toEqual(manifest.components.map((c) => c.name).sort());
+  });
+
+  it("the root README's count is right, and the package README names every server-safe entry", () => {
+    expect(componentsListed('../../../../README.md').readme).toContain(`${manifest.components.length} components, one entry each`);
+    const { readme } = componentsListed('../../README.md');
+    const sentence = readme.match(/render on the server as they are: ([^(]+)\(/)?.[1] ?? '';
+    const named = sentence.split(',').map((name) => name.trim()).filter(Boolean).sort();
+    expect(named).toEqual(manifest.components.filter((c) => !c.client).map((c) => c.name).sort());
   });
 
   // A Server Component reaches a client entry as a client reference: only its named exports

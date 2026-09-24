@@ -16,4 +16,5 @@ The short version:
 - **Screenshots** are rendered in CI only. After an intended visual change, run
   `gh workflow run visual-update.yml --ref <branch>` and review the image diff of the commit it pushes.
 
-Bugs and ideas go to [GitHub issues](https://github.com/pearpages/pulp/issues).
+Bugs and ideas go to [GitHub issues](https://github.com/pearpages/pulp/issues). Everyone taking part follows the
+[code of conduct](CODE_OF_CONDUCT.md).

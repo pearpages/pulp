@@ -15,6 +15,10 @@ this file holds what is left to do, ticked with a date when done. Ordered within
 
 ## Session log
 
+- 2026-09-24 (later): the three maturity gaps closed: npm README brought in line and guarded, a code
+  of conduct, and 0.6.0 released (flat part names, package metadata).
+- 2026-09-24: Maturity assessment — verdict **Ready to advertise** (A all ✅), 3 gaps added to
+  group 13: the npm README, the 0.6.0 release, a code of conduct.
 - 2026-09-23 (night): group 13 closed on `advertising` except README's "why native CSS" and the
   bitepals scale retune. Share card rendered from the tokens (`og-card` script, PNG because LinkedIn
   does not reliably take WebP), OG/Twitter tags and a build check for them; `architecture.md`;
@@ -899,6 +903,18 @@ Found with `pulp-react` 0.4.0; the same code is in 0.3.0.
       `publish.yml` do it) so the repo page shows "Latest".
 - [x] **E23 Contributor files (nice-to-have).** (2026-09-23: CONTRIBUTING, SECURITY via private vulnerability reporting, bug template, PR template.) No `CONTRIBUTING.md` (the Storybook Contributing
       page exists; a root file can point to it), `SECURITY.md`, or issue/PR templates.
+
+- [x] **C17 The npm page's README is stale.** (2026-09-24: all 47, Heatmap's stylesheet, flat names under RSC, sizes; `test:dist` checks both READMEs' lists and the server-safe sentence.) `packages/react/README.md` (what npmjs.com shows for
+      `@pearpages/pulp-react`) lists 40 of 47 components (missing Avatar, Chip, Divider, EmptyState,
+      Heatmap, Link, SegmentedControl), never mentions `@pearpages/heatmap/styles.css`, and its
+      "React Server Components" section does not say to use the flat part names. Bring it in line
+      with the root README, and extend the `test:dist` README check to this file too.
+- [x] **B10 / C17 Release 0.6.0.** (2026-09-24.) `main` documents `MenuTrigger` & co. and the packages carry
+      keywords/homepage/bugs, but npm still has 0.5.0: a reader of the README who installs today
+      gets no flat names, and npm search sees no keywords. Two changesets are waiting
+      (`flat-parts` minor, `package-metadata` patch).
+- [x] **E23 Code of conduct (nice-to-have).** (2026-09-24: Contributor Covenant 2.1 by reference, reports to @pearpages on GitHub.) CONTRIBUTING, SECURITY and templates exist; no
+      `CODE_OF_CONDUCT.md`.
 
 ## Later (not scheduled)
 Deprecation codemods, Tailwind preset emitted from tokens, Figma sync (Tokens Studio reads the

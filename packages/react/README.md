@@ -50,56 +50,64 @@ theme everything inside the element they're on.
 
 ## Components
 
-- **Typography**: `Heading`, `Text`
-- **Layout**: `Card`, `Stack`, `Inline`
-- **Actions**: `Button`, `IconButton`
-- **Forms**: `Field`, `TextField`, `Textarea`, `Select`, `Checkbox`, `Switch`, `RadioGroup`,
-  `Radio`, `Combobox`, `Listbox`, `Picker`, `Calendar`, `DatePicker`, `Slider`
-- **Navigation**: `Tabs`, `Accordion`, `Pagination`
-- **Overlays**: `Dialog`, `DialogSystem`, `Sheet`, `Menu`, `Popover`, `Tooltip`
-- **Feedback**: `Alert`, `Badge`, `ToastProvider` and `useToast`, `Progress`, `Skeleton`, `Spinner`
-- **Data**: `Table` (a plain `<table>`, server-safe), `DataGrid` (sortable and selectable)
-- **Utilities**: `Icon`, `VisuallyHidden`
+- **Typography**: `Heading`, `Link`, `Text`
+- **Layout**: `Card`, `Divider`, `Inline`, `Stack`
+- **Actions**: `Button`, `Chip`, `IconButton`
+- **Forms**: `Calendar`, `Checkbox`, `Combobox`, `DatePicker`, `Field`, `Listbox`, `Picker`, `RadioGroup`,
+  `Radio`, `SegmentedControl`, `Select`, `Slider`, `Switch`, `TextField`, `Textarea`
+- **Navigation**: `Accordion`, `Pagination`, `Tabs`
+- **Overlays**: `DialogSystem`, `Dialog`, `Menu`, `Popover`, `Sheet`, `Tooltip`
+- **Feedback**: `Alert`, `Badge`, `EmptyState`, `Progress`, `Skeleton`, `Spinner`, `ToastProvider` (and `useToast`)
+- **Data**: `DataGrid` (sortable and selectable), `Heatmap` (a contribution calendar), `Table` (a plain `<table>`)
+- **Utilities**: `Avatar`, `Icon`, `VisuallyHidden`
 
-`Combobox`, `Listbox`, `Picker`, `Calendar`, `DatePicker`, `Slider`, `DataGrid`, `Pagination` and
-`Sheet` are **experimental**: their API may still change in a minor release. All but `Pagination` build on
-React Aria Components, installed with this package and tree-shaken per entry. Their props are
-pulp's, and dates cross the API as `YYYY-MM-DD` strings.
+A component marked **experimental** (on its docs page, and as `status` in the component manifest)
+may still change its API in a minor release. The complex widgets (Combobox, Listbox, Picker,
+Calendar, DatePicker, Slider, DataGrid) build on React Aria Components, installed with this package
+and tree-shaken per entry; their props are pulp's, and dates cross the API as `YYYY-MM-DD` strings.
 
-## Dialogs need one more stylesheet
+Each entry is small: half of them are under 1 kB brotli and the largest (Toast) is 3.1 kB, React
+Aria and the modal and heatmap vendors aside. Every entry has a size budget that CI enforces.
+
+## Dialogs and Heatmap need one more stylesheet
 
 `Dialog`, `DialogSystem` and `Sheet` (a dialog docked to an edge) build on
 [`@pearpages/modals`](https://www.npmjs.com/package/@pearpages/modals): the focus trap, the inert
-page behind the dialog, stacking, Escape and backdrop dismissal are its work, and it is installed
-with this package. pulp maps its own tokens onto the vendor's `--modal-*` variables, so a dialog
-follows `data-brand` and `data-scheme` like everything else.
+page behind the dialog, stacking, Escape and backdrop dismissal are its work. `Heatmap` builds on
+[`@pearpages/heatmap`](https://www.npmjs.com/package/@pearpages/heatmap). Both are installed with
+this package, and pulp maps its own tokens onto their variables (`--modal-*`,
+`--contribution-heatmap-*`), so they follow `data-brand` and `data-scheme` like everything else.
 
-The vendor's stylesheet is the one you import yourself. Put it in the `vendor` layer, which
+Their stylesheets are the ones you import yourself. Put them in the `vendor` layer, which
 `@pearpages/pulp-css` declares below `components`, so pulp's styles win:
 
 ```css
 @import "@pearpages/pulp-css";
 @import "@pearpages/modals/styles.css" layer(vendor);
+@import "@pearpages/heatmap/styles.css" layer(vendor);
 @import "@pearpages/pulp-react/styles.css";
 ```
 
-Every pulp stylesheet restates the layer order, so the result does not depend on which file your
-bundler loads first; importing `@pearpages/pulp-css` first stays the recommended setup.
-
-Then mount `DialogSystem` once near the root. Without the stylesheet a dialog opens unstyled; if
-you never render a `Dialog`, skip it.
+Skip the modals line if you never render a `Dialog` or `Sheet`, and the heatmap line if you never
+render a `Heatmap`. Every pulp stylesheet restates the layer order, so the result does not depend on
+which file your bundler loads first; importing `@pearpages/pulp-css` first stays the recommended
+setup. Mount `DialogSystem` once near the root; without the stylesheet a dialog opens unstyled.
 
 ## React Server Components
 
 Every entry that needs the browser ships with `'use client'` as its first statement, so on the
 Next.js App Router (or any RSC setup) you import pulp from a server file and it works: the client
 entries become client boundaries on their own. The leaf, hook-free entries carry no directive and
-render on the server as they are: Text, Heading, Stack, Inline, Card, Divider, Badge, Skeleton,
-Spinner, Progress, Icon, VisuallyHidden, Link, Button, IconButton, Alert, Pagination, EmptyState
-(the `client` field of the component manifest is the list). Two things to know:
+render on the server as they are: Alert, Badge, Button, Card, Divider, EmptyState, Heading, Heatmap,
+Icon, IconButton, Inline, Link, Pagination, Progress, Skeleton, Spinner, Stack, Table, Text,
+VisuallyHidden (the `client` field of the component manifest is the list). Three things to know:
 
 - The barrel (`@pearpages/pulp-react`) is a client module, because it re-exports everything. Import
   from the per-component entries (`@pearpages/pulp-react/text`) to keep server-safe ones on the server.
+- In a Server Component, write compound parts by their flat names: `MenuTrigger`, `TabsList`,
+  `DialogTitle`, not `Menu.Trigger`. A client entry reaches a server file as a client reference,
+  which carries only named exports, so the dotted form is `undefined` there ("Element type is
+  invalid"). Every part has a flat export from the same entry; in client files both forms work.
 - A function cannot cross from a server file into any component, pulp's or not. `<Button asChild>`
   around a link is fine in a Server Component; `<Button onClick={…}>` belongs in a client file.
 
