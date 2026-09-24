@@ -15,6 +15,15 @@ this file holds what is left to do, ticked with a date when done. Ordered within
 
 ## Session log
 
+- 2026-09-24 (docs scheme): Pere found grey text hard to read on Tokens and Status, no visible
+  version, and asked whether the docs have dark mode. They did, half: the chrome was pinned light, the
+  token tables followed the OS (MDX pages have no decorator), so a dark OS gave `#ededf2` on white;
+  matrix stories on a docs page also rewrote `<html>`. Now one scheme (toolbar, OS by default) via
+  `DocsContainer.tsx`, stories scoped on docs pages, wordmark per scheme, `v0.6.0` in the toolbar and
+  the masthead. Guard: axe color-contrast on docs pages in three views in `check-built-site.mjs`;
+  it failed on 9 page views before the fix.
+- 2026-09-24 (0.6.0 out): Maturity assessment — verdict **Ready to advertise**, every item ✅; 0
+  gaps added. Polish still open elsewhere: README "why native CSS" (group 5), bitepals scale retune.
 - 2026-09-24 (later): the three maturity gaps closed: npm README brought in line and guarded, a code
   of conduct, and 0.6.0 released (flat part names, package metadata).
 - 2026-09-24: Maturity assessment — verdict **Ready to advertise** (A all ✅), 3 gaps added to

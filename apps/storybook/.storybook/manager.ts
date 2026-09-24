@@ -1,5 +1,8 @@
-import { addons } from 'storybook/manager-api';
+import { createElement } from 'react';
+import { Link } from 'storybook/internal/components';
+import { addons, types } from 'storybook/manager-api';
 import { getPreferredColorScheme } from 'storybook/theming';
+import pkg from '../../../packages/react/package.json';
 import manifest from '../../../packages/react/dist/component-manifest.json';
 import { makeTheme } from './theme';
 
@@ -19,4 +22,20 @@ addons.setConfig({
       return state && state !== 'stable' ? `${item.name} · ${state}` : item.name;
     },
   },
+});
+
+// The released version, on every page: the react package's version, which the release tag follows.
+// It links to that GitHub Release (notes built from the CHANGELOGs by scripts/release-notes.mjs).
+addons.register('pulp/version', () => {
+  addons.add('pulp/version/tool', {
+    type: types.TOOL,
+    title: 'Version',
+    match: () => true,
+    render: () =>
+      createElement(
+        Link,
+        { href: `https://github.com/pearpages/pulp/releases/tag/v${pkg.version}`, target: '_blank', rel: 'noreferrer', cancel: false, secondary: true },
+        `v${pkg.version}`,
+      ),
+  });
 });

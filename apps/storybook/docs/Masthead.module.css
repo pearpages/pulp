@@ -15,6 +15,29 @@
   inline-size: auto;
 }
 
+/* The page's scheme is data-scheme on <html>, or the OS when it has none (DocsContainer.tsx). */
+.wordmarkDark {
+  display: none;
+}
+
+:root[data-scheme="dark"] .wordmarkLight {
+  display: none;
+}
+
+:root[data-scheme="dark"] .wordmarkDark {
+  display: block;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-scheme]) .wordmarkLight {
+    display: none;
+  }
+
+  :root:not([data-scheme]) .wordmarkDark {
+    display: block;
+  }
+}
+
 .tagline {
   margin: 0;
   color: var(--color-text-default);
