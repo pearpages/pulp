@@ -1,6 +1,7 @@
 # 001. Complex widgets build on React Aria Components
 
-Date: 2026-09-14. Status: accepted. Applies principle 6 ("complex widgets build on a
+Date: 2026-09-14. Status: accepted; record 011 pilots Ark UI on Slider, and replaces this one
+per component only if the pilot holds. Applies principle 6 ("complex widgets build on a
 headless accessibility layer rather than hand-rolled keyboard handling").
 
 ## Context
