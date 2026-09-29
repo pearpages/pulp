@@ -78,7 +78,8 @@ npm and yarn have no such delay.
 Load the brand typefaces yourself (pulp: Archivo, Instrument Sans, Geist Mono; bitepals:
 Nunito, Inter), for example from `@fontsource-variable/*`. The tokens name the families
 with system fallbacks but ship no font files. Shipped CSS uses native nesting and
-`light-dark()`: Chrome/Edge 123, Firefox 120, Safari 17.5 or later.
+`light-dark()`, not lowered; the supported browsers are the `browserslist` in
+[`package.json`](package.json).
 
 The complex widgets (Combobox, Listbox, Picker, Calendar, DatePicker, Slider, DataGrid) build
 on React Aria Components, installed with the package and tree-shaken per entry. Their

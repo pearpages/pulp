@@ -89,8 +89,8 @@ that line first, because the bundler decides which file loads first.
 - **Compound parts** (`Menu.Trigger`) are also exported flat (`MenuTrigger`), the only form a Server
   Component can use from a client entry.
 - **Complex widgets** (Combobox, Listbox, Picker, Calendar, DatePicker, Slider, DataGrid) build on
-  React Aria Components (record 001); Dialog and Sheet on `@pearpages/modals`; Heatmap on
-  `@pearpages/heatmap`. Their props never reach pulp's API, and pulp themes them by mapping tokens onto
+  React Aria Components (record 001); Slider is the pilot for moving them to Ark UI (record 011).
+  Dialog and Sheet build on `@pearpages/modals`; Heatmap on `@pearpages/heatmap`. Their props never reach pulp's API, and pulp themes them by mapping tokens onto
   their CSS variables in the `vendor` layer.
 - **The manifest** (`dist/component-manifest.json`) is generated from each component's JSDoc
   (`@status`, `@category`, `@accessibility`, `@do`, `@dont`) and its props. The docs page, the status

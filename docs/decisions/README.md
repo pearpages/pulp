@@ -16,3 +16,5 @@ option was defensible. Newest last. The Storybook renders this folder under "Dec
 | [007](007-per-brand-component-tokens.md) | A brand may override a single component token |
 | [008](008-table-and-datagrid.md) | `Table` is a `<table>`; the React Aria one becomes `DataGrid` |
 | [009](009-heatmap-and-a-data-scale.md) | `Heatmap` builds on `@pearpages/heatmap`, and pulp gains a sequential data scale |
+| [010](010-promotion-to-stable.md) | A component is promoted to `stable` on five criteria, all required |
+| [011](011-ark-ui-behaviour-layer.md) | Complex widgets move to Ark UI one at a time, starting with a Slider pilot |
