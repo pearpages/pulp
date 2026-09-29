@@ -44,7 +44,8 @@ them yourself, for example from `@fontsource-variable/*`:
 
 ## Browser support
 
-Native CSS nesting and `light-dark()`: Chrome/Edge 123, Firefox 120, Safari 17.5 or later.
+Native CSS nesting and `light-dark()`, not lowered. The supported browsers are the `browserslist`
+in the repository's root [`package.json`](https://github.com/pearpages/pulp/blob/main/package.json).
 
 ## License
 

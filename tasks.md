@@ -15,6 +15,10 @@ this file holds what is left to do, ticked with a date when done. Ordered within
 
 ## Session log
 
+- 2026-09-29 (browser floor): the browser versions now live only in the root `browserslist`;
+  PRINCIPLES 4, README and the css README point to it instead of repeating them.
+- 2026-09-29 (later still): principle 11, one explicit source for humans and agents, naming the
+  rule behind principles 5 and 8 and the flat part names.
 - 2026-09-29 (later): decision record 011, accepted for a Slider pilot on Ark UI; the rest waits for
   its verdict (DataGrid stays on React Aria; Pagination was never on it). Plan in group 14.
 - 2026-09-29: decision record 010, what earns a component `stable` (five criteria, all required;

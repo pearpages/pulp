@@ -38,9 +38,9 @@ CSS-in-JS, no utility classes leaking into consumers. A library must not impose 
 tool on the app that uses it.
 
 The price of native CSS is a support floor. The shipped stylesheets rely on native nesting
-and `light-dark()` and are not lowered: Chrome and Edge 123, Firefox 120, Safari 17.5 and
-later (the `browserslist` in the root `package.json`, which `pnpm check:floor` holds every shipped
-stylesheet to). Component rules sit in the
+and `light-dark()` and are not lowered. The floor is whatever the `browserslist` in the root
+`package.json` declares, and `pnpm check:floor` holds every shipped stylesheet to it; the
+versions are never restated in the docs. Component rules sit in the
 `components` cascade layer (every stylesheet restates the layer order, so it holds whatever
 loads first), so an app overrides them from any later layer or from unlayered
 CSS, never by fighting specificity.
@@ -86,3 +86,18 @@ break: a new semantic token is added to every brand file, and the tests diff the
 The system is complete when one component runs through every layer: tokens, CSS,
 component, tests, stories, packaging, consumer. Breadth comes after, one component kind at
 a time, each proving a new design decision rather than repeating an old one.
+
+## 11. One explicit source, read by humans and agents alike
+
+Every fact about the system has one source, and it is stated, not implied. The manifest says
+what exists, JSDoc says how to use it, `data-*` attributes say what state a component is in,
+and flat names (`MenuTrigger` beside `Menu.Trigger`) say what each part is called. Where a copy
+has to exist (the layer order in every stylesheet, the component lists in the READMEs), it is
+generated from the source or tested against it. Anything a human could infer but an agent
+would have to guess is a gap in the system, not in the reader.
+
+This is the rule behind several of the others, named once instead of left as a side benefit.
+State lives on the DOM (principle 5) so it can be read rather than deduced from class names.
+Guardrails and the generated manifest (principle 8) turn conventions into checks and a list
+anyone can query. Compound parts are exported flat so each part has one name that works
+everywhere, including where `Menu.Trigger` cannot reach.
