@@ -75,10 +75,11 @@ inventing.
 ## 9. Versioned like a dependency, because it is one
 
 Semantic versioning per package. Removing or renaming a token, a prop or a `data-*`
-attribute is a major. The React package declares the tokens package as a peer dependency:
-installing components without their tokens is an error, not a silent unstyled page. Anything removed stays one major with a deprecation note and, where
-mechanical, a codemod. Brands never break: a new semantic token is added to every brand
-file, and the tests diff the brands.
+attribute is a major. Before 1.0 the next minor stands in for the major, and its changeset
+says it breaks. The React package declares the tokens package as a peer dependency:
+installing components without their tokens is an error, not a silent unstyled page. Anything
+removed stays one major with a deprecation note and, where mechanical, a codemod. Brands never
+break: a new semantic token is added to every brand file, and the tests diff the brands.
 
 ## 10. Smallest complete slice first
 

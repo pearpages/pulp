@@ -15,6 +15,8 @@ this file holds what is left to do, ticked with a date when done. Ordered within
 
 ## Session log
 
+- 2026-09-29: decision record 010, what earns a component `stable` (five criteria, all required;
+  no demotion; the pre-1.0 minor is the breaking slot). Status page points to it. Follow-up in group 4.
 - 2026-09-24 (docs scheme): Pere found grey text hard to read on Tokens and Status, no visible
   version, and asked whether the docs have dark mode. They did, half: the chrome was pinned light, the
   token tables followed the OS (MDX pages have no decorator), so a dark OS gave `#ededf2` on white;
@@ -375,6 +377,8 @@ copy, not to re-derive.
       Combobox/Table/DatePicker with React Aria 54/52/65 kB. Limits sit about 20% above.
 
 **4. Guardrails still missing**
+- [ ] Record 010, criterion 5 as a guardrail: the manifest build fails a `@status stable` component
+      without `@do` and `@dont` (today both are optional). Fill the gaps on the 30 stable ones first.
 - [x] Token schema validation (2026-09-18): `scripts/schema.mjs` walks the raw JSON; every one of
       the 1,081 tokens has a known *effective* `$type` (about 600 inherit a group's, so "own" would
       have been the wrong rule), unknown `$` keys fail, and a fixture test proves each message fires.
