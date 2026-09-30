@@ -61,11 +61,11 @@ the same drift check as `tokens.css`.
   `theme.css` is a bridge for a consumer that has Tailwind, not an endorsement of it.
 - Shadows, type sizes, motion and z-layers are not in `native`: React Native has no `box-shadow`
   string, and the rest has had no consumer. Add a group when one asks, not before.
-- `native` gives up one accessibility property of the web. There, spacing and radius are mostly
-  `rem` and grow with the reader's browser font-size setting; `toPx` resolves them at 1rem = 16,
-  so in React Native they stay fixed whatever the OS text size. Text itself still scales, because
-  the platform owns it (Dynamic Type, `fontScale`); what is lost is the space and rounding around
-  the text growing with it.
+- `native` gives up one accessibility property of the web. On the web, spacing and radius are
+  mostly `rem` and grow with the reader's browser font-size setting; `toPx` resolves them at
+  1rem = 16, so in React Native they stay fixed whatever the OS text size. Text itself still
+  scales, because the platform owns it (Dynamic Type, `fontScale`); what is lost is the space and
+  rounding around the text growing with it.
 - A semantic token added later appears in both outputs with no further work; the tests check that
   every name `native` exposes has a value in both schemes, and that `theme.css` references nothing
   outside the semantic tier.
