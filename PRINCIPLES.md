@@ -24,7 +24,9 @@ DTCG-aware tool reads the names, types and light values. Two things are pulp-spe
 live under `$extensions["com.pearpages.pulp"]`: the dark counterpart of a colour, and the
 multiplier that builds the spacing scale. A tool that ignores extensions sees a light-only
 system. Colours are hex strings, not the 2025 colour objects; the build script is the one
-place to change when that matters.
+place to change when that matters. Values cross to every platform, but adapting at run time to
+the user's preferred text size is a property of the web renderer: in native, spacing and radius
+resolve to fixed values and text scaling is left to the OS (record 005).
 
 ## 2. Two axes, never mixed
 

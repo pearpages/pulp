@@ -61,6 +61,11 @@ the same drift check as `tokens.css`.
   `theme.css` is a bridge for a consumer that has Tailwind, not an endorsement of it.
 - Shadows, type sizes, motion and z-layers are not in `native`: React Native has no `box-shadow`
   string, and the rest has had no consumer. Add a group when one asks, not before.
+- `native` gives up one accessibility property of the web. There, spacing and radius are mostly
+  `rem` and grow with the reader's browser font-size setting; `toPx` resolves them at 1rem = 16,
+  so in React Native they stay fixed whatever the OS text size. Text itself still scales, because
+  the platform owns it (Dynamic Type, `fontScale`); what is lost is the space and rounding around
+  the text growing with it.
 - A semantic token added later appears in both outputs with no further work; the tests check that
   every name `native` exposes has a value in both schemes, and that `theme.css` references nothing
   outside the semantic tier.
@@ -74,3 +79,6 @@ the same drift check as `tokens.css`.
   components): then do the per-component split.
 - Tailwind changes what `@theme inline reference` emits: re-run the compile and adjust.
 - The Expo app needs shadows or type sizes from the system: extend `native`.
+- Layout has to follow the OS text size in native: emit spacing and radius as scalable units
+  (the px value divided by 16) instead of raw px, and let the consumer multiply them by 16 times
+  the system `fontScale`.
