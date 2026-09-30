@@ -127,6 +127,10 @@ copy of the working tree, two-minute loops. Colima only, never Docker Desktop; f
   not a copy of the clip rule per component.
 - **Adding a semantic token means adding it to every brand file.** The token tests diff the
   brands and fail otherwise.
+- **A brand overrides a component token rarely, and says why** (record 007). The override lives in
+  `tokens/component/<brand>/`, references the semantic tier, names a token the base already has,
+  carries its own `$description`, and a brand has at most 3 (`packages/tokens/scripts/overrides.mjs`).
+  A fourth fails the token tests: add a semantic token every brand maps instead.
 - **`ref` is a normal prop** (React 19). The compiler lint rule (`react-hooks/refs`) rejects
   passing a ref, or an object holding one, into any function. An `asChild` helper has to,
   so that one call carries a `eslint-disable-next-line react-hooks/refs -- forwarded, not read`.

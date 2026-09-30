@@ -1,5 +1,5 @@
 {
-  "$description": "bitepals' overrides of the component tier. Every name here must also exist in tokens/component/, and every value must still reference the semantic layer; the tests check both. Decision record 007.",
+  "$description": "bitepals' overrides of the component tier. Every name here must also exist in tokens/component/, every value must still reference the semantic layer, each override carries its own $description saying why, and a brand has at most 3 (scripts/overrides.mjs); the tests check all four. Decision record 007.",
   "button": {
     "radius": {
       "$type": "dimension",

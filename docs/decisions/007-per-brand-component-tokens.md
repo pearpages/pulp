@@ -1,6 +1,6 @@
 # 007. A brand may override a single component token
 
-Date: 2026-09-20 (group 11). Status: accepted.
+Date: 2026-09-20 (group 11). Status: accepted. Rules 3 and 4 added 2026-09-30.
 
 ## Context
 
@@ -36,18 +36,33 @@ page.
 
 bitepals gets `button.radius` → `{radius.full}`.
 
-Two rules hold the door shut, both tested:
+Four rules hold the door shut, all tested:
 
 1. **An override must reference the semantic layer**, like any component token. The
    component→semantic test now runs over every brand, not only pulp; otherwise a brand file would be
    the one place a literal colour could reach a component.
 2. **An override must name a token that already exists.** A brand may change a component's value, not
    give a component a knob the component does not read.
+3. **An override says why, in its own `$description`.** Not the file's or the group's: the reason
+   is per token, and it should be the one this file already gives for the pill, that the shape is
+   the brand's and the semantic tier has no name for it. A legitimate exception documents itself;
+   an override that only saves the author a semantic token has to say so in writing, where review
+   sees it. The test can check that a reason exists, not that it is a good one.
+4. **A brand has at most 3 overrides**, counted in tokens, not files (one file can hold ten).
+   bitepals has 1. Three leaves room for another exception or two of the pill's kind; the fourth
+   means overrides have become a pattern, and the test fails with the real fix: add a semantic token
+   every brand maps, and point the component token at it. It fails rather than warns, because a
+   warning in a green run is read by nobody. The cap is one constant,
+   `MAX_OVERRIDES_PER_BRAND` in `packages/tokens/scripts/overrides.mjs`; raising it is a deliberate
+   edit with its reason in the commit.
 
 ## Consequences
 
 - The escape hatch is real and it is small. A brand that overrides a lot of component tokens is
-  telling you the semantic tier is missing a name; that, not this file, is the fix.
+  telling you the semantic tier is missing a name; that, not this file, is the fix. Since rule 4,
+  the test says so instead of this sentence alone.
+- The `$type` schema test now reads the brand directories too; until rules 3 and 4 it walked
+  `tokens/component/` flat, so an override file was never schema-checked.
 - `--button-radius` is read by Button and IconButton, so bitepals' pill reaches both, which is what
   its own override already did.
 - A consumer no longer has to keep an unlayered stylesheet to be itself. bitepals drops that override

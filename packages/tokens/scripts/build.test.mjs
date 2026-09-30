@@ -5,11 +5,16 @@ import { toCss } from './format.mjs';
 import { PUBLIC_SEMANTIC_TOKENS } from './public-tokens.mjs';
 import { nativeBrand, themeCss, toPx } from './outputs.mjs';
 import { validateTokens } from './schema.mjs';
+import { MAX_OVERRIDES_PER_BRAND, checkOverrides } from './overrides.mjs';
 import { createRequire } from 'node:module';
-import { readdirSync, readFileSync } from 'node:fs';
+import { readdirSync, readFileSync, statSync } from 'node:fs';
 import { resolve } from 'node:path';
 
 const TOKENS = resolve(import.meta.dirname, '../tokens');
+const readJson = (...path) => JSON.parse(readFileSync(resolve(TOKENS, ...path), 'utf8'));
+const jsonFiles = (...path) => readdirSync(resolve(TOKENS, ...path)).filter((f) => f.endsWith('.json'));
+// A brand's component overrides, tokens/component/<brand>/*.json. Decision record 007.
+const brandDirs = () => readdirSync(resolve(TOKENS, 'component')).filter((f) => statSync(resolve(TOKENS, 'component', f)).isDirectory());
 
 test('references become var(), composites become CSS', () => {
   assert.equal(toCss('{color.neutral.50}'), 'var(--color-neutral-50)');
@@ -22,9 +27,14 @@ test('every token has a known $type, its own or its group\'s', () => {
   const problems = [];
   let files = 0;
   for (const tier of ['primitives', 'semantic', 'component']) {
-    for (const name of readdirSync(resolve(TOKENS, tier)).filter((f) => f.endsWith('.json'))) {
-      const tree = JSON.parse(readFileSync(resolve(TOKENS, tier, name), 'utf8'));
-      problems.push(...validateTokens(tree, `${tier}/${name}`));
+    for (const name of jsonFiles(tier)) {
+      problems.push(...validateTokens(readJson(tier, name), `${tier}/${name}`));
+      files += 1;
+    }
+  }
+  for (const brand of brandDirs()) {
+    for (const name of jsonFiles('component', brand)) {
+      problems.push(...validateTokens(readJson('component', brand, name), `component/${brand}/${name}`));
       files += 1;
     }
   }
@@ -42,6 +52,29 @@ test('the schema check fires: missing type, unknown type, misspelt key', () => {
     "x.json: size.sm has no $type, its own or a group's",
   ]);
   assert.deepEqual(validateTokens({ size: { sm: '4px' } }, 'x.json'), ['x.json: size.sm is neither a group nor a token']);
+});
+
+test('brand overrides stay few, and each one says why', () => {
+  const brands = Object.fromEntries(brandDirs().map((brand) => [brand, Object.fromEntries(jsonFiles('component', brand).map((name) => [name, readJson('component', brand, name)]))]));
+  assert.ok(Object.keys(brands).length > 0, 'no brand override directories found');
+  assert.deepEqual(checkOverrides(brands), []);
+});
+
+test('the override checks fire: past the cap, and without a reason', () => {
+  const pill = { button: { radius: { $type: 'dimension', $description: 'Pills are the brand.', $value: '{radius.full}' } } };
+  assert.deepEqual(checkOverrides({ bitepals: { 'button.json': pill } }), []);
+
+  const many = { button: { $type: 'dimension' } };
+  for (let i = 0; i <= MAX_OVERRIDES_PER_BRAND; i += 1) many.button[`k${i}`] = { $description: 'why', $value: '{radius.full}' };
+  const [cap, ...rest] = checkOverrides({ loud: { 'button.json': many } });
+  assert.deepEqual(rest, []);
+  assert.match(cap, new RegExp(`^loud overrides ${MAX_OVERRIDES_PER_BRAND + 1} component tokens, over the cap of ${MAX_OVERRIDES_PER_BRAND}\\..*semantic tier is missing a name`));
+
+  // The file's and the group's descriptions do not count: the reason is per override.
+  const mute = { $description: 'file', button: { $description: 'group', radius: { $type: 'dimension', $value: '{radius.full}' } } };
+  assert.deepEqual(checkOverrides({ mute: { 'button.json': mute } }), [
+    'mute/button.json: button.radius overrides a component token without its own $description saying why (record 007)',
+  ]);
 });
 
 test('tokens.css restates the layer order of the css package before its own block', async () => {

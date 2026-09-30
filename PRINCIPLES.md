@@ -10,6 +10,15 @@ CSS custom properties, the JSON manifest, and any future output (Tailwind preset
 Android, Figma) are generated from them. Components are one renderer of the tokens. When
 the next framework arrives, the token and CSS packages do not change.
 
+How far that holds depends on the layer, and each layer crosses to fewer renderers than the one
+below it. **Tokens** are data: they reach every renderer, web or native, unchanged, and each
+platform gets an output generated from them. **CSS and the simple components** (markup and a
+stylesheet) reach every renderer that has a DOM; a native one rewrites them, cheaply, on the same
+tokens. **Complex-widget behaviour and accessibility** reach other DOM renderers only through a
+framework-agnostic behaviour layer (record 011), and do not reach native at all: there the
+platform owns accessibility. The promise is strongest at the bottom and narrows on the way up.
+Record 012 lists the renderers and what each one inherits.
+
 What is portable and what is not, stated plainly: the files are valid DTCG and any
 DTCG-aware tool reads the names, types and light values. Two things are pulp-specific and
 live under `$extensions["com.pearpages.pulp"]`: the dark counterpart of a colour, and the
@@ -44,6 +53,12 @@ versions are never restated in the docs. Component rules sit in the
 `components` cascade layer (every stylesheet restates the layer order, so it holds whatever
 loads first), so an app overrides them from any later layer or from unlayered
 CSS, never by fighting specificity.
+
+The behaviour layer has a floor of its own, and it is the DOM. Keyboard models, focus
+management and ARIA wiring are written against the DOM and stop there. A native renderer builds
+its accessibility fresh, on the platform's own controls and screen readers (VoiceOver,
+TalkBack). That is a deliberate, separate cost, paid per native component, not a gap to paper
+over with a shim.
 
 ## 5. State lives on the DOM
 
