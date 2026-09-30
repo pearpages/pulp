@@ -15,6 +15,10 @@ this file holds what is left to do, ticked with a date when done. Ordered within
 
 ## Session log
 
+- 2026-09-30: decision record 012, the portability gradient (data → DOM → platform) and the planned
+  Web Components and native renderers; PRINCIPLES 1 and 4 name it. Record 007 gains rules 3 and 4,
+  tested: each brand override carries its own `$description`, at most 3 per brand; brand override
+  files are now schema-checked too.
 - 2026-09-29 (browser floor): the browser versions now live only in the root `browserslist`;
   PRINCIPLES 4, README and the css README point to it instead of repeating them.
 - 2026-09-29 (later still): principle 11, one explicit source for humans and agents, naming the
@@ -948,3 +952,5 @@ Found with `pulp-react` 0.4.0; the same code is in 0.3.0.
 ## Later (not scheduled)
 Deprecation codemods, Tailwind preset emitted from tokens, Figma sync (Tokens Studio reads the
 DTCG files; dark values live in pulp's extension), a third brand to prove "one JSON file, zero component changes".
+A Web Components renderer (proves the DOM ring, record 012), then a native iOS/Android renderer
+(accessibility built fresh on platform controls).
