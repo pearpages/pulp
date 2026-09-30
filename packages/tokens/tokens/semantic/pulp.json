@@ -81,7 +81,8 @@
         "$value": "{color.neutral.100}",
         "$extensions": {
           "com.pearpages.pulp": {
-            "dark": "{color.neutral.950}"
+            "dark": "{color.neutral.950}",
+            "note": "Dark scheme fills are light, so the text flips to ink."
           }
         },
         "$description": "Text and marks on an action fill (action.primary and its states). Each brand picks whichever of light or ink meets AA on its fill."
@@ -321,7 +322,8 @@
         "$value": "{color.neutral.950}",
         "$extensions": {
           "com.pearpages.pulp": {
-            "dark": "{color.neutral.950}"
+            "dark": "{color.neutral.950}",
+            "note": "Ink: bone on this green is 3.5:1."
           }
         },
         "$description": "Text on the solid success fill. Each brand picks whichever of light or ink meets AA on its green."
@@ -339,7 +341,8 @@
         "$value": "{color.neutral.0}",
         "$extensions": {
           "com.pearpages.pulp": {
-            "dark": "{color.neutral.950}"
+            "dark": "{color.neutral.950}",
+            "note": "White on the light red fill, ink on the light-scheme-dark fill."
           }
         },
         "$description": "Text on the solid error fill. Each brand picks whichever of light or ink meets AA on it, per scheme."
@@ -934,7 +937,7 @@
         "value": 14,
         "unit": "rem"
       },
-      "$description": "Minimum width of a menu, so short items do not make a sliver."
+      "$description": "Width of a narrow floating panel: a menu's minimum and a tooltip's maximum."
     },
     "listbox-height": {
       "$value": {

@@ -73,10 +73,10 @@
         "$value": "{color.neutral.900}",
         "$extensions": {
           "com.pearpages.pulp": {
-            "dark": "{color.neutral.900}"
+            "dark": "{color.neutral.900}",
+            "note": "Ink, not white: white on the brand orange is 2.8:1 and fails AA in both schemes."
           }
-        },
-        "$description": "Ink, not white: white on the brand orange is 2.8:1 and fails AA in both schemes."
+        }
       },
       "on-inverse": {
         "$value": "{color.neutral.0}",
@@ -100,10 +100,10 @@
         "$value": "{color.orange.400}",
         "$extensions": {
           "com.pearpages.pulp": {
-            "dark": "{color.orange.300}"
+            "dark": "{color.orange.300}",
+            "note": "Interaction brightens rather than darkens: the fill carries ink text, and a darker orange would drop below AA."
           }
-        },
-        "$description": "Interaction brightens rather than darkens: the fill carries ink text, and a darker orange would drop below AA."
+        }
       },
       "primary-active": {
         "$value": "{color.orange.300}",
@@ -141,10 +141,10 @@
         "$value": "{color.orange.800}",
         "$extensions": {
           "com.pearpages.pulp": {
-            "dark": "{color.orange.300}"
+            "dark": "{color.orange.300}",
+            "note": "The brand orange itself is 2.3:1 on cream, so text uses the 800 step."
           }
-        },
-        "$description": "The brand orange itself is 2.3:1 on cream, so text uses the 800 step."
+        }
       }
     },
     "border": {
@@ -194,10 +194,10 @@
         "$value": "{color.red.600}",
         "$extensions": {
           "com.pearpages.pulp": {
-            "dark": "{color.red.300}"
+            "dark": "{color.red.300}",
+            "note": "One step darker than the brand red so white text on it meets AA."
           }
-        },
-        "$description": "One step darker than the brand red so white text on it meets AA."
+        }
       },
       "error-hover": {
         "$value": "{color.red.700}",
@@ -219,10 +219,10 @@
         "$value": "{color.blue.600}",
         "$extensions": {
           "com.pearpages.pulp": {
-            "dark": "{color.blue.300}"
+            "dark": "{color.blue.300}",
+            "note": "One step darker than the brand blue so white text on it meets AA."
           }
-        },
-        "$description": "One step darker than the brand blue so white text on it meets AA."
+        }
       },
       "error-text": {
         "$value": "{color.red.700}",

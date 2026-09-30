@@ -156,16 +156,18 @@ test('every semantic token states its role, once, in the base brand', async () =
   const { missing } = semanticRoles(readJson('semantic', 'pulp.json'), cssName);
   assert.deepEqual(missing, [], 'semantic tokens without a role: add a $description to semantic/pulp.json');
 
-  const repeated = [];
-  const compare = (base, other, path) => {
-    for (const [key, node] of Object.entries(other)) {
-      if (key.startsWith('$') || node === null || typeof node !== 'object' || !base?.[key]) continue;
-      if (node.$description !== undefined && node.$description === base[key].$description) repeated.push([...path, key].join('.'));
-      compare(base[key], node, [...path, key]);
+  // Another brand states no role at all: its $description would be a second copy, or a
+  // different answer to the same question. Why its value differs goes in its `note` extension.
+  const stated = [];
+  const collect = (node, path) => {
+    for (const [key, child] of Object.entries(node)) {
+      if (key.startsWith('$') || child === null || typeof child !== 'object') continue;
+      if (child.$description !== undefined) stated.push([...path, key].join('.'));
+      collect(child, [...path, key]);
     }
   };
-  for (const name of jsonFiles('semantic').filter((f) => f !== 'pulp.json')) compare(readJson('semantic', 'pulp.json'), readJson('semantic', name), [name]);
-  assert.deepEqual(repeated, [], 'a brand restates the base role; state it once, in semantic/pulp.json');
+  for (const name of jsonFiles('semantic').filter((f) => f !== 'pulp.json')) collect(readJson('semantic', name), [name]);
+  assert.deepEqual(stated, [], 'a brand states a role; roles live in semantic/pulp.json, a brand\'s own reason in $extensions["com.pearpages.pulp"].note');
 
   const { json } = await render();
   for (const [brand, tokens] of Object.entries(JSON.parse(json))) {

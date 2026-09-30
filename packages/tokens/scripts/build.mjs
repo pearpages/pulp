@@ -80,17 +80,16 @@ export async function render() {
   ].join('\n');
 
   // A semantic token's role is stated once, in the base brand's file, and read by every brand:
-  // the role is the name's, the value is the brand's. A brand's own $description stays as
-  // `description` only where it says something else (why its value is what it is). Record 013.
+  // the role is the name's, the value is the brand's (a brand says why its value is what it is in
+  // its `note`). `description` stays, as role and note together, for readers of the old field. Record 013.
   const base = BRANDS.find((brand) => brand.base).name;
   const { roles } = semanticRoles(JSON.parse(readFileSync(resolve(ROOT, `tokens/semantic/${base}.json`), 'utf8')), cssName);
   for (const brand of brands) {
-    brand.json = brand.json.map((entry) => {
-      if (entry.tier !== 'semantic' || !roles.has(entry.name)) return entry;
-      const { description, ...rest } = entry;
-      const role = roles.get(entry.name);
-      return { ...rest, role, ...(description && description !== role ? { description } : {}) };
-    });
+    for (const entry of brand.json) {
+      if (entry.tier !== 'semantic' || !roles.has(entry.name)) continue;
+      entry.role = roles.get(entry.name);
+      entry.description = [entry.role, entry.note].filter(Boolean).join(' ');
+    }
   }
 
   const manifest = Object.fromEntries(brands.map((b) => [b.name, b.json]));

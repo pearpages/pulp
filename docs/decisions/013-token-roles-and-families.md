@@ -78,12 +78,14 @@ design is good. Each removes one band of error from what review has to look for.
 Every semantic token states the role it exists for, as its DTCG `$description`. A step of a scale
 (`space.3`, `font.size.lg`, `accent.on-4`) may leave that to its group. The roles live in the base
 brand's file, the same brand that carries the component tier (record 007). A role belongs to the name
-and a value to the brand, so another brand's `$description` now says only why *its value* is what it
-is ("Ink, not white: white on the brand orange is 2.8:1"). Before this record 23 descriptions were
-copied between the two brand files. They are gone, and a test fails if a brand restates the base role.
+and a value to the brand. So another brand states no role at all, and every brand, the base included,
+says why *its value* is what it is in a `note` under `$extensions["com.pearpages.pulp"]` ("Ink, not
+white: white on the brand orange is 2.8:1"). Before this record 23 descriptions were copied between the
+two brand files. They are gone, and a test fails if a brand other than the base carries a
+`$description`.
 
-The build copies the role to every brand in `tokens.json` (`role`, beside the brand's own
-`description` when it has one). The Tokens page shows it under each name, and an agent reads the same
+The build copies the role to every brand in `tokens.json` (`role`, and `note` where the brand has one).
+`description` stays, as role and note together, so a reader of the old field loses nothing. The Tokens page shows it under each name, and an agent reads the same
 field, as the component manifest carries each component's JSDoc (principle 11). A wrong-but-valid
 choice then sits next to a sentence that says what the token is for. That is how the error that no
 test reaches becomes visible to a reviewer or an agent.
@@ -91,9 +93,10 @@ test reaches becomes visible to a reviewer or an agent.
 ## Consequences
 
 - Principle 8 says what guardrails are for: taking the mechanical layer out of review, not replacing it.
-- `tokens.json` semantic entries gain `role`. The base brand's entries lose `description`, which was the
-  role and now is `role`; other brands keep `description` only where it differs. That is a change of
-  shape in a published file, so it ships as a tokens minor with a changeset.
+- `tokens.json` semantic entries gain `role` and `note`; `description` stays, as the two joined. Nothing
+  is removed. It ships as a tokens minor with a changeset.
+- Writing the roles surfaced one reuse: the tooltip's maximum width reads `size.menu-width`. Its role
+  now says so (one width for narrow floating panels), rather than claiming it for menus alone.
 - Adding a semantic token now costs a sentence of role, in the base brand only. Adding a component
   colour token costs a slot word in its name.
 - A tool that reads one brand's DTCG file on its own sees the roles only in the base brand's file.

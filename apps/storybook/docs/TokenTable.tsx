@@ -9,6 +9,7 @@ interface Token {
   light?: string;
   dark?: string;
   role?: string;
+  note?: string;
   description?: string;
 }
 
@@ -35,7 +36,9 @@ export function TokenTable({ tokens, tier, brand }: Props) {
             <code>{token.name}</code>
             {/* A scale shares its group's role: say it on the first step only. */}
             {token.role && token.role !== rows[index - 1]?.role && <span className={styles.description}>{token.role}</span>}
-            {token.description && <span className={styles.description}>{token.description}</span>}
+            {token.role
+              ? token.note && <span className={styles.description}>{token.note}</span>
+              : token.description && <span className={styles.description}>{token.description}</span>}
           </span>
           <span role="cell" className={styles.preview}>
             <Preview token={token} />

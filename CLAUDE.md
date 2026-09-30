@@ -137,8 +137,9 @@ copy of the working tree, two-minute loops. Colima only, never Docker Desktop; f
   border colour; a fg reads text or on-*; every focus ring reads `--color-border-focus`. A name
   with no slot word, or a semantic colour in no family, fails until placed; a deliberate break goes
   in `EXCEPTIONS` with its reason. The check can't tell *which* fill fits. That is review's job,
-  against the role every semantic token states in `semantic/pulp.json` (the base brand only;
-  another brand's `$description` explains its value, and a copied role fails the tests).
+  against the role every semantic token states in `semantic/pulp.json` (the base brand only: another
+  brand carries no `$description`; any brand says why its value differs in a `note` under
+  `$extensions["com.pearpages.pulp"]`).
 - **`ref` is a normal prop** (React 19). The compiler lint rule (`react-hooks/refs`) rejects
   passing a ref, or an object holding one, into any function. An `asChild` helper has to,
   so that one call carries a `eslint-disable-next-line react-hooks/refs -- forwarded, not read`.

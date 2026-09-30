@@ -22,6 +22,8 @@ this file holds what is left to do, ticked with a date when done. Ordered within
 - 2026-09-30 (later): principle 8 says what guardrails are for; record 013: every semantic token
   states its role once (base brand, copied to `tokens.json` as `role`; 23 cross-brand copies gone),
   and a family test holds each component colour token to its slot (5 findings: 1 misnamed, 4 exceptions).
+  Then: brand value notes in `$extensions` `note` (pulp's restored), `tokens.json` additive, `size.menu-width`
+  role covers the tooltip.
 - 2026-09-29 (browser floor): the browser versions now live only in the root `browserslist`;
   PRINCIPLES 4, README and the css README point to it instead of repeating them.
 - 2026-09-29 (later still): principle 11, one explicit source for humans and agents, naming the

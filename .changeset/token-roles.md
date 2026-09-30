@@ -2,6 +2,6 @@
 '@pearpages/pulp-tokens': minor
 ---
 
-Every semantic token in `tokens.json` now carries a `role`: one sentence on what it exists for, the same in every brand. Before, 86 of the 114 semantic tokens had no description.
+Every semantic token in `tokens.json` now carries a `role`: one sentence on what it exists for, the same in every brand. Before, 86 of the 114 semantic tokens had no description of their own. Where a brand's value needs explaining ("Ink, not white: white on the brand orange is 2.8:1"), the entry carries a `note` as well.
 
-The shape changed. On pulp's semantic entries, the old `description` is now `role`. A bitepals entry keeps `description` only where it explains bitepals' own value ("Ink, not white: white on the brand orange is 2.8:1"). If you read `description` for a semantic token's meaning, read `role`. CSS, `theme.css` and `native` are unchanged.
+Additive: `description` is still there, as the role and the note together. CSS, `theme.css` and `native` are unchanged.
