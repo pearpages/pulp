@@ -112,6 +112,8 @@ export const jsonBrand = {
           delete entry.value;
         }
         if (token.$description) entry.description = token.$description;
+        // Why this brand's value is what it is. A semantic token's role is the name's, not the brand's (record 013).
+        if (ext.note !== undefined) entry.note = ext.note;
         return entry;
       }),
       null,

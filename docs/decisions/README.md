@@ -19,3 +19,4 @@ option was defensible. Newest last. The Storybook renders this folder under "Dec
 | [010](010-promotion-to-stable.md) | A component is promoted to `stable` on five criteria, all required |
 | [011](011-ark-ui-behaviour-layer.md) | Complex widgets move to Ark UI one at a time, starting with a Slider pilot |
 | [012](012-portability-gradient.md) | Portability is layered: tokens reach every renderer, CSS and behaviour the DOM ones, native accessibility is built fresh |
+| [013](013-token-roles-and-families.md) | Semantic tokens state their role, and component colour tokens read a family their slot accepts |

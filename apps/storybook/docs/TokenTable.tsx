@@ -8,6 +8,8 @@ interface Token {
   value?: string;
   light?: string;
   dark?: string;
+  role?: string;
+  note?: string;
   description?: string;
 }
 
@@ -28,11 +30,15 @@ export function TokenTable({ tokens, tier, brand }: Props) {
         <span role="columnheader">Preview</span>
         <span role="columnheader">Value</span>
       </div>
-      {rows.map((token) => (
+      {rows.map((token, index) => (
         <div className={styles.row} role="row" key={token.name}>
           <span role="cell" className={styles.name}>
             <code>{token.name}</code>
-            {token.description && <span className={styles.description}>{token.description}</span>}
+            {/* A scale shares its group's role: say it on the first step only. */}
+            {token.role && token.role !== rows[index - 1]?.role && <span className={styles.description}>{token.role}</span>}
+            {token.role
+              ? token.note && <span className={styles.description}>{token.note}</span>
+              : token.description && <span className={styles.description}>{token.description}</span>}
           </span>
           <span role="cell" className={styles.preview}>
             <Preview token={token} />

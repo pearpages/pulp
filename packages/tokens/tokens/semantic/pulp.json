@@ -9,7 +9,8 @@
           "com.pearpages.pulp": {
             "dark": "{color.neutral.975}"
           }
-        }
+        },
+        "$description": "The page itself: the ground everything else sits on, and table headers."
       },
       "raised": {
         "$value": "{color.neutral.0}",
@@ -17,7 +18,8 @@
           "com.pearpages.pulp": {
             "dark": "{color.neutral.900}"
           }
-        }
+        },
+        "$description": "One step up from the page: cards, fields, list and calendar panels. The default fill of a control."
       },
       "overlay": {
         "$value": "{color.neutral.0}",
@@ -34,7 +36,8 @@
           "com.pearpages.pulp": {
             "dark": "{color.neutral.1000}"
           }
-        }
+        },
+        "$description": "One step below the page: wells, tracks, skeletons, a segmented control's groove."
       },
       "inverse": {
         "$value": "{color.neutral.950}",
@@ -53,7 +56,8 @@
           "com.pearpages.pulp": {
             "dark": "{color.neutral.100}"
           }
-        }
+        },
+        "$description": "Body text and anything that must read at full strength on a surface."
       },
       "muted": {
         "$value": "{color.neutral.700}",
@@ -61,7 +65,8 @@
           "com.pearpages.pulp": {
             "dark": "{color.neutral.400}"
           }
-        }
+        },
+        "$description": "Secondary text and icons: hints, values beside a label, chevrons."
       },
       "faint": {
         "$value": "{color.neutral.600}",
@@ -76,10 +81,11 @@
         "$value": "{color.neutral.100}",
         "$extensions": {
           "com.pearpages.pulp": {
-            "dark": "{color.neutral.950}"
+            "dark": "{color.neutral.950}",
+            "note": "Dark scheme fills are light, so the text flips to ink."
           }
         },
-        "$description": "Text on an action fill. Dark scheme fills are light, so the text flips to ink."
+        "$description": "Text and marks on an action fill (action.primary and its states). Each brand picks whichever of light or ink meets AA on its fill."
       },
       "on-inverse": {
         "$value": "{color.neutral.50}",
@@ -87,7 +93,8 @@
           "com.pearpages.pulp": {
             "dark": "{color.neutral.950}"
           }
-        }
+        },
+        "$description": "Text on surface.inverse: tooltips, an inverted selected chip."
       }
     },
     "action": {
@@ -97,7 +104,8 @@
           "com.pearpages.pulp": {
             "dark": "{color.ultramarine.300}"
           }
-        }
+        },
+        "$description": "The fill of the main action and of chosen state: primary Button, checked controls, selected options, slider fill, tab indicator."
       },
       "primary-hover": {
         "$value": "{color.ultramarine.700}",
@@ -105,7 +113,8 @@
           "com.pearpages.pulp": {
             "dark": "{color.ultramarine.200}"
           }
-        }
+        },
+        "$description": "action.primary under the pointer."
       },
       "primary-active": {
         "$value": "{color.ultramarine.800}",
@@ -113,7 +122,8 @@
           "com.pearpages.pulp": {
             "dark": "{color.ultramarine.400}"
           }
-        }
+        },
+        "$description": "action.primary while pressed."
       },
       "primary-quiet": {
         "$value": "{color.ultramarine.100}",
@@ -121,7 +131,8 @@
           "com.pearpages.pulp": {
             "dark": "{color.ultramarine.900}"
           }
-        }
+        },
+        "$description": "A faint tint of the action colour for backgrounds: ghost hover, subtle action Badge, an unselected action Chip, a highlighted option."
       },
       "secondary": {
         "$value": "{color.neutral.100}",
@@ -129,7 +140,8 @@
           "com.pearpages.pulp": {
             "dark": "{color.neutral.850}"
           }
-        }
+        },
+        "$description": "The fill of a secondary action: secondary Button, neutral Chip, a dialog's close button."
       },
       "secondary-hover": {
         "$value": "{color.neutral.200}",
@@ -137,7 +149,8 @@
           "com.pearpages.pulp": {
             "dark": "{color.neutral.800}"
           }
-        }
+        },
+        "$description": "action.secondary under the pointer."
       },
       "text": {
         "$value": "{color.ultramarine.500}",
@@ -156,7 +169,8 @@
           "com.pearpages.pulp": {
             "dark": "{color.neutral.850}"
           }
-        }
+        },
+        "$description": "Edges and dividers that separate without asking for attention: cards, fields at rest, table rules."
       },
       "strong": {
         "$value": "{color.neutral.400}",
@@ -164,7 +178,8 @@
           "com.pearpages.pulp": {
             "dark": "{color.neutral.800}"
           }
-        }
+        },
+        "$description": "An edge that must be seen: a hovered field, the box of a checkbox or radio."
       },
       "focus": {
         "$value": "{color.ultramarine.500}",
@@ -172,7 +187,8 @@
           "com.pearpages.pulp": {
             "dark": "{color.ultramarine.300}"
           }
-        }
+        },
+        "$description": "The focus ring, and nothing else. Every component's focus ring reads it, so focus looks the same everywhere."
       }
     },
     "status": {
@@ -182,7 +198,8 @@
           "com.pearpages.pulp": {
             "dark": "{color.green.300}"
           }
-        }
+        },
+        "$description": "The solid success fill: solid Badge, progress indicator, Alert accent bar. Pair with status.on-success."
       },
       "warning": {
         "$value": "{color.saffron.500}",
@@ -190,7 +207,8 @@
           "com.pearpages.pulp": {
             "dark": "{color.saffron.500}"
           }
-        }
+        },
+        "$description": "The solid warning fill: solid Badge, progress indicator, Alert accent bar. Pair with status.on-warning."
       },
       "error": {
         "$value": "{color.red.500}",
@@ -198,7 +216,8 @@
           "com.pearpages.pulp": {
             "dark": "{color.red.300}"
           }
-        }
+        },
+        "$description": "The solid error fill and the invalid field's border: danger Button, solid Badge, Alert accent bar. Pair with status.on-error."
       },
       "error-hover": {
         "$value": "{color.red.700}",
@@ -224,7 +243,8 @@
           "com.pearpages.pulp": {
             "dark": "{color.ultramarine.300}"
           }
-        }
+        },
+        "$description": "The solid info fill: solid Badge, Alert accent bar. Pair with status.on-info."
       },
       "error-text": {
         "$value": "{color.red.700}",
@@ -241,7 +261,8 @@
           "com.pearpages.pulp": {
             "dark": "{color.green.300}"
           }
-        }
+        },
+        "$description": "Success colour for text and icons on a surface, and for the edge of a subtle success Badge."
       },
       "warning-text": {
         "$value": "{color.saffron.700}",
@@ -249,7 +270,8 @@
           "com.pearpages.pulp": {
             "dark": "{color.saffron.500}"
           }
-        }
+        },
+        "$description": "Warning colour for text and icons on a surface, and for the edge of a subtle warning Badge."
       },
       "info-text": {
         "$value": "{color.ultramarine.500}",
@@ -257,7 +279,8 @@
           "com.pearpages.pulp": {
             "dark": "{color.ultramarine.300}"
           }
-        }
+        },
+        "$description": "Info colour for text and icons on a surface, and for the edge of a subtle info Badge."
       },
       "success-subtle": {
         "$value": "{color.green.100}",
@@ -266,7 +289,7 @@
             "dark": "{color.green.900}"
           }
         },
-        "$description": "Tinted background for the tone; pair with <tone>-text."
+        "$description": "Tinted background for the success tone; pair with success-text."
       },
       "warning-subtle": {
         "$value": "{color.saffron.100}",
@@ -274,7 +297,8 @@
           "com.pearpages.pulp": {
             "dark": "{color.saffron.900}"
           }
-        }
+        },
+        "$description": "Tinted background for the warning tone; pair with warning-text."
       },
       "error-subtle": {
         "$value": "{color.red.100}",
@@ -282,7 +306,8 @@
           "com.pearpages.pulp": {
             "dark": "{color.red.900}"
           }
-        }
+        },
+        "$description": "Tinted background for the error tone; pair with error-text."
       },
       "info-subtle": {
         "$value": "{color.ultramarine.100}",
@@ -290,16 +315,18 @@
           "com.pearpages.pulp": {
             "dark": "{color.ultramarine.900}"
           }
-        }
+        },
+        "$description": "Tinted background for the info tone; pair with info-text."
       },
       "on-success": {
         "$value": "{color.neutral.950}",
         "$extensions": {
           "com.pearpages.pulp": {
-            "dark": "{color.neutral.950}"
+            "dark": "{color.neutral.950}",
+            "note": "Ink: bone on this green is 3.5:1."
           }
         },
-        "$description": "Text on the solid success fill. Ink: bone on this green is 3.5:1."
+        "$description": "Text on the solid success fill. Each brand picks whichever of light or ink meets AA on its green."
       },
       "on-warning": {
         "$value": "{color.neutral.950}",
@@ -307,16 +334,18 @@
           "com.pearpages.pulp": {
             "dark": "{color.neutral.950}"
           }
-        }
+        },
+        "$description": "Text on the solid warning fill."
       },
       "on-error": {
         "$value": "{color.neutral.0}",
         "$extensions": {
           "com.pearpages.pulp": {
-            "dark": "{color.neutral.950}"
+            "dark": "{color.neutral.950}",
+            "note": "White on the light red fill, ink on the light-scheme-dark fill."
           }
         },
-        "$description": "White on the light red fill, ink on the light-scheme-dark fill."
+        "$description": "Text on the solid error fill. Each brand picks whichever of light or ink meets AA on it, per scheme."
       },
       "on-info": {
         "$value": "{color.neutral.100}",
@@ -324,7 +353,8 @@
           "com.pearpages.pulp": {
             "dark": "{color.neutral.950}"
           }
-        }
+        },
+        "$description": "Text on the solid info fill."
       },
       "neutral": {
         "$value": "{color.neutral.700}",
@@ -341,7 +371,8 @@
           "com.pearpages.pulp": {
             "dark": "{color.neutral.850}"
           }
-        }
+        },
+        "$description": "Tinted background for the neutral tone: subtle Badge, the default Avatar."
       },
       "neutral-text": {
         "$value": "{color.neutral.700}",
@@ -349,7 +380,8 @@
           "com.pearpages.pulp": {
             "dark": "{color.neutral.400}"
           }
-        }
+        },
+        "$description": "Neutral tone colour for text on a surface or on neutral-subtle."
       },
       "on-neutral": {
         "$value": "{color.neutral.0}",
@@ -357,7 +389,8 @@
           "com.pearpages.pulp": {
             "dark": "{color.neutral.950}"
           }
-        }
+        },
+        "$description": "Text on the solid neutral fill."
       }
     },
     "accent": {
@@ -553,13 +586,16 @@
     "family": {
       "$type": "fontFamily",
       "display": {
-        "$value": "{typeface.display}"
+        "$value": "{typeface.display}",
+        "$description": "Headings and display text."
       },
       "body": {
-        "$value": "{typeface.body}"
+        "$value": "{typeface.body}",
+        "$description": "Running text and every control."
       },
       "mono": {
-        "$value": "{typeface.mono}"
+        "$value": "{typeface.mono}",
+        "$description": "Code, keyboard input, samples."
       }
     },
     "size": {
@@ -605,27 +641,33 @@
           "value": 2.25,
           "unit": "rem"
         }
-      }
+      },
+      "$description": "Type scale, xs to 3xl. Body text is md; the steps above it are for headings."
     },
     "weight": {
       "$type": "fontWeight",
       "regular": {
-        "$value": 400
+        "$value": 400,
+        "$description": "Running text."
       },
       "medium": {
-        "$value": 500
+        "$value": 500,
+        "$description": "Labels and controls: buttons, tabs, chips."
       },
       "semibold": {
-        "$value": 600
+        "$value": 600,
+        "$description": "Headings and the strongest emphasis in a control."
       }
     },
     "line-height": {
       "$type": "number",
       "tight": {
-        "$value": 1.2
+        "$value": 1.2,
+        "$description": "Headings and single-line controls, where the box, not the leading, sets the height."
       },
       "normal": {
-        "$value": 1.5
+        "$value": 1.5,
+        "$description": "Running text."
       }
     }
   },
@@ -640,7 +682,8 @@
       "$description": "Cards, dialogs, popovers."
     },
     "full": {
-      "$value": "{radius.pill}"
+      "$value": "{radius.pill}",
+      "$description": "Fully round: pills and circles (avatars, switch tracks, a brand's pill buttons)."
     }
   },
   "space": {
@@ -715,16 +758,19 @@
     "duration": {
       "$type": "duration",
       "fast": {
-        "$value": "{duration.fast}"
+        "$value": "{duration.fast}",
+        "$description": "Feedback on something already on screen: hover, press, focus, a toggle."
       },
       "base": {
-        "$value": "{duration.base}"
+        "$value": "{duration.base}",
+        "$description": "Something entering or leaving: an overlay opening, a panel expanding."
       }
     },
     "easing": {
       "$type": "cubicBezier",
       "standard": {
-        "$value": "{easing.standard}"
+        "$value": "{easing.standard}",
+        "$description": "The easing of every transition, so motion reads as one system."
       }
     }
   },
@@ -772,7 +818,8 @@
             "color": "#00000059"
           }
         }
-      }
+      },
+      "$description": "Resting elevation for something that sits on the page: a card."
     },
     "overlay": {
       "$value": {
@@ -875,19 +922,22 @@
       "$value": {
         "value": 22,
         "unit": "rem"
-      }
+      },
+      "$description": "Width of a toast."
     },
     "popover-width": {
       "$value": {
         "value": 20,
         "unit": "rem"
-      }
+      },
+      "$description": "Width of a popover's panel."
     },
     "menu-width": {
       "$value": {
         "value": 14,
         "unit": "rem"
-      }
+      },
+      "$description": "Width of a narrow floating panel: a menu's minimum and a tooltip's maximum."
     },
     "listbox-height": {
       "$value": {
@@ -925,13 +975,15 @@
         "$value": {
           "value": 2,
           "unit": "px"
-        }
+        },
+        "$description": "Thickness of the focus ring."
       },
       "offset": {
         "$value": {
           "value": 2,
           "unit": "px"
-        }
+        },
+        "$description": "Gap between a control and its focus ring."
       }
     }
   },

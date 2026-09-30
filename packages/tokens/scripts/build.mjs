@@ -13,7 +13,8 @@ import { readFileSync, writeFileSync, mkdirSync, existsSync } from 'node:fs';
 import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import StyleDictionary from 'style-dictionary';
-import { cssBrand, jsonBrand } from './format.mjs';
+import { cssBrand, cssName, jsonBrand } from './format.mjs';
+import { semanticRoles } from './roles.mjs';
 import { nativeModule, themeCss } from './outputs.mjs';
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
@@ -77,6 +78,19 @@ export async function render() {
     '}',
     '',
   ].join('\n');
+
+  // A semantic token's role is stated once, in the base brand's file, and read by every brand:
+  // the role is the name's, the value is the brand's (a brand says why its value is what it is in
+  // its `note`). `description` stays, as role and note together, for readers of the old field. Record 013.
+  const base = BRANDS.find((brand) => brand.base).name;
+  const { roles } = semanticRoles(JSON.parse(readFileSync(resolve(ROOT, `tokens/semantic/${base}.json`), 'utf8')), cssName);
+  for (const brand of brands) {
+    for (const entry of brand.json) {
+      if (entry.tier !== 'semantic' || !roles.has(entry.name)) continue;
+      entry.role = roles.get(entry.name);
+      entry.description = [entry.role, entry.note].filter(Boolean).join(' ');
+    }
+  }
 
   const manifest = Object.fromEntries(brands.map((b) => [b.name, b.json]));
   const json = `${JSON.stringify(manifest, null, 2)}\n`;

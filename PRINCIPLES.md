@@ -79,13 +79,22 @@ than hand-rolled keyboard handling.
 Every story renders in a real browser, runs its interactions, and fails on accessibility
 violations. Documentation, demonstration and verification are one file per component.
 
-## 8. Guardrails, not review
+## 8. Guardrails, so review is spent where no rule reaches
 
 Inline styles fail lint. A literal colour outside the tokens package fails lint. Token
-output that drifts from its source fails CI. The published package is smoke-tested as a
-consumer would install it. The same rules keep humans and coding agents on-system; the
-generated component manifest tells an agent exactly what exists so it composes instead of
-inventing.
+output that drifts from its source fails CI. Text pairs below AA fail the contrast test, and a
+component colour token that reads the wrong family of semantic token (a background in a text
+colour) fails the family test. The published package is smoke-tested as a consumer would
+install it. The same rules keep humans and coding agents on-system; the generated component
+manifest tells an agent exactly what exists so it composes instead of inventing.
+
+What guardrails remove is review of the mechanical layer, not review. A green run proves no
+rule was broken; it does not prove the design is right. A component can read a valid semantic
+token, of an accepted family, with no literal and no drift, and still read the wrong one: a
+hover in the pressed colour, a hint in the body text colour. Review spends its attention
+there, on whether the chosen token is the one whose role fits. So that question has an
+answer to check against, every semantic token states the role it exists for (record 013), and
+whatever part of that judgement becomes mechanical is moved into a test.
 
 ## 9. Versioned like a dependency, because it is one
 
