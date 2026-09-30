@@ -19,6 +19,9 @@ this file holds what is left to do, ticked with a date when done. Ordered within
   Web Components and native renderers; PRINCIPLES 1 and 4 name it. Record 007 gains rules 3 and 4,
   tested: each brand override carries its own `$description`, at most 3 per brand; brand override
   files are now schema-checked too.
+- 2026-09-30 (later): principle 8 says what guardrails are for; record 013: every semantic token
+  states its role once (base brand, copied to `tokens.json` as `role`; 23 cross-brand copies gone),
+  and a family test holds each component colour token to its slot (5 findings: 1 misnamed, 4 exceptions).
 - 2026-09-29 (browser floor): the browser versions now live only in the root `browserslist`;
   PRINCIPLES 4, README and the css README point to it instead of repeating them.
 - 2026-09-29 (later still): principle 11, one explicit source for humans and agents, naming the
@@ -948,6 +951,11 @@ Found with `pulp-react` 0.4.0; the same code is in 0.3.0.
 - [ ] Calendar and DatePicker, `YYYY-MM-DD` boundary unchanged.
 - [ ] Then update CLAUDE.md's rule (only after the pilot) and drop `AriaField.tsx`;
       `react-aria-components` stays for DataGrid.
+
+**15. Token roles (record 013, 2026-09-30)**
+- [ ] A semantic token for an unchecked control fill (and its hover), so `--switch-track-bg` stops
+      reading `border.strong` and `--switch-track-bg-hover` stops reading `text.faint`; both brands, the
+      contrast test, `public-tokens.mjs`, then drop the two exceptions in `scripts/roles.mjs`.
 
 ## Later (not scheduled)
 Deprecation codemods, Tailwind preset emitted from tokens, Figma sync (Tokens Studio reads the

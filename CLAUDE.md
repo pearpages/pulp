@@ -131,6 +131,14 @@ copy of the working tree, two-minute loops. Colima only, never Docker Desktop; f
   `tokens/component/<brand>/`, references the semantic tier, names a token the base already has,
   carries its own `$description`, and a brand has at most 3 (`packages/tokens/scripts/overrides.mjs`).
   A fourth fails the token tests: add a semantic token every brand maps instead.
+- **A component colour token reads a semantic family its slot accepts** (record 013,
+  `packages/tokens/scripts/roles.mjs`). The slot is the last slot word in the name (`-bg`, `-fg`,
+  `-border`, `-focus-ring`, `-thumb`…): a bg reads surface, tint, fill or scrim, never a text or
+  border colour; a fg reads text or on-*; every focus ring reads `--color-border-focus`. A name
+  with no slot word, or a semantic colour in no family, fails until placed; a deliberate break goes
+  in `EXCEPTIONS` with its reason. The check can't tell *which* fill fits. That is review's job,
+  against the role every semantic token states in `semantic/pulp.json` (the base brand only;
+  another brand's `$description` explains its value, and a copied role fails the tests).
 - **`ref` is a normal prop** (React 19). The compiler lint rule (`react-hooks/refs`) rejects
   passing a ref, or an object holding one, into any function. An `asChild` helper has to,
   so that one call carries a `eslint-disable-next-line react-hooks/refs -- forwarded, not read`.

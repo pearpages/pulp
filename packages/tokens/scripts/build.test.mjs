@@ -6,6 +6,8 @@ import { PUBLIC_SEMANTIC_TOKENS } from './public-tokens.mjs';
 import { nativeBrand, themeCss, toPx } from './outputs.mjs';
 import { validateTokens } from './schema.mjs';
 import { MAX_OVERRIDES_PER_BRAND, checkOverrides } from './overrides.mjs';
+import { checkFamilies, semanticRoles } from './roles.mjs';
+import { cssName } from './format.mjs';
 import { createRequire } from 'node:module';
 import { readdirSync, readFileSync, statSync } from 'node:fs';
 import { resolve } from 'node:path';
@@ -146,6 +148,63 @@ test('component tokens reference the semantic layer only, never a primitive or a
     }
   }
   assert.deepEqual(offenders, []);
+});
+
+test('every semantic token states its role, once, in the base brand', async () => {
+  // The role belongs to the name, the value to the brand (record 013). pulp is the base brand:
+  // its file states every role, and another brand's $description says only why its value differs.
+  const { missing } = semanticRoles(readJson('semantic', 'pulp.json'), cssName);
+  assert.deepEqual(missing, [], 'semantic tokens without a role: add a $description to semantic/pulp.json');
+
+  const repeated = [];
+  const compare = (base, other, path) => {
+    for (const [key, node] of Object.entries(other)) {
+      if (key.startsWith('$') || node === null || typeof node !== 'object' || !base?.[key]) continue;
+      if (node.$description !== undefined && node.$description === base[key].$description) repeated.push([...path, key].join('.'));
+      compare(base[key], node, [...path, key]);
+    }
+  };
+  for (const name of jsonFiles('semantic').filter((f) => f !== 'pulp.json')) compare(readJson('semantic', 'pulp.json'), readJson('semantic', name), [name]);
+  assert.deepEqual(repeated, [], 'a brand restates the base role; state it once, in semantic/pulp.json');
+
+  const { json } = await render();
+  for (const [brand, tokens] of Object.entries(JSON.parse(json))) {
+    const roleless = tokens.filter((t) => t.tier === 'semantic' && !t.role).map((t) => t.name);
+    assert.deepEqual(roleless, [], `${brand}: tokens.json entries without a role`);
+  }
+});
+
+test('component colour tokens read a semantic family their slot accepts', async () => {
+  // The semantic analogue of the contrast test: a design rule made mechanical. Record 013.
+  const { json } = await render();
+  assert.deepEqual(checkFamilies(JSON.parse(json)), []);
+});
+
+test('the family check fires: wrong family, a stray focus colour, no slot, no family, a stale exception', () => {
+  const semantic = (name, role) => ({ name, path: [], type: 'color', tier: 'semantic', css: '#000', role });
+  const component = (name, ref) => ({ name, path: name.slice(2).split('-'), type: 'color', tier: 'component', css: `var(${ref})` });
+  const manifest = {
+    x: [
+      semantic('--color-text-muted', 'Secondary text.'),
+      semantic('--color-surface-raised'),
+      semantic('--color-border-default'),
+      semantic('--color-border-focus'),
+      semantic('--color-glow'),
+      component('--button-primary-bg', '--color-text-muted'),
+      component('--button-fg', '--color-surface-raised'),
+      component('--button-focus-ring', '--color-border-default'),
+      component('--card-border', '--color-border-default'),
+      component('--card-glint', '--color-border-default'),
+    ],
+  };
+  assert.deepEqual(checkFamilies(manifest, { '--card-border': 'stale' }), [
+    'x: --color-glow belongs to no family; place it in familyOf (scripts/roles.mjs, record 013)',
+    'x: --button-primary-bg is a bg slot and reads --color-text-muted (ink: "Secondary text."); a bg expects surface, tint, fill, scrim. Pick the semantic token whose role fits, or list the exception with its reason (scripts/roles.mjs, record 013).',
+    'x: --button-fg is a fg slot and reads --color-surface-raised (surface); a fg expects ink, on-ink. Pick the semantic token whose role fits, or list the exception with its reason (scripts/roles.mjs, record 013).',
+    'x: --button-focus-ring is a focus-ring slot and reads --color-border-default (line); a focus-ring expects --color-border-focus. Pick the semantic token whose role fits, or list the exception with its reason (scripts/roles.mjs, record 013).',
+    'x: --card-glint names no slot (bg, fg, border, focus-ring…); name it, or add it to SLOT_OF (scripts/roles.mjs, record 013)',
+    '--card-border is listed in EXCEPTIONS but fits its slot or no longer exists; remove the entry',
+  ]);
 });
 
 test('a brand only overrides component tokens that already exist, never invents one', async () => {

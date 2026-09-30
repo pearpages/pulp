@@ -25,8 +25,7 @@
           "com.pearpages.pulp": {
             "dark": "{color.ink.600}"
           }
-        },
-        "$description": "What floats above the page: dialogs, sheets, popovers, menus. One step lighter than raised in dark schemes, where a shadow alone does not separate a menu from a card; in light it may equal raised."
+        }
       },
       "sunken": {
         "$value": "{color.cream.400}",
@@ -42,8 +41,7 @@
           "com.pearpages.pulp": {
             "dark": "{color.neutral.50}"
           }
-        },
-        "$description": "The opposite of the page: tooltips, and anything that must stand out from every surface."
+        }
       }
     },
     "text": {
@@ -69,8 +67,7 @@
           "com.pearpages.pulp": {
             "dark": "{color.neutral.400}"
           }
-        },
-        "$description": "Lowest-emphasis text. Promised AA on base and raised surfaces only, not on sunken."
+        }
       },
       "on-action": {
         "$value": "{color.neutral.900}",
@@ -147,7 +144,7 @@
             "dark": "{color.orange.300}"
           }
         },
-        "$description": "Accent for text and icons on a surface. The brand orange itself is 2.3:1 on cream, so text uses the 800 step."
+        "$description": "The brand orange itself is 2.3:1 on cream, so text uses the 800 step."
       }
     },
     "border": {
@@ -208,8 +205,7 @@
           "com.pearpages.pulp": {
             "dark": "{color.red.200}"
           }
-        },
-        "$description": "A filled error surface under the pointer (a danger Button). Darkens in light, lightens in dark: away from its on-error text."
+        }
       },
       "error-active": {
         "$value": "{color.red.800}",
@@ -217,8 +213,7 @@
           "com.pearpages.pulp": {
             "dark": "{color.red.400}"
           }
-        },
-        "$description": "A filled error surface while pressed."
+        }
       },
       "info": {
         "$value": "{color.blue.600}",
@@ -235,8 +230,7 @@
           "com.pearpages.pulp": {
             "dark": "{color.red.300}"
           }
-        },
-        "$description": "Error colour for text (messages, required markers). status.error is a fill/border colour and is below AA as text on light surfaces."
+        }
       },
       "success-text": {
         "$value": "{color.green.700}",
@@ -268,8 +262,7 @@
           "com.pearpages.pulp": {
             "dark": "{color.green.900}"
           }
-        },
-        "$description": "Tinted background for the tone; pair with <tone>-text."
+        }
       },
       "warning-subtle": {
         "$value": "{color.gold.100}",
@@ -333,8 +326,7 @@
           "com.pearpages.pulp": {
             "dark": "{color.neutral.400}"
           }
-        },
-        "$description": "A tone with no meaning: default Badge, counts, tags."
+        }
       },
       "neutral-subtle": {
         "$value": "{color.cream.400}",
@@ -426,7 +418,6 @@
           }
         }
       },
-      "$description": "Eight categorical fills for telling things of one kind apart (people, mostly): a consumer hashes an id to an index. No meaning is attached to a number; the hues come in the same order in every brand (blue, orange, green, violet, red, teal, amber, pink). Pair accent.N with accent.on-N, never with another text colour.",
       "on-1": {
         "$value": "{color.neutral.0}",
         "$extensions": {
@@ -493,7 +484,6 @@
       }
     },
     "data": {
-      "$description": "Fills for data, not for UI. sequential.0 is \"none\" and 1-4 rise in intensity, on the brand's own hue: a heatmap's cells, a density scale. In dark schemes the ramp inverts, so more is always brighter against the surface. Never carries text.",
       "sequential": {
         "0": {
           "$value": "{color.cream.300}",
@@ -501,8 +491,7 @@
             "com.pearpages.pulp": {
               "dark": "{color.ink.700}"
             }
-          },
-          "$description": "Zero: one step off the raised surface, so an empty cell still reads as a slot."
+          }
         },
         "1": {
           "$value": "{color.orange.200}",
@@ -545,8 +534,7 @@
           "com.pearpages.pulp": {
             "dark": "#000000b3"
           }
-        },
-        "$description": "Scrim behind dialogs and sheets. Alpha hex, no primitive: it is a role, not a palette colour."
+        }
       }
     }
   },
@@ -707,8 +695,7 @@
           "multiply": 16
         }
       }
-    },
-    "$description": "Spacing scale. Names are steps, not multipliers: 1..8 map to 1, 2, 3, 4, 6, 8, 12, 16 \u00d7 space.unit, so the scale opens up at the top like a type scale. space.unit is the density knob for the brand."
+    }
   },
   "motion": {
     "duration": {
@@ -815,8 +802,7 @@
             "color": "#00000080"
           }
         }
-      },
-      "$description": "Elevation for floating surfaces: dialogs, popovers."
+      }
     }
   },
   "size": {
@@ -839,15 +825,13 @@
           "value": 3,
           "unit": "rem"
         }
-      },
-      "$description": "Block size of interactive controls: buttons, inputs, selects."
+      }
     },
     "hairline": {
       "$value": {
         "value": 1,
         "unit": "px"
-      },
-      "$description": "The thinnest visible line: borders, dividers, the visually-hidden box."
+      }
     },
     "toggle": {
       "sm": {
@@ -867,8 +851,7 @@
           "value": 1.5,
           "unit": "rem"
         }
-      },
-      "$description": "Box size of checkboxes, radios and switch thumbs."
+      }
     },
     "toast-width": {
       "$value": {
@@ -892,29 +875,25 @@
       "$value": {
         "value": 18,
         "unit": "rem"
-      },
-      "$description": "Maximum height of an option list before it scrolls (Combobox, Picker, Listbox)."
+      }
     },
     "dialog-width": {
       "$value": {
         "value": 32.5,
         "unit": "rem"
-      },
-      "$description": "Width of a centred dialog: 520px, the vendor's own default, so Dialog owns the number instead of inheriting it."
+      }
     },
     "sheet-width": {
       "$value": {
         "value": 24,
         "unit": "rem"
-      },
-      "$description": "Width of a sheet docked to the start or end edge."
+      }
     },
     "sheet-height": {
       "$value": {
         "value": 60,
         "unit": "vh"
-      },
-      "$description": "Height of a sheet docked to the top or bottom edge: a share of the viewport, so the page stays visible behind it."
+      }
     }
   },
   "focus": {
@@ -937,16 +916,13 @@
   "layer": {
     "$type": "number",
     "toast": {
-      "$value": 1100,
-      "$description": "Stacking order for toasts: above the dialog layer (the vendor dialog uses 1000)."
+      "$value": 1100
     },
     "popover": {
-      "$value": 1200,
-      "$description": "Popovers and menus: above dialogs (they open inside them) and toasts."
+      "$value": 1200
     },
     "tooltip": {
-      "$value": 1300,
-      "$description": "Tooltips: above everything."
+      "$value": 1300
     }
   }
 }
