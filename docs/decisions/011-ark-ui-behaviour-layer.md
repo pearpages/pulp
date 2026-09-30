@@ -87,7 +87,8 @@ component.
 ## Consequences
 
 - For a while there are two vendors. `.size-limit.js` gains "with Ark" entries beside the "with React
-  Aria" ones; `scripts/client-entries.mjs` learns `@ark-ui/react` as a client package; tsup keeps
+  Aria" ones; `scripts/client-entries.mjs` learns `@ark-ui/react` as a client package (and any `@zag-js/*` package a
+  pulp module imports directly: the list is kept by hand, record 015); tsup keeps
   both external, and the dist smoke test asserts it. `react-aria-components` stays a dependency for as long as `DataGrid`
   uses it.
 - The size claim is Ark's, not ours yet. Slider's budget is where it gets measured: if the Ark entry

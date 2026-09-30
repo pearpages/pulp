@@ -99,10 +99,10 @@ copy of the working tree, two-minute loops. Colima only, never Docker Desktop; f
   a page, every literal `?path=` resolves, and every `docs/decisions/NNN-*.md` is both imported and
   rendered by `Decisions.mdx` and listed in the folder's README. It imports `docs/paths.ts` directly
   (Node strips the types), so that file must stay type-only syntax.
-- **`'use client'` is decided from source and proven on dist.** `packages/react/scripts/client-entries.mjs`
+- **`'use client'` is decided from source and proven on dist** (record 015). `packages/react/scripts/client-entries.mjs`
   walks each entry's relative imports for client-only React APIs (state, effects, refs, context,
   `createPortal`; not `useId`, which the server build has) or a client package (React Aria, modals,
-  floating-ui), and `pnpm build` stamps `"use client";` onto those `dist/<entry>.js` (on the first
+  floating-ui; a hand-kept `CLIENT_PACKAGES` list, so a new vendor that uses hooks is added there), and `pnpm build` stamps `"use client";` onto those `dist/<entry>.js` (on the first
   line, no line break, so source maps hold). Chunks need none: esbuild puts a shared module in the
   chunk of exactly the entries that reach it. The manifest carries `client` per component (Status
   page column "Renders in"). `test:dist` asserts the directive per entry, that a named list of
@@ -143,7 +143,7 @@ copy of the working tree, two-minute loops. Colima only, never Docker Desktop; f
 - **`ref` is a normal prop** (React 19). The compiler lint rule (`react-hooks/refs`) rejects
   passing a ref, or an object holding one, into any function. An `asChild` helper has to,
   so that one call carries a `eslint-disable-next-line react-hooks/refs -- forwarded, not read`.
-- **Every component's JSDoc carries `@status`, `@category` and `@accessibility`** (plus optional
+- **Every component's JSDoc carries `@status`, `@category` and `@accessibility`** (record 016; plus optional
   `@do`/`@dont`, one bullet per line). The manifest build fails without them. That block is the single
   source: the Docs page (`apps/storybook/docs/ComponentDocs.tsx`), the Status page, the sidebar label
   and agents read it from `component-manifest.json`. Stories carry no `parameters.docs.description`.
