@@ -15,6 +15,12 @@ this file holds what is left to do, ticked with a date when done. Ordered within
 
 ## Session log
 
+- 2026-09-30 (build vs buy): records 014 (tokens build on Style Dictionary 5; the two formats and
+  `theme.css`/`native` are pulp's) and 015 (`"use client"` decided from source; `CLIENT_PACKAGES` is
+  hand-kept, and record 011's Slider pilot must add `@ark-ui/react` and any direct `@zag-js/*`).
+  `architecture.md` gains a table of what makes each generated file, standard or bespoke, and why.
+  Record 016: the component manifest stays pulp's (Storybook 10.6's `componentsManifest` carries the
+  tags raw, unchecked, in the site only); 014 states the rule the three share, once.
 - 2026-09-30: decision record 012, the portability gradient (data → DOM → platform) and the planned
   Web Components and native renderers; PRINCIPLES 1 and 4 name it. Record 007 gains rules 3 and 4,
   tested: each brand override carries its own `$description`, at most 3 per brand; brand override

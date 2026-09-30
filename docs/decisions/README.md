@@ -20,3 +20,6 @@ option was defensible. Newest last. The Storybook renders this folder under "Dec
 | [011](011-ark-ui-behaviour-layer.md) | Complex widgets move to Ark UI one at a time, starting with a Slider pilot |
 | [012](012-portability-gradient.md) | Portability is layered: tokens reach every renderer, CSS and behaviour the DOM ones, native accessibility is built fresh |
 | [013](013-token-roles-and-families.md) | Semantic tokens state their role, and component colour tokens read a family their slot accepts |
+| [014](014-token-build-on-style-dictionary.md) | The token build runs on Style Dictionary; the output formats are pulp's own |
+| [015](015-use-client-from-source.md) | `"use client"` is decided from source by a script, not written by hand |
+| [016](016-component-manifest.md) | The component manifest is pulp's own, not Storybook's `componentsManifest` |

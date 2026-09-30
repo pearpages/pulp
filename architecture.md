@@ -41,6 +41,24 @@ flowchart TD
 | `.claude/skills/add-component` | the scaffold procedure for a new component |
 | `docs/decisions` | decision records, rendered as the Storybook "Decisions" page |
 
+### What makes each generated file, and whether it is ours
+
+*Standard* is an off-the-shelf tool used as documented; *bespoke* is a script in this repo that pulp
+maintains. The committed token and icon outputs are checked for drift by re-rendering them in
+memory (`--check`), which is bespoke too: build and check are one function, so they cannot disagree.
+
+| Artefact | Made by | Why |
+| --- | --- | --- |
+| `tokens.css`, `tokens.json` | Standard engine, bespoke output: Style Dictionary 5 reads and resolves the DTCG, pulp's formats (`packages/tokens/scripts/format.mjs`) write | No built-in format emits `light-dark()` and `calc()` from pulp's two `$extensions`, the per-brand blocks or the manifest's fields; resolving references is not pulp-specific, so it is not rewritten (record 014) |
+| `theme.css`, `native.{js,cjs,d.ts}` | Bespoke: `packages/tokens/scripts/outputs.mjs` | A filter and rename over the finished `tokens.json`, across brands, where Style Dictionary builds one brand at a time (records 005, 014) |
+| `packages/icons/src/icons/*.tsx` | Bespoke: `packages/icons/scripts/generate.mjs` | The SVGs are stroke-only simple shapes by rule, so the JSX translation is a few lines and needs no SVG toolchain |
+| `packages/react/dist` (JS, types, CSS) | Standard: tsup (esbuild), `local-css` loader | Nothing pulp-specific in bundling; one entry per component is tsup configuration |
+| `"use client"` on client entries | Bespoke: `packages/react/scripts/client-entries.mjs`, run after tsup | Decided from each entry's imports, so the fact has one source, the code; its `CLIENT_PACKAGES` list is kept by hand (record 015) |
+| `dist/component-manifest.json` | Standard parser, bespoke manifest: `react-docgen-typescript` reads the props, `packages/react/scripts/manifest.mjs` validates the JSDoc tags and adds `client`, `flat`, `tokens`, `requires` | The tags (`@status`, `@category`, `@accessibility`, `@do`, `@dont`) are pulp's contract with its docs and with agents, checked at build and shipped in the package. Storybook 10's own `componentsManifest` is not enabled: it carries the tags raw, unchecked, and only in the site (record 016) |
+| `storybook-static` | Standard: Storybook 10 | The docs site; pulp adds a link check (`check-links.mjs`) and the built-site test (`check-built-site.mjs`) |
+| `public/og.png`, `apple-touch-icon.png`, manager fonts | Bespoke: `apps/storybook/scripts/og-card.mjs` (drives Playwright), `fonts.mjs` (copies from fontsource) | Rendered from `tokens.css` and the brand typefaces. The PNGs are committed and re-run by hand after a brand change, with no drift check; the fonts are copied at build and not committed |
+| `CHANGELOG.md`, versions | Standard: Changesets | The GitHub Release notes are bespoke (`scripts/release-notes.mjs`), cut from those changelogs |
+
 ## How a token reaches the screen
 
 Three tiers, two axes. Components read only the semantic and component tiers, so a brand is a
@@ -85,7 +103,8 @@ that line first, because the bundler decides which file loads first.
 
 - **One entry per component** (`@pearpages/pulp-react/button`), each with its own stylesheet, plus a
   barrel and a combined `styles.css`. `pnpm build` stamps `"use client"` on the entries that need a
-  client (decided from source by `scripts/client-entries.mjs`); the others render in a Server Component.
+  client (decided from source by `scripts/client-entries.mjs`, record 015); the others render in a
+  Server Component.
 - **Compound parts** (`Menu.Trigger`) are also exported flat (`MenuTrigger`), the only form a Server
   Component can use from a client entry.
 - **Complex widgets** (Combobox, Listbox, Picker, Calendar, DatePicker, Slider, DataGrid) build on
