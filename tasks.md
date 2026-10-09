@@ -965,6 +965,34 @@ Found with `pulp-react` 0.4.0; the same code is in 0.3.0.
       reading `border.strong` and `--switch-track-bg-hover` stops reading `text.faint`; both brands, the
       contrast test, `public-tokens.mjs`, then drop the two exceptions in `scripts/roles.mjs`.
 
+**16. From bitepals (2026-10-09)**
+- [ ] A surface that stays dark in both schemes, for an emphasis band such as a page's closing
+      call to action. bitepals' home final CTA band uses `color.surface.inverse`, which flips with the
+      scheme: near-black in light, near-white in dark, so in dark it is a bright block on a dark page.
+      Add e.g. `color.surface.emphasis` + its text colour (`color.text.on-emphasis`): near-black in
+      light, a distinct dark ink in dark that stands apart from `base` and `raised` (bitepals
+      suggested `#202938`, which is already its dark `surface.overlay`, so pick a step that differs
+      from that or decide sharing is fine). Decide first whether it's a new semantic token or a
+      component (a `Band`/`Section` with `tone="emphasis"`), and write it down. Then: both brands,
+      `role` per record 013, `public-tokens.mjs`, the contrast test (text, muted text and
+      `action.primary` on it), matrix screenshots, changeset. bitepals then bumps and switches
+      `home-final-cta.css`.
+
+**17. From the CV (2026-10-09, `~/Projects/cv` branch `pulp-alignment`)**
+The CV now reads pulp's foundations instead of restating them (its ADR-0011). These are the only
+values it still has to declare itself for lack of a pulp token; each one that lands here gets
+deleted from the CV's `src/styles/_tokens.scss`.
+- [ ] Letter-spacing tokens. pulp has none; the CV uses `--tracking-tight: -0.02em` (display
+      headings, 8 uses), `--tracking-wide: 0.08em` and `--tracking-wider: 0.16em` (mono uppercase
+      labels, 9 uses). Add e.g. `font.tracking.tight|wide|wider` (`$type: dimension`, in `em`) to
+      both brands' semantic files, decide whether `heading`/`text` read them, then
+      `public-tokens.mjs`, `role` per record 013, changeset. bitepals may want its own values.
+- [ ] Extend the space ramp by one step. The CV needs one step past `space.8`: `--space-9: 6rem`
+      (`.section` padding and `scroll-padding-top`; now `calc(var(--space-unit) * 24)` in the CV). Add `space.9`
+      (unit × 24, continuing the ramp's ×12 → ×16 → ×24) to both brands' semantic files, then
+      `public-tokens.mjs`, the semantic-name test, changeset. The CV also declared `--space-10` and a
+      `--dur-slow: 620ms`, but nothing used them; they were deleted rather than asked for.
+
 ## Later (not scheduled)
 Deprecation codemods, Tailwind preset emitted from tokens, Figma sync (Tokens Studio reads the
 DTCG files; dark values live in pulp's extension), a third brand to prove "one JSON file, zero component changes".
