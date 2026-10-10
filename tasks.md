@@ -977,6 +977,31 @@ Found with `pulp-react` 0.4.0; the same code is in 0.3.0.
       `role` per record 013, `public-tokens.mjs`, the contrast test (text, muted text and
       `action.primary` on it), matrix screenshots, changeset. bitepals then bumps and switches
       `home-final-cta.css`.
+- [ ] `AvatarGroup` (2026-10-10, from bitepals' home photo collage, PR #100): overlapping avatars,
+      the "who among your friends saved this" pattern that bitepals will repeat in the feed, the place
+      sheet and the friend lists. The collage needed three workarounds:
+      - a negative `margin-left` for the overlap;
+      - a `box-shadow` ring in the surface colour, because `[data-accent]` sets the avatar's own
+        border to its fill, so `--avatar-border` cannot separate two avatars;
+      - `--avatar-size-sm: 26px` on a wrapper.
+
+      Decide first: a component, or an Avatar `stacked` part. Then the API: `max` with a "+N"
+      overflow, `size`, a ring token (e.g. `--avatar-group-ring`, default the surface it sits on, as
+      `--avatar-group-overlap`), and one accessible name for the group (e.g. "Maria, Jordi and Anna")
+      with the avatars inside it decorative. Then tokens, axe, the four matrices, changeset. bitepals
+      then replaces `.photo-collage__avatars` / `__avatar` in
+      `apps/web/app/[locale]/(app)/_components/home-hero/photo-collage.css`.
+- [ ] `motion.duration-slow` (2026-10-10, same PR): the longest duration is `duration.base`
+      (220 ms pulp / 260 ms bitepals), so the collage's 500 ms hover is
+      `calc(var(--motion-duration-base) * 2)`. Add `duration.slow` and `motion.duration-slow` to both
+      brands (≈ 2× base). The CV declared a `--dur-slow: 620ms` once, deleted unused (group 17), so
+      this is the second ask for it. `role` per record 013, `public-tokens.mjs`, changeset. bitepals
+      then drops the `calc` from `photo-collage.css`. No new easing token: bitepals'
+      `easing.standard` `cubic-bezier(0.2, 0.7, 0.3, 1)` already matches the design's curve.
+- Waiting for a second use (from the same collage, one place each today, so not tasks yet): a
+  halo ring on Badge `variant="dot"` plus app tones (a `love` dot); a translucent floating-chip
+  surface (the collage mixes `surface.raised` to 92%); a hover-lift shadow (`shadow.overlay` plus
+  a 1px `action.primary` ring at 50%). Promote one when a second component needs it.
 
 **17. From the CV (2026-10-09, `~/Projects/cv` branch `pulp-alignment`)**
 The CV now reads pulp's foundations instead of restating them (its ADR-0011). These are the only
