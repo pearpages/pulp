@@ -998,6 +998,11 @@ Found with `pulp-react` 0.4.0; the same code is in 0.3.0.
       this is the second ask for it. `role` per record 013, `public-tokens.mjs`, changeset. bitepals
       then drops the `calc` from `photo-collage.css`. No new easing token: bitepals'
       `easing.standard` `cubic-bezier(0.2, 0.7, 0.3, 1)` already matches the design's curve.
+- [ ] `Globe` icon (2026-10-10, from bitepals' public header): the "Language and theme" button needs
+      a globe, and the set has none, so bitepals draws `GlobeIcon` locally in
+      `apps/web/design-system/ui/primitives/icons/icons.tsx` (circle, equator, meridian lens; 24
+      viewBox, stroke 2). Draw one for pulp (don't copy), add it to `svg/`, changeset; bitepals then
+      swaps its local one for `fromPulp(Globe)`.
 - Waiting for a second use (from the same collage, one place each today, so not tasks yet): a
   halo ring on Badge `variant="dot"` plus app tones (a `love` dot); a translucent floating-chip
   surface (the collage mixes `surface.raised` to 92%); a hover-lift shadow (`shadow.overlay` plus
