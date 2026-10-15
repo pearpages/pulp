@@ -81,7 +81,7 @@ copy of the working tree, two-minute loops. Colima only, never Docker Desktop; f
 - **CSS modules, native CSS** (nesting, logical properties, cascade layers). No Sass, no
   CSS-in-JS, no utility classes.
 - **Every component ships** `Name.tsx`, `Name.module.css`, `Name.test.tsx` (with an `axe`
-  check), `Name.stories.tsx` (with a `play` for anything interactive and the four brand × scheme
+  check), `Name.stories.tsx` (with a `play` for anything interactive and the six brand × scheme
   matrix stories), `index.ts`, and a `tokens/component/<kebab-name>.json`. Directory, entry point
   and CSS file are kebab-case (`text-field`); the export is PascalCase. The scaffold script
   creates all of them, and the dist smoke test covers every component listed in the manifest.
@@ -155,7 +155,7 @@ copy of the working tree, two-minute loops. Colima only, never Docker Desktop; f
   2.1 kB brotli for a leaf entry, named overrides with a reason, the barrel, the stylesheet, and three
   "with React Aria" entries that show the vendor's true cost. `pnpm check:size` runs in CI.
 - **The matrix stories are compared with committed screenshots of the *built* site**, in CI only
-  (`apps/storybook/visual-baselines/<Component>/<brand>-<scheme>.png`, 140 of them).
+  (`apps/storybook/visual-baselines/<Component>/<brand>-<scheme>.png`, 258 of them).
   `apps/storybook/tests/visual.spec.ts` (`@playwright/test`, `playwright.config.ts`) serves
   `storybook-static` and shoots every story named `Matrix…` after its `play`: animations and
   transitions off from before the first render, `Date` frozen so Calendar's "today" never moves,

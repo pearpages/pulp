@@ -1026,8 +1026,9 @@ deleted from the CV's `src/styles/_tokens.scss`.
 **18. menja.bé, the third brand (2026-10-15, branch `menja-brand`)**
 - [x] Tokens from the Claude Design canvas "menja.bé" (Paleta, Landing): `primitives/menja.json`,
       `semantic/menja.json`, the pill-button override; Storybook toolbar, docs theme, Tokens page. (2026-10-15)
-- [ ] Matrix stories for menja (light, dark) on every component, then `gh workflow run visual-update.yml --ref menja-brand`
-      for the new baselines (CI owns them); the rule "four brand × scheme matrix stories" becomes six.
+- [x] Matrix stories for menja (light, dark) in all 43 story files; "four" becomes "six" in CLAUDE.md,
+      CONTRIBUTING, the add-component skill. axe passes on all 86. (2026-10-15)
+- [ ] Baselines: `gh workflow run visual-update.yml --ref menja-brand` (86 new PNGs, 258 in all; CI owns them).
 - [ ] `og-card.mjs`: a menja tile (or say why the card shows only two brands), rerun and commit the PNG.
 - [ ] Review the guesses the design does not state: faint text `#6b6158`, warning fill `#e8a317`, dark
       overlay `#322a24`, garnet inverse in both schemes, the yellow → ochre data ramp, violet/teal/pink accents borrowed from bitepals.

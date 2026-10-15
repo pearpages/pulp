@@ -10,7 +10,7 @@ The short version:
 - **Set up:** Node 22 (`.nvmrc`) and pnpm 11 (`mise.toml`), then `pnpm install`.
 - **Before a PR:** `pnpm verify` runs everything CI runs, in the same order.
 - **New component:** `pnpm --filter @pearpages/pulp-react scaffold Name Category`, then follow the page
-  above. Every component ships tests with an `axe` check, stories for the four brand × scheme
+  above. Every component ships tests with an `axe` check, stories for the six brand × scheme
   combinations, and a token file that reads the semantic tier only.
 - **A notable change** gets a changeset: `pnpm changeset`.
 - **Screenshots** are rendered in CI only. After an intended visual change, run

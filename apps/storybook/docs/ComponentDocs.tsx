@@ -12,7 +12,7 @@ const TONE = { stable: 'success', experimental: 'warning', deprecated: 'error' }
 /**
  * The docs page every component gets. Everything but the stories comes from
  * the component manifest, which comes from the component's JSDoc, so the
- * page, the status page and coding agents read one source. The four brand ×
+ * page, the status page and coding agents read one source. The six brand ×
  * scheme matrix stories are tests and are not rendered here.
  */
 export function ComponentDocs() {
