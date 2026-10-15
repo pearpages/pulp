@@ -27,7 +27,7 @@ export interface LinkProps<E extends HTMLElement = HTMLAnchorElement> extends An
  * land on a router's own link, so client-side navigation keeps working.
  *
  * @status experimental
- * @category Typography
+ * @category Navigation
  * @accessibility A native `a`: focusable and activated with Enter only when it has an `href` (or the `asChild` element provides one). The focus ring comes from the semantic focus tokens. `underline="hover"` removes the only non-colour cue, so it is for lists of links, never for a link inside a sentence (WCAG 1.4.1).
  * @do Use `asChild` with the router's link: `<Link asChild><NextLink href="/feed">Feed</NextLink></Link>`.
  * @do Write link text that makes sense out of context; screen readers list links on their own.

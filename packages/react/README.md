@@ -50,16 +50,16 @@ theme everything inside the element they're on.
 
 ## Components
 
-- **Typography**: `Heading`, `Link`, `Text`
-- **Layout**: `Card`, `Divider`, `Inline`, `Stack`
-- **Actions**: `Button`, `Chip`, `IconButton`
-- **Forms**: `Calendar`, `Checkbox`, `Combobox`, `DatePicker`, `Field`, `Listbox`, `Picker`, `RadioGroup`,
+- **Typography**: `Heading`, `Text`
+- **Layout**: `Accordion`, `Card`, `Divider`, `Inline`, `Stack`
+- **Actions**: `Button`, `IconButton`
+- **Forms**: `Calendar`, `Checkbox`, `Chip`, `Combobox`, `DatePicker`, `Field`, `Listbox`, `Picker`, `RadioGroup`,
   `Radio`, `SegmentedControl`, `Select`, `Slider`, `Switch`, `TextField`, `Textarea`
-- **Navigation**: `Accordion`, `Pagination`, `Tabs`
+- **Navigation**: `Link`, `Pagination`, `Tabs`
 - **Overlays**: `DialogSystem`, `Dialog`, `Menu`, `Popover`, `Sheet`, `Tooltip`
 - **Feedback**: `Alert`, `Badge`, `EmptyState`, `Progress`, `Skeleton`, `Spinner`, `ToastProvider` (and `useToast`)
-- **Data**: `DataGrid` (sortable and selectable), `Heatmap` (a contribution calendar), `Table` (a plain `<table>`)
-- **Utilities**: `Avatar`, `Icon`, `VisuallyHidden`
+- **Data**: `Avatar`, `DataGrid` (sortable and selectable), `Heatmap` (a contribution calendar), `Table` (a plain `<table>`)
+- **Utilities**: `Icon`, `VisuallyHidden`
 
 A component marked **experimental** (on its docs page, and as `status` in the component manifest)
 may still change its API in a minor release. The complex widgets (Combobox, Listbox, Picker,

@@ -5,7 +5,7 @@ import { Text } from '../text';
 import { Link } from './Link';
 
 const meta = {
-  title: 'Components/Typography/Link',
+  title: 'Components/Navigation/Link',
   component: Link,
   args: { children: 'Read the principles', href: '#principles', tone: 'action', underline: 'always' },
   argTypes: {
