@@ -5,6 +5,8 @@ import '@fontsource-variable/instrument-sans';
 import '@fontsource-variable/geist-mono';
 import '@fontsource-variable/inter';
 import '@fontsource-variable/nunito';
+import '@fontsource/trochut/400.css';
+import '@fontsource/trochut/700.css';
 import '@pearpages/pulp-css';
 import './preview.css';
 import { ComponentDocs } from '../docs/ComponentDocs';

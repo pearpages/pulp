@@ -76,7 +76,8 @@ minimumReleaseAgeExclude:
 npm and yarn have no such delay.
 
 Load the brand typefaces yourself (pulp: Archivo, Instrument Sans, Geist Mono; bitepals:
-Nunito, Inter), for example from `@fontsource-variable/*`. The tokens name the families
+Nunito, Inter; menja: Trochut, Inter), for example from `@fontsource-variable/*` (Trochut is
+static: `@fontsource/trochut`). The tokens name the families
 with system fallbacks but ship no font files. Shipped CSS uses native nesting and
 `light-dark()`, not lowered; the supported browsers are the `browserslist` in
 [`package.json`](package.json).

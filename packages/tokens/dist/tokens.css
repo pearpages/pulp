@@ -1328,7 +1328,7 @@
     --duration-fast: 120ms;
     --duration-base: 220ms;
     --easing-standard: cubic-bezier(0.25, 0.1, 0.25, 1);
-    --typeface-display: 'Nunito Variable', Nunito, system-ui, sans-serif;
+    --typeface-display: Trochut, Georgia, serif;
     --typeface-body: 'Inter Variable', Inter, system-ui, sans-serif;
     --typeface-mono: ui-monospace, 'SF Mono', Menlo, monospace;
     --font-family-display: var(--typeface-display);

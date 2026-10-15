@@ -1032,6 +1032,8 @@ deleted from the CV's `src/styles/_tokens.scss`.
 - [ ] `og-card.mjs`: a menja tile (or say why the card shows only two brands), rerun and commit the PNG.
 - [ ] Review the guesses the design does not state: faint text `#6b6158`, warning fill `#e8a317`, dark
       overlay `#322a24`, garnet inverse in both schemes, the yellow → ochre data ramp, violet/teal/pink accents borrowed from bitepals.
+- [ ] Trochut below ~24px: its swash capitals (an N that reads as Π) hurt small headings (EmptyState,
+      Card titles). If it bothers, a large-display semantic family so h1/h2 take Trochut and small headings Inter.
 
 ## Later (not scheduled)
 Deprecation codemods, Tailwind preset emitted from tokens, Figma sync (Tokens Studio reads the

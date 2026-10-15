@@ -1,5 +1,5 @@
 {
-  "$description": "menja.bé primitives. The Catalan palette of the menja.bé design (senyera yellow and red, ochre, garnet, terracotta, Mediterranean blue, olive, cream) on bitepals' structure: the same radii, spacing, motion and typefaces, only the colours change.",
+  "$description": "menja.bé primitives. The Catalan palette of the menja.bé design (senyera yellow and red, ochre, garnet, terracotta, Mediterranean blue, olive, cream) on bitepals' radii, spacing and motion. The display face is its own: Trochut.",
   "color": {
     "$type": "color",
     "yellow": {
@@ -265,11 +265,11 @@
   "typeface": {
     "display": {
       "$value": [
-        "Nunito Variable",
-        "Nunito",
-        "system-ui",
-        "sans-serif"
-      ]
+        "Trochut",
+        "Georgia",
+        "serif"
+      ],
+      "$description": "Trochut (Andreu Balius, 2011, OFL), from Joan Trochut's Bisonte, cast in Barcelona in 1942: a display face with a Catalan history, where bitepals uses Nunito. Static 400 and 700 only, so a 600 heading renders at 700. Body and controls stay Inter."
     },
     "body": {
       "$value": [
