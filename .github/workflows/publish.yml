@@ -1,26 +1,29 @@
-name: Publish to npm
+name: Release
 
+# A release is a tag (record 017). One `vX.Y.Z` tag on main, named after @pearpages/pulp-react's
+# version, does all three, in this order: npm, then the site, then the GitHub Release. Pushes to
+# main are verified by ci.yml and released by nothing: the site documents what consumers can install.
+#   git tag vX.Y.Z && git push origin vX.Y.Z      # the `release` skill does this, after CI on main
+#   gh workflow run publish.yml --ref vX.Y.Z      # redo a release: what is already done is skipped
+# The filename stays publish.yml: npm's Trusted Publisher entries name it.
 on:
   push:
     tags: ["v*"]
-  # Re-run a failed publish for an existing tag without re-tagging:
-  #   gh workflow run publish.yml --ref vX.Y.Z
   workflow_dispatch:
 
 permissions:
-  contents: write # the GitHub Release at the end
-  id-token: write # npm trusted publishing (OIDC) + provenance
+  contents: read
 
 jobs:
-  publish:
+  verify:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
-      # Only tags that point at main get published. Push main and wait for its
-      # run to finish BEFORE pushing the tag, or this check sees a stale main.
+      # Only tags that point at main get released. Push main and wait for ci.yml BEFORE pushing the
+      # tag, or this check sees a stale main.
       - name: Tag must be on main
         run: |
           git fetch origin main
@@ -30,14 +33,10 @@ jobs:
           fi
 
       - uses: pnpm/action-setup@v4
-      # No registry-url on purpose: setup-node would write an empty auth token
-      # to .npmrc, and that shadows trusted publishing.
       - uses: actions/setup-node@v4
         with:
           node-version-file: .nvmrc
           cache: pnpm
-      # Trusted publishing needs npm >= 11.5.1.
-      - run: npm install -g npm@^11
       - run: pnpm install --frozen-lockfile
 
       - run: pnpm check:generated
@@ -47,30 +46,111 @@ jobs:
       - run: pnpm build
       - run: pnpm check:package
       - run: pnpm check:size
+      - run: pnpm check:floor
       - run: pnpm test:dist
+      - run: pnpm --filter pulp-docs exec playwright install --with-deps chromium
+      - run: pnpm test:storybook
+      - run: pnpm storybook:build
+      # The production build, opened for real: every other test renders through the dev transform.
+      - run: pnpm test:site
+        env:
+          PULP_VISUAL: '1'
+      # A failed shot leaves its expected, actual and diff images here.
+      - if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: visual-diffs
+          path: apps/storybook/test-results
+          if-no-files-found: ignore
 
-      # pnpm pack rewrites workspace:* to real ranges; npm publish does the
-      # OIDC exchange. Each package name is registered as a Trusted Publisher
-      # for this repository + this workflow file on npmjs.com. The entry's
-      # workflow filename must be exactly publish.yml: an entry that does not
-      # match the token fails as "OIDC token exchange error - package not
-      # found" → ENEEDAUTH (0.1.0's entries said deploy.yml).
+      # What was tested is what ships: the tarballs are packed here and published as they are.
+      # pnpm pack rewrites workspace:* to real ranges.
+      - name: Pack
+        run: |
+          set -euo pipefail
+          mkdir -p "$RUNNER_TEMP/packages"
+          for dir in packages/tokens packages/css packages/icons packages/react; do
+            (cd "$dir" && pnpm pack --pack-destination "$RUNNER_TEMP/packages")
+          done
+      - uses: actions/upload-artifact@v4
+        with:
+          name: packages
+          path: ${{ runner.temp }}/packages/*.tgz
+          if-no-files-found: error
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: apps/storybook/storybook-static
+
+  # npm first, so the site never documents a version that cannot be installed.
+  publish:
+    needs: verify
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write # npm trusted publishing (OIDC) + provenance
+    steps:
+      - uses: actions/checkout@v4
+      # No registry-url on purpose: setup-node would write an empty auth token
+      # to .npmrc, and that shadows trusted publishing.
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+      # Trusted publishing needs npm >= 11.5.1.
+      - run: npm install -g npm@^11
+      - uses: actions/download-artifact@v4
+        with:
+          name: packages
+          path: ${{ runner.temp }}/packages
+
+      # Each package name is registered as a Trusted Publisher for this repository + this workflow
+      # file on npmjs.com, with no environment: this job must not get one. The entry's workflow
+      # filename must be exactly publish.yml: an entry that does not match the token fails as
+      # "OIDC token exchange error - package not found" → ENEEDAUTH (0.1.0's entries said deploy.yml).
       - name: Publish packages
         run: |
           set -euo pipefail
-          for dir in packages/tokens packages/css packages/icons packages/react; do
-            name=$(node -p "require('./$dir/package.json').name")
-            version=$(node -p "require('./$dir/package.json').version")
+          for tarball in "$RUNNER_TEMP"/packages/*.tgz; do
+            name=$(tar -xOzf "$tarball" package/package.json | node -p "JSON.parse(require('fs').readFileSync(0)).name")
+            version=$(tar -xOzf "$tarball" package/package.json | node -p "JSON.parse(require('fs').readFileSync(0)).version")
             if npm view "$name@$version" version >/dev/null 2>&1; then
               echo "$name@$version already published, skipping"
               continue
             fi
-            tarball=$(cd "$dir" && pnpm pack --pack-destination "$RUNNER_TEMP" | tail -n1)
             npm publish "$tarball" --access public --provenance --loglevel verbose
           done
 
-      # The GitHub Release, with the notes of the packages whose version this tag changed, from their
-      # CHANGELOGs. Skipped when it exists, so re-running a failed publish does not fail here.
+  deploy:
+    needs: publish
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    concurrency:
+      group: pages
+      cancel-in-progress: false
+    # The environment allows v* tags only, so nothing else can publish the site.
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/configure-pages@v5
+      - id: deployment
+        uses: actions/deploy-pages@v4
+
+  # The GitHub Release, with the notes of the packages whose version this tag changed, from their
+  # CHANGELOGs. Skipped when it exists, so redoing a release does not fail here.
+  release:
+    needs: deploy
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
       - name: GitHub Release
         env:
           GH_TOKEN: ${{ github.token }}

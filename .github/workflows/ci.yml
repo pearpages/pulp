@@ -1,8 +1,9 @@
 name: CI
 
+# Every push, main included, and every PR. Nothing here deploys or publishes: a tag does (publish.yml).
 on:
   push:
-    branches-ignore: [main]
+    branches: ['**']
   pull_request:
 
 jobs:

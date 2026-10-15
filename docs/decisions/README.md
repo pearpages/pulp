@@ -23,3 +23,4 @@ option was defensible. Newest last. The Storybook renders this folder under "Dec
 | [014](014-token-build-on-style-dictionary.md) | The token build runs on Style Dictionary; the output formats are pulp's own |
 | [015](015-use-client-from-source.md) | `"use client"` is decided from source by a script, not written by hand |
 | [016](016-component-manifest.md) | The component manifest is pulp's own, not Storybook's `componentsManifest` |
+| [017](017-a-release-is-a-tag.md) | A release is a tag named after `pulp-react`'s version; it publishes to npm, deploys the site and writes the Release, and `main` does neither |

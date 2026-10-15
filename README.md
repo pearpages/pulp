@@ -1,7 +1,7 @@
 # pulp
 
 [![npm](https://img.shields.io/npm/v/@pearpages/pulp-react?label=%40pearpages%2Fpulp-react)](https://www.npmjs.com/package/@pearpages/pulp-react)
-[![deploy](https://github.com/pearpages/pulp/actions/workflows/deploy.yml/badge.svg)](https://github.com/pearpages/pulp/actions/workflows/deploy.yml)
+[![ci](https://github.com/pearpages/pulp/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/pearpages/pulp/actions/workflows/ci.yml)
 [![license: MIT](https://img.shields.io/badge/license-MIT-blue)](LICENSE)
 
 [![pulp: the same button, data scale and accent colours in two brands, light and dark](apps/storybook/public/og.png)](https://pulp.pearpages.com)

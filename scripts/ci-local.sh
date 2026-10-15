@@ -5,7 +5,7 @@
 #   pnpm ci:local up          start the profile and the container (first run pulls ~2 GB)
 #   pnpm ci:local sync        copy the working tree in (uncommitted changes included) and install
 #   pnpm ci:local run <cmd>   run anything in the copy, with CI=true
-#   pnpm ci:local verify      the whole chain deploy.yml runs
+#   pnpm ci:local verify      the whole chain ci.yml and the release run check
 #   pnpm ci:local visual [-u] [N]   build the site, then the screenshot suite against it, N times (default 1)
 #   pnpm ci:local diffs       copy failed-shot images out to apps/storybook/test-results/ci-local
 #   pnpm ci:local shell       a shell in the container

@@ -1,17 +1,17 @@
 name: Update visual baselines
 
 # The baselines in apps/storybook/visual-baselines are rendered here and nowhere else, from the
-# *built* site (storybook-static), which is the page that gets deployed: text
+# *built* site (storybook-static), which is the page a release deploys: text
 # rasterises differently on macOS and on Linux, so a laptop-made baseline never matches CI.
 #   gh workflow run visual-update.yml              # on main
 #   gh workflow run visual-update.yml --ref branch
-# Review the change as the image diff of the commit this pushes.
+# Review the change as the image diff of the commit this pushes. It deploys nothing: the new
+# baselines reach the site with the next release tag (record 017).
 on:
   workflow_dispatch:
 
 permissions:
   contents: write # commit the baselines
-  actions: write # start the deploy afterwards: a push by this token does not trigger it
 
 jobs:
   update:
@@ -47,8 +47,3 @@ jobs:
             echo "changed=true" >> "$GITHUB_OUTPUT"
           fi
 
-      - name: Deploy the new state of main
-        if: steps.commit.outputs.changed == 'true' && github.ref == 'refs/heads/main'
-        run: gh workflow run deploy.yml --ref main
-        env:
-          GH_TOKEN: ${{ github.token }}
