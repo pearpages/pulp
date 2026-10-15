@@ -41,6 +41,7 @@ them yourself, for example from `@fontsource-variable/*`:
 
 - pulp: Archivo, Instrument Sans, Geist Mono
 - bitepals: Nunito, Inter
+- menja: Trochut (static 400 and 700, `@fontsource/trochut`), Inter
 
 ## Browser support
 

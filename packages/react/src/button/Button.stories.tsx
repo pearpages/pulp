@@ -149,3 +149,15 @@ export const MatrixBitepalsDark: Story = {
   name: 'Matrix: bitepals, dark',
   globals: { brand: 'bitepals', scheme: 'dark' },
 };
+
+export const MatrixMenjaLight: Story = {
+  ...Matrix,
+  name: 'Matrix: menja, light',
+  globals: { brand: 'menja', scheme: 'light' },
+};
+
+export const MatrixMenjaDark: Story = {
+  ...Matrix,
+  name: 'Matrix: menja, dark',
+  globals: { brand: 'menja', scheme: 'dark' },
+};

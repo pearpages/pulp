@@ -1,0 +1,292 @@
+{
+  "$description": "menja.bé primitives. The Catalan palette of the menja.bé design (senyera yellow and red, ochre, garnet, terracotta, Mediterranean blue, olive, cream) on bitepals' radii, spacing and motion. The display face is its own: Trochut.",
+  "color": {
+    "$type": "color",
+    "yellow": {
+      "100": {
+        "$value": "#fdf0c2"
+      },
+      "500": {
+        "$value": "#f5c400"
+      },
+      "600": {
+        "$value": "#e0ae00"
+      },
+      "700": {
+        "$value": "#d9a400"
+      }
+    },
+    "ochre": {
+      "300": {
+        "$value": "#e3c45e"
+      },
+      "400": {
+        "$value": "#d9b54a"
+      },
+      "500": {
+        "$value": "#c99a1e"
+      },
+      "700": {
+        "$value": "#7a5a00"
+      },
+      "800": {
+        "$value": "#5e4a00"
+      },
+      "900": {
+        "$value": "#3a3216"
+      }
+    },
+    "red": {
+      "100": {
+        "$value": "#fbe6e9"
+      },
+      "200": {
+        "$value": "#f5b3b6"
+      },
+      "300": {
+        "$value": "#f08a8e"
+      },
+      "400": {
+        "$value": "#e86a70"
+      },
+      "500": {
+        "$value": "#c8102e"
+      },
+      "600": {
+        "$value": "#a50d26"
+      },
+      "700": {
+        "$value": "#8a0b20"
+      },
+      "900": {
+        "$value": "#3a1d1f"
+      }
+    },
+    "garnet": {
+      "700": {
+        "$value": "#7e1420"
+      }
+    },
+    "terracotta": {
+      "300": {
+        "$value": "#e0956f"
+      },
+      "500": {
+        "$value": "#b4532a"
+      },
+      "700": {
+        "$value": "#8f3f1e"
+      }
+    },
+    "blue": {
+      "100": {
+        "$value": "#d3deee"
+      },
+      "300": {
+        "$value": "#8fb3e6"
+      },
+      "500": {
+        "$value": "#1f4e8c"
+      },
+      "700": {
+        "$value": "#173a66"
+      },
+      "900": {
+        "$value": "#16243a"
+      }
+    },
+    "olive": {
+      "100": {
+        "$value": "#e8efdc"
+      },
+      "300": {
+        "$value": "#a3c27a"
+      },
+      "500": {
+        "$value": "#5b7a35"
+      },
+      "700": {
+        "$value": "#44602a"
+      },
+      "900": {
+        "$value": "#232d18"
+      }
+    },
+    "gold": {
+      "500": {
+        "$value": "#e8a317"
+      }
+    },
+    "cream": {
+      "100": {
+        "$value": "#fbf5ea"
+      },
+      "200": {
+        "$value": "#f3ebdc"
+      },
+      "300": {
+        "$value": "#e6dbc8"
+      },
+      "400": {
+        "$value": "#c9b9a3"
+      },
+      "500": {
+        "$value": "#9c8e7e"
+      }
+    },
+    "ink": {
+      "400": {
+        "$value": "#85766a"
+      },
+      "500": {
+        "$value": "#5a4b40"
+      },
+      "600": {
+        "$value": "#3e342d"
+      },
+      "650": {
+        "$value": "#322a24"
+      },
+      "700": {
+        "$value": "#28211c"
+      },
+      "800": {
+        "$value": "#231c18"
+      },
+      "900": {
+        "$value": "#1e1814"
+      }
+    },
+    "neutral": {
+      "0": {
+        "$value": "#ffffff"
+      },
+      "50": {
+        "$value": "#e9e0d4"
+      },
+      "300": {
+        "$value": "#afa394"
+      },
+      "400": {
+        "$value": "#968a7c"
+      },
+      "600": {
+        "$value": "#6b6158"
+      },
+      "700": {
+        "$value": "#5c534b"
+      },
+      "900": {
+        "$value": "#1e1915"
+      }
+    },
+    "teal": {
+      "300": {
+        "$value": "#45c9b4"
+      },
+      "700": {
+        "$value": "#0e6a5c"
+      }
+    },
+    "violet": {
+      "300": {
+        "$value": "#b79bf5"
+      },
+      "700": {
+        "$value": "#6240b5"
+      }
+    },
+    "pink": {
+      "300": {
+        "$value": "#f78bb6"
+      },
+      "700": {
+        "$value": "#a3306a"
+      }
+    }
+  },
+  "radius": {
+    "$type": "dimension",
+    "sm": {
+      "$value": {
+        "value": 10,
+        "unit": "px"
+      }
+    },
+    "lg": {
+      "$value": {
+        "value": 18,
+        "unit": "px"
+      }
+    },
+    "pill": {
+      "$value": {
+        "value": 9999,
+        "unit": "px"
+      }
+    }
+  },
+  "space": {
+    "$type": "dimension",
+    "unit": {
+      "$value": {
+        "value": 0.28,
+        "unit": "rem"
+      },
+      "$description": "Roomier than pulp: the whole spacing scale grows 12% from this one value."
+    }
+  },
+  "duration": {
+    "$type": "duration",
+    "fast": {
+      "$value": {
+        "value": 120,
+        "unit": "ms"
+      }
+    },
+    "base": {
+      "$value": {
+        "value": 220,
+        "unit": "ms"
+      }
+    }
+  },
+  "easing": {
+    "$type": "cubicBezier",
+    "standard": {
+      "$value": [
+        0.25,
+        0.1,
+        0.25,
+        1
+      ]
+    }
+  },
+  "typeface": {
+    "display": {
+      "$value": [
+        "Trochut",
+        "Georgia",
+        "serif"
+      ],
+      "$description": "Trochut (Andreu Balius, 2011, OFL), from Joan Trochut's Bisonte, cast in Barcelona in 1942: a display face with a Catalan history, where bitepals uses Nunito. Static 400 and 700 only, so a 600 heading renders at 700. Body and controls stay Inter."
+    },
+    "body": {
+      "$value": [
+        "Inter Variable",
+        "Inter",
+        "system-ui",
+        "sans-serif"
+      ]
+    },
+    "mono": {
+      "$value": [
+        "ui-monospace",
+        "SF Mono",
+        "Menlo",
+        "monospace"
+      ]
+    },
+    "$type": "fontFamily"
+  }
+}

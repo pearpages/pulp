@@ -998,6 +998,11 @@ Found with `pulp-react` 0.4.0; the same code is in 0.3.0.
       this is the second ask for it. `role` per record 013, `public-tokens.mjs`, changeset. bitepals
       then drops the `calc` from `photo-collage.css`. No new easing token: bitepals'
       `easing.standard` `cubic-bezier(0.2, 0.7, 0.3, 1)` already matches the design's curve.
+- [ ] `Globe` icon (2026-10-10, from bitepals' public header): the "Language and theme" button needs
+      a globe, and the set has none, so bitepals draws `GlobeIcon` locally in
+      `apps/web/design-system/ui/primitives/icons/icons.tsx` (circle, equator, meridian lens; 24
+      viewBox, stroke 2). Draw one for pulp (don't copy), add it to `svg/`, changeset; bitepals then
+      swaps its local one for `fromPulp(Globe)`.
 - Waiting for a second use (from the same collage, one place each today, so not tasks yet): a
   halo ring on Badge `variant="dot"` plus app tones (a `love` dot); a translucent floating-chip
   surface (the collage mixes `surface.raised` to 92%); a hover-lift shadow (`shadow.overlay` plus
@@ -1017,6 +1022,19 @@ deleted from the CV's `src/styles/_tokens.scss`.
       (unit × 24, continuing the ramp's ×12 → ×16 → ×24) to both brands' semantic files, then
       `public-tokens.mjs`, the semantic-name test, changeset. The CV also declared `--space-10` and a
       `--dur-slow: 620ms`, but nothing used them; they were deleted rather than asked for.
+
+**18. menja.bé, the third brand (2026-10-15, branch `menja-brand`)**
+- [x] Tokens from the Claude Design canvas "menja.bé" (Paleta, Landing): `primitives/menja.json`,
+      `semantic/menja.json`, the pill-button override; Storybook toolbar, docs theme, Tokens page. (2026-10-15)
+- [x] Matrix stories for menja (light, dark) in all 43 story files; "four" becomes "six" in CLAUDE.md,
+      CONTRIBUTING, the add-component skill. axe passes on all 86. (2026-10-15)
+- [x] Baselines: `visual-update.yml --ref menja-brand` committed 86 new PNGs (258 in all); `Picker/pulp-dark`
+      was re-rendered with no visible change. (2026-10-15)
+- [ ] `og-card.mjs`: a menja tile (or say why the card shows only two brands), rerun and commit the PNG.
+- [ ] Review the guesses the design does not state: faint text `#6b6158`, warning fill `#e8a317`, dark
+      overlay `#322a24`, garnet inverse in both schemes, the yellow → ochre data ramp, violet/teal/pink accents borrowed from bitepals.
+- [ ] Trochut below ~24px: its swash capitals (an N that reads as Π) hurt small headings (EmptyState,
+      Card titles). If it bothers, a large-display semantic family so h1/h2 take Trochut and small headings Inter.
 
 ## Later (not scheduled)
 Deprecation codemods, Tailwind preset emitted from tokens, Figma sync (Tokens Studio reads the

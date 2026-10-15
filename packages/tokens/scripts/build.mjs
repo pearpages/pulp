@@ -27,6 +27,7 @@ export const BRANDS = [
   // `base` carries the component tier for everyone; see the source list below.
   { name: 'pulp', selector: ':root, [data-brand="pulp"]', base: true },
   { name: 'bitepals', selector: '[data-brand="bitepals"]' },
+  { name: 'menja', selector: '[data-brand="menja"]' },
 ];
 
 StyleDictionary.registerFormat(cssBrand);

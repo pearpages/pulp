@@ -47,7 +47,7 @@ CI checks what the pattern promises.
    pnpm test
    ```
 
-5. **Stories.** One per variant, a `play` function for anything interactive, the four
+5. **Stories.** One per variant, a `play` function for anything interactive, the six
    brand × scheme matrix stories. No `parameters.docs.description` (the JSDoc is the
    description). Stories run as browser tests with a11y checks:
    ```
