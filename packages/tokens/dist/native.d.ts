@@ -10,5 +10,6 @@ export interface NativeBrand {
 }
 export declare const pulp: NativeBrand;
 export declare const bitepals: NativeBrand;
-declare const brands: { pulp: NativeBrand; bitepals: NativeBrand };
+export declare const menja: NativeBrand;
+declare const brands: { pulp: NativeBrand; bitepals: NativeBrand; menja: NativeBrand };
 export default brands;

@@ -10,7 +10,7 @@ import './preview.css';
 import { ComponentDocs } from '../docs/ComponentDocs';
 import { DocsContainer } from './DocsContainer';
 
-const BRANDS = ['pulp', 'bitepals'] as const;
+const BRANDS = ['pulp', 'bitepals', 'menja'] as const;
 const SCHEMES = ['light', 'dark', 'system'] as const;
 
 const preview: Preview = {

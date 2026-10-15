@@ -1023,6 +1023,15 @@ deleted from the CV's `src/styles/_tokens.scss`.
       `public-tokens.mjs`, the semantic-name test, changeset. The CV also declared `--space-10` and a
       `--dur-slow: 620ms`, but nothing used them; they were deleted rather than asked for.
 
+**18. menja.bé, the third brand (2026-10-15, branch `menja-brand`)**
+- [x] Tokens from the Claude Design canvas "menja.bé" (Paleta, Landing): `primitives/menja.json`,
+      `semantic/menja.json`, the pill-button override; Storybook toolbar, docs theme, Tokens page. (2026-10-15)
+- [ ] Matrix stories for menja (light, dark) on every component, then `gh workflow run visual-update.yml --ref menja-brand`
+      for the new baselines (CI owns them); the rule "four brand × scheme matrix stories" becomes six.
+- [ ] `og-card.mjs`: a menja tile (or say why the card shows only two brands), rerun and commit the PNG.
+- [ ] Review the guesses the design does not state: faint text `#6b6158`, warning fill `#e8a317`, dark
+      overlay `#322a24`, garnet inverse in both schemes, the yellow → ochre data ramp, violet/teal/pink accents borrowed from bitepals.
+
 ## Later (not scheduled)
 Deprecation codemods, Tailwind preset emitted from tokens, Figma sync (Tokens Studio reads the
 DTCG files; dark values live in pulp's extension), a third brand to prove "one JSON file, zero component changes".

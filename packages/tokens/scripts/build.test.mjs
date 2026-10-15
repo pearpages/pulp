@@ -377,7 +377,8 @@ test('the committed native builds load with import and with require, and agree',
   const require = createRequire(import.meta.url);
   const cjs = require('../dist/native.cjs');
   const esm = await import('../dist/native.js');
-  assert.deepEqual(Object.keys(cjs), ['pulp', 'bitepals']);
+  assert.deepEqual(Object.keys(cjs), ['pulp', 'bitepals', 'menja']);
   assert.deepEqual(esm.default, cjs);
   assert.deepEqual(esm.bitepals, cjs.bitepals);
+  assert.deepEqual(esm.menja, cjs.menja);
 });

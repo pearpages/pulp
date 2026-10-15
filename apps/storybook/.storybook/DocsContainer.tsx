@@ -38,7 +38,7 @@ export function DocsContainer({ context, children }: PropsWithChildren<DocsConta
     return () => context.channel.off(GLOBALS_UPDATED, update);
   }, [context]);
 
-  const brand: Brand = globals.brand === 'bitepals' ? 'bitepals' : 'pulp';
+  const brand: Brand = globals.brand === 'bitepals' || globals.brand === 'menja' ? globals.brand : 'pulp';
   const chosen = globals.scheme ?? 'system';
   const scheme: Scheme = chosen === 'dark' || (chosen === 'system' && systemDark) ? 'dark' : 'light';
 
