@@ -1,5 +1,14 @@
 # @pearpages/pulp-react
 
+## 0.6.1
+
+### Patch Changes
+
+- 3b8cb7d: Four components change category (record 018): Avatar → Data, Accordion → Layout, Link → Navigation, Chip → Forms. Only the manifest's `category` and the Storybook URLs change (`components-utilities-avatar--docs` is now `components-data-avatar--docs`); imports stay the same.
+- Updated dependencies [a1008ac]
+- Updated dependencies [3d7075e]
+  - @pearpages/pulp-tokens@0.6.0
+
 ## 0.6.0
 
 ### Minor Changes

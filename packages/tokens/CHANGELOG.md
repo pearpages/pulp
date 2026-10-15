@@ -1,5 +1,14 @@
 # @pearpages/pulp-tokens
 
+## 0.6.0
+
+### Minor Changes
+
+- a1008ac: A third brand, `data-brand="menja"`, for menja.bé: the Catalan palette of its design (senyera yellow actions with ink text, ochre links and focus ring, senyera red for errors and accents only, garnet as the inverse surface, cream ground; a warm dark scheme) on bitepals' radii, spacing, motion and pill buttons. Its display face is its own: Trochut (Andreu Balius, after Joan Trochut's Barcelona Bisonte), with Inter for body and controls; load it from `@fontsource/trochut`. `tokens.css`, `tokens.json` and `native` (a `menja` export) carry it. Every text pair meets AA in both schemes.
+- 3d7075e: Every semantic token in `tokens.json` now carries a `role`: one sentence on what it exists for, the same in every brand. Before, 86 of the 114 semantic tokens had no description of their own. Where a brand's value needs explaining ("Ink, not white: white on the brand orange is 2.8:1"), the entry carries a `note` as well.
+  
+  Additive: `description` is still there, as the role and the note together. CSS, `theme.css` and `native` are unchanged.
+
 ## 0.5.1
 
 ### Patch Changes
