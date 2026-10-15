@@ -149,7 +149,7 @@ copy of the working tree, two-minute loops. Colima only, never Docker Desktop; f
   source: the Docs page (`apps/storybook/docs/ComponentDocs.tsx`), the Status page, the sidebar label
   and agents read it from `component-manifest.json`. Stories carry no `parameters.docs.description`.
 - **Categories are kinds, never tiers**: Typography, Layout, Actions, Forms, Navigation, Overlays,
-  Feedback, Data, Utilities (`packages/react/scripts/categories.mjs`, in sidebar order). A story's
+  Feedback, Data, Utilities (`packages/react/scripts/categories.mjs`, in sidebar order; record 018 gives the question each answers). A story's
   title must be `Components/<Category>/<Name>` with the component's own `@category`; the dist smoke
   test fails otherwise. Compositions live under `Patterns/`.
 - **Every entry has a bundle budget** (`packages/react/.size-limit.js`, driven by tsup's entry list):

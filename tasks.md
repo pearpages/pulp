@@ -15,6 +15,7 @@ this file holds what is left to do, ticked with a date when done. Ordered within
 
 ## Session log
 
+- 2026-10-15 (categories): record 018, one question per category; Avatar, Accordion, Link and Chip move. Their Storybook URLs change.
 - 2026-10-15: menja.bé, the third brand (PR #13: tokens, Trochut, matrix stories, 86 baselines), and
   record 017: a release is a tag that publishes, deploys and writes the Release; `main` deploys nothing; `release` skill.
 - 2026-09-30 (build vs buy): records 014 (tokens build on Style Dictionary 5; the two formats and
@@ -1043,6 +1044,11 @@ deleted from the CV's `src/styles/_tokens.scss`.
       `deploy.yml` gone, `ci.yml` covers `main`, `visual-update.yml` deploys nothing; the `release` skill. (2026-10-15)
 - [ ] `github-pages` environment: allow `v*` tags, then drop the `main` policy (when this merges).
 - [ ] First real run: `/release 13` (menja), tag `v0.6.1`.
+
+**20. Category placements (2026-10-15, branch `categories`, record 018)**
+- [x] Avatar → Data, Accordion → Layout, Link → Navigation, Chip → Forms; each category's question in record 018. (2026-10-15)
+- [ ] Split Forms into Inputs and Selection (record 018, "Revisit when") once the next inputs land; one URL change, not several.
+- [ ] Breadcrumbs, in Navigation beside Link.
 
 ## Later (not scheduled)
 Deprecation codemods, Tailwind preset emitted from tokens, Figma sync (Tokens Studio reads the

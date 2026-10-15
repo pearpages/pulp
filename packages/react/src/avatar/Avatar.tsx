@@ -43,7 +43,7 @@ function initialsOf(name: string | undefined) {
  * and the scheme, never a colour computed from the name.
  *
  * @status experimental
- * @category Utilities
+ * @category Data
  * @accessibility With an image, the `img` carries the name as its `alt`. With initials, the root is `role="img"` named by `alt` or `name`, and the letters are hidden from assistive technology ("AR" read aloud means nothing). `alt=""` makes the avatar decorative (`aria-hidden`): use it when the name is written next to it. Not focusable and not interactive; wrap it in a Link or a Button to make it one.
  * @do Pass `name` always, even with an image: it is the fallback when the image fails.
  * @do Pass `alt=""` when the person's name is visible beside the avatar.

@@ -36,7 +36,7 @@ export interface ChipProps extends Omit<ButtonHTMLAttributes<HTMLButtonElement>,
  * label is a button only when pressing it does something.
  *
  * @status experimental
- * @category Actions
+ * @category Forms
  * @accessibility A toggle chip is a native `button` with `aria-pressed`, so Space and Enter work and the state is announced. The remove control is a second `button`, a sibling of the first (a button inside a button is invalid HTML and unreachable by keyboard), named by `removeLabel` plus the chip's own label through `aria-labelledby`: "Remove Vegan", not "Remove" six times. The pair is wrapped in a `role="group"` named by the label only when there are two controls. `disabled` disables both. After removing a chip, move focus yourself (to the next chip or the input): the button that had it is gone.
  * @do Use a group of toggle chips for filters where several can be on at once.
  * @do Keep the label to a word or two; a chip does not wrap.

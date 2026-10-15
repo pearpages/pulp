@@ -25,7 +25,7 @@ const items = (
 );
 
 const meta = {
-  title: 'Components/Navigation/Accordion',
+  title: 'Components/Layout/Accordion',
   component: Accordion,
   args: { type: 'single', defaultValue: 'tokens', collapsible: true, headingLevel: 3, children: items },
   argTypes: {

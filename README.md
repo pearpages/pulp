@@ -40,16 +40,16 @@ Reference consumer: [perepages.com](https://perepages.com) takes its colour from
 
 ## Components
 
-- **Typography**: `Heading`, `Link`, `Text`
-- **Layout**: `Card`, `Divider`, `Inline`, `Stack`
-- **Actions**: `Button`, `Chip`, `IconButton`
-- **Forms**: `Calendar`, `Checkbox`, `Combobox`, `DatePicker`, `Field`, `Listbox`, `Picker`, `RadioGroup`,
+- **Typography**: `Heading`, `Text`
+- **Layout**: `Accordion`, `Card`, `Divider`, `Inline`, `Stack`
+- **Actions**: `Button`, `IconButton`
+- **Forms**: `Calendar`, `Checkbox`, `Chip`, `Combobox`, `DatePicker`, `Field`, `Listbox`, `Picker`, `RadioGroup`,
   `Radio`, `SegmentedControl`, `Select`, `Slider`, `Switch`, `TextField`, `Textarea`
-- **Navigation**: `Accordion`, `Pagination`, `Tabs`
+- **Navigation**: `Link`, `Pagination`, `Tabs`
 - **Overlays**: `DialogSystem`, `Dialog`, `Menu`, `Popover`, `Sheet`, `Tooltip`
 - **Feedback**: `Alert`, `Badge`, `EmptyState`, `Progress`, `Skeleton`, `Spinner`, `ToastProvider`
-- **Data**: `DataGrid`, `Heatmap`, `Table`
-- **Utilities**: `Avatar`, `Icon`, `VisuallyHidden`
+- **Data**: `Avatar`, `DataGrid`, `Heatmap`, `Table`
+- **Utilities**: `Icon`, `VisuallyHidden`
 
 ## Use
 

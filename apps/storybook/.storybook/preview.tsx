@@ -91,7 +91,7 @@ const preview: Preview = {
             'Layout',
             'Actions',
             'Forms',
-            ['Field', 'TextField', 'Textarea', 'Select', 'Picker', 'Combobox', 'Listbox', 'Checkbox', 'Switch', 'RadioGroup', 'Slider', 'DatePicker', 'Calendar'],
+            ['Field', 'TextField', 'Textarea', 'Select', 'Picker', 'Combobox', 'Listbox', 'Checkbox', 'Switch', 'Chip', 'RadioGroup', 'Slider', 'DatePicker', 'Calendar'],
             'Navigation',
             'Overlays',
             'Feedback',

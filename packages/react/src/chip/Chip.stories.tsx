@@ -5,7 +5,7 @@ import { Inline } from '../inline';
 import { Chip } from './Chip';
 
 const meta = {
-  title: 'Components/Actions/Chip',
+  title: 'Components/Forms/Chip',
   component: Chip,
   args: { children: 'Vegan', size: 'md', tone: 'neutral', onSelectedChange: fn() },
   argTypes: {

@@ -16,7 +16,8 @@ CI checks what the pattern promises.
    pnpm --filter @pearpages/pulp-react scaffold <PascalName> <Category>
    ```
    The category is one of Typography, Layout, Actions, Forms, Navigation, Overlays, Feedback,
-   Data, Utilities (`packages/react/scripts/categories.mjs`): the kind a consumer reaches for.
+   Data, Utilities (`packages/react/scripts/categories.mjs`): the kind a consumer reaches for. Record 018
+   gives the one question each category answers; pick by what the component does, not how it looks.
    Creates `packages/react/src/<camelName>/{Name.tsx, Name.module.css, Name.test.tsx,
    Name.stories.tsx, index.ts}`, `packages/tokens/tokens/component/<kebab-name>.json`,
    and registers the entry in `src/index.ts`, `tsup.config.ts`, and `package.json` exports.
