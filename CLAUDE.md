@@ -9,7 +9,8 @@ to humans and coding agents alike.
 
 `architecture.md` maps the packages, the token tiers and theming axes, and the workflows (with
 diagrams). `PRINCIPLES.md` is the why, `docs/decisions/` the records, `tasks.md` the pending work and
-session log, `.claude/skills/add-component` the procedure for a new component.
+session log, `.claude/skills/add-component` the procedure for a new component, `.claude/skills/release`
+the one for a release.
 
 ## Commands (run from the repo root)
 
@@ -29,13 +30,13 @@ pnpm storybook         # dev server on :6006
 pnpm storybook:build   # ends with scripts/check-links.mjs: a dead docs link fails the build
 pnpm test:site         # the built site in Chromium: cascade check, then the matrix screenshots under PULP_VISUAL=1 (after storybook:build)
 pnpm --filter @pearpages/pulp-react scaffold Name Category   # new component skeleton (category from scripts/categories.mjs)
-pnpm verify            # everything deploy.yml runs, in the same order. Run it before pushing to main
+pnpm verify            # everything ci.yml and the release run check, in the same order. Run it before pushing to main
 pnpm ci:local up|sync|verify|visual|diffs|shell|down   # the pipeline in CI's image, linux/amd64, via Colima (docs/ci-local.md)
 ```
 
-`ci.yml` ignores `main`, so a push to `main` is verified only by `deploy.yml`, after the fact, and
-a failure there also blocks the site. `pnpm verify` is the same chain locally; after pushing, watch
-the run (`gh run watch`) instead of assuming it passed.
+`ci.yml` verifies every push, `main` included, and deploys nothing: only a release tag publishes
+to npm and deploys the site (record 017, "Releasing" below). `pnpm verify` is the same chain
+locally; after pushing, watch the run (`gh run watch`) instead of assuming it passed.
 
 When something fails on the runner and not on macOS, reproduce it with `pnpm ci:local`
 (`docs/ci-local.md`): a throwaway Colima profile running CI's Playwright image as `linux/amd64`, a
@@ -71,7 +72,7 @@ copy of the working tree, two-minute loops. Colima only, never Docker Desktop; f
   to a value some matching component rule asked for (each candidate rule is forced inline and
   compared, so no specificity is re-implemented; font-size and color are pinned because em and
   currentcolor values follow them; logical and physical twins are one slot; an inline style may
-  win). It runs in `verify`, `ci.yml` and in `deploy.yml` before the Pages upload. When UI work is
+  win). It runs in `verify`, `ci.yml` and in the release run before the Pages upload. When UI work is
   done, look at the built page too: a green run said nothing about this bug.
 - **`loading` never uses the `disabled` attribute** (focus would be lost); it uses
   `aria-disabled` + `aria-busy` and blocks activation. Only `disabled` uses the attribute.
@@ -163,8 +164,8 @@ copy of the working tree, two-minute loops. Colima only, never Docker Desktop; f
   whole body. It is the second half of `pnpm test:site` and runs only under `PULP_VISUAL=1`, which
   the workflows set: text rasterises differently on macOS and Linux, so **CI owns the baselines**.
   After an intended visual change run `gh workflow run visual-update.yml` (add `--ref <branch>` off
-  main); it builds the site, re-renders everything, commits the PNGs and redeploys, and the commit's
-  image diff is the review. A failing run uploads `visual-diffs` (Playwright's `test-results`:
+  main); it builds the site, re-renders everything, commits the PNGs (the site gets them with the next
+  release), and the commit's image diff is the review. A failing run uploads `visual-diffs` (Playwright's `test-results`:
   expected, actual, diff); a shot that only passed on the retry is reported as flaky. Threshold
   0.02, not the default, which let a border go from `#d5d7de` to `#c0c3cc` unnoticed. Until
   2026-09-18 the shots were taken by the Vitest run, through the dev transform: all green while
@@ -244,15 +245,21 @@ model is in `architecture.md` ("How a token reaches the screen").
 
 ## Releasing
 
-`pnpm changeset` per notable change → `pnpm version-packages` on main → push, wait for the deploy
-run, then tag `vX.Y.Z` and push the tag. `publish.yml` packs with `pnpm pack` and publishes via npm
+A release is a tag (record 017): one `vX.Y.Z` per release, for all four packages, named after
+`pulp-react`'s version (changesets bumps react whenever tokens or icons change; a css-only release has
+no new name until react gets a patch changeset). `pnpm changeset` per notable change, then **run the
+`release` skill** (`/release [PR]`): it versions, runs `verify`, pushes `main`, waits for CI on that
+commit, tags, and checks what shipped. The tag runs `publish.yml` (the filename npm trusts), four jobs
+in order: verify and pack, npm, the site (the `github-pages` environment allows `v*` tags only), the
+GitHub Release. `main` deploys nothing; `gh workflow run publish.yml --ref vX.Y.Z` redoes a release,
+skipping what is done. Packages go out via npm
 trusted publishing: each package name must be registered on npmjs.com as a Trusted Publisher for
 `pearpages/pulp` + `publish.yml` before the first release. The workflow filename in that entry must
-be exactly `publish.yml` (not `deploy.yml`, which is the one with an environment): npm reports an
+be exactly `publish.yml` (0.1.0's said `deploy.yml`), and the npm job runs with no environment: npm reports an
 entry that does not match the token as `OIDC token exchange error - package not found` →
 `ENEEDAUTH`, which is what blocked 0.1.0. After fixing the entry, `gh run rerun <id> --failed`
-resumes the tag's run; versions already on the registry are skipped. The run ends by creating the GitHub Release
-from the CHANGELOG sections of the packages whose version the tag changed (`scripts/release-notes.mjs`).
+resumes the tag's run; versions already on the registry are skipped. The Release holds the CHANGELOG
+sections of the packages whose version the tag changed (`scripts/release-notes.mjs`).
 
 ## Status
 

@@ -23,14 +23,14 @@ brew install colima docker   # docker is the CLI only; Colima provides the daemo
 ```
 
 Apple Silicon with Rosetta installed (`softwareupdate --install-rosetta`). On an x64 Linux machine
-you do not need any of this: run the commands from `deploy.yml` directly.
+you do not need any of this: run the commands from `ci.yml` directly.
 
 ## A session
 
 ```
 pnpm ci:local up          # ~1 min; the first time also pulls ~2 GB
 pnpm ci:local sync        # copy the tree in, pnpm install --frozen-lockfile
-pnpm ci:local verify      # everything deploy.yml runs
+pnpm ci:local verify      # everything ci.yml and the release run check
 pnpm ci:local visual -u 5 # render baselines in the container, then compare 5 times
 pnpm ci:local diffs       # failed shots → apps/storybook/test-results/ci-local (gitignored)
 pnpm ci:local stop        # between sessions: frees the RAM, keeps the image and the copy

@@ -122,16 +122,20 @@ Which workflow runs when, and what each one guards.
 ```mermaid
 flowchart TD
   branch["Push to a branch / open a PR"] --> ci["ci.yml<br/>drift, lint, typecheck, unit, build,<br/>dist, package, size, floor, stories + axe,<br/>built site + screenshots"]
-  main["Push or merge to main"] --> deploy["deploy.yml<br/>the same checks, then<br/>GitHub Pages: pulp.pearpages.com"]
+  branch2["Push or merge to main"] --> ci
   dispatch["gh workflow run visual-update.yml"] --> visual["visual-update.yml<br/>re-render the matrix screenshots<br/>from the built site, commit them"]
-  tag["Push tag vX.Y.Z (on main)"] --> publish["publish.yml<br/>checks, pnpm pack, npm publish<br/>(trusted publishing + provenance)"]
-  publish --> npm[("npm: @pearpages/pulp-*")]
-  deploy --> site[("pulp.pearpages.com")]
+  tag["Push tag vX.Y.Z (on main, CI green)"] --> publish["publish.yml<br/>verify: the same checks, pnpm pack"]
+  publish --> npm[("npm: @pearpages/pulp-*<br/>(trusted publishing + provenance)")]
+  npm --> site[("GitHub Pages:<br/>pulp.pearpages.com")]
+  site --> release[("GitHub Release vX.Y.Z")]
 ```
 
-The release itself: `pnpm changeset` per notable change → `pnpm version-packages` on `main` →
-`pnpm verify` → push and wait for the deploy → tag `vX.Y.Z` and push the tag. Versions already on
-the registry are skipped, so a package without changes is not republished.
+A release is a tag (record 017): `main` deploys and publishes nothing, so the site always documents
+what consumers can install. One `vX.Y.Z` per release, named after `pulp-react`'s version, runs four
+jobs in order: verify and pack, npm, the site, the GitHub Release. The `release` skill drives it:
+`pnpm version-packages` → `pnpm verify` → push `main` → wait for CI on that commit → tag. Versions
+already on the registry are skipped, so a package without changes is not republished, and a rerun
+does only what is missing.
 
 The screenshots are rendered in CI only (text rasterises differently on macOS and Linux), from the
 built site, never from Storybook's dev server: the dev transform once showed every test green while

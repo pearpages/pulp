@@ -15,6 +15,8 @@ this file holds what is left to do, ticked with a date when done. Ordered within
 
 ## Session log
 
+- 2026-10-15: menja.bé, the third brand (PR #13: tokens, Trochut, matrix stories, 86 baselines), and
+  record 017: a release is a tag that publishes, deploys and writes the Release; `main` deploys nothing; `release` skill.
 - 2026-09-30 (build vs buy): records 014 (tokens build on Style Dictionary 5; the two formats and
   `theme.css`/`native` are pulp's) and 015 (`"use client"` decided from source; `CLIENT_PACKAGES` is
   hand-kept, and record 011's Slider pilot must add `@ark-ui/react` and any direct `@zag-js/*`).
@@ -1035,6 +1037,12 @@ deleted from the CV's `src/styles/_tokens.scss`.
       overlay `#322a24`, garnet inverse in both schemes, the yellow → ochre data ramp, violet/teal/pink accents borrowed from bitepals.
 - [ ] Trochut below ~24px: its swash capitals (an N that reads as Π) hurt small headings (EmptyState,
       Card titles). If it bothers, a large-display semantic family so h1/h2 take Trochut and small headings Inter.
+
+**19. A release is a tag (record 017, 2026-10-15, branch `release-on-tag`)**
+- [x] `publish.yml` is the release run: verify and pack, npm, the site, the GitHub Release, in order;
+      `deploy.yml` gone, `ci.yml` covers `main`, `visual-update.yml` deploys nothing; the `release` skill. (2026-10-15)
+- [ ] `github-pages` environment: allow `v*` tags, then drop the `main` policy (when this merges).
+- [ ] First real run: `/release 13` (menja), tag `v0.6.1`.
 
 ## Later (not scheduled)
 Deprecation codemods, Tailwind preset emitted from tokens, Figma sync (Tokens Studio reads the
