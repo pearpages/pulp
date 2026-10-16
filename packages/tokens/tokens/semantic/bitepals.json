@@ -883,6 +883,12 @@
         "unit": "rem"
       }
     },
+    "sidebar-width": {
+      "$value": {
+        "value": 15,
+        "unit": "rem"
+      }
+    },
     "sheet-width": {
       "$value": {
         "value": 24,

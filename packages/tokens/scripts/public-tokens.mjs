@@ -119,6 +119,7 @@ export const PUBLIC_SEMANTIC_TOKENS = [
   '--size-popover-width',
   '--size-sheet-height',
   '--size-sheet-width',
+  '--size-sidebar-width',
   '--size-toast-width',
   '--size-toggle-lg',
   '--size-toggle-md',

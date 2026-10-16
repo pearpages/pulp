@@ -35,13 +35,13 @@ Reference consumer: [perepages.com](https://perepages.com) takes its colour from
 | --- | --- |
 | `@pearpages/pulp-tokens` | `tokens.css`, `tokens.json` |
 | `@pearpages/pulp-css` | `index.css` (layers + tokens + reset + base) |
-| `@pearpages/pulp-react` | 49 components, one entry each (below) |
+| `@pearpages/pulp-react` | 50 components, one entry each (below) |
 | `@pearpages/pulp-icons` | stroke icons as React components, tree-shakeable |
 
 ## Components
 
 - **Typography**: `Heading`, `Text`
-- **Layout**: `Accordion`, `Card`, `Divider`, `Inline`, `Stack`
+- **Layout**: `Accordion`, `AppShell`, `Card`, `Divider`, `Inline`, `Stack`
 - **Actions**: `Button`, `IconButton`
 - **Forms**: `Calendar`, `Checkbox`, `Chip`, `Combobox`, `DatePicker`, `Field`, `Listbox`, `Picker`, `RadioGroup`,
   `Radio`, `SegmentedControl`, `Select`, `Slider`, `Switch`, `TextField`, `Textarea`

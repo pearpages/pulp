@@ -45,3 +45,4 @@ export * from './table';
 export * from './heatmap';
 export * from './nav-list';
 export * from './tab-bar';
+export * from './app-shell';

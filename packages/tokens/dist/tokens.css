@@ -180,6 +180,7 @@
     --size-menu-width: 14rem;
     --size-listbox-height: 18rem;
     --size-dialog-width: 32.5rem;
+    --size-sidebar-width: 15rem;
     --size-sheet-width: 24rem;
     --size-sheet-height: 60vh;
     --focus-ring-width: 2px;
@@ -226,6 +227,13 @@
     --alert-error-bg: var(--color-status-error-subtle);
     --alert-error-accent: var(--color-status-error);
     --alert-error-title: var(--color-status-error-text);
+    --app-shell-bg: var(--color-surface-base);
+    --app-shell-fg: var(--color-text-default);
+    --app-shell-sidebar-width: var(--size-sidebar-width);
+    --app-shell-sidebar-padding: var(--space-3);
+    --app-shell-sidebar-bg: var(--color-surface-raised);
+    --app-shell-sidebar-border: var(--color-border-default);
+    --app-shell-sidebar-border-width: var(--size-hairline);
     --avatar-size-sm: var(--size-control-sm);
     --avatar-size-md: var(--size-control-md);
     --avatar-size-lg: calc(var(--size-control-md) * 1.4);
@@ -1229,6 +1237,7 @@
     --size-menu-width: 14rem;
     --size-listbox-height: 18rem;
     --size-dialog-width: 32.5rem;
+    --size-sidebar-width: 15rem;
     --size-sheet-width: 24rem;
     --size-sheet-height: 60vh;
     --focus-ring-width: 2px;
@@ -1419,6 +1428,7 @@
     --size-menu-width: 14rem;
     --size-listbox-height: 18rem;
     --size-dialog-width: 32.5rem;
+    --size-sidebar-width: 15rem;
     --size-sheet-width: 24rem;
     --size-sheet-height: 60vh;
     --focus-ring-width: 2px;

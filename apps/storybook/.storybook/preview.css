@@ -31,6 +31,26 @@
   inline-size: 24rem;
 }
 
+/* The app's own header, page and footer inside the AppShell stories: the shell places them, the app styles them. */
+.sb-app-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  padding: var(--space-3) var(--space-4);
+  border-block-end: var(--size-hairline) solid var(--color-border-default);
+  background: var(--color-surface-raised);
+}
+
+.sb-app-page {
+  padding: var(--space-5) var(--space-4);
+}
+
+.sb-app-footer {
+  padding: var(--space-4);
+  border-block-start: var(--size-hairline) solid var(--color-border-default);
+}
+
 /* One dialog made wider, for the Dialog width story: a consumer sets the token on Dialog.Content. */
 .sb-wide-dialog {
   --dialog-width: 44rem;

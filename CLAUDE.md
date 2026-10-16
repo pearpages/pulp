@@ -124,6 +124,10 @@ copy of the working tree, two-minute loops. Colima only, never Docker Desktop; f
 - **Per-person colour is an index, never a literal.** `color.accent.1…8` with `color.accent.on-1…8`
   (semantic, both brands, same hue order, each pair in the contrast tests); Avatar and Chip take
   `accent?: 1…8` and the consumer hashes an id to it. A new categorical use reads these tokens.
+- **App navigation is NavList, TabBar and AppShell** (record 019): links in a named `nav`, never menu or
+  tab roles; the app passes `current` and its router's link (`asChild`), so all three stay server-safe.
+  The one width breakpoint, 48rem, lives in `AppShell.module.css`; the shell publishes the tab bar's
+  height as `--app-shell-inset-block-end`, which Toast reads. Sign-in state stays in the app.
 - **A hidden label goes through `Field.Label visuallyHidden`** (TextField and Textarea `hideLabel`),
   not a copy of the clip rule per component.
 - **Adding a semantic token means adding it to every brand file.** The token tests diff the
