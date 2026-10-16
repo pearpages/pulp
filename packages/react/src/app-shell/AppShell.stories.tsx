@@ -87,9 +87,15 @@ const page = (
     <Stack gap={4}>
       <Heading level={1}>Feed</Heading>
       <Text tone="muted">What your friends saved this week.</Text>
-      <Card padding="md">Can Culleretes · saved by Marta</Card>
-      <Card padding="md">Bar Cañete · saved by Pau</Card>
-      <Card padding="md">Els Pescadors · saved by Laia</Card>
+      <Card>
+        <Card.Body>Can Culleretes · saved by Marta</Card.Body>
+      </Card>
+      <Card>
+        <Card.Body>Bar Cañete · saved by Pau</Card.Body>
+      </Card>
+      <Card>
+        <Card.Body>Els Pescadors · saved by Laia</Card.Body>
+      </Card>
     </Stack>
   </div>
 );

@@ -1064,6 +1064,10 @@ named on an `aside`, a live-region dot, literal sizes. Signing in and out stays 
 - [x] TabBar: 3 to 5 links fixed to the bottom edge (`position="static"` to leave it in the flow), safe-area padding, a `prominent` raised item, a badge cut out of the icon's corner; semantic `layer.navigation` (900). (2026-10-16)
 - [x] AppShell (Layout): `header`, `sidebar`, `tabBar`, `footer` slots and the page; sidebar from 48rem, tab bar below it,
       CSS only; `--app-shell-inset-block-end` so the page, the footer and Toast clear the bar; record 019. (2026-10-16)
+- [x] Icons bitepals drew by hand: `Globe`, `Newspaper`, `UserPlus`, `UserCheck`, `Flag`, `Lightbulb`, `Eye`, `EyeOff`.
+      Follow/Circles are `Share`, Discover is `ZoomIn`, Followers is `Users`; filled bookmark and comment are the outline
+      glyph with `fill: currentColor`; the Hub pictograms become `Flag`, `Heart`, `Lightbulb`, `Meh`, `EyeOff` with
+      `color` and `fill` from bitepals' CSS (two tones; the third ink colour and the sparkles go). (2026-10-16)
 - [ ] bitepals `apps/web`: upgrade pulp, render `Sidebar`/`BottomNav`/`LocaleShell` through NavList, TabBar and AppShell,
       delete the Tailwind versions.
 
