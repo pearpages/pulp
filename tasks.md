@@ -15,6 +15,8 @@ this file holds what is left to do, ticked with a date when done. Ordered within
 
 ## Session log
 
+- 2026-10-15 (release): v0.6.1, the first release under record 017: tokens 0.6.0 (menja, token roles), react 0.6.1
+  (categories), css 0.1.8; npm, the site and the Release from one tag.
 - 2026-10-15 (categories): record 018, one question per category; Avatar, Accordion, Link and Chip move. Their Storybook URLs change.
 - 2026-10-15: menja.bé, the third brand (PR #13: tokens, Trochut, matrix stories, 86 baselines), and
   record 017: a release is a tag that publishes, deploys and writes the Release; `main` deploys nothing; `release` skill.
@@ -1042,8 +1044,8 @@ deleted from the CV's `src/styles/_tokens.scss`.
 **19. A release is a tag (record 017, 2026-10-15, branch `release-on-tag`)**
 - [x] `publish.yml` is the release run: verify and pack, npm, the site, the GitHub Release, in order;
       `deploy.yml` gone, `ci.yml` covers `main`, `visual-update.yml` deploys nothing; the `release` skill. (2026-10-15)
-- [ ] `github-pages` environment: allow `v*` tags, then drop the `main` policy (when this merges).
-- [ ] First real run: `/release 13` (menja), tag `v0.6.1`.
+- [x] `github-pages` environment: allows `v*` tags only (the `main` policy dropped). (2026-10-15)
+- [x] First real run: `/release`, tag `v0.6.1` (menja and the categories). (2026-10-15)
 
 **20. Category placements (2026-10-15, branch `categories`, record 018)**
 - [x] Avatar → Data, Accordion → Layout, Link → Navigation, Chip → Forms; each category's question in record 018. (2026-10-15)
