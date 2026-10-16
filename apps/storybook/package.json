@@ -28,7 +28,7 @@
   "devDependencies": {
     "@fontsource/trochut": "^5.3.0",
     "@pearpages/heatmap": "^0.4.1",
-    "@pearpages/modals": "^0.4.0",
+    "@pearpages/modals": "^0.5.0",
     "@pearpages/pulp-icons": "workspace:*",
     "@playwright/test": "1.63.0",
     "@storybook/addon-a11y": "^10.6.0",

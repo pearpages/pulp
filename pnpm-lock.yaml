@@ -100,8 +100,8 @@ importers:
         specifier: ^0.4.1
         version: 0.4.1(react-dom@19.3.0(react@19.3.0))(react@19.3.0)
       '@pearpages/modals':
-        specifier: ^0.4.0
-        version: 0.4.0(react-dom@19.3.0(react@19.3.0))(react@19.3.0)
+        specifier: ^0.5.0
+        version: 0.5.0(react-dom@19.3.0(react@19.3.0))(react@19.3.0)
       '@pearpages/pulp-icons':
         specifier: workspace:*
         version: link:../../packages/icons
@@ -218,8 +218,8 @@ importers:
         specifier: ^0.4.1
         version: 0.4.1(react-dom@19.3.0(react@19.3.0))(react@19.3.0)
       '@pearpages/modals':
-        specifier: ^0.4.0
-        version: 0.4.0(react-dom@19.3.0(react@19.3.0))(react@19.3.0)
+        specifier: ^0.5.0
+        version: 0.5.0(react-dom@19.3.0(react@19.3.0))(react@19.3.0)
       '@pearpages/pulp-icons':
         specifier: workspace:^
         version: link:../icons
@@ -1428,8 +1428,8 @@ packages:
       react: ^19.1.1
       react-dom: ^19.1.1
 
-  '@pearpages/modals@0.4.0':
-    resolution: {integrity: sha512-TVLn52dcIZ74HsKI60q+iAa6fPqcriPMf6x8XqeXTDienyZpvC77Y1H5BMeLXrFfkwTTDkw59FbEF3/JQ5w0kQ==}
+  '@pearpages/modals@0.5.0':
+    resolution: {integrity: sha512-v/qHfES0j4GM7i4VCRgDfxa9MKDYtegl74RfPlIYAnqMXircYkhIuEBRHYZ1COa0yMP8F7adwqrsPijrzN6UAw==}
     peerDependencies:
       react: ^19.1.1
       react-dom: ^19.1.1
@@ -5336,7 +5336,7 @@ snapshots:
       react: 19.3.0
       react-dom: 19.3.0(react@19.3.0)
 
-  '@pearpages/modals@0.4.0(react-dom@19.3.0(react@19.3.0))(react@19.3.0)':
+  '@pearpages/modals@0.5.0(react-dom@19.3.0(react@19.3.0))(react@19.3.0)':
     dependencies:
       react: 19.3.0
       react-dom: 19.3.0(react@19.3.0)

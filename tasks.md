@@ -15,6 +15,10 @@ this file holds what is left to do, ticked with a date when done. Ordered within
 
 ## Session log
 
+- 2026-10-16 (modals-0.5): `@pearpages/modals` ^0.5.0 (Modal renders no wrapper, takes no HTML attributes); Dialog/SheetProps
+  narrow with it, minor changeset for react. `verify` green; unreleased.
+- 2026-10-16 (release): v0.7.0: react 0.7.0 (NavList, TabBar, AppShell), tokens 0.7.0, icons 0.3.0 (eight glyphs), css 0.1.9;
+  npm, the site and the Release from one tag.
 - 2026-10-16 (app-shell): bitepals' navigation investigated; NavList, TabBar and AppShell built (server-safe), record 019, semantic `layer.navigation` and `size.sidebar-width`. bitepals migration next.
 
 - 2026-10-15 (release): v0.6.1, the first release under record 017: tokens 0.6.0 (menja, token roles), react 0.6.1
@@ -1060,7 +1064,9 @@ bitepals' `Sidebar`, `BottomNav`, `NavMenu`, `NavBadge` and `AppShell` (Tailwind
 move to pulp. Found there: menu roles on page links, `aria-expanded` on a link that opens nothing, the landmark
 named on an `aside`, a live-region dot, literal sizes. Signing in and out stays in bitepals: it passes the nav slots or not.
 - [x] NavList: `nav` + list of links, `current: 'page' | 'section'` (`aria-current` page / true), `sub`, `icon`, `badge`, `asChild`; server-safe. (2026-10-16)
-- [ ] Visual baselines for NavList, TabBar and AppShell: `gh workflow run visual-update.yml --ref app-shell` once the branch is pushed.
+- [x] Visual baselines for NavList, TabBar and AppShell, rendered by `visual-update.yml`; released in v0.7.0. (2026-10-16)
+- [ ] Patterns/App navigation: the Default story's `play` ends signed out, so the live site opens it with no navigation.
+      Toggle back to signed in at the end of the play.
 - [x] TabBar: 3 to 5 links fixed to the bottom edge (`position="static"` to leave it in the flow), safe-area padding, a `prominent` raised item, a badge cut out of the icon's corner; semantic `layer.navigation` (900). (2026-10-16)
 - [x] AppShell (Layout): `header`, `sidebar`, `tabBar`, `footer` slots and the page; sidebar from 48rem, tab bar below it,
       CSS only; `--app-shell-inset-block-end` so the page, the footer and Toast clear the bar; record 019. (2026-10-16)
