@@ -283,6 +283,17 @@ Menu (stable)
   Menu.Trigger
     asChild?: boolean = false
     ref?: Ref<HTMLButtonElement>
+NavList (experimental)
+  children: ReactNode
+  label: string
+  ref?: Ref<HTMLElement>
+  NavList.Item
+    asChild?: boolean = false
+    badge?: ReactNode
+    current?: "page" | "section"
+    icon?: ReactNode
+    ref?: Ref<E>
+    sub?: ReactNode
 Pagination (experimental)
   aria-label?: string = Pagination
   boundaries?: number = 1

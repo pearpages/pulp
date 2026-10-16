@@ -35,7 +35,7 @@ Reference consumer: [perepages.com](https://perepages.com) takes its colour from
 | --- | --- |
 | `@pearpages/pulp-tokens` | `tokens.css`, `tokens.json` |
 | `@pearpages/pulp-css` | `index.css` (layers + tokens + reset + base) |
-| `@pearpages/pulp-react` | 47 components, one entry each (below) |
+| `@pearpages/pulp-react` | 48 components, one entry each (below) |
 | `@pearpages/pulp-icons` | stroke icons as React components, tree-shakeable |
 
 ## Components
@@ -45,7 +45,7 @@ Reference consumer: [perepages.com](https://perepages.com) takes its colour from
 - **Actions**: `Button`, `IconButton`
 - **Forms**: `Calendar`, `Checkbox`, `Chip`, `Combobox`, `DatePicker`, `Field`, `Listbox`, `Picker`, `RadioGroup`,
   `Radio`, `SegmentedControl`, `Select`, `Slider`, `Switch`, `TextField`, `Textarea`
-- **Navigation**: `Link`, `Pagination`, `Tabs`
+- **Navigation**: `Link`, `NavList`, `Pagination`, `Tabs`
 - **Overlays**: `DialogSystem`, `Dialog`, `Menu`, `Popover`, `Sheet`, `Tooltip`
 - **Feedback**: `Alert`, `Badge`, `EmptyState`, `Progress`, `Skeleton`, `Spinner`, `ToastProvider`
 - **Data**: `Avatar`, `DataGrid`, `Heatmap`, `Table`

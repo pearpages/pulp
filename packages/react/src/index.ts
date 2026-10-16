@@ -43,3 +43,4 @@ export * from './segmented-control';
 export * from './empty-state';
 export * from './table';
 export * from './heatmap';
+export * from './nav-list';

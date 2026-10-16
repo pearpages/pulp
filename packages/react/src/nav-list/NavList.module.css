@@ -1,0 +1,97 @@
+/* Every value is a token: --nav-list-* in packages/tokens/tokens/component/nav-list.json */
+
+@layer reset, tokens, vendor, base, components, utilities;
+
+@layer components {
+  .root {
+    font-family: var(--font-family-body);
+  }
+
+  .list,
+  .sub {
+    display: flex;
+    flex-direction: column;
+    gap: var(--nav-list-gap);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .sub {
+    margin-inline-start: var(--nav-list-sub-indent);
+    padding-block: var(--nav-list-sub-padding-block);
+    padding-inline-start: var(--nav-list-gap);
+    border-inline-start: var(--nav-list-sub-divider-width) solid var(--nav-list-sub-divider);
+  }
+
+  /* An `a` by default; with `asChild` a router's link or a `button`, so the button's own box is reset. */
+  .link {
+    display: flex;
+    align-items: center;
+    gap: var(--nav-list-item-gap);
+    box-sizing: border-box;
+    inline-size: 100%;
+    min-block-size: var(--nav-list-item-min-height);
+    margin: 0;
+    padding-block: 0;
+    padding-inline: var(--nav-list-item-padding-inline);
+    border: 0;
+    border-radius: var(--nav-list-item-radius);
+    background: none;
+    color: var(--nav-list-item-fg);
+    font: inherit;
+    font-size: var(--nav-list-item-font-size);
+    font-weight: var(--nav-list-item-weight);
+    line-height: 1.2;
+    text-align: start;
+    text-decoration: none;
+    cursor: pointer;
+    transition:
+      background-color var(--nav-list-duration) var(--motion-easing-standard),
+      color var(--nav-list-duration) var(--motion-easing-standard);
+
+    &:hover {
+      background-color: var(--nav-list-item-bg-hover);
+      color: var(--nav-list-item-fg-hover);
+    }
+
+    &:focus-visible {
+      outline: var(--nav-list-focus-ring-width) solid var(--nav-list-focus-ring);
+      outline-offset: var(--nav-list-focus-ring-offset);
+    }
+
+    &[data-current='section'] {
+      color: var(--nav-list-item-section-fg);
+    }
+
+    &[data-current='page'] {
+      background-color: var(--nav-list-item-current-bg);
+      color: var(--nav-list-item-current-fg);
+      font-weight: var(--nav-list-item-current-weight);
+    }
+  }
+
+  .icon {
+    display: inline-flex;
+    flex: none;
+    font-size: var(--nav-list-icon-size);
+
+    & > svg {
+      inline-size: 1em;
+      block-size: 1em;
+    }
+  }
+
+  .label {
+    flex: 1;
+    min-inline-size: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .badge {
+    display: inline-flex;
+    flex: none;
+  }
+}
