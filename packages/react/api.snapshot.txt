@@ -454,6 +454,19 @@ Switch (stable)
   label: ReactNode
   ref?: Ref<HTMLInputElement>
   size?: "sm" | "md" | "lg" = md
+TabBar (experimental)
+  children: ReactNode
+  label: string
+  position?: "fixed" | "static" = fixed
+  ref?: Ref<HTMLElement>
+  TabBar.Item
+    asChild?: boolean = false
+    badge?: ReactNode
+    children: ReactNode
+    current?: boolean = false
+    icon: ReactNode
+    prominent?: boolean = false
+    ref?: Ref<E>
 Table (experimental)
   caption: ReactNode
   captionHidden?: boolean = false

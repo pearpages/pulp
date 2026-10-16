@@ -12,6 +12,7 @@ import { defineConfig } from 'tsup';
 export default defineConfig({
   entry: {
     index: 'src/index.ts',
+    'tab-bar': 'src/tab-bar/index.ts',
     'nav-list': 'src/nav-list/index.ts',
     'heatmap': 'src/heatmap/index.ts',
     'table': 'src/table/index.ts',

@@ -15,7 +15,7 @@ this file holds what is left to do, ticked with a date when done. Ordered within
 
 ## Session log
 
-- 2026-10-16 (app-shell): bitepals' navigation investigated; NavList built (sidebar and section links, server-safe). TabBar and AppShell next.
+- 2026-10-16 (app-shell): bitepals' navigation investigated; NavList and TabBar built (server-safe), semantic `layer.navigation`. AppShell next.
 
 - 2026-10-15 (release): v0.6.1, the first release under record 017: tokens 0.6.0 (menja, token roles), react 0.6.1
   (categories), css 0.1.8; npm, the site and the Release from one tag.
@@ -1060,8 +1060,8 @@ bitepals' `Sidebar`, `BottomNav`, `NavMenu`, `NavBadge` and `AppShell` (Tailwind
 move to pulp. Found there: menu roles on page links, `aria-expanded` on a link that opens nothing, the landmark
 named on an `aside`, a live-region dot, literal sizes. Signing in and out stays in bitepals: it passes the nav slots or not.
 - [x] NavList: `nav` + list of links, `current: 'page' | 'section'` (`aria-current` page / true), `sub`, `icon`, `badge`, `asChild`; server-safe. (2026-10-16)
-- [ ] Visual baselines for NavList: `gh workflow run visual-update.yml --ref app-shell` once the branch is pushed.
-- [ ] TabBar: 3 to 5 links fixed to the bottom edge, safe-area padding, a `prominent` centre item, a badge on the icon.
+- [ ] Visual baselines for NavList and TabBar: `gh workflow run visual-update.yml --ref app-shell` once the branch is pushed.
+- [x] TabBar: 3 to 5 links fixed to the bottom edge (`position="static"` to leave it in the flow), safe-area padding, a `prominent` raised item, a badge cut out of the icon's corner; semantic `layer.navigation` (900). (2026-10-16)
 - [ ] AppShell (Layout): `header`, `sidebar`, `tabBar`, `footer` slots and the page; sidebar from 48rem, tab bar below it,
       CSS only; publishes the tab bar's height so Main and Toast clear it. Decision record for the 48rem breakpoint.
 - [ ] bitepals `apps/web`: upgrade pulp, render `Sidebar`/`BottomNav`/`LocaleShell` through NavList, TabBar and AppShell,

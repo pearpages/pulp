@@ -97,6 +97,7 @@ export const PUBLIC_SEMANTIC_TOKENS = [
   '--font-weight-medium',
   '--font-weight-regular',
   '--font-weight-semibold',
+  '--layer-navigation',
   '--layer-popover',
   '--layer-toast',
   '--layer-tooltip',

@@ -989,6 +989,10 @@
   },
   "layer": {
     "$type": "number",
+    "navigation": {
+      "$value": 900,
+      "$description": "App navigation fixed to an edge (a tab bar): above the page, below dialogs (the vendor uses 1000), toasts and popovers."
+    },
     "toast": {
       "$value": 1100,
       "$description": "Stacking order for toasts: above the dialog layer (the vendor dialog uses 1000)."

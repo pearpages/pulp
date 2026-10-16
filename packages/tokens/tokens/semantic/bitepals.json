@@ -915,6 +915,9 @@
   },
   "layer": {
     "$type": "number",
+    "navigation": {
+      "$value": 900
+    },
     "toast": {
       "$value": 1100
     },

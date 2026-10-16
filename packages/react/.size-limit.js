@@ -17,8 +17,10 @@ const VENDORS = ['@pearpages/modals', '@pearpages/heatmap', '@floating-ui/react-
 // Heatmap 2026-09-23: its entry 235 B; with @pearpages/heatmap 0.4.1, 1.8 kB (budget 2.2 kB).
 // Flat part names 2026-09-23 (MenuTrigger beside Menu.Trigger, 43 exports): barrel 16.89 -> 17.17: budget 17 -> 17.5 kB.
 // Stylesheet 9.0 on 2026-09-20, with the eight accents on Avatar and Chip: its budget went from 9 to 10 kB.
+// NavList and TabBar 2026-10-16 (763 B and 758 B on their own): barrel 17.61 -> budget 17.5 -> 18 kB;
+// stylesheet 10.08 -> budget 10 -> 10.5 kB.
 const DEFAULT = '2.1 kB';
-const LIMITS = { index: '17.5 kB', toast: '3.6 kB', menu: '2.8 kB', pagination: '2.5 kB', alert: '2.4 kB' };
+const LIMITS = { index: '18 kB', toast: '3.6 kB', menu: '2.8 kB', pagination: '2.5 kB', alert: '2.4 kB' };
 
 const entries = Object.keys(tsupConfig.entry);
 
@@ -34,5 +36,5 @@ export default [
   { name: 'date-picker with React Aria', path: 'dist/date-picker.js', import: '*', limit: '78 kB', ignore: PEERS },
   { name: 'data-grid with React Aria', path: 'dist/data-grid.js', import: '*', limit: '63 kB', ignore: PEERS },
   { name: 'heatmap with @pearpages/heatmap', path: 'dist/heatmap.js', import: '*', limit: '2.2 kB', ignore: PEERS },
-  { name: 'stylesheet (every component)', path: 'dist/index.css', limit: '10 kB' },
+  { name: 'stylesheet (every component)', path: 'dist/index.css', limit: '10.5 kB' },
 ];
