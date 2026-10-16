@@ -51,11 +51,11 @@ theme everything inside the element they're on.
 ## Components
 
 - **Typography**: `Heading`, `Text`
-- **Layout**: `Accordion`, `Card`, `Divider`, `Inline`, `Stack`
+- **Layout**: `Accordion`, `AppShell`, `Card`, `Divider`, `Inline`, `Stack`
 - **Actions**: `Button`, `IconButton`
 - **Forms**: `Calendar`, `Checkbox`, `Chip`, `Combobox`, `DatePicker`, `Field`, `Listbox`, `Picker`, `RadioGroup`,
   `Radio`, `SegmentedControl`, `Select`, `Slider`, `Switch`, `TextField`, `Textarea`
-- **Navigation**: `Link`, `Pagination`, `Tabs`
+- **Navigation**: `Link`, `NavList`, `Pagination`, `TabBar`, `Tabs`
 - **Overlays**: `DialogSystem`, `Dialog`, `Menu`, `Popover`, `Sheet`, `Tooltip`
 - **Feedback**: `Alert`, `Badge`, `EmptyState`, `Progress`, `Skeleton`, `Spinner`, `ToastProvider` (and `useToast`)
 - **Data**: `Avatar`, `DataGrid` (sortable and selectable), `Heatmap` (a contribution calendar), `Table` (a plain `<table>`)
@@ -98,8 +98,8 @@ setup. Mount `DialogSystem` once near the root; without the stylesheet a dialog 
 Every entry that needs the browser ships with `'use client'` as its first statement, so on the
 Next.js App Router (or any RSC setup) you import pulp from a server file and it works: the client
 entries become client boundaries on their own. The leaf, hook-free entries carry no directive and
-render on the server as they are: Alert, Badge, Button, Card, Divider, EmptyState, Heading, Heatmap,
-Icon, IconButton, Inline, Link, Pagination, Progress, Skeleton, Spinner, Stack, Table, Text,
+render on the server as they are: Alert, AppShell, Badge, Button, Card, Divider, EmptyState, Heading, Heatmap,
+Icon, IconButton, Inline, Link, NavList, Pagination, Progress, Skeleton, Spinner, Stack, TabBar, Table, Text,
 VisuallyHidden (the `client` field of the component manifest is the list). Three things to know:
 
 - The barrel (`@pearpages/pulp-react`) is a client module, because it re-exports everything. Import

@@ -4,9 +4,10 @@
 
 @layer components {
   .region {
-    /* The block offset clears the notch and the home indicator; the safe area is zero elsewhere. */
+    /* The block offset clears the notch and the home indicator; the safe area is zero elsewhere.
+       At the bottom it clears an AppShell's tab bar when there is one: that inset holds the safe area. */
     --_block-start: calc(var(--toast-offset-block) + env(safe-area-inset-top, 0px));
-    --_block-end: calc(var(--toast-offset-block) + env(safe-area-inset-bottom, 0px));
+    --_block-end: calc(var(--toast-offset-block) + var(--app-shell-inset-block-end, env(safe-area-inset-bottom, 0px)));
     --_top: auto;
     --_end: var(--toast-offset);
     --_bottom: var(--_block-end);

@@ -1,0 +1,42 @@
+{
+  "$description": "TabBar component tokens. Reference the semantic layer only.",
+  "tab-bar": {
+    "height": { "$type": "dimension", "$description": "The bar without the safe-area inset under it. Every tab is this tall, so it is the touch target too.", "$value": "{size.control.lg}" },
+    "padding-inline": { "$type": "dimension", "$value": "{space.1}" },
+    "bg": { "$type": "color", "$value": "{color.surface.raised}" },
+    "border": { "$type": "color", "$value": "{color.border.default}" },
+    "border-width": { "$type": "dimension", "$value": "{size.hairline}" },
+    "layer": { "$type": "number", "$value": "{layer.navigation}" },
+    "item": {
+      "gap": { "$type": "dimension", "$description": "Between the icon and the label under it.", "$value": "{space.1}" },
+      "fg": { "$type": "color", "$value": "{color.text.muted}" },
+      "fg-hover": { "$type": "color", "$value": "{color.text.default}" },
+      "current-fg": { "$type": "color", "$value": "{color.action.text}" },
+      "radius": { "$type": "dimension", "$description": "The focus ring's corners.", "$value": "{radius.control}" }
+    },
+    "badge": {
+      "cutout-bg": { "$type": "color", "$description": "A ring in the bar's colour around a badge, so it reads as cut out of the icon instead of touching its strokes.", "$value": "{color.surface.raised}" },
+      "cutout-width": { "$type": "dimension", "$value": "{focus.ring.width}" },
+      "radius": { "$type": "dimension", "$value": "{radius.full}" }
+    },
+    "icon-size": { "$type": "dimension", "$description": "Icons are drawn at 1em, so this is their size.", "$value": "{font.size.xl}" },
+    "label": {
+      "font-size": { "$type": "dimension", "$value": "{font.size.xs}" },
+      "weight": { "$type": "fontWeight", "$value": "{font.weight.medium}" },
+      "current-weight": { "$type": "fontWeight", "$value": "{font.weight.semibold}" }
+    },
+    "prominent": {
+      "size": { "$type": "dimension", "$description": "The round button of the prominent tab.", "$value": "{size.control.md}" },
+      "lift": { "$type": "dimension", "$description": "How far the round button rises above the bar.", "$value": "{space.4}" },
+      "bg": { "$type": "color", "$value": "{color.action.primary}" },
+      "bg-hover": { "$type": "color", "$value": "{color.action.primary-hover}" },
+      "fg": { "$type": "color", "$value": "{color.text.on-action}" },
+      "radius": { "$type": "dimension", "$value": "{radius.full}" },
+      "shadow": { "$type": "shadow", "$value": "{shadow.raised}" }
+    },
+    "focus-ring": { "$type": "color", "$value": "{color.border.focus}" },
+    "focus-ring-width": { "$type": "dimension", "$value": "{focus.ring.width}" },
+    "focus-ring-offset": { "$type": "dimension", "$value": "{focus.ring.offset}" },
+    "duration": { "$type": "duration", "$value": "{motion.duration.fast}" }
+  }
+}

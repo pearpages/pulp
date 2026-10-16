@@ -1,0 +1,88 @@
+/* Every value is a token: --app-shell-* in packages/tokens/tokens/component/app-shell.json */
+
+@layer reset, tokens, vendor, base, components, utilities;
+
+@layer components {
+  /* One column on a phone; from 48rem a sidebar beside the page. 48rem is fixed: a media query takes
+     no custom property. The tab bar is fixed to the bottom edge by itself, so it has no grid area. */
+  .root {
+    display: grid;
+    grid-template:
+      'header' auto
+      'main' 1fr
+      'footer' auto
+      / minmax(0, 1fr);
+    min-block-size: 100dvh;
+    background-color: var(--app-shell-bg);
+    color: var(--app-shell-fg);
+  }
+
+  .header {
+    grid-area: header;
+  }
+
+  .main {
+    grid-area: main;
+    min-inline-size: 0;
+  }
+
+  .footer {
+    grid-area: footer;
+  }
+
+  .sidebar {
+    display: none;
+    grid-area: sidebar;
+    box-sizing: border-box;
+    padding: var(--app-shell-sidebar-padding);
+    border-inline-end: var(--app-shell-sidebar-border-width) solid var(--app-shell-sidebar-border);
+    background-color: var(--app-shell-sidebar-bg);
+  }
+
+  @media (width < 48rem) {
+    /* The bar's height: TabBar's own tokens, plus its top border and the safe area under it.
+       On the shell, so the page clears the bar on every supported browser. */
+    .root[data-tab-bar] {
+      --app-shell-inset-block-end: calc(var(--tab-bar-height) + var(--tab-bar-border-width) + env(safe-area-inset-bottom, 0px));
+    }
+
+    /* Whatever is last above the bar clears it: the footer when there is one, else the page. */
+    .root[data-tab-bar]:not([data-footer]) .main,
+    .root[data-tab-bar] .footer {
+      padding-block-end: var(--app-shell-inset-block-end);
+    }
+
+    /* Toasts render at the end of body, outside the shell, so the inset is published on the root too.
+       `:has` is progressive: on Firefox 120, the support floor, toasts keep the plain safe-area offset. */
+    :root:has(.root[data-tab-bar]) {
+      --app-shell-inset-block-end: calc(var(--tab-bar-height) + var(--tab-bar-border-width) + env(safe-area-inset-bottom, 0px));
+    }
+  }
+
+  @media (width >= 48rem) {
+    .root[data-sidebar] {
+      grid-template:
+        'header header' auto
+        'sidebar main' 1fr
+        'footer footer' auto
+        / var(--app-shell-sidebar-width) minmax(0, 1fr);
+    }
+
+    /* The column runs the page's full height; its contents stay in view while the page scrolls,
+       and scroll themselves when they are taller than the viewport. */
+    .sidebar {
+      display: block;
+    }
+
+    .sidebarInner {
+      position: sticky;
+      inset-block-start: 0;
+      max-block-size: 100dvh;
+      overflow-y: auto;
+    }
+
+    .tabBar {
+      display: none;
+    }
+  }
+}

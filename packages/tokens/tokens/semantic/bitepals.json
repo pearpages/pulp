@@ -883,6 +883,12 @@
         "unit": "rem"
       }
     },
+    "sidebar-width": {
+      "$value": {
+        "value": 15,
+        "unit": "rem"
+      }
+    },
     "sheet-width": {
       "$value": {
         "value": 24,
@@ -915,6 +921,9 @@
   },
   "layer": {
     "$type": "number",
+    "navigation": {
+      "$value": 900
+    },
     "toast": {
       "$value": 1100
     },

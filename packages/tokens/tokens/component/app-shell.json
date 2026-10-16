@@ -1,0 +1,14 @@
+{
+  "$description": "AppShell component tokens. Reference the semantic layer only.",
+  "app-shell": {
+    "bg": { "$type": "color", "$value": "{color.surface.base}" },
+    "fg": { "$type": "color", "$value": "{color.text.default}" },
+    "sidebar": {
+      "width": { "$type": "dimension", "$value": "{size.sidebar-width}" },
+      "padding": { "$type": "dimension", "$value": "{space.3}" },
+      "bg": { "$type": "color", "$value": "{color.surface.raised}" },
+      "border": { "$type": "color", "$value": "{color.border.default}" },
+      "border-width": { "$type": "dimension", "$value": "{size.hairline}" }
+    }
+  }
+}

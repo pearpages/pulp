@@ -25,6 +25,13 @@ Alert (stable)
   ref?: Ref<HTMLDivElement>
   title?: ReactNode
   tone?: "info" | "success" | "warning" | "error" = info
+AppShell (experimental)
+  children: ReactNode
+  footer?: ReactNode
+  header?: ReactNode
+  ref?: Ref<HTMLDivElement>
+  sidebar?: ReactNode
+  tabBar?: ReactNode
 Avatar (experimental)
   accent?: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8
   alt?: string
@@ -283,6 +290,17 @@ Menu (stable)
   Menu.Trigger
     asChild?: boolean = false
     ref?: Ref<HTMLButtonElement>
+NavList (experimental)
+  children: ReactNode
+  label: string
+  ref?: Ref<HTMLElement>
+  NavList.Item
+    asChild?: boolean = false
+    badge?: ReactNode
+    current?: "page" | "section"
+    icon?: ReactNode
+    ref?: Ref<E>
+    sub?: ReactNode
 Pagination (experimental)
   aria-label?: string = Pagination
   boundaries?: number = 1
@@ -443,6 +461,19 @@ Switch (stable)
   label: ReactNode
   ref?: Ref<HTMLInputElement>
   size?: "sm" | "md" | "lg" = md
+TabBar (experimental)
+  children: ReactNode
+  label: string
+  position?: "fixed" | "static" = fixed
+  ref?: Ref<HTMLElement>
+  TabBar.Item
+    asChild?: boolean = false
+    badge?: ReactNode
+    children: ReactNode
+    current?: boolean = false
+    icon: ReactNode
+    prominent?: boolean = false
+    ref?: Ref<E>
 Table (experimental)
   caption: ReactNode
   captionHidden?: boolean = false
