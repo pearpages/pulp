@@ -1,5 +1,14 @@
 # @pearpages/pulp-css
 
+## 0.1.9
+
+### Patch Changes
+
+- Updated dependencies [4654155]
+- Updated dependencies [e2f00ef]
+- Updated dependencies [180a652]
+  - @pearpages/pulp-tokens@0.7.0
+
 ## 0.1.8
 
 ### Patch Changes

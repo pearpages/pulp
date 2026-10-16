@@ -1,5 +1,22 @@
 # @pearpages/pulp-react
 
+## 0.7.0
+
+### Minor Changes
+
+- 4654155: AppShell: the frame of an app's pages. Slots for `header`, `sidebar`, `tabBar` and `footer` around the page, which it renders in `main`; a slot left out takes no room, so a signed-out page passes no navigation. From 48rem the sidebar sits beside the page, below it the tab bar docks to the bottom edge, with CSS only. With a tab bar, the page (or the footer) clears it, and `--app-shell-inset-block-end` carries its height, which Toast now reads to stay above the bar. No hooks, so it renders on the server. Record 019. Tokens: `--app-shell-*` and a new semantic `--size-sidebar-width` (15rem).
+- e2f00ef: NavList: a vertical list of links for an app's sidebar or a section's pages. A labelled `nav` with a list of links, the page marked `aria-current="page"` and its section `aria-current="true"`, a nested list for a section's pages (`sub`), an optional icon and badge per link, and `asChild` for a router's link or a `button`. No hooks, so it renders on the server. Tokens: `--nav-list-*`.
+- 180a652: TabBar: an app's primary navigation on a phone, three to five tabs docked to the bottom edge. A labelled `nav` with a list of links (not a `tablist`), the current tab `aria-current="page"`, an icon over a visible label, a badge on the icon's corner, one `prominent` tab drawn as a raised round button, and the safe-area inset under it. `position="static"` leaves it in the flow. No hooks, so it renders on the server. Tokens: `--tab-bar-*`, and a new semantic `--layer-navigation` (900, below dialogs, toasts and popovers).
+
+### Patch Changes
+
+- Updated dependencies [4654155]
+- Updated dependencies [7513bd6]
+- Updated dependencies [e2f00ef]
+- Updated dependencies [180a652]
+  - @pearpages/pulp-tokens@0.7.0
+  - @pearpages/pulp-icons@0.3.0
+
 ## 0.6.1
 
 ### Patch Changes
