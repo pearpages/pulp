@@ -8,8 +8,7 @@ to humans and coding agents alike.
 ## Where things are
 
 `architecture.md` maps the packages, the token tiers and theming axes, and the workflows (with
-diagrams). `PRINCIPLES.md` is the why, `docs/decisions/` the records, `tasks.md` the pending work and
-session log, `.claude/skills/add-component` the procedure for a new component, `.claude/skills/release`
+diagrams). `PRINCIPLES.md` is the why, `docs/decisions/` the records, GitHub Issues the pending work, `.claude/skills/add-component` the procedure for a new component, `.claude/skills/release`
 the one for a release.
 
 ## Commands (run from the repo root)
@@ -267,5 +266,7 @@ sections of the packages whose version the tag changed (`scripts/release-notes.m
 
 ## Status
 
-Pending work, the recommended order and the session log live in [`tasks.md`](tasks.md). Tick items
-there and add a one-line session summary at the top of its log when a session ends.
+Pending work lives in [GitHub Issues](https://github.com/pearpages/pulp/issues), also on the [Backlog](https://github.com/users/pearpages/projects/3) board; the
+`priority:*` labels give the order. Close an issue from the commit or PR that finishes it
+(`Fixes #N`). There is no session log: git, the PRs and the Releases are the history
+([record 020](docs/decisions/020-work-in-github-issues.md)).

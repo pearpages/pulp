@@ -89,8 +89,8 @@ Argument: an optional PR number. With one, the PR is merged first and released w
    Open https://pulp.pearpages.com: the toolbar shows the new react version and links to the
    Release.
 
-10. **Report** the versions published, the Release URL and the two run URLs, and add a one-line
-    entry at the top of the session log in `tasks.md`.
+10. **Report** the versions published, the Release URL and the two run URLs. Close the issues the
+    release completes: `gh issue close N --comment "Released in <tag>"`.
 
 ## What not to do
 

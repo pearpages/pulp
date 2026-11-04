@@ -129,7 +129,7 @@ pnpm verify             # everything CI runs, in the same order; run it before p
 See `PRINCIPLES.md` for why the system is shaped this way, `architecture.md` for how the pieces
 fit together, `CONTRIBUTING.md` to send a change, `docs/decisions/` for the
 decisions that applied them (the headless layer, positioning, the vendor dialog), and
-`CLAUDE.md` for the rules CI enforces. What is pending is in `tasks.md`.
+`CLAUDE.md` for the rules CI enforces. What is pending is in [GitHub Issues](https://github.com/pearpages/pulp/issues).
 
 ## License
 

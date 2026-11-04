@@ -26,3 +26,4 @@ option was defensible. Newest last. The Storybook renders this folder under "Dec
 | [017](017-a-release-is-a-tag.md) | A release is a tag named after `pulp-react`'s version; it publishes to npm, deploys the site and writes the Release, and `main` does neither |
 | [018](018-category-placements.md) | A category answers what the component does for the user; Avatar, Accordion, Link and Chip move |
 | [019](019-app-navigation.md) | App navigation is NavList, TabBar and an AppShell that places them, switching at 48rem with CSS only |
+| [020](020-work-in-github-issues.md) | Pending work is tracked in GitHub Issues, and there is no session log |

@@ -2,7 +2,7 @@
 
 How pulp is built: what the packages are, how a token becomes a painted pixel, and how a change
 reaches npm and the docs site. `PRINCIPLES.md` says *why* it is shaped this way, `CLAUDE.md` holds
-the rules CI enforces, `docs/decisions/` the choices made along the way, and `tasks.md` what is left.
+the rules CI enforces, `docs/decisions/` the choices made along the way, and [GitHub Issues](https://github.com/pearpages/pulp/issues) what is left.
 
 ## What the repository holds
 

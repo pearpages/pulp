@@ -59,8 +59,8 @@ CI checks what the pattern promises.
    (the bundle budget: a leaf entry is allowed 2.1 kB brotli; add an override in
    `packages/react/.size-limit.js` only with a reason), then `pnpm changeset` (minor for a
    new component). Add the name to its category in the README's "Components" list and bump the
-   count in the package table (`test:dist` compares both with the manifest). Tick the item in
-   `tasks.md`.
+   count in the package table (`test:dist` compares both with the manifest). Close its issue from the commit or
+   PR (`Fixes #N`).
 
 ## Reference
 
